@@ -1,12 +1,20 @@
 Package: mregions2
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Marine Regions Data from 'Marineregions.org'
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: c(person(given = "Lotte",
+           family = "Pohl",
+           role = "aut",
+           email = "lotte.pohl@imbrsea.eu",
+           comment = c(ORCID = "0000-0002-7607-7018", github = "whaleshark99")),
+           person(given = "Salvador",
+           family = "Fernandez",
+           role = c("aut", "cre"),
+           email = "salvador.fernandez@vliz.be",
+           comment = c(ORCID = "0000-0003-0535-7677", github = "salvafern")))
+Maintainer: The package maintainer <salvador.fernandez@vliz.be>
+Description: Retrieve marine geospatial information from the Marineregions gazetteer. Access and handle data products from the Flanders Marine Institute (VLIZ) geoserver.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Config/testthat/edition: 3
@@ -16,3 +24,4 @@ Suggests:
 Imports: 
     httr2,
     roxygen2
+RoxygenNote: 7.1.2
