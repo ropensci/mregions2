@@ -1,21 +1,29 @@
-usethis::use_package("glue", type = "Suggests")
-usethis::use_package("httr2", type = "Imports")
-
-req_URL <- function(api_type = c("rest", "soap"), file_type = c("json", "xml", "ttl", "jsonld"), method){
+#' Create a base URL for a http request. Queries can be added to the URL.
+#'
+#' @param api_type Type of API architecture. Must be either "rest" or "soap".
+#' @param file_format File format.
+#' @param method
+#'
+#' @return A base URL to append queries to.
+#' @export
+#'
+#' @examples
+req_URL <- function(api_type, file_format, method){
   URL <- "https://marineregions.org/"
-  base_url <- glue::glue("{URL}/{api_type}/{method}.{file_type}")
+  base_url <- glue::glue("{URL}/{api_type}/{method}.{file_format}/")
 
-  # To Do: make warning messages more pretty, make assertions more compact?
-  stopifnot("File type not of class character." = is.character(file_type))
-  stopifnot("File type not one of the following: json, xml, ttl, jsonld." = file_type %in% c("json", "xml", "ttl", "jsonld"))
+  stopifnot(is.character(file_format))
+  stopifnot("File type must be one of the following: json, xml, ttl, jsonld." = file_format %in% c("json", "xml", "ttl", "jsonld"))
 
-  stopifnot("API type not of class character." = is.character(api_type))
-  stopifnot("API type not one of the following: rest, soap.", api_type %in% c("rest", soap))
+  stopifnot(is.character(api_type))
+  stopifnot("API type must be one of the following: rest, soap." = api_type %in% c("rest", "soap"))
 
-  stopifnot("Method not of class character." = is.character(method))
+  stopifnot(is.character(method))
   stopifnot("Method unknown. Check https://marineregions.org/gazetteer.php?p=webservices&type=rest for available methods." = method %in% methods)
+
+  return(base_url)
 }
 
-# To Do: link methods with available output file types. E.g. "getGazetteerTypes" = c("json", "xml", ""ttl)
+# write function mr_gaz_methods() where you can see the available methods
 methods <- c("getGazetteerRecordByMRGID", "getGazetteerGeometry" , "getGazetteerTypes", "getGazetteerGeometries", "getGazetteerRecordsByName", "getGazetteerRecordsByType", "getGazetteerWMSes", "getGazetteerRecordsByLatLong", "getGazetteerRecordsByNames", "getGazetteerSources", "getGazetteerNamesByMRGID", "getGazetteerRecordsBySource", "getFeed", "getGazetteerRelationsByMRGID")
-# where should the acceptable methods be defined?
+

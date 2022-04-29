@@ -14,4 +14,5 @@ Suggests:
     glue,
     testthat
 Imports: 
-    httr2
+    httr2,
+    roxygen2
