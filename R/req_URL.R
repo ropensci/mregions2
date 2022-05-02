@@ -19,18 +19,16 @@ req_URL <- function(api_type, file_format, method){
   base_url <- glue::glue("{URL}/{api_type}/{method}.{file_format}/")
 
   # Assertions
-  ## To Do: modify messages when test passed (default: "TRUE").
-  ## Check customising error messages in checkmate package.
+  # Check customising error messages in checkmate package.
+  # method_coll <- makeAssertCollection() # not working yet
+  # method_coll$push("\U02139 Check `https://marineregions.org/gazetteer.php?p=webservices&type=rest` for available methods.")
 
-  assert_api_type <- api_type %>% checkmate::check_choice(c("rest", "soap"))
-  assert_file_format <- file_format %>% checkmate::check_choice(c("json", "xml", "ttl", "jsonld"))
-  assert_method <- method %>% checkmate::check_choice(methods)
+  checkmate::assert_choice(api_type, c("rest", "soap"))
+  checkmate::assert_choice(file_format, c("json", "xml", "ttl", "jsonld"))
+  # assert_method <- method %>% checkmate::assert_choice(methods, add = method_coll)
+  checkmate::assert_choice(method, methods)
 
-  if(!isTRUE(checkmate::check_choice(method, methods))){
-    paste("\U02139 Check https://marineregions.org/gazetteer.php?p=webservices&type=rest for available methods.")
-  }
-
-  return(c(assert_api_type, assert_file_format, assert_method, base_url))
+  return(base_url)
 }
 
 # write function mr_gaz_methods() where you can see the available methods & search for strings
@@ -41,6 +39,6 @@ api_type <- "rest"
 file_format <- "json"
 file_format <- 2
 method <- "getGazetteerRecordsByName"
-method <- "getGazetteerRecordByName"
+method <- "getGazetteerRecordByNamexx"
 req_URL(api_type = api_type, file_format = file_format, method = method)
 
