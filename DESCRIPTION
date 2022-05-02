@@ -11,7 +11,10 @@ Encoding: UTF-8
 LazyData: true
 Config/testthat/edition: 3
 Suggests: 
-    glue,
     testthat
 Imports: 
-    httr2
+    glue,
+    sf,
+    httr2,
+    magrittr
+RoxygenNote: 7.1.1
