@@ -18,27 +18,29 @@ req_URL <- function(api_type, file_format, method){
   URL <- "https://marineregions.org/"
   base_url <- glue::glue("{URL}/{api_type}/{method}.{file_format}/")
 
-  # assert_class(file_format, "character")
-  good_error_message <- paste0("\U02716 `file_format` has class `", class(file_format), "`. \U02139 `file_format` must have class `character`.")
+  # Assertions
+  ## To Do: modify messages when test passed (default: "TRUE").
+  ## Check customising error messages in checkmate package.
 
-  stopifnot(paste0("\U02716 `file_format` has class `", class(file_format), "`. \U02139 `file_format` must have class `character`.") = is.character(file_format), call. = FALSE)
-  stopifnot("`file_format` must be one of the following: 'json', 'xml', 'ttl', 'jsonld'." = file_format %in% c("json", "xml", "ttl", "jsonld"))
+  assert_api_type <- api_type %>% checkmate::check_choice(c("rest", "soap"))
+  assert_file_format <- file_format %>% checkmate::check_choice(c("json", "xml", "ttl", "jsonld"))
+  assert_method <- method %>% checkmate::check_choice(methods)
 
-  stopifnot(is.character(api_type))
-  stopifnot("`api_type` must be one of the following: 'rest', 'soap'." = api_type %in% c("rest", "soap"))
+  if(!isTRUE(checkmate::check_choice(method, methods))){
+    paste("\U02139 Check https://marineregions.org/gazetteer.php?p=webservices&type=rest for available methods.")
+  }
 
-  stopifnot(is.character(method))
-  stopifnot("`method` unknown. Check https://marineregions.org/gazetteer.php?p=webservices&type=rest for available methods." = method %in% methods)
-
-  return(base_url)
+  return(c(assert_api_type, assert_file_format, assert_method, base_url))
 }
 
 # write function mr_gaz_methods() where you can see the available methods & search for strings
 methods <- c("getGazetteerRecordByMRGID", "getGazetteerGeometry" , "getGazetteerTypes", "getGazetteerGeometries", "getGazetteerRecordsByName", "getGazetteerRecordsByType", "getGazetteerWMSes", "getGazetteerRecordsByLatLong", "getGazetteerRecordsByNames", "getGazetteerSources", "getGazetteerNamesByMRGID", "getGazetteerRecordsBySource", "getFeed", "getGazetteerRelationsByMRGID")
 
-
-api <- "rest"
-file <- "jxon"
+#test
+api_type <- "rest"
+file_format <- "json"
 file_format <- 2
 method <- "getGazetteerRecordsByName"
-req_URL(api_type = api, file_format = file_format, method = method)
+method <- "getGazetteerRecordByName"
+req_URL(api_type = api_type, file_format = file_format, method = method)
+
