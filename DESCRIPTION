@@ -18,12 +18,11 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Config/testthat/edition: 3
-Suggests: 
-    testthat (>= 3.0.0)
 Imports: 
     glue,
     httr2,
     roxygen2,
+    testthat,
     tibble,
     utils
 RoxygenNote: 7.1.2
