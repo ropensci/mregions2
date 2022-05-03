@@ -21,6 +21,7 @@ Config/testthat/edition: 3
 Imports: 
     glue,
     httr2,
+    magrittr,
     roxygen2,
     testthat,
     tibble,

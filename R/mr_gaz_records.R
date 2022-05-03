@@ -15,6 +15,7 @@
 mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE, offset = 0){
 
   checkmate::assert_character(name)
+  # todo: throw error when name is not in the records
 
   url <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByName")
 
@@ -38,6 +39,40 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
       `fuzzy` = fuzzy,
       `offset` = offset,
       `count` = count) %>%
+    httr2::req_perform()
+
+  res_json <- resp %>%
+    httr2::resp_body_json()
+
+  res <- do.call(rbind, res_json) %>%
+    tibble::as_tibble(res_json)
+
+  return(res)
+}
+
+type <- "FAO subdivisions"
+offset <- 0
+
+mr_gaz_records_by_type <- function(type, offset = 0){
+
+  checkmate::assert_character(type)
+
+  url <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByType")
+
+  type <- utils::URLencode(type)
+
+  # todo: get user agent from utils
+  user_agent <- "0.1.8"
+
+  req <- httr2::request(url) %>%
+    httr2::req_headers(
+      accept = "application/json",
+      `User-Agent` = user_agent)  %>%
+    httr2::req_url_path_append(type) %>%
+    httr2::req_url_path_append("/")
+
+  resp <- req %>%
+    httr2::req_url_query(`offset` = offset) %>%
     httr2::req_perform()
 
   res_json <- resp %>%

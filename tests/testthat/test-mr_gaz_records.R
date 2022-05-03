@@ -27,5 +27,7 @@ testthat::test_that("Error message appears when PC is disconnected to the intern
   tested_res <- readLines("https://marineregions.org/gazetteer.php?p=webservices&type=rest", n=1)
   expected_res <- "<!DOCTYPE html>"
   result <- expect_equal(tested_res, expected_res)
+  # does not make that much sense just yet.
+  # Todo: through comprehensible error message
 })
 
