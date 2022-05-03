@@ -1,19 +1,18 @@
-# Records by Name ####
-#' Title
+#' Retrieve Gazetteer Records by Name
 #'
-#' @param name
-#' @param like
-#' @param fuzzy
-#' @param offset
-#' @param count
+#' @param name GazetteerName of the marine region of interest. Search names here: https://marineregions.org/gazetteer.php?p=search
+#' @param count Number of records to retrieve.
+#' @param like Adds a '%'-sign before and after the GazetteerName.
+#' @param fuzzy Uses Levenshtein query to find nearest matches.
+#' @param offset Start record number, in order to page through next batch of results.
 #'
-#' @return
+#' @return A tibble with Gazetter records.
 #' @export
 #'
 #' @examples
 #' mr_gaz_records_by_name(name = "High Seas", count = 5)
-#'
-mr_gaz_records_by_name <- function(name, like = TRUE, fuzzy = FALSE, offset = 0, count = 100){
+
+mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE, offset = 0){
 
   checkmate::assert_character(name)
 
