@@ -34,11 +34,4 @@ req_URL <- function(api_type, file_format, method){
 # write function mr_gaz_methods() where you can see the available methods & search for strings
 methods <- c("getGazetteerRecordByMRGID", "getGazetteerGeometry" , "getGazetteerTypes", "getGazetteerGeometries", "getGazetteerRecordsByName", "getGazetteerRecordsByType", "getGazetteerWMSes", "getGazetteerRecordsByLatLong", "getGazetteerRecordsByNames", "getGazetteerSources", "getGazetteerNamesByMRGID", "getGazetteerRecordsBySource", "getFeed", "getGazetteerRelationsByMRGID")
 
-#test
-api_type <- "rest"
-file_format <- "json"
-file_format <- 2
-method <- "getGazetteerRecordsByName"
-method <- "getGazetteerRecordByNamexx"
-req_URL(api_type = api_type, file_format = file_format, method = method)
 
