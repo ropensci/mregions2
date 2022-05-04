@@ -26,5 +26,6 @@ Imports:
     roxygen2,
     testthat,
     tibble,
+    tidyr,
     utils
 RoxygenNote: 7.1.2

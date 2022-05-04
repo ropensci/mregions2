@@ -1,3 +1,51 @@
+#' Retrieve information of Marine Gazetteer Records
+#'
+#' @description Available Placetypes and Sources of [Marine Gazetteer](https://marineregions.org/gazetteer.php) Records.
+#' Useful for retrieving information about Gazetteer Records based on Placetypes (`mr_gaz_records_by_type()`) and Sources (`mr_gaz_records_by_source`).
+#'
+#' @param info The information wished to retrieve. Must be one of: `c("sources", "placetypes")`.
+#' @return Sources: A tibble with the source and source URL.
+#' Placetypes: A tibble with the ID, name and description of each Placetype available in the [Marine Gazetteer](https://marineregions.org/gazetteer.php).
+#' @export
+#'
+#' @examples
+#' placetypes <- mr_gaz_info(info = "placetypes")
+#' placetypes$type[28]
+#' # [1] "Sandbank"
+#'
+#' sources <- mr_gaz_info(info = "sources")
+#' sources$source[36]
+#' # [1] "GeoNames"
+mr_gaz_info <- function(info = c("sources", "placetypes")){
+
+  checkmate::assert_character(info)
+  checkmate::assert_choice(tolower(info), c("sources", "placetypes"))
+
+  url_sources <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerSources")
+  url_placetypes <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerTypes")
+
+  ifelse(info == "sources", url <- url_sources, url <- url_placetypes)
+
+  # todo: get user agent from utils
+  user_agent <- "0.1.8"
+
+  req <- httr2::request(url) %>%
+    httr2::req_headers(
+      accept = "application/json",
+      `User-Agent` = user_agent)
+
+  resp <- req %>%
+    httr2::req_perform()
+
+  res_json <- resp %>%
+    httr2::resp_body_json()
+
+  res <- do.call(rbind, res_json) %>%
+    tibble::as_tibble(res_json)
+
+  return(res)
+}
+
 #' Retrieve Gazetteer Records by Name
 #'
 #' @param name GazetteerName of the marine region of interest.
@@ -43,6 +91,10 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
 
   res <- do.call(rbind, res_json) %>%
     tibble::as_tibble(res_json)
+
+  col_names <- colnames(res)
+  res <- res %>%
+    unnest(col_names)
 
   return(res)
 }
@@ -98,6 +150,10 @@ mr_gaz_records_by_type <- function(type, offset = 0){
   res <- do.call(rbind, res_json) %>%
     tibble::as_tibble(res_json)
 
+  col_names <- colnames(res)
+  res <- res %>%
+    unnest(col_names)
+
   return(res)
 }
 
@@ -150,53 +206,9 @@ mr_gaz_records_by_source <- function(source){
   res <- do.call(rbind, res_json) %>%
     tibble::as_tibble(res_json)
 
-  return(res)
-}
-
-#' Retrieve information of Marine Gazetteer Records
-#'
-#' @description Available Placetypes and Sources of [Marine Gazetteer](https://marineregions.org/gazetteer.php) Records.
-#' Useful for retrieving information about Gazetteer Records based on Placetypes (`mr_gaz_records_by_type()`) and Sources (`mr_gaz_records_by_source`).
-#'
-#' @param info The information wished to retrieve. Must be one of: `c("sources", "placetypes")`.
-#' @return Sources: A tibble with the source and source URL.
-#' Placetypes: A tibble with the ID, name and description of each Placetype available in the [Marine Gazetteer](https://marineregions.org/gazetteer.php).
-#' @export
-#'
-#' @examples
-#' placetypes <- mr_gaz_info(info = "placetypes")
-#' placetypes$type[28]
-#' # [1] "Sandbank"
-#'
-#' sources <- mr_gaz_info(info = "sources")
-#' sources$source[36]
-#' # [1] "GeoNames"
-mr_gaz_info <- function(info = c("sources", "placetypes")){
-
-  checkmate::assert_character(info)
-  checkmate::assert_choice(tolower(info), c("sources", "placetypes"))
-
-  url_sources <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerSources")
-  url_placetypes <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerTypes")
-
-  ifelse(info == "sources", url <- url_sources, url <- url_placetypes)
-
-  # todo: get user agent from utils
-  user_agent <- "0.1.8"
-
-  req <- httr2::request(url) %>%
-    httr2::req_headers(
-      accept = "application/json",
-      `User-Agent` = user_agent)
-
-  resp <- req %>%
-    httr2::req_perform()
-
-  res_json <- resp %>%
-    httr2::resp_body_json()
-
-  res <- do.call(rbind, res_json) %>%
-    tibble::as_tibble(res_json)
+  col_names <- colnames(res)
+  res <- res %>%
+    unnest(col_names)
 
   return(res)
 }
@@ -222,6 +234,7 @@ mr_gaz_info <- function(info = c("sources", "placetypes")){
 #' some_atlantic_lon <- 37
 #' some_atlantic_location <- mr_gaz_records_by_latlon(some_atlantic_lat, some_atlantic_lon)
 mr_gaz_records_by_latlon <- function(lat, lon, lat_radius = 0, lon_radius = 0){
+
   # Assertions
   checkmate::assert_double(lat, lower = -90, upper = 90)
   checkmate::assert_double(lon, lower = -180, upper = 180)
@@ -262,6 +275,60 @@ mr_gaz_records_by_latlon <- function(lat, lon, lat_radius = 0, lon_radius = 0){
 
   res <- do.call(rbind, res_json) %>%
     tibble::as_tibble(res_json)
+
+  col_names <- colnames(res)
+  res <- res %>%
+    unnest(col_names)
+
+  return(res)
+}
+
+mr_gaz_records_by_names <- function(names){
+  # path to build: https://marineregions.org/rest/getGazetteerRecordsByNames.json/true/false/belgium%2Fportugal%2Fspain/sandbank/albatross/
+
+  # Assertions
+  # checkmate::assert_double(lat, lower = -90, upper = 90)
+  # checkmate::assert_double(lon, lower = -180, upper = 180)
+
+  # check if high numbers of decimals work or not
+  # assert for "," instead of "."
+  ##  dec_test2 <- mr_gaz_records_by_latlon(34,3, 12,4, 5,7): error for unused arguments
+  ## hint for this case:
+  # dec_test3 <- mr_gaz_records_by_latlon(lat = 32,3, lon = 34,5)
+  # dec_test4 <- mr_gaz_records_by_latlon(lat = 32, lon = 34, 3, 5)
+  # setequal(dec_test3, dec_test4) # TRUE
+
+  url <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByNames")
+
+  # todo: get user agent from utils
+  user_agent <- "0.1.8"
+
+  req <- httr2::request(url) %>%
+    httr2::req_headers(
+      accept = "application/json",
+      `User-Agent` = user_agent)  %>%
+    httr2::req_url_path_append(names) %>%
+    httr2::req_url_path_append("/")
+
+  resp <- req %>%
+    httr2::req_url_query(
+      `lat_radius` = lat_radius,
+      `lon_radius` = lon_radius) %>%
+    httr2::req_perform()
+
+  # # inform user of CPU time (request takes long compared to the other webservices)
+  # req_cpu_time <- system.time(httr2::req_perform(req))
+  # message(glue::glue("The CPU time for performing this http request was {round(req_cpu_time[[3]], digits = 2)} s."))
+
+  res_json <- resp %>%
+    httr2::resp_body_json()
+
+  res <- do.call(rbind, res_json) %>%
+    tibble::as_tibble(res_json)
+
+  col_names <- colnames(res)
+  res <- res %>%
+    unnest(col_names)
 
   return(res)
 }
