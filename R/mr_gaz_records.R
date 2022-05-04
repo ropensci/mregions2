@@ -203,3 +203,68 @@ mr_gaz_info <- function(info = c("sources", "placetypes")){
 
   return(res)
 }
+
+#' Retrieve Gazetteer Records by Lat-Lon Coordinates
+#'
+#' @description Get the first 100 [Marine Gazetteer](https://marineregions.org/gazetteer.php) records, where their centroid is within the bounding box calculated by latitude (+/- radius) and longitude (+/- radius)
+
+#' @param lat A decimal number which ranges from -90 to 90.
+#' @param lon A decimal number which ranges from -180 to +180.
+#' @param lat_radius Searches for latitudes in the range 'latitude'-'latRadius' and 'latitude'+'latRadius' default = 0.
+#' @param lon_radius Searches for longitudes in the range 'longitude'-'longRadius' and 'longitude'+'longRadius' default = 0.
+#'
+#' @return A tibble with the first 100 Gazetteer records of the specified coordinates.
+#' @export
+#'
+#' @examples
+#' oostende_lat <- 51.21551
+#' oostende_lon <- 2.927
+#' oostende <- mr_gaz_records_by_latlon(ostende_lat, ostende_lon, lat_radius = 0, lon_radius = 0)
+#'
+#' some_atlantic_lat <- -37
+#' some_atlantic_lon <- 37
+#' some_atlantic_location <- mr_gaz_records_by_latlon(some_atlantic_lat, some_atlantic_lon)
+mr_gaz_records_by_latlon <- function(lat, lon, lat_radius = 0, lon_radius = 0){
+  # Assertions
+  checkmate::assert_double(lat, lower = -90, upper = 90)
+  checkmate::assert_double(lon, lower = -180, upper = 180)
+
+  # check if high numbers of decimals work or not
+  # assert for "," instead of "."
+  ##  dec_test2 <- mr_gaz_records_by_latlon(34,3, 12,4, 5,7): error for unused arguments
+  ## hint for this case:
+  # dec_test3 <- mr_gaz_records_by_latlon(lat = 32,3, lon = 34,5)
+  # dec_test4 <- mr_gaz_records_by_latlon(lat = 32, lon = 34, 3, 5)
+  # setequal(dec_test3, dec_test4) # TRUE
+
+  url <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByLatLong")
+
+  # todo: get user agent from utils
+  user_agent <- "0.1.8"
+
+  req <- httr2::request(url) %>%
+    httr2::req_headers(
+      accept = "application/json",
+      `User-Agent` = user_agent)  %>%
+    httr2::req_url_path_append(lat) %>%
+    httr2::req_url_path_append(lon) %>%
+    httr2::req_url_path_append("/")
+
+  resp <- req %>%
+    httr2::req_url_query(
+      `lat_radius` = lat_radius,
+      `lon_radius` = lon_radius) %>%
+    httr2::req_perform()
+
+  # # inform user of CPU time (request takes long compared to the other webservices)
+  # req_cpu_time <- system.time(httr2::req_perform(req))
+  # message(glue::glue("The CPU time for performing this http request was {round(req_cpu_time[[3]], digits = 2)} s."))
+
+  res_json <- resp %>%
+    httr2::resp_body_json()
+
+  res <- do.call(rbind, res_json) %>%
+    tibble::as_tibble(res_json)
+
+  return(res)
+}

@@ -28,6 +28,12 @@ testthat::test_that("Error message appears when PC is disconnected to the intern
   expected_res <- "<!DOCTYPE html>"
   result <- expect_equal(tested_res, expected_res)
   # does not make that much sense just yet.
-  # Todo: through comprehensible error message
+  # Todo: give comprehensible error message
 })
 
+# testthat::test_that("mr_gaz_records_by_latlon throws error with `,` decimal separator.", {
+#   # dec_test3 <- mr_gaz_records_by_latlon(lat = 32,3, lon = 34,5)
+#   # # equals:
+#   # dec_test4 <- mr_gaz_records_by_latlon(lat = 32, lon = 34, 3, 5)
+#   # setequal(dec_test3, dec_test4)
+# })

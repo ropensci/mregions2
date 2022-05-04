@@ -2,6 +2,7 @@
 
 export("%>%")
 export(mr_gaz_info)
+export(mr_gaz_records_by_latlon)
 export(mr_gaz_records_by_name)
 export(mr_gaz_records_by_source)
 export(mr_gaz_records_by_type)
