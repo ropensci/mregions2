@@ -13,11 +13,11 @@ mr_gaz_records_by_name(
 )
 }
 \arguments{
-\item{name}{GazetteerName of the marine region of interest. Search names here: https://marineregions.org/gazetteer.php?p=search}
+\item{name}{GazetteerName of the marine region of interest.}
 
 \item{count}{Number of records to retrieve.}
 
-\item{like}{Adds a '%'-sign before and after the GazetteerName.}
+\item{like}{Formats the name into a SQL-like syntax.}
 
 \item{fuzzy}{Uses Levenshtein query to find nearest matches.}
 

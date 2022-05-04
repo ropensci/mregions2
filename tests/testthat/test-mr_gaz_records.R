@@ -30,10 +30,3 @@ testthat::test_that("Error message appears when PC is disconnected to the intern
   # does not make that much sense just yet.
   # Todo: give comprehensible error message
 })
-
-# testthat::test_that("mr_gaz_records_by_latlon throws error with `,` decimal separator.", {
-#   # dec_test3 <- mr_gaz_records_by_latlon(lat = 32,3, lon = 34,5)
-#   # # equals:
-#   # dec_test4 <- mr_gaz_records_by_latlon(lat = 32, lon = 34, 3, 5)
-#   # setequal(dec_test3, dec_test4)
-# })

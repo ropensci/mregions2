@@ -1,8 +1,8 @@
 #' Retrieve Gazetteer Records by Name
 #'
-#' @param name GazetteerName of the marine region of interest. Search names here: https://marineregions.org/gazetteer.php?p=search
+#' @param name GazetteerName of the marine region of interest.
 #' @param count Number of records to retrieve.
-#' @param like Adds a '%'-sign before and after the GazetteerName.
+#' @param like Formats the name into a SQL-like syntax.
 #' @param fuzzy Uses Levenshtein query to find nearest matches.
 #' @param offset Start record number, in order to page through next batch of results.
 #'
@@ -21,9 +21,7 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
   name <- utils::URLencode(name)
 
   # todo: get user agent from utils
-  user_agent <- "mregions" %>%
-    packageVersion() %>%
-    as.character()
+  user_agent <- "1.0.8"
 
   req <- httr2::request(url) %>%
     httr2::req_headers(
