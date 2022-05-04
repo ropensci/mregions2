@@ -1,21 +1,37 @@
-usethis::use_package("glue", type = "Suggests")
-usethis::use_package("httr2", type = "Imports")
+#' Create a base URL for a http request.
+#'
+#' @param api_type Type of API architecture. Must be one of c("rest", "soap").
+#' @param file_format File format. Must be one of c("json", "xml", "ttl", "jsonld").
+#' @param method RESTful method. Check the Marineregions gazetteer at https://marineregions.org/gazetteer.php?p=webservices for available methods.
+#'
+#' @return A base URL to append queries to.
+#' @export
+#'
+#' @examples
+#' api <- "rest"
+#' file <- "json"
+#' method <- "getGazetteerRecordsByName"
+#' req_URL(api_type = api, file_format = file, method = method)
+#' # https://marineregions.org//rest/getGazetteerRecordsByName.json/
 
-req_URL <- function(api_type = c("rest", "soap"), file_type = c("json", "xml", "ttl", "jsonld"), method){
+req_URL <- function(api_type, file_format, method){
   URL <- "https://marineregions.org/"
-  base_url <- glue::glue("{URL}/{api_type}/{method}.{file_type}")
+  base_url <- glue::glue("{URL}/{api_type}/{method}.{file_format}/")
 
-  # To Do: make warning messages more pretty, make assertions more compact?
-  stopifnot("File type not of class character." = is.character(file_type))
-  stopifnot("File type not one of the following: json, xml, ttl, jsonld." = file_type %in% c("json", "xml", "ttl", "jsonld"))
+  # Assertions
+  # Check customising error messages in checkmate package.
+  # method_coll <- makeAssertCollection() # not working yet
+  # method_coll$push("\U02139 Check `https://marineregions.org/gazetteer.php?p=webservices&type=rest` for available methods.")
 
-  stopifnot("API type not of class character." = is.character(api_type))
-  stopifnot("API type not one of the following: rest, soap.", api_type %in% c("rest", soap))
+  checkmate::assert_choice(api_type, c("rest", "soap"))
+  checkmate::assert_choice(file_format, c("json", "xml", "ttl", "jsonld"))
+  # assert_method <- method %>% checkmate::assert_choice(methods, add = method_coll)
+  checkmate::assert_choice(method, methods)
 
-  stopifnot("Method not of class character." = is.character(method))
-  stopifnot("Method unknown. Check https://marineregions.org/gazetteer.php?p=webservices&type=rest for available methods." = method %in% methods)
+  return(base_url)
 }
 
-# To Do: link methods with available output file types. E.g. "getGazetteerTypes" = c("json", "xml", ""ttl)
+# write function mr_gaz_methods() where you can see the available methods & search for strings
 methods <- c("getGazetteerRecordByMRGID", "getGazetteerGeometry" , "getGazetteerTypes", "getGazetteerGeometries", "getGazetteerRecordsByName", "getGazetteerRecordsByType", "getGazetteerWMSes", "getGazetteerRecordsByLatLong", "getGazetteerRecordsByNames", "getGazetteerSources", "getGazetteerNamesByMRGID", "getGazetteerRecordsBySource", "getFeed", "getGazetteerRelationsByMRGID")
-# where should the acceptable methods be defined?
+
+
