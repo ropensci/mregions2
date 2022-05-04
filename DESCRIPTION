@@ -28,5 +28,6 @@ Imports:
     testthat,
     tibble,
     tidyr,
-    utils
+    utils,
+    rdflib
 RoxygenNote: 7.1.2

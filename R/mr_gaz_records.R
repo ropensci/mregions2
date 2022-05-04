@@ -94,7 +94,7 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
 
   col_names <- colnames(res)
   res <- res %>%
-    unnest(col_names)
+    tidyr::unnest(col_names)
 
   return(res)
 }
@@ -152,7 +152,7 @@ mr_gaz_records_by_type <- function(type, offset = 0){
 
   col_names <- colnames(res)
   res <- res %>%
-    unnest(col_names)
+    tidyr::unnest(col_names)
 
   return(res)
 }
@@ -208,7 +208,7 @@ mr_gaz_records_by_source <- function(source){
 
   col_names <- colnames(res)
   res <- res %>%
-    unnest(col_names)
+    tidyr::unnest(col_names)
 
   return(res)
 }
@@ -278,57 +278,7 @@ mr_gaz_records_by_latlon <- function(lat, lon, lat_radius = 0, lon_radius = 0){
 
   col_names <- colnames(res)
   res <- res %>%
-    unnest(col_names)
-
-  return(res)
-}
-
-mr_gaz_records_by_names <- function(names){
-  # path to build: https://marineregions.org/rest/getGazetteerRecordsByNames.json/true/false/belgium%2Fportugal%2Fspain/sandbank/albatross/
-
-  # Assertions
-  # checkmate::assert_double(lat, lower = -90, upper = 90)
-  # checkmate::assert_double(lon, lower = -180, upper = 180)
-
-  # check if high numbers of decimals work or not
-  # assert for "," instead of "."
-  ##  dec_test2 <- mr_gaz_records_by_latlon(34,3, 12,4, 5,7): error for unused arguments
-  ## hint for this case:
-  # dec_test3 <- mr_gaz_records_by_latlon(lat = 32,3, lon = 34,5)
-  # dec_test4 <- mr_gaz_records_by_latlon(lat = 32, lon = 34, 3, 5)
-  # setequal(dec_test3, dec_test4) # TRUE
-
-  url <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByNames")
-
-  # todo: get user agent from utils
-  user_agent <- "0.1.8"
-
-  req <- httr2::request(url) %>%
-    httr2::req_headers(
-      accept = "application/json",
-      `User-Agent` = user_agent)  %>%
-    httr2::req_url_path_append(names) %>%
-    httr2::req_url_path_append("/")
-
-  resp <- req %>%
-    httr2::req_url_query(
-      `lat_radius` = lat_radius,
-      `lon_radius` = lon_radius) %>%
-    httr2::req_perform()
-
-  # # inform user of CPU time (request takes long compared to the other webservices)
-  # req_cpu_time <- system.time(httr2::req_perform(req))
-  # message(glue::glue("The CPU time for performing this http request was {round(req_cpu_time[[3]], digits = 2)} s."))
-
-  res_json <- resp %>%
-    httr2::resp_body_json()
-
-  res <- do.call(rbind, res_json) %>%
-    tibble::as_tibble(res_json)
-
-  col_names <- colnames(res)
-  res <- res %>%
-    unnest(col_names)
+    tidyr::unnest(col_names)
 
   return(res)
 }
