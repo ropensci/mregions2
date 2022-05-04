@@ -18,25 +18,15 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Config/testthat/edition: 3
-<<<<<<< HEAD
-Suggests: 
-    testthat
-Imports: 
-    glue,
-    sf,
-    httr2,
-    magrittr
-RoxygenNote: 7.1.1
-=======
 Imports: 
     checkmate,
     glue,
     httr2,
     magrittr,
+    sf,
     roxygen2,
     testthat,
     tibble,
     tidyr,
     utils
 RoxygenNote: 7.1.2
->>>>>>> main
