@@ -11,7 +11,6 @@
 #'
 #' @examples
 #' mr_gaz_records_by_name(name = "High Seas", count = 5)
-
 mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE, offset = 0){
 
   checkmate::assert_character(name)
@@ -66,7 +65,6 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
 #' fao_subdivs <- mr_gaz_records_by_type("FAO Subdivisions")
 #' fao_subdivs$preferredGazetteerName[1]
 #' # [1] "Northern Alboran Sea"
-
 mr_gaz_records_by_type <- function(type, offset = 0){
 
   # Assertions
@@ -77,7 +75,6 @@ mr_gaz_records_by_type <- function(type, offset = 0){
     as.character() %>%
     tolower()
   checkmate::assert_choice(tested_type, expected_types)
-
 
   url <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByType")
 
@@ -106,7 +103,7 @@ mr_gaz_records_by_type <- function(type, offset = 0){
   return(res)
 }
 
-#' Retrieve Gazetteer Records by Placetype
+#' Retrieve Gazetteer Records by Source
 #'
 #' @description
 #' Every record in the [Marine Gazetteer](https://marineregions.org/gazetteer.php) has a placetype, e.g. `Sandbank` or `Marine Protected Area`.
@@ -122,7 +119,6 @@ mr_gaz_records_by_type <- function(type, offset = 0){
 #' ecoregions <- mr_gaz_records_by_source("ICES Ecoregions")
 #' ecoregions$preferredGazetteerName[4]
 # [1] "Oceanic Northeast Atlantic"
-
 mr_gaz_records_by_source <- function(source){
 
   # Assertions
@@ -160,9 +156,6 @@ mr_gaz_records_by_source <- function(source){
   return(res)
 }
 
-
-
-
 #' Retrieve information of Marine Gazetteer Records
 #'
 #' @description Available Placetypes and Sources of [Marine Gazetteer](https://marineregions.org/gazetteer.php) Records.
@@ -181,8 +174,7 @@ mr_gaz_records_by_source <- function(source){
 #' sources <- mr_gaz_info(info = "sources")
 #' sources$source[36]
 #' # [1] "GeoNames"
-
-mr_gaz_info <- function(info){
+mr_gaz_info <- function(info = c("sources", "placetypes")){
 
   checkmate::assert_character(info)
   checkmate::assert_choice(tolower(info), c("sources", "placetypes"))
