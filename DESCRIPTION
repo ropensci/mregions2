@@ -23,6 +23,7 @@ Imports:
     glue,
     httr2,
     magrittr,
+    sf,
     roxygen2,
     testthat,
     tibble,
