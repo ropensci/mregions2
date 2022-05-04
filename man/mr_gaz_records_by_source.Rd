@@ -7,9 +7,7 @@
 mr_gaz_records_by_source(source)
 }
 \arguments{
-\item{type}{The placetype of which records are retrieved. Must be one of the types in `mr_gaz_info("placetypes")` and class `character`. Case insensitive.}
-
-\item{offset}{Start record number, in order to page through next batch of results.}
+\item{source}{The source of which records are retrieved. Must be one of the types in `mr_gaz_info("placetypes")` and class `character`. Case insensitive.}
 }
 \value{
 A tibble with all Gazetteer records of the specified placetype.

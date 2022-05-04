@@ -24,7 +24,7 @@ Get the first 100 [Marine Gazetteer](https://marineregions.org/gazetteer.php) re
 \examples{
 oostende_lat <- 51.21551
 oostende_lon <- 2.927
-oostende <- mr_gaz_records_by_latlon(ostende_lat, ostende_lon, lat_radius = 0, lon_radius = 0)
+oostende <- mr_gaz_records_by_latlon(oostende_lat, oostende_lon)
 
 some_atlantic_lat <- -37
 some_atlantic_lon <- 37

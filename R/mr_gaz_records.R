@@ -107,8 +107,7 @@ mr_gaz_records_by_type <- function(type, offset = 0){
 #' Every record in the [Marine Gazetteer](https://marineregions.org/gazetteer.php) has a placetype, e.g. `Sandbank` or `Marine Protected Area`.
 #' All placetypes currently available in the gazetteer can be retrieved via `mr_gaz_info("placetypes")`.
 #'
-#' @param type The placetype of which records are retrieved. Must be one of the types in `mr_gaz_info("placetypes")` and class `character`. Case insensitive.
-#' @param offset Start record number, in order to page through next batch of results.
+#' @param source The source of which records are retrieved. Must be one of the types in `mr_gaz_info("placetypes")` and class `character`. Case insensitive.
 #'
 #' @return A tibble with all Gazetteer records of the specified placetype.
 #' @export
@@ -217,7 +216,7 @@ mr_gaz_info <- function(info = c("sources", "placetypes")){
 #' @examples
 #' oostende_lat <- 51.21551
 #' oostende_lon <- 2.927
-#' oostende <- mr_gaz_records_by_latlon(ostende_lat, ostende_lon, lat_radius = 0, lon_radius = 0)
+#' oostende <- mr_gaz_records_by_latlon(oostende_lat, oostende_lon)
 #'
 #' some_atlantic_lat <- -37
 #' some_atlantic_lon <- 37
