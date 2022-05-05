@@ -68,9 +68,6 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
 
   name <- utils::URLencode(name)
 
-  # todo: get user agent from utils
-  user_agent <- "1.0.8"
-
   req <- httr2::request(url) %>%
     httr2::req_headers(
       accept = "application/json")  %>%

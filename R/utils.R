@@ -36,6 +36,57 @@ req_URL <- function(api_type, file_format, method){
 #' @export
 #'
 #' @examples
+#' request("http://example.com") %>% req_mr_user_agent() %>% req_dry_run()
 req_mr_user_agent <- function(.){
   httr2::req_user_agent(. , glue::glue("mregions2 {packageVersion('mregions')}"))
+}
+
+#' Transform httr2 response into tibble
+#'
+#' @param resp response from httr2 request.
+#' @param unpack Set `TRUE` when `mr_gaz_records_by_names()` is run. This webservice nests the result once more.
+#'
+#' @return A tibble containing the json response body from the httr2 response.
+#' @export
+#'
+#' @examples
+#' name <- "High Sea"
+#' count <- 5
+#' url <- "https://marineregions.org//rest/getGazetteerRecordsByName.json/"
+#'
+#' req <- httr2::request(url) %>%
+#'  httr2::req_url_path_append(utils::URLencode(name)) %>%
+#'  httr2::req_url_path_append("/")
+#'
+#' resp <- req %>%
+#'  httr2::req_url_query(
+#'   `like` = TRUE,
+#'   `fuzzy` = FALSE,
+#'   `offset` = 0,
+#'   `count` = count) %>%
+#'  httr2::req_perform()
+#'
+#' res <- http_resp_to_tibble(resp)
+http_resp_to_tibble <- function(resp, unpack = FALSE){
+
+  res_json <- resp %>%
+    httr2::resp_body_json()
+
+  if(unpack == TRUE){
+    entries <- list()
+    for (i in 1:length(res_json)) {
+      entry <- res_json[[i]]
+      entries <- append(entries, entry)
+      }
+    res_json <- entries
+  }
+
+  res <- do.call(rbind, res_json) %>%
+    tibble::as_tibble(res_json)
+
+  col_names <- colnames(res)
+  res <- res %>%
+    tidyr::unnest(col_names)
+
+  return(res)
 }
