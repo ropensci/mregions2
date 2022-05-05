@@ -11,10 +11,10 @@
 #' api <- "rest"
 #' file <- "json"
 #' method <- "getGazetteerRecordsByName"
-#' req_URL(api_type = api, file_format = file, method = method)
+#' mr_req_URL(api_type = api, file_format = file, method = method)
 #' # https://marineregions.org//rest/getGazetteerRecordsByName.json/
 
-req_URL <- function(api_type, file_format, method){
+mr_req_URL <- function(api_type, file_format, method){
   URL <- "https://marineregions.org/"
   base_url <- glue::glue("{URL}/{api_type}/{method}.{file_format}/")
 
@@ -66,8 +66,8 @@ req_mr_user_agent <- function(.){
 #'   `count` = count) %>%
 #'  httr2::req_perform()
 #'
-#' res <- http_resp_to_tibble(resp)
-http_resp_to_tibble <- function(resp, unpack = FALSE){
+#' res <- mr_resp_to_tibble(resp)
+mr_resp_to_tibble <- function(resp, unpack = FALSE){
 
   res_json <- resp %>%
     httr2::resp_body_json()

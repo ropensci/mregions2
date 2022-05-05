@@ -21,13 +21,10 @@ mr_gaz_info <- function(info = c("sources", "placetypes")){
   checkmate::assert_character(info)
   checkmate::assert_choice(tolower(info), c("sources", "placetypes"))
 
-  url_sources <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerSources")
-  url_placetypes <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerTypes")
+  url_sources <- mr_req_URL("rest", "json", "getGazetteerSources")
+  url_placetypes <- mr_req_URL("rest", "json", "getGazetteerTypes")
 
   ifelse(info == "sources", url <- url_sources, url <- url_placetypes)
-
-  # todo: get user agent from utils
-  user_agent <- "0.1.8"
 
   req <- httr2::request(url) %>%
     httr2::req_headers(
@@ -37,13 +34,8 @@ mr_gaz_info <- function(info = c("sources", "placetypes")){
   resp <- req %>%
     httr2::req_perform()
 
-  res_json <- resp %>%
-    httr2::resp_body_json()
-
-  res <- do.call(rbind, res_json) %>%
-    tibble::as_tibble(res_json)
-
-  return(res)
+  res <- resp %>%
+    mr_resp_to_tibble()
 }
 
 #' Retrieve Gazetteer Records by Name
@@ -64,7 +56,7 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
   checkmate::assert_character(name)
   # todo: throw error when name is not in the records
 
-  url <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByName")
+  url <- mregions2::mr_req_URL("rest", "json", "getGazetteerRecordsByName")
 
   name <- utils::URLencode(name)
 
@@ -83,17 +75,8 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
       `count` = count) %>%
     httr2::req_perform()
 
-  res_json <- resp %>%
-    httr2::resp_body_json()
-
-  res <- do.call(rbind, res_json) %>%
-    tibble::as_tibble(res_json)
-
-  col_names <- colnames(res)
-  res <- res %>%
-    tidyr::unnest(col_names)
-
-  return(res)
+  res <- resp %>%
+    mr_resp_to_tibble()
 }
 
 #' Retrieve Gazetteer Records by Placetype
@@ -123,7 +106,7 @@ mr_gaz_records_by_type <- function(type, offset = 0){
     tolower()
   checkmate::assert_choice(tested_type, expected_types)
 
-  url <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByType")
+  url <- mregions2::mr_req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByType")
 
   type <- utils::URLencode(type)
 
@@ -144,14 +127,8 @@ mr_gaz_records_by_type <- function(type, offset = 0){
   res_json <- resp %>%
     httr2::resp_body_json()
 
-  res <- do.call(rbind, res_json) %>%
-    tibble::as_tibble(res_json)
-
-  col_names <- colnames(res)
-  res <- res %>%
-    tidyr::unnest(col_names)
-
-  return(res)
+  res <- resp %>%
+    mr_resp_to_tibble()
 }
 
 #' Retrieve Gazetteer Records by Source
@@ -180,7 +157,7 @@ mr_gaz_records_by_source <- function(source){
     tolower()
   checkmate::assert_choice(tested_source, expected_sources)
 
-  url <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsBySource")
+  url <- mregions2::mr_req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsBySource")
 
   source <- utils::URLencode(source)
 
@@ -197,17 +174,8 @@ mr_gaz_records_by_source <- function(source){
   resp <- req %>%
     httr2::req_perform()
 
-  res_json <- resp %>%
-    httr2::resp_body_json()
-
-  res <- do.call(rbind, res_json) %>%
-    tibble::as_tibble(res_json)
-
-  col_names <- colnames(res)
-  res <- res %>%
-    tidyr::unnest(col_names)
-
-  return(res)
+  res <- resp %>%
+    mr_resp_to_tibble()
 }
 
 #' Retrieve Gazetteer Records by Lat-Lon Coordinates
@@ -244,7 +212,7 @@ mr_gaz_records_by_latlon <- function(lat, lon, lat_radius = 0, lon_radius = 0){
   # dec_test4 <- mr_gaz_records_by_latlon(lat = 32, lon = 34, 3, 5)
   # setequal(dec_test3, dec_test4) # TRUE
 
-  url <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByLatLong")
+  url <- mregions2::mr_req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByLatLong")
 
   # todo: get user agent from utils
   user_agent <- "0.1.8"
@@ -267,17 +235,8 @@ mr_gaz_records_by_latlon <- function(lat, lon, lat_radius = 0, lon_radius = 0){
   # req_cpu_time <- system.time(httr2::req_perform(req))
   # message(glue::glue("The CPU time for performing this http request was {round(req_cpu_time[[3]], digits = 2)} s."))
 
-  res_json <- resp %>%
-    httr2::resp_body_json()
-
-  res <- do.call(rbind, res_json) %>%
-    tibble::as_tibble(res_json)
-
-  col_names <- colnames(res)
-  res <- res %>%
-    tidyr::unnest(col_names)
-
-  return(res)
+   res <- resp %>%
+    mr_resp_to_tibble()
 }
 
 #' Retrieve Gazetteer Records by a list of Names
@@ -299,7 +258,7 @@ mr_gaz_records_by_names <- function(names, like = TRUE, fuzzy = FALSE){
 
   checkmate::assert_character(names)
 
-  url <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByNames")
+  url <- mregions2::mr_req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByNames")
 
   names <- names %>%
     utils::URLencode()
@@ -321,21 +280,6 @@ mr_gaz_records_by_names <- function(names, like = TRUE, fuzzy = FALSE){
   resp <- req %>%
     httr2::req_perform()
 
-  res_json <- resp %>%
-    httr2::resp_body_json()
-
-  entries <- list()
-  for (i in 1:length(res_json)) {
-    entry <- res_json[[i]]
-    entries <- append(entries, entry)
-  }
-
-  res <- do.call(rbind, entries) %>%
-    tibble::as_tibble(entries)
-
-  col_names <- colnames(res)
-  res <- res %>%
-    tidyr::unnest(col_names)
-
-  return(res)
+  res <- resp %>%
+    mr_resp_to_tibble(unpack = TRUE)
 }
