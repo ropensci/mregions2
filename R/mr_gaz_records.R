@@ -31,8 +31,8 @@ mr_gaz_info <- function(info = c("sources", "placetypes")){
 
   req <- httr2::request(url) %>%
     httr2::req_headers(
-      accept = "application/json",
-      `User-Agent` = user_agent)
+      accept = "application/json") %>%
+    req_mr_user_agent()
 
   resp <- req %>%
     httr2::req_perform()
@@ -73,8 +73,8 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
 
   req <- httr2::request(url) %>%
     httr2::req_headers(
-      accept = "application/json",
-      `User-Agent` = user_agent)  %>%
+      accept = "application/json")  %>%
+    req_mr_user_agent() %>%
     httr2::req_url_path_append(name) %>%
     httr2::req_url_path_append("/")
 
@@ -135,8 +135,8 @@ mr_gaz_records_by_type <- function(type, offset = 0){
 
   req <- httr2::request(url) %>%
     httr2::req_headers(
-      accept = "application/json",
-      `User-Agent` = user_agent)  %>%
+      accept = "application/json")  %>%
+    req_mr_user_agent() %>%
     httr2::req_url_path_append(type) %>%
     httr2::req_url_path_append("/")
 
@@ -192,8 +192,8 @@ mr_gaz_records_by_source <- function(source){
 
   req <- httr2::request(url) %>%
     httr2::req_headers(
-      accept = "application/json",
-      `User-Agent` = user_agent)  %>%
+      accept = "application/json")  %>%
+    req_mr_user_agent() %>%
     httr2::req_url_path_append(source) %>%
     httr2::req_url_path_append("/")
 
@@ -254,8 +254,8 @@ mr_gaz_records_by_latlon <- function(lat, lon, lat_radius = 0, lon_radius = 0){
 
   req <- httr2::request(url) %>%
     httr2::req_headers(
-      accept = "application/json",
-      `User-Agent` = user_agent)  %>%
+      accept = "application/json")  %>%
+    req_mr_user_agent() %>%
     httr2::req_url_path_append(lat) %>%
     httr2::req_url_path_append(lon) %>%
     httr2::req_url_path_append("/")
@@ -301,23 +301,21 @@ mr_gaz_records_by_latlon <- function(lat, lon, lat_radius = 0, lon_radius = 0){
 mr_gaz_records_by_names <- function(names, like = TRUE, fuzzy = FALSE){
 
   checkmate::assert_character(names)
-  # Assertions
-  # checkmate::assert_double(lat, lower = -90, upper = 90)
-  # checkmate::assert_double(lon, lower = -180, upper = 180)
 
   url <- mregions2::req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByNames")
 
-  # todo: get user agent from utils
-  user_agent <- "0.1.8"
-
   names <- names %>%
-    utils::URLencode() %>%
-    paste(collapse = "/")
+    utils::URLencode()
+
+  if(length(names) > 1){
+    names <- names %>%
+      paste(collapse = "/")
+    }
 
   req <- httr2::request(url) %>%
     httr2::req_headers(
-      accept = "application/json",
-      `User-Agent` = user_agent)  %>%
+      accept = "application/json")  %>%
+    req_mr_user_agent() %>%
     httr2::req_url_path_append(like) %>%
     httr2::req_url_path_append(fuzzy) %>%
     httr2::req_url_path_append(names) %>%
@@ -328,7 +326,6 @@ mr_gaz_records_by_names <- function(names, like = TRUE, fuzzy = FALSE){
 
   res_json <- resp %>%
     httr2::resp_body_json()
-  # works until here!
 
   entries <- list()
   for (i in 1:length(res_json)) {
