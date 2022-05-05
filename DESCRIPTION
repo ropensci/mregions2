@@ -29,5 +29,6 @@ Imports:
     tibble,
     tidyr,
     utils,
-    rdflib
+    rdflib,
+    mregions
 RoxygenNote: 7.1.2

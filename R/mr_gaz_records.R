@@ -282,9 +282,25 @@ mr_gaz_records_by_latlon <- function(lat, lon, lat_radius = 0, lon_radius = 0){
 
   return(res)
 }
-mr_gaz_records_by_names <- function(names, like = TRUE, fuzzy = FALSE){
-  # path to build: https://marineregions.org/rest/getGazetteerRecordsByNames.json/true/false/belgium%2Fportugal%2Fspain/sandbank/albatross/
 
+#' Retrieve Gazetteer Records by a list of Names
+#'
+#' @description
+#' Retrieve all Records of the [Marine Gazetteer](https://marineregions.org/gazetteer.php) that contain one or more parameters in `names` in their `preferredGazetteerName`.
+#'
+#' @param names Names that are retrieved from the
+#' @param like Formats the name into a SQL-like syntax. Default = TRUE.
+#' @param fuzzy Uses Levenshtein query to find nearest matches. Default = FALSE.
+#'
+#' @return Tibble with Gazetteer records.
+#' @export
+#'
+#' @examples
+#' names <- c("Atlantic Ocean", "Vanuatu", "Mariana Trench")
+#' result <- mr_gaz_records_by_names(names)
+mr_gaz_records_by_names <- function(names, like = TRUE, fuzzy = FALSE){
+
+  checkmate::assert_character(names)
   # Assertions
   # checkmate::assert_double(lat, lower = -90, upper = 90)
   # checkmate::assert_double(lon, lower = -180, upper = 180)
@@ -309,17 +325,19 @@ mr_gaz_records_by_names <- function(names, like = TRUE, fuzzy = FALSE){
 
   resp <- req %>%
     httr2::req_perform()
-  # works until here!
-
-  # # inform user of CPU time (request takes long compared to the other webservices)
-  # req_cpu_time <- system.time(httr2::req_perform(req))
-  # message(glue::glue("The CPU time for performing this http request was {round(req_cpu_time[[3]], digits = 2)} s."))
 
   res_json <- resp %>%
     httr2::resp_body_json()
+  # works until here!
 
-  res <- do.call(rbind, res_json) %>%
-    tibble::as_tibble(res_json)
+  entries <- list()
+  for (i in 1:length(res_json)) {
+    entry <- res_json[[i]]
+    entries <- append(entries, entry)
+  }
+
+  res <- do.call(rbind, entries) %>%
+    tibble::as_tibble(entries)
 
   col_names <- colnames(res)
   res <- res %>%
