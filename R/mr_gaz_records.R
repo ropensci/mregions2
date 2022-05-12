@@ -36,6 +36,8 @@ mr_gaz_info <- function(info = c("sources", "placetypes")){
 
   res <- resp %>%
     mr_resp_to_tibble()
+
+  return(res)
 }
 
 #' Retrieve Gazetteer Records by Name
