@@ -72,7 +72,7 @@ mr_resp_to_tibble <- function(resp, unpack = FALSE){
   res_json <- resp %>%
     httr2::resp_body_json()
 
-  if(unpack == TRUE){
+  if(unpack){
     entries <- list()
     for (i in 1:length(res_json)) {
       entry <- res_json[[i]]
