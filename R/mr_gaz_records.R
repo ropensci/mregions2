@@ -79,6 +79,8 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
 
   res <- resp %>%
     mr_resp_to_tibble()
+  
+  res
 }
 
 #' Retrieve Gazetteer Records by Placetype
@@ -131,6 +133,8 @@ mr_gaz_records_by_type <- function(type, offset = 0){
 
   res <- resp %>%
     mr_resp_to_tibble()
+  
+  res
 }
 
 #' Retrieve Gazetteer Records by Source
@@ -178,6 +182,8 @@ mr_gaz_records_by_source <- function(source){
 
   res <- resp %>%
     mr_resp_to_tibble()
+  
+  res
 }
 
 #' Retrieve Gazetteer Records by Lat-Lon Coordinates
@@ -239,6 +245,8 @@ mr_gaz_records_by_latlon <- function(lat, lon, lat_radius = 0, lon_radius = 0){
 
    res <- resp %>%
     mr_resp_to_tibble()
+  
+  res
 }
 
 #' Retrieve Gazetteer Records by a list of Names
@@ -284,4 +292,6 @@ mr_gaz_records_by_names <- function(names, like = TRUE, fuzzy = FALSE){
 
   res <- resp %>%
     mr_resp_to_tibble(unpack = TRUE)
+  
+  res
 }
