@@ -73,7 +73,7 @@ mr_gaz_geometry <- function(mrgid){
     geom <- lapply(feed$`mr:hasGeometry`, req_geom) %>%
       unlist() %>%
       sf::st_as_sfc(crs = 4326) %>%
-      sf::st_union()
+      sf::st_combine()
 
     return(geom)
   }
