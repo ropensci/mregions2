@@ -90,3 +90,40 @@ mr_resp_to_tibble <- function(resp, unpack = FALSE){
 
   return(res)
 }
+
+#' Replace NULL values with NA in list
+#'
+#' @description useful when running `tibble::as_tibble()` which does not accept NULL.
+#' @param list_with_NULL list element passed to be changed to NA if NULL.
+#'
+#' @return elements in e.g. a list with NA instead of NULL.
+#' @export
+#'
+#' @examples
+#' y <- list(
+#' one = c(month.abb, 5),
+#' two = c(NULL, 5, NA),
+#' three = NULL,
+#' four = list(NULL) # does not change nested NULL for now
+#' )
+#' View(y)
+#' z <- mr_null_to_na(y)
+#' View(z)
+mr_null_to_na <- function(list_with_NULL){
+
+  checkmate::check_list(list_with_NULL)
+
+  null_to_na <- function(x){
+    if(is.null(x))
+    {x <- NA} else{x}
+    return(x)
+  }
+
+  list_with_NA <- lapply(list_with_NULL, null_to_na)
+  return(list_with_NA)
+}
+
+
+test2 <-lapply(test, mr_null_to_na)
+test_unnest <- lapply(test, "[[", 0)
+test_unnest

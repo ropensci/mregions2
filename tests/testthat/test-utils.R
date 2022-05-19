@@ -17,3 +17,7 @@ testthat::test_that("mr_req_URL() gives a valid URL", {
   status_ok <- 200
   testthat::expect_equal(tested_resp$status_code, status_ok)
 })
+#
+# testthat::test_that("mr_null_to_na() outputs a list", {
+#
+# })

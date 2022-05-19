@@ -100,17 +100,8 @@ mr_gaz_record <- function(mrgid, add_geometry = TRUE){
     req_mr_user_agent() %>%
     httr2::req_headers(accept = "application/json") %>%
     httr2::req_perform() %>%
-    httr2::resp_body_json(encoding = "UTF-8")
-
-  for(i in 1:length(req)){
-    if(req[[i]] %>% is.null()){
-      req[[i]] <- NA
-    }
-  }
-
-  # TODO: outsource function mr_null_to_na() (the for loop) into utils
-
-  req <- req %>%
+    httr2::resp_body_json(encoding = "UTF-8") %>%
+    mr_null_to_na() %>%
     tibble::as_tibble()
 
   if(add_geometry){
