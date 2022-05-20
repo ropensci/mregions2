@@ -122,8 +122,3 @@ mr_null_to_na <- function(list_with_NULL){
   list_with_NA <- lapply(list_with_NULL, null_to_na)
   return(list_with_NA)
 }
-
-
-test2 <-lapply(test, mr_null_to_na)
-test_unnest <- lapply(test, "[[", 0)
-test_unnest
