@@ -105,7 +105,8 @@ mr_gaz_record <- function(mrgid, add_geometry = TRUE){
     tibble::as_tibble()
 
   if(add_geometry){
-    req$geom <- mr_gaz_geometry(mrgid)[1, ]
+    # req$geom <- mr_gaz_geometry(mrgid)[1, ]
+    req$geom <- mr_gaz_geometry(mrgid)
     req <- sf::st_as_sf(req)
   }
 
