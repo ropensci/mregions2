@@ -79,7 +79,7 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
 
   res <- resp %>%
     mr_resp_to_tibble()
-  
+
   res
 }
 
@@ -133,7 +133,7 @@ mr_gaz_records_by_type <- function(type, offset = 0){
 
   res <- resp %>%
     mr_resp_to_tibble()
-  
+
   res
 }
 
@@ -182,7 +182,7 @@ mr_gaz_records_by_source <- function(source){
 
   res <- resp %>%
     mr_resp_to_tibble()
-  
+
   res
 }
 
@@ -245,7 +245,7 @@ mr_gaz_records_by_latlon <- function(lat, lon, lat_radius = 0, lon_radius = 0){
 
    res <- resp %>%
     mr_resp_to_tibble()
-  
+
   res
 }
 
@@ -292,6 +292,51 @@ mr_gaz_records_by_names <- function(names, like = TRUE, fuzzy = FALSE){
 
   res <- resp %>%
     mr_resp_to_tibble(unpack = TRUE)
-  
-  res
+
+  return(res)
+}
+
+#' Retrieve Gazetter Relations by MRGID
+#'
+#'Gazetteer Records that are related to a given input MRGID. Relationships can be parents (`upper`), children (`lower`) oder both.
+#'Geographic types can also be specified, for example `partof` and `adjacentto`.
+#'
+#' @param mrgid The [Marine Regions Geographic IDentifier](https://marineregions.org/mrgid.php).
+#' @param direction The hierarchical structure. Must be one of `c("upper", "lower", "both")`. `"upper"` lists all parents of the record. `"lower"` lists all childs of the record. `"both"` lists parents and childs of the record.
+#' @param type must be one of `c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")`. Explanations of the `types` [here](https://marineregions.org/ontology/documentation.html) in chapter *Object Properties*.
+#' @return a `tibble` with all relations for the given `MRGID`.
+#' @export
+#'
+#' @examples
+#' mariana_trench <- mr_gaz_records_by_names("Mariana Trench")
+#' mariana_trench_mrgid <- mariana_trench$MRGID
+#'
+#' mariana_trench_relations <- mr_gaz_relations_by_MRGID(mariana_trench_mrgid)
+#' mariana_trench_relations$preferredGazetteerName
+mr_gaz_relations_by_MRGID <- function(mrgid, direction = "upper", type = "partof"){
+
+  types <- c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")
+  checkmate::assert_character(c("type", "direction"))
+  checkmate::assert_integer(mrgid)
+  checkmate::assert_choice(type, types)
+  checkmate::assert_choice(direction, c("upper", "lower", "both"))
+
+  url <- mregions2::mr_req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRelationsByMRGID")
+
+  req <- httr2::request(url) %>%
+    httr2::req_headers(
+      accept = "application/json")  %>%
+    req_mr_user_agent() %>%
+    httr2::req_url_path_append(mrgid) %>%
+    httr2::req_url_path_append("/")
+
+  resp <- req %>%
+    httr2::req_url_query(
+      `direction` = direction,
+      `type` = type) %>%
+    httr2::req_perform()
+
+  res <- resp %>%
+    mr_resp_to_tibble()
+  return(res)
 }
