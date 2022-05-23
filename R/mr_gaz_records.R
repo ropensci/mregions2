@@ -74,12 +74,20 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
       `like` = like,
       `fuzzy` = fuzzy,
       `offset` = offset,
-      `count` = count) %>%
-    httr2::req_perform()
+      `count` = count)
+
+  tryCatch(req %>% httr2::req_perform(),
+             if(httr2::last_response()$status){
+               message("The Marine Gazetteer entry was not found. Check that \n1) the name is spelled correctly and \n2) that it is in the Marine Gazetteer here: https://marineregions.org/gazetteer.php?p=search.")
+             } else{
+               resp <- req %>% httr2::req_perform()
+             }
+
+  )
 
   res <- resp %>%
     mr_resp_to_tibble()
-  
+
   res
 }
 
@@ -114,9 +122,6 @@ mr_gaz_records_by_type <- function(type, offset = 0){
 
   type <- utils::URLencode(type)
 
-  # todo: get user agent from utils
-  user_agent <- "0.1.8"
-
   req <- httr2::request(url) %>%
     httr2::req_headers(
       accept = "application/json")  %>%
@@ -133,7 +138,7 @@ mr_gaz_records_by_type <- function(type, offset = 0){
 
   res <- resp %>%
     mr_resp_to_tibble()
-  
+
   res
 }
 
@@ -167,9 +172,6 @@ mr_gaz_records_by_source <- function(source){
 
   source <- utils::URLencode(source)
 
-  # todo: get user agent from utils
-  user_agent <- "0.1.8"
-
   req <- httr2::request(url) %>%
     httr2::req_headers(
       accept = "application/json")  %>%
@@ -182,7 +184,7 @@ mr_gaz_records_by_source <- function(source){
 
   res <- resp %>%
     mr_resp_to_tibble()
-  
+
   res
 }
 
@@ -222,9 +224,6 @@ mr_gaz_records_by_latlon <- function(lat, lon, lat_radius = 0, lon_radius = 0){
 
   url <- mregions2::mr_req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByLatLong")
 
-  # todo: get user agent from utils
-  user_agent <- "0.1.8"
-
   req <- httr2::request(url) %>%
     httr2::req_headers(
       accept = "application/json")  %>%
@@ -245,7 +244,7 @@ mr_gaz_records_by_latlon <- function(lat, lon, lat_radius = 0, lon_radius = 0){
 
    res <- resp %>%
     mr_resp_to_tibble()
-  
+
   res
 }
 
@@ -292,6 +291,6 @@ mr_gaz_records_by_names <- function(names, like = TRUE, fuzzy = FALSE){
 
   res <- resp %>%
     mr_resp_to_tibble(unpack = TRUE)
-  
+
   res
 }
