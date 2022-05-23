@@ -35,8 +35,9 @@ mr_req_URL <- function(api_type, file_format, method){
 #' @return A character string that unites the user agent of the http request and the package version.
 #' @export
 #'
-#' @examples
-#' request("http://example.com") %>% req_mr_user_agent() %>% req_dry_run()
+#' @examples \dontrun{
+#' httr2::request("http://example.com") %>% req_mr_user_agent() %>% httr2::req_dry_run()
+#' }
 req_mr_user_agent <- function(.){
   httr2::req_user_agent(. , glue::glue("mregions2 {packageVersion('mregions')}"))
 }
@@ -106,9 +107,9 @@ mr_resp_to_tibble <- function(resp, unpack = FALSE){
 #' three = NULL,
 #' four = list(NULL) # does not change nested NULL for now
 #' )
-#' View(y)
+#' str(y)
 #' z <- mr_null_to_na(y)
-#' View(z)
+#' str(z)
 mr_null_to_na <- function(list_with_NULL){
 
   checkmate::check_list(list_with_NULL)

@@ -16,5 +16,7 @@ A character string that unites the user agent of the http request and the packag
 Get user agent and package version
 }
 \examples{
-request("http://example.com") \%>\% req_mr_user_agent() \%>\% req_dry_run()
+\dontrun{
+httr2::request("http://example.com") \%>\% req_mr_user_agent() \%>\% httr2::req_dry_run()
+}
 }
