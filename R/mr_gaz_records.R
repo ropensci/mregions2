@@ -77,7 +77,7 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
       `count` = count)
 
   tryCatch(req %>% httr2::req_perform(),
-             if(httr2::last_response()$status){
+             if(httr2::last_response()$status == 404){
                message("The Marine Gazetteer entry was not found. Check that \n1) the name is spelled correctly and \n2) that it is in the Marine Gazetteer here: https://marineregions.org/gazetteer.php?p=search.")
              } else{
                resp <- req %>% httr2::req_perform()
