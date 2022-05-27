@@ -21,6 +21,11 @@
 # TODO: design case when no geometry is available
 # TODO: function to check if geometry is available? sth like `mr_check_geometry_availability()`
 
+
+#' R6 Class Representing a Marine Region Object
+#'
+#' @description A ´MarineRegion` object corresponds to a record in the Marine Gazetteer, available at https://marineregions.org.
+#' It contains relevant information such as the Name, the MRGID (Marine Regions Geographic IDentifier), the Placetype, the Source,...
 marine_region <- R6Class(
   "MarineRegion",
   private = list(
@@ -33,7 +38,8 @@ marine_region <- R6Class(
     ..longitude = NA,
     ..latitude = NA,
     ..status = NA,
-    ..placetype = NA
+    ..placetype = NA,
+    ..area = NA
     ),
   active = list( # active elements make private elements accessible by the user
     add_geometry = function(){private$..add_geometry},
@@ -45,22 +51,33 @@ marine_region <- R6Class(
     longitude = function(){private$..longitude},
     source = function(){private$..source},
     status = function(){private$..status},
-    placetype = function(){private$..placetype}
+    placetype = function(){private$..placetype},
+    area = function(){private$..area}
   ),
   public = list(
+#' Inititalize `Marineregion` object
+#' @description This method gets called whenever a new `MarineRegion` object is created. It created all necessary attributes and e.g. includes that the object is immediately printed.
+#' @param add_geometry specify if the geometry is wanted or not
+#' @param mrgid the Marine Regions Geographic IDentifier
+#' @param name the name of the `MarineRegion` object
+#'
+#' @return an initialized `MarineRegion` object
     initialize = function(add_geometry, mrgid, name){
       if(!missing(mrgid)) {private$..mrgid <- mrgid}
       if(!missing(name)) {private$..name <- name}
       if(!missing(add_geometry)) {private$..add_geometry <- add_geometry}
-      # if(private$..add_geometry == TRUE) {self$get_geometry()}
-      if(add_geometry == TRUE) {self$get_geometry()}
+      if(private$..add_geometry == TRUE) {self$get_geometry()}
       self$get_info()
       self$print()
       message("Tip: run `View(<marine_region>$info)` to get an overview on the marine region.\n")
-      # message("Tip: run `library(mapview); mapview(<marine_region>$geometry)` to plot/visualise the geometry.")
     },
+#' Title
+#'
+#' @return
+#' @export
+#'
+#' @examples
     print = function(){ #good style according to: https://adv-r.hadley.nz/r6.html
-      # cat(mr_marine_region$classname, ":\n") # does not work for some reason
       cat( "Marine Region:\n")
       cat("  Name: ", private$..name, "\n", sep = "")
       cat("  MRGID: ", private$..mrgid, "\n", sep = "")
@@ -70,8 +87,6 @@ marine_region <- R6Class(
       cat("  Source: ", private$..source, "\n", sep = "")
       cat("  Status: ", private$..status, "\n", sep = "")
       cat("  add_geometry: ", private$..add_geometry, "\n", sep = "")
-      # cat("  geometry: ", ifelse(!is.na(private$..geometry),c("TRUE\n", message("Tip: run `library(mapview); mapview(<marine_region>$geometry)` to plot/visualise the geometry.")), "FALSE"), "\n", sep = "")
-      # cat("  geometry: ", self$get_geometry_info(private$..geometry),"\n", sep = "")
       cat("  geometry: ", sep = "")
       self$get_geometry_info(private$..geometry)
       invisible(self) #TODO: make tip about visualisation appear below `geometry: TRUE`
@@ -84,16 +99,26 @@ marine_region <- R6Class(
       private$..status <- private$..info$status
       private$..placetype <- private$..info$placeType
     },
-    get_geometry = function(){private$..geometry <- mregions2::mr_gaz_geometry(private$..mrgid)},
+    get_geometry = function(){
+      private$..geometry <- mregions2::mr_gaz_geometry(private$..mrgid)
+      if(is.list(private$..geometry)){
+        private$..area <- sf::st_area(private$..geometry)
+        attributes(private$..area)$units$numerator[1:2] <- "km"
+        private$..area <- private$..area / 1000000 # transform m^2 to km^2
+        }
+      },
     get_geometry_info = function(geometry){
       if(is.list(geometry)){
-        print(class(geometry))
+        cat("class ", class(geometry)[1], "\n", sep = "")
+        # cat("  area: ", private$..area, "\n", sep = "")
+        cat("  area: ")
+        print(private$..area)
+        # cat("\n", sep = "")
         cat(message("Tip: run `library(mapview); mapview(<marine_region>$geometry)` to plot/visualise the geometry."),"\n", sep = "")
       } else {
         if(is.null(geometry)){
           cat("NULL\n", sep = "")
           cat(message("  geometry not available at marineregions.org\n", sep = ""))
-          # cat("NULL", message("\n  geometry not available at marineregions.org", "\n", sep = ""))
         } else{cat(geometry, "\n\n", sep = "")}
         }
     }
@@ -115,7 +140,6 @@ marine_region <- R6Class(
 #' high_seas_mrgid <- mr_gaz_record_by_name("High Seas", count = 1)$MRGID
 #' high_seas <- mr_marine_region$new(high_seas_mrgid, add_geometry = FALSE)
 mr_marine_region <- function(name = NA, mrgid = NA, add_geometry = TRUE){
-  # assertions: check class of name and mrgid
   if(!missing(add_geometry)){
     checkmate::assert_logical(add_geometry)
   }
@@ -131,7 +155,7 @@ mr_marine_region <- function(name = NA, mrgid = NA, add_geometry = TRUE){
     if(is.na(mrgid) & !is.na(name)){
       # get MRGID if only name is given
       checkmate::assert_string(name)
-      # if name is misspelled: make tryCatch error msg from mr_gaz_records_by_name() visible here
+      # TODO: if name is misspelled: make tryCatch error msg from mr_gaz_records_by_name() visible here
       message("A `name` was given as input. The first result from `mr_gaz_records_by_name()` will be used as the marine region. Prefer using MRGID, find mrgids with `mr_gaz_records_by_name(<your_region_name>)`.")
       mrgid <- mregions2::mr_gaz_records_by_name(name, count = 1)$MRGID
     }
@@ -139,30 +163,13 @@ mr_marine_region <- function(name = NA, mrgid = NA, add_geometry = TRUE){
     }
   return(res)
 }
-#
-#
-# mr_marine_region(name = "Hotzenplotz")
-# mr_gaz_records_by_name(name = "Hotzenplotz")
-# high_seas <- mr_marine_region(name = "High Seas")
-# marine_region$new()
-#
-# bpns <- mr_marine_region(name = "Belgian Part of the North Sea", add_geometry = TRUE)
-# class(bpns)
-# # View(bpns)
-# bpns$add_geometry <- FALSE
-# bpns$add_geometry
-# bpns$mrgid
-# # bpns$mrgid <- 2393
-# bpns
-# bpns$geometry
-#
-# germany <- mr_marine_region(name = "German Part of the North Sea")
-# germany
-#
-# guadelupe <- mr_marine_region(name = "Guadelupe")
-#
-# guadelupe_na <- mr_marine_region(name= "Guadelupe", add_geometry = FALSE)
-#
-#
-# default <- mr_marine_region()
-# default
+
+# Tests
+
+guadelupe <- mr_marine_region(name = "Guadelupe")
+
+guadelupe_na <- mr_marine_region(name= "Guadelupe", add_geometry = FALSE)
+
+default <- mr_marine_region()
+
+mr_marine_region(name = "thisisnotaname")
