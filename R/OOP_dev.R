@@ -12,14 +12,17 @@
 # - get more info such as area when initialising the object (how to get the area? --> spatial operations)
 # - Question: necessary/good idea to write the object with pipes? Now there is quite some nesting but idk if using pipes will destroy anything in R6
 # - enable user to save more info in the object (i.e. wrapper function to create public elements)
+# - eventually look up bathymetry data from emodnet / gebco
 
-# TODO: think about if add_geometry has to be a private element or if it can simply be public as well
 # TODO: create assertion when people want to override read-only elements, eg MRGID
 # bpns$mrgid <- 2393
 # error now: Error in (function ()  : unused argument (base::quote(2393))
 #error goal: this is read-only. create a new marineregion with your MRGID
 # TODO: document like https://roxygen2.r-lib.org/articles/rd.html#r6
 # TODO: function to check if geometry is available? sth like `mr_check_geometry_availability()`
+# TODO: add relationship function
+# TODO: make a pro function to access all info
+# TODO: what if system is in diff lang?
 
 
 #' R6 Class Representing a Marine Region Object
@@ -81,6 +84,7 @@ marine_region <- R6Class(
 #' @examples
 #' guadelupe <- mr_marine_reggion(name = "Guadelupe")
 #' guadelupe
+#' @description if an instance of `MarineRegion` is called, the `print` function will be run.
     print = function(){ #good style according to: https://adv-r.hadley.nz/r6.html
       cat( "Marine Region:\n")
       cat("  Name: ", private$..name, "\n", sep = "")
