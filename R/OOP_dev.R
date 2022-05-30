@@ -11,6 +11,7 @@
 # - give the possibility to add own private elements with a wrapper function?
 # - get more info such as area when initialising the object (how to get the area? --> spatial operations)
 # - Question: necessary/good idea to write the object with pipes? Now there is quite some nesting but idk if using pipes will destroy anything in R6
+# - enable user to save more info in the object (i.e. wrapper function to create public elements)
 
 # TODO: think about if add_geometry has to be a private element or if it can simply be public as well
 # TODO: create assertion when people want to override read-only elements, eg MRGID
@@ -18,7 +19,6 @@
 # error now: Error in (function ()  : unused argument (base::quote(2393))
 #error goal: this is read-only. create a new marineregion with your MRGID
 # TODO: document like https://roxygen2.r-lib.org/articles/rd.html#r6
-# TODO: design case when no geometry is available
 # TODO: function to check if geometry is available? sth like `mr_check_geometry_availability()`
 
 
@@ -39,6 +39,7 @@ marine_region <- R6Class(
     ..latitude = NA,
     ..status = NA,
     ..placetype = NA,
+    ..all_relations = NA,
     ..area = NA
     ),
   active = list( # active elements make private elements accessible by the user
@@ -52,6 +53,7 @@ marine_region <- R6Class(
     source = function(){private$..source},
     status = function(){private$..status},
     placetype = function(){private$..placetype},
+    all_relations = function(){private$..all_relations},
     area = function(){private$..area}
   ),
   public = list(
@@ -71,12 +73,14 @@ marine_region <- R6Class(
       self$print()
       message("Tip: run `View(<marine_region>$info)` to get an overview on the marine region.\n")
     },
-#' Title
+#' Print important attributes of the class `MarineRegion`
 #'
-#' @return
+#' @return important attributes of the class `MarineRegion`.
 #' @export
 #'
 #' @examples
+#' guadelupe <- mr_marine_reggion(name = "Guadelupe")
+#' guadelupe
     print = function(){ #good style according to: https://adv-r.hadley.nz/r6.html
       cat( "Marine Region:\n")
       cat("  Name: ", private$..name, "\n", sep = "")
@@ -86,6 +90,7 @@ marine_region <- R6Class(
       cat("  Placetype: ", private$..placetype, "\n", sep = "")
       cat("  Source: ", private$..source, "\n", sep = "")
       cat("  Status: ", private$..status, "\n", sep = "")
+      cat("  All Relations: A ", class(private$..all_relations)[2], " with ", nrow(private$..all_relations), " related marine regions.", "\n", sep = "")
       cat("  add_geometry: ", private$..add_geometry, "\n", sep = "")
       cat("  geometry: ", sep = "")
       self$get_geometry_info(private$..geometry)
@@ -93,6 +98,7 @@ marine_region <- R6Class(
     },
     get_info = function(){
       private$..info <- mregions2::mr_gaz_record(private$..mrgid, add_geometry = FALSE)
+      private$..all_relations <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "both", type = "all") #can be changed
       private$..latitude <- private$..info$latitude
       private$..longitude <- private$..info$longitude
       private$..source <- private$..info$gazetteerSource
@@ -127,12 +133,13 @@ marine_region <- R6Class(
 
 #' Get a marine region
 #'
-#' @description If only a name is given, the MRGID from the first record found by `mr_gaz_record_by_name(name)` will be fetched. Since names are not unique, prefer to input MRGIDs.
-#' @param name
-#' @param mrgid
-#' @param add_geometry
+#' @description
+#' If only a name is given, the MRGID from the first record found by `mr_gaz_record_by_name(name)` will be fetched. Since names are not unique, prefer to input MRGIDs.
+#' @param name The `preferredGazetteerName` of a marine gazetteer record. Can be retrieved with `mr_gaz_records_by_name()`.
+#' @param mrgid The `Marine Regions Geographical IDentifier`.
+#' @param add_geometry Statement if geospatial data should be retrieved.
 #'
-#' @return
+#' @return An instance of the class `MarineRegion`.
 #' @export
 #'
 #' @examples
@@ -156,20 +163,10 @@ mr_marine_region <- function(name = NA, mrgid = NA, add_geometry = TRUE){
       # get MRGID if only name is given
       checkmate::assert_string(name)
       # TODO: if name is misspelled: make tryCatch error msg from mr_gaz_records_by_name() visible here
-      message("A `name` was given as input. The first result from `mr_gaz_records_by_name()` will be used as the marine region. Prefer using MRGID, find mrgids with `mr_gaz_records_by_name(<your_region_name>)`.")
+      message("Tip: Use `MRGID` to access elements unmistakeably. Find mrgids with `mr_gaz_records_by_name(<your_region_name>)`. For inputs with a `name`, the first result from `mr_gaz_records_by_name()` will be used as the marine region.")
       mrgid <- mregions2::mr_gaz_records_by_name(name, count = 1)$MRGID
     }
     res <- marine_region$new(name = name, mrgid = mrgid, add_geometry = add_geometry)
     }
   return(res)
 }
-
-# Tests
-
-guadelupe <- mr_marine_region(name = "Guadelupe")
-
-guadelupe_na <- mr_marine_region(name= "Guadelupe", add_geometry = FALSE)
-
-default <- mr_marine_region()
-
-mr_marine_region(name = "thisisnotaname")
