@@ -23,7 +23,9 @@
 # TODO: add relationship function
 # TODO: make a pro function to access all info
 # TODO: what if system is in diff lang?
-
+# TODO: relations: make easily accessible functions like <marine_region>$children/parents/neighbors.
+#       Make message in `print()`: get more relations with <marine_region>$relations(direction, type)
+#       Remove "all relations".
 
 #' R6 Class Representing a Marine Region Object
 #'
@@ -42,8 +44,46 @@ marine_region <- R6Class(
     ..latitude = NA,
     ..status = NA,
     ..placetype = NA,
-    ..all_relations = NA,
-    ..area = NA
+    ..children = NA,
+    ..parents = NA,
+    ..neighbours = NA,
+    # ..all_relations = NA,
+    ..area = NA,
+    get_info = function(){
+      private$..info <- mregions2::mr_gaz_record(private$..mrgid, add_geometry = FALSE)
+      # private$..all_relations <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "both", type = "all") #can be changed
+      private$..children <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "lower", type = "partof")
+      private$..parents <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "upper", type = "partof")
+      # private$..neighbors <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "both", type = "adjacentto")
+      private$..latitude <- private$..info$latitude
+      private$..longitude <- private$..info$longitude
+      private$..source <- private$..info$gazetteerSource
+      private$..status <- private$..info$status
+      private$..placetype <- private$..info$placeType
+    },
+    get_geometry = function(){
+      private$..geometry <- mregions2::mr_gaz_geometry(private$..mrgid)
+      if(is.list(private$..geometry)){
+        private$..area <- sf::st_area(private$..geometry)
+        attributes(private$..area)$units$numerator[1:2] <- "km"
+        private$..area <- private$..area / 1000000 # transform m^2 to km^2
+      }
+    },
+    get_geometry_info = function(geometry){
+      if(is.list(geometry)){
+        cat("class ", class(geometry)[1], "\n", sep = "")
+        # cat("  area: ", private$..area, "\n", sep = "")
+        cat("  area: ")
+        print(private$..area)
+        # cat("\n", sep = "")
+        cat(message("Tip: run `library(mapview); mapview(<marine_region>$geometry)` to plot/visualise the geometry."),"\n", sep = "")
+      } else {
+        if(is.null(geometry)){
+          cat("NULL\n", sep = "")
+          cat(message("  geometry not available at marineregions.org\n", sep = ""))
+        } else{cat(geometry, "\n\n", sep = "")}
+      }
+    }
     ),
   active = list( # active elements make private elements accessible by the user
     add_geometry = function(){private$..add_geometry},
@@ -56,7 +96,10 @@ marine_region <- R6Class(
     source = function(){private$..source},
     status = function(){private$..status},
     placetype = function(){private$..placetype},
-    all_relations = function(){private$..all_relations},
+    # all_relations = function(){private$..all_relations},
+    children = function(){private$..children},
+    parents = function(){private$..parents},
+    # neighbors = function(){private$..neighbors},
     area = function(){private$..area}
   ),
   public = list(
@@ -71,8 +114,8 @@ marine_region <- R6Class(
       if(!missing(mrgid)) {private$..mrgid <- mrgid}
       if(!missing(name)) {private$..name <- name}
       if(!missing(add_geometry)) {private$..add_geometry <- add_geometry}
-      if(private$..add_geometry == TRUE) {self$get_geometry()}
-      self$get_info()
+      if(private$..add_geometry == TRUE) {private$get_geometry()}
+      private$get_info()
       self$print()
       message("Tip: run `View(<marine_region>$info)` to get an overview on the marine region.\n")
     },
@@ -82,7 +125,7 @@ marine_region <- R6Class(
 #' @export
 #'
 #' @examples
-#' guadelupe <- mr_marine_reggion(name = "Guadelupe")
+#' guadelupe <- mr_marine_region(name = "Guadelupe")
 #' guadelupe
 #' @description if an instance of `MarineRegion` is called, the `print` function will be run.
     print = function(){ #good style according to: https://adv-r.hadley.nz/r6.html
@@ -94,43 +137,17 @@ marine_region <- R6Class(
       cat("  Placetype: ", private$..placetype, "\n", sep = "")
       cat("  Source: ", private$..source, "\n", sep = "")
       cat("  Status: ", private$..status, "\n", sep = "")
-      cat("  All Relations: A ", class(private$..all_relations)[2], " with ", nrow(private$..all_relations), " related marine regions.", "\n", sep = "")
+      cat("  Cildren: A ", class(private$..children)[2], " with ", nrow(private$..children), " related marine regions.", "\n", sep = "")
+      cat("  Parents: A ", class(private$..parents)[2], " with ", nrow(private$..parents), " related marine regions.", "\n", sep = "")
+      # cat("  All Relations: A ", class(private$..all_relations)[2], " with ", nrow(private$..all_relations), " related marine regions.", "\n", sep = "")
       cat("  add_geometry: ", private$..add_geometry, "\n", sep = "")
       cat("  geometry: ", sep = "")
-      self$get_geometry_info(private$..geometry)
+      private$get_geometry_info(private$..geometry)
       invisible(self) #TODO: make tip about visualisation appear below `geometry: TRUE`
     },
-    get_info = function(){
-      private$..info <- mregions2::mr_gaz_record(private$..mrgid, add_geometry = FALSE)
-      private$..all_relations <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "both", type = "all") #can be changed
-      private$..latitude <- private$..info$latitude
-      private$..longitude <- private$..info$longitude
-      private$..source <- private$..info$gazetteerSource
-      private$..status <- private$..info$status
-      private$..placetype <- private$..info$placeType
-    },
-    get_geometry = function(){
-      private$..geometry <- mregions2::mr_gaz_geometry(private$..mrgid)
-      if(is.list(private$..geometry)){
-        private$..area <- sf::st_area(private$..geometry)
-        attributes(private$..area)$units$numerator[1:2] <- "km"
-        private$..area <- private$..area / 1000000 # transform m^2 to km^2
-        }
-      },
-    get_geometry_info = function(geometry){
-      if(is.list(geometry)){
-        cat("class ", class(geometry)[1], "\n", sep = "")
-        # cat("  area: ", private$..area, "\n", sep = "")
-        cat("  area: ")
-        print(private$..area)
-        # cat("\n", sep = "")
-        cat(message("Tip: run `library(mapview); mapview(<marine_region>$geometry)` to plot/visualise the geometry."),"\n", sep = "")
-      } else {
-        if(is.null(geometry)){
-          cat("NULL\n", sep = "")
-          cat(message("  geometry not available at marineregions.org\n", sep = ""))
-        } else{cat(geometry, "\n\n", sep = "")}
-        }
+    get_relations = function(direction, type){
+      res <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = direction, type = type)
+      return(res)
     }
   )
 )

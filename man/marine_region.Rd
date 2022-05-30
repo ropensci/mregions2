@@ -14,7 +14,7 @@ Inititalize `Marineregion` object
 ## Method `marine_region$print`
 ## ------------------------------------------------
 
-guadelupe <- mr_marine_reggion(name = "Guadelupe")
+guadelupe <- mr_marine_region(name = "Guadelupe")
 guadelupe
 }
 \section{Methods}{
@@ -22,9 +22,7 @@ guadelupe
 \itemize{
 \item \href{#method-new}{\code{marine_region$new()}}
 \item \href{#method-print}{\code{marine_region$print()}}
-\item \href{#method-get_info}{\code{marine_region$get_info()}}
-\item \href{#method-get_geometry}{\code{marine_region$get_geometry()}}
-\item \href{#method-get_geometry_info}{\code{marine_region$get_geometry_info()}}
+\item \href{#method-get_relations}{\code{marine_region$get_relations()}}
 \item \href{#method-clone}{\code{marine_region$clone()}}
 }
 }
@@ -57,6 +55,7 @@ Print important attributes of the class `MarineRegion`
 \if{html}{\out{<a id="method-print"></a>}}
 \if{latex}{\out{\hypertarget{method-print}{}}}
 \subsection{Method \code{print()}}{
+if an instance of `MarineRegion` is called, the `print` function will be run.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{marine_region$print()}\if{html}{\out{</div>}}
 }
@@ -66,7 +65,7 @@ important attributes of the class `MarineRegion`.
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{guadelupe <- mr_marine_reggion(name = "Guadelupe")
+\preformatted{guadelupe <- mr_marine_region(name = "Guadelupe")
 guadelupe
 }
 \if{html}{\out{</div>}}
@@ -75,29 +74,11 @@ guadelupe
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_info"></a>}}
-\if{latex}{\out{\hypertarget{method-get_info}{}}}
-\subsection{Method \code{get_info()}}{
+\if{html}{\out{<a id="method-get_relations"></a>}}
+\if{latex}{\out{\hypertarget{method-get_relations}{}}}
+\subsection{Method \code{get_relations()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{marine_region$get_info()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_geometry"></a>}}
-\if{latex}{\out{\hypertarget{method-get_geometry}{}}}
-\subsection{Method \code{get_geometry()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{marine_region$get_geometry()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_geometry_info"></a>}}
-\if{latex}{\out{\hypertarget{method-get_geometry_info}{}}}
-\subsection{Method \code{get_geometry_info()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{marine_region$get_geometry_info(geometry)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{marine_region$get_relations(direction, type)}\if{html}{\out{</div>}}
 }
 
 }
