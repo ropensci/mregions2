@@ -153,5 +153,25 @@ mr_http_error_message <- function(response) {
   if(response$status_code == 404) message("That url doesn't exist")
   if(response$status_code == 500) message("The server screwed up")
   if(response$status_code == 400) message("You made a mistake!")
+  stop()
+}
+
+#' Check if marine region has a geometry
+#'
+#' @param mrgid The Marine Regions Geographic IDentifier.
+#'
+#' @return TRUE if the a geometry is available, otherwise FALSE.
+#' @export
+#'
+#' @examples
+#' guadelupe_mrgid <- mr_gaz_records_by_name(name = "Guadelupe", count = 1)$MRGID
+#' guadelupe_hasgeometry <- mr_has_geometry(guadelupe_mrgid)
+#'
+#' belgium_mrgid <- mr_gaz_records_by_name(name = "Belgium", count = 1)$MRGID
+#' belgium_hasgeometry <- mr_has_geometry(belgium_mrgid)
+mr_has_geometry <- function(mrgid) {
+  feed <- mr_gaz_ldes(mrgid, "list")
+  has_geometry <- "mr:hasGeometry" %in% names(feed)
+  return(has_geometry)
 }
 

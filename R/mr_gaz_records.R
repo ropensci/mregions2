@@ -337,7 +337,61 @@ mr_gaz_relations_by_MRGID <- function(mrgid, direction = "upper", type = "partof
     req_error(is_error = function(resp) FALSE) %>%
     httr2::req_perform()
 
+  resp %>% mr_http_error_message()
+
   res <- resp %>%
     mr_resp_to_tibble()
   return(res)
+}
+
+mr_gaz_relations_full_by_MRGID <- function(mrgid){
+
+  res1 <- mregions2::mr_gaz_ldes(mrgid, type = "list")
+
+  res_isAdjacentTo
+
+  length(res1$`mr:isAdjacentTo`)
+
+  relative_url <- res1[["mr:isPartOf"]][[1]][["@id"]]
+  relative_mrgid <- relative_url %>%
+    gsub("http://marineregions.org/mrgid/", "", .)  %>%
+    as.integer()
+  entry <- mregions2::mr_gaz_record(relative_mrgid, add_geometry = FALSE)
+
+
+  res1[[1]]
+  names(res1)
+
+  # types <- c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")
+  # directions <- c("upper", "lower")
+  #
+  # res <- mr_gaz_relations_by_MRGID(mrgid = mrgid, direction = "upper", type = "partof")
+  #
+  # for (i in 1:length(directions)) {
+  #   direction <- directions[i]
+  #   for(j in 2:length(types)) {
+  #     type <- types[j]
+  #     res_temp <- mr_gaz_relations_by_MRGID(mrgid = mrgid, direction = direction, type = type)
+  #     res <- rbind(res, res_temp)
+  #   }
+  # }
+
+  # url <- mregions2::mr_req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRelationsByMRGID")
+  #
+  # req <- httr2::request(url) %>%
+  #   httr2::req_headers(
+  #     accept = "application/json")  %>%
+  #   req_mr_user_agent() %>%
+  #   httr2::req_url_path_append(mrgid) %>%
+  #   httr2::req_url_path_append("/")
+  #
+  # resp <- req %>%
+  #   httr2::req_url_query(
+  #     `direction` = direction,
+  #     `type` = type) %>%
+  #   httr2::req_perform()
+  #
+  # res <- resp %>%
+  #   mr_resp_to_tibble()
+  # return(res)
 }
