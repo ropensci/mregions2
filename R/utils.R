@@ -122,3 +122,36 @@ mr_null_to_na <- function(list_with_NULL){
   list_with_NA <- lapply(list_with_NULL, null_to_na)
   return(list_with_NA)
 }
+
+
+# f <- function(url) {
+#   tryCatch(stop_for_status(GET(url)),
+#            http_404 = function(c) "That url doesn't exist",
+#            http_403 = function(c) "You need to authenticate!",
+#            http_400 = function(c) "You made a mistake!",
+#            http_500 = function(c) "The server screwed up"
+#   )
+# }
+# f("http://httpbin.org/status/404")
+# f("http://httpbin.org/status/403")
+# f("http://httpbin.org/status/505")
+# # }
+
+#' Retrieve error message for some http errors
+#'
+#' @param response httr2 response object.
+#'
+#' @return error message if the response status code is one of the status codes handled by the function.
+#' @export
+#'
+#' @examples
+#' failresp <- httr2::response(status_code = 404)
+#' successresp <- httr2::response(status_code = 200)
+#' mr_http_error_message(successresp)
+#' mr_http_error_message(failresp)
+mr_http_error_message <- function(response) {
+  if(response$status_code == 404) message("That url doesn't exist")
+  if(response$status_code == 500) message("The server screwed up")
+  if(response$status_code == 400) message("You made a mistake!")
+}
+

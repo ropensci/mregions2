@@ -334,10 +334,10 @@ mr_gaz_relations_by_MRGID <- function(mrgid, direction = "upper", type = "partof
     httr2::req_url_query(
       `direction` = direction,
       `type` = type) %>%
+    req_error(is_error = function(resp) FALSE) %>%
     httr2::req_perform()
 
   res <- resp %>%
     mr_resp_to_tibble()
   return(res)
 }
-

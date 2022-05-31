@@ -26,6 +26,8 @@
 # TODO: relations: make easily accessible functions like <marine_region>$children/parents/neighbors.
 #       Make message in `print()`: get more relations with <marine_region>$relations(direction, type)
 #       Remove "all relations".
+# TODO: change default values to NULL
+# TODO: link functions directly
 
 #' R6 Class Representing a Marine Region Object
 #'
@@ -37,23 +39,23 @@ marine_region <- R6Class(
     ..add_geometry = TRUE,
     ..mrgid = 3293,
     ..name = "Belgian Exclusive Economic Zone",
-    ..info = NA,
+    ..info = NULL,
     ..geometry = NA,
-    ..source = NA,
-    ..longitude = NA,
-    ..latitude = NA,
-    ..status = NA,
-    ..placetype = NA,
-    ..children = NA,
-    ..parents = NA,
-    ..neighbours = NA,
+    ..source = NULL,
+    ..longitude = NULL,
+    ..latitude = NULL,
+    ..status = NULL,
+    ..placetype = NULL,
+    ..children = NULL,
+    ..parents = NULL,
+    ..neighbours = NULL,
     # ..all_relations = NA,
-    ..area = NA,
+    ..area = NULL,
     get_info = function(){
       private$..info <- mregions2::mr_gaz_record(private$..mrgid, add_geometry = FALSE)
       # private$..all_relations <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "both", type = "all") #can be changed
-      private$..children <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "lower", type = "partof")
-      private$..parents <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "upper", type = "partof")
+      private$..children <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "lower", type = "all")
+      private$..parents <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "upper", type = "all")
       # private$..neighbors <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "both", type = "adjacentto")
       private$..latitude <- private$..info$latitude
       private$..longitude <- private$..info$longitude
