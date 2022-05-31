@@ -344,54 +344,41 @@ mr_gaz_relations_by_MRGID <- function(mrgid, direction = "upper", type = "partof
   return(res)
 }
 
+#' Get all Relations for a Marine Gazetteer Record
+#'
+#' @param mrgid The Marine Regions Geographic IDentifier.
+#'
+#' @return A `tibble` with all records that are related. The column `relation` contains the type of relation.
+#' Explanations of the relation types can be found at: https://marineregions.org/ontology/documentation.html#objectproperties.
+#' @export
+#'
+#' @examples
+#' belgium_mrgid <- 14
+#' belgium_relations <- mr_gaz_relations_full_by_MRGID(belgium_mrgid)
 mr_gaz_relations_full_by_MRGID <- function(mrgid){
 
-  res1 <- mregions2::mr_gaz_ldes(mrgid, type = "list")
+  record <- mregions2::mr_gaz_ldes(mrgid, type = "list")
 
-  res_isAdjacentTo
+  relations = record[grepl("mr:", names(record))]
+  if("mr:hasGeometry" %in% names(relations)) relations[["mr:hasGeometry"]] <- NULL
 
-  length(res1$`mr:isAdjacentTo`)
+  for (i in 1:length(relations)) {
+    for (j in 1:length(relations[[i]])) {
+      relative_url <- relations[[i]][[j]][["@id"]]
+      relative_mrgid <- relative_url %>%
+        gsub("http://marineregions.org/mrgid/", "", .)  %>%
+        as.integer()
+      temp_res_j <- mregions2::mr_gaz_record(relative_mrgid, add_geometry = FALSE)
+      temp_res_j$relation <- gsub("mr:", "", names(relations[i]))
 
-  relative_url <- res1[["mr:isPartOf"]][[1]][["@id"]]
-  relative_mrgid <- relative_url %>%
-    gsub("http://marineregions.org/mrgid/", "", .)  %>%
-    as.integer()
-  entry <- mregions2::mr_gaz_record(relative_mrgid, add_geometry = FALSE)
+      ifelse(j == 1,
+             res_j <- temp_res_j,
+             res_j <- rbind(res_j, temp_res_j))
+    }
+    ifelse(i == 1,
+           res <- res_j,
+           res <- rbind(res, res_j))
+  }
 
-
-  res1[[1]]
-  names(res1)
-
-  # types <- c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")
-  # directions <- c("upper", "lower")
-  #
-  # res <- mr_gaz_relations_by_MRGID(mrgid = mrgid, direction = "upper", type = "partof")
-  #
-  # for (i in 1:length(directions)) {
-  #   direction <- directions[i]
-  #   for(j in 2:length(types)) {
-  #     type <- types[j]
-  #     res_temp <- mr_gaz_relations_by_MRGID(mrgid = mrgid, direction = direction, type = type)
-  #     res <- rbind(res, res_temp)
-  #   }
-  # }
-
-  # url <- mregions2::mr_req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRelationsByMRGID")
-  #
-  # req <- httr2::request(url) %>%
-  #   httr2::req_headers(
-  #     accept = "application/json")  %>%
-  #   req_mr_user_agent() %>%
-  #   httr2::req_url_path_append(mrgid) %>%
-  #   httr2::req_url_path_append("/")
-  #
-  # resp <- req %>%
-  #   httr2::req_url_query(
-  #     `direction` = direction,
-  #     `type` = type) %>%
-  #   httr2::req_perform()
-  #
-  # res <- resp %>%
-  #   mr_resp_to_tibble()
-  # return(res)
+  return(res)
 }
