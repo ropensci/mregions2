@@ -11,7 +11,7 @@ mr_gaz_relations_full_by_MRGID(mrgid)
 }
 \value{
 A `tibble` with all records that are related. The column `relation` contains the type of relation.
-Explanations of the relation types can be found at: https://marineregions.org/ontology/documentation.html#objectproperties.
+Explanations of the relation types can be found at: \url{https://marineregions.org/ontology/documentation.html#objectproperties}.
 }
 \description{
 Get all Relations for a Marine Gazetteer Record

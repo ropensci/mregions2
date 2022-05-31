@@ -7,14 +7,14 @@
 mr_gaz_records_by_source(source)
 }
 \arguments{
-\item{source}{The source of which records are retrieved. Must be one of the types in `mr_gaz_info("placetypes")` and class `character`. Case insensitive.}
+\item{source}{The source of which records are retrieved. Must be one of the sources in \code{\link{mr_gaz_info}} and class `character`. Case insensitive.}
 }
 \value{
 A tibble with all Gazetteer records of the specified placetype.
 }
 \description{
-Every record in the [Marine Gazetteer](https://marineregions.org/gazetteer.php) has a placetype, e.g. `Sandbank` or `Marine Protected Area`.
-All placetypes currently available in the gazetteer can be retrieved via `mr_gaz_info("placetypes")`.
+Every record in the Marine Gazetteer (\url{https://marineregions.org/gazetteer.php}) has a source, e.g. `GeoNames` or `IMIS`.
+All sources currently in the gazetteer can be retrieved via \code{\link{mr_gaz_info}}.
 }
 \examples{
 ecoregions <- mr_gaz_records_by_source("ICES Ecoregions")

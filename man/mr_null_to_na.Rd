@@ -22,7 +22,5 @@ two = c(NULL, 5, NA),
 three = NULL,
 four = list(NULL) # does not change nested NULL for now
 )
-View(y)
 z <- mr_null_to_na(y)
-View(z)
 }

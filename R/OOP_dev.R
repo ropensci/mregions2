@@ -31,32 +31,39 @@
 
 #' R6 Class Representing a Marine Region Object
 #'
-#' @description A ´MarineRegion` object corresponds to a record in the Marine Gazetteer, available at https://marineregions.org.
+#' @description A ´MarineRegion` object corresponds to a record in the Marine Gazetteer, available at \url{https://marineregions.org}.
 #' It contains relevant information such as the Name, the MRGID (Marine Regions Geographic IDentifier), the Placetype, the Source,...
-marine_region <- R6Class(
+marine_region <- R6::R6Class(
   "MarineRegion",
   private = list(
+
+    #' @field add_geometry TRUE/FALSE statement if a `MarineRegion`'s geometry should be added or not.
     ..add_geometry = TRUE,
+    #' @field mrgid Marine Regions Geographic IDentifier.
     ..mrgid = 3293,
+    #' @field name `preferredGazetteerName` of the `MarineRegion`.
     ..name = "Belgian Exclusive Economic Zone",
+    #' @field info Information about the `MarineRegion`.
     ..info = NULL,
+    #' @field geometry Geometry of the `MarineRegion`.
     ..geometry = NA,
+    #' @field source Source of the `MarineRegion`.
     ..source = NULL,
+    #' @field longitude Longitude of the `MarineRegion`.
     ..longitude = NULL,
+    #' @field latitude Latitude of the `MarineRegion`.
     ..latitude = NULL,
+    #' @field status Status of the `MarineRegion`. `status == "standard"` should be preferred.
     ..status = NULL,
+    #' @field placetype Placetype of the `MarineRegion`.
     ..placetype = NULL,
-    ..children = NULL,
-    ..parents = NULL,
-    ..neighbours = NULL,
-    # ..all_relations = NA,
+    #' @field relations Related Regions of the `MarineRegion`.
+    ..relations = NULL,
+    #' @field area Area in `km^2` of the `MarineRegion`.
     ..area = NULL,
     get_info = function(){
       private$..info <- mregions2::mr_gaz_record(private$..mrgid, add_geometry = FALSE)
-      # private$..all_relations <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "both", type = "all") #can be changed
-      private$..children <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "lower", type = "all")
-      private$..parents <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "upper", type = "all")
-      # private$..neighbors <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = "both", type = "adjacentto")
+      private$..relations <- mregions2::mr_gaz_relations_full_by_MRGID(private$..mrgid)
       private$..latitude <- private$..info$latitude
       private$..longitude <- private$..info$longitude
       private$..source <- private$..info$gazetteerSource
@@ -74,10 +81,8 @@ marine_region <- R6Class(
     get_geometry_info = function(geometry){
       if(is.list(geometry)){
         cat("class ", class(geometry)[1], "\n", sep = "")
-        # cat("  area: ", private$..area, "\n", sep = "")
         cat("  area: ")
         print(private$..area)
-        # cat("\n", sep = "")
         cat(message("Tip: run `library(mapview); mapview(<marine_region>$geometry)` to plot/visualise the geometry."),"\n", sep = "")
       } else {
         if(is.null(geometry)){
@@ -98,10 +103,7 @@ marine_region <- R6Class(
     source = function(){private$..source},
     status = function(){private$..status},
     placetype = function(){private$..placetype},
-    # all_relations = function(){private$..all_relations},
-    children = function(){private$..children},
-    parents = function(){private$..parents},
-    # neighbors = function(){private$..neighbors},
+    relations = function(){private$..relations},
     area = function(){private$..area}
   ),
   public = list(
@@ -139,17 +141,11 @@ marine_region <- R6Class(
       cat("  Placetype: ", private$..placetype, "\n", sep = "")
       cat("  Source: ", private$..source, "\n", sep = "")
       cat("  Status: ", private$..status, "\n", sep = "")
-      cat("  Cildren: A ", class(private$..children)[2], " with ", nrow(private$..children), " related marine regions.", "\n", sep = "")
-      cat("  Parents: A ", class(private$..parents)[2], " with ", nrow(private$..parents), " related marine regions.", "\n", sep = "")
-      # cat("  All Relations: A ", class(private$..all_relations)[2], " with ", nrow(private$..all_relations), " related marine regions.", "\n", sep = "")
+      cat("  Relations: A ", class(private$..relations)[2], " with ", nrow(private$..relations), " related marine regions.", "\n", sep = "")
       cat("  add_geometry: ", private$..add_geometry, "\n", sep = "")
       cat("  geometry: ", sep = "")
       private$get_geometry_info(private$..geometry)
       invisible(self) #TODO: make tip about visualisation appear below `geometry: TRUE`
-    },
-    get_relations = function(direction, type){
-      res <- mregions2::mr_gaz_relations_by_MRGID(private$..mrgid, direction = direction, type = type)
-      return(res)
     }
   )
 )
@@ -166,9 +162,9 @@ marine_region <- R6Class(
 #' @export
 #'
 #' @examples
-#' german_part_north_sea <- mr_marine_region$new(name = "German Part of the North Sea")
-#' high_seas_mrgid <- mr_gaz_record_by_name("High Seas", count = 1)$MRGID
-#' high_seas <- mr_marine_region$new(high_seas_mrgid, add_geometry = FALSE)
+#' german_part_north_sea <- mr_marine_region(name = "German Part of the North Sea")
+#' high_seas_mrgid <- mregions2::mr_gaz_records_by_name("High Seas", count = 1)$MRGID
+#' high_seas <- mr_marine_region(mrgid = high_seas_mrgid, add_geometry = FALSE)
 mr_marine_region <- function(name = NA, mrgid = NA, add_geometry = TRUE){
   if(!missing(add_geometry)){
     checkmate::assert_logical(add_geometry)
@@ -192,4 +188,32 @@ mr_marine_region <- function(name = NA, mrgid = NA, add_geometry = TRUE){
     res <- marine_region$new(name = name, mrgid = mrgid, add_geometry = add_geometry)
     }
   return(res)
+}
+
+#' Add elements to a marine region #DOES NOT WORK YET
+#'
+#' @param region Must be an object of the class `MarineRegion`
+#' @param extension_name Must be of class character.
+#' @param extension_value Can be a value or a function.
+#'
+#' @return Object that inherits of class `MarineRegion` that contains the new element specified.
+#' @export
+#'
+#' @examples
+#' mexico <- mr_marine_region(mrgid = 2224)
+#' children <- function(mrgid) mregions2::mr_gaz_relations_by_MRGID(mrgid, direction = "lower", type = "all")
+#' mr_marine_region_extend(region = mexico,  extension_name = "children", extension_value = children)
+mr_marine_region_extend <- function(region, extension_name, extension_value) {
+
+  marine_region_extension <- R6::R6Class(
+    region$name,
+    inherit = marine_region,
+    public = list(
+      extension_name = extension_value
+    )
+  )
+  res <- marine_region_extension$new(name = region$name, mrgid = region$mrgid, add_geometry = region$add_geometry)
+  # res <- marine_region$set(which = "public", name = extension_name, extension_value, overwrite = FALSE)
+  return(res)
+  # TODO: add something in print method, i.e. update method (if that's possible)
 }

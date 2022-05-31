@@ -4,9 +4,8 @@
 \alias{marine_region}
 \title{R6 Class Representing a Marine Region Object}
 \description{
-A ´MarineRegion` object corresponds to a record in the Marine Gazetteer, available at https://marineregions.org.
+A ´MarineRegion` object corresponds to a record in the Marine Gazetteer, available at \url{https://marineregions.org}.
 It contains relevant information such as the Name, the MRGID (Marine Regions Geographic IDentifier), the Placetype, the Source,...
-Inititalize `Marineregion` object
 }
 \examples{
 
@@ -17,12 +16,41 @@ Inititalize `Marineregion` object
 guadelupe <- mr_marine_region(name = "Guadelupe")
 guadelupe
 }
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{add_geometry}}{TRUE/FALSE statement if a `MarineRegion`'s geometry should be added or not.}
+
+\item{\code{mrgid}}{Marine Regions Geographic IDentifier.}
+
+\item{\code{name}}{`preferredGazetteerName` of the `MarineRegion`.}
+
+\item{\code{info}}{Information about the `MarineRegion`.}
+
+\item{\code{geometry}}{Geometry of the `MarineRegion`.}
+
+\item{\code{source}}{Source of the `MarineRegion`.}
+
+\item{\code{longitude}}{Longitude of the `MarineRegion`.}
+
+\item{\code{latitude}}{Latitude of the `MarineRegion`.}
+
+\item{\code{status}}{Status of the `MarineRegion`. `status == "standard"` should be preferred.}
+
+\item{\code{placetype}}{Placetype of the `MarineRegion`.}
+
+\item{\code{relations}}{Related Regions of the `MarineRegion`.}
+
+\item{\code{area}}{Area in `km^2` of the `MarineRegion`.
+Inititalize `Marineregion` object}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{marine_region$new()}}
 \item \href{#method-print}{\code{marine_region$print()}}
-\item \href{#method-get_relations}{\code{marine_region$get_relations()}}
 \item \href{#method-clone}{\code{marine_region$clone()}}
 }
 }
@@ -70,15 +98,6 @@ guadelupe
 }
 \if{html}{\out{</div>}}
 
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_relations"></a>}}
-\if{latex}{\out{\hypertarget{method-get_relations}{}}}
-\subsection{Method \code{get_relations()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{marine_region$get_relations(direction, type)}\if{html}{\out{</div>}}
 }
 
 }

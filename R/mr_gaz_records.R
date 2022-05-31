@@ -1,11 +1,11 @@
 #' Retrieve information of Marine Gazetteer Records
 #'
-#' @description Available Placetypes and Sources of [Marine Gazetteer](https://marineregions.org/gazetteer.php) Records.
-#' Useful for retrieving information about Gazetteer Records based on Placetypes (`mr_gaz_records_by_type()`) and Sources (`mr_gaz_records_by_source`).
+#' @description Available Placetypes and Sources of the Marine Gazetteer Records, available at: \url{https://marineregions.org/gazetteer.php}.
+#' Useful for retrieving information about Gazetteer Records based on Placetypes \code{\link{mr_gaz_records_by_type}} and Sources \code{\link{mr_gaz_records_by_source}}.
 #'
 #' @param info The information wished to retrieve. Must be one of: `c("sources", "placetypes")`.
 #' @return Sources: A tibble with the source and source URL.
-#' Placetypes: A tibble with the ID, name and description of each Placetype available in the [Marine Gazetteer](https://marineregions.org/gazetteer.php).
+#' Placetypes: A tibble with the ID, name and description of each Placetype available in the Marine Gazetteer \url{https://marineregions.org/gazetteer.php}.
 #' @export
 #'
 #' @examples
@@ -75,12 +75,12 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
       `fuzzy` = fuzzy,
       `offset` = offset,
       `count` = count) %>%
-    req_perform()
+    httr2::req_perform()
 
 
   # tryCatch(req %>% httr2::req_perform(),
   #            if(httr2::last_response()$status == 404){
-  #              message("The Marine Gazetteer entry was not found. Check that \n1) the name is spelled correctly and \n2) that it is in the Marine Gazetteer here: https://marineregions.org/gazetteer.php?p=search.")
+  #              message("The Marine Gazetteer entry was not found. Check that \n1) the name is spelled correctly and \n2) that it is in the Marine Gazetteer here: \url{https://marineregions.org/gazetteer.php?p=search}.")
   #            } else{
   #              resp <- req %>% httr2::req_perform()
   #            }
@@ -95,10 +95,10 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
 #' Retrieve Gazetteer Records by Placetype
 #'
 #' @description
-#' Every record in the [Marine Gazetteer](https://marineregions.org/gazetteer.php) has a placetype, e.g. `Sandbank` or `Marine Protected Area`.
-#' All placetypes currently available in the gazetteer can be retrieved via `mr_gaz_info("placetypes")`.
+#' Every record in the Marine Gazetteer (\url{https://marineregions.org/gazetteer.php}) has a placetype, e.g. `Sandbank` or `Marine Protected Area`.
+#' All placetypes currently available in the gazetteer can be retrieved via \code{\link{mr_gaz_info}}.
 #'
-#' @param type The placetype of which records are retrieved. Must be one of the types in `mr_gaz_info("placetypes")` and class `character`. Case insensitive.
+#' @param type The placetype of which records are retrieved. Must be one of the types in \code{\link{mr_gaz_info}} and class `character`. Case insensitive.
 #' @param offset Start record number, in order to page through next batch of results.
 #'
 #' @return A tibble with all Gazetteer records of the specified placetype.
@@ -146,10 +146,10 @@ mr_gaz_records_by_type <- function(type, offset = 0){
 #' Retrieve Gazetteer Records by Source
 #'
 #' @description
-#' Every record in the [Marine Gazetteer](https://marineregions.org/gazetteer.php) has a placetype, e.g. `Sandbank` or `Marine Protected Area`.
-#' All placetypes currently available in the gazetteer can be retrieved via `mr_gaz_info("placetypes")`.
+#' Every record in the Marine Gazetteer (\url{https://marineregions.org/gazetteer.php}) has a source, e.g. `GeoNames` or `IMIS`.
+#' All sources currently in the gazetteer can be retrieved via \code{\link{mr_gaz_info}}.
 #'
-#' @param source The source of which records are retrieved. Must be one of the types in `mr_gaz_info("placetypes")` and class `character`. Case insensitive.
+#' @param source The source of which records are retrieved. Must be one of the sources in \code{\link{mr_gaz_info}} and class `character`. Case insensitive.
 #'
 #' @return A tibble with all Gazetteer records of the specified placetype.
 #' @export
@@ -191,7 +191,7 @@ mr_gaz_records_by_source <- function(source){
 
 #' Retrieve Gazetteer Records by Lat-Lon Coordinates
 #'
-#' @description Get the first 100 [Marine Gazetteer](https://marineregions.org/gazetteer.php) records, where their centroid is within the bounding box calculated by latitude (+/- radius) and longitude (+/- radius)
+#' @description Get the first 100 Marine Gazetteer (\url{https://marineregions.org/gazetteer.php}) records, where their centroid is within the bounding box calculated by latitude (+/- radius) and longitude (+/- radius).
 
 #' @param lat A decimal number which ranges from -90 to 90.
 #' @param lon A decimal number which ranges from -180 to +180.
@@ -252,7 +252,7 @@ mr_gaz_records_by_latlon <- function(lat, lon, lat_radius = 0, lon_radius = 0){
 #' Retrieve Gazetteer Records by a list of Names
 #'
 #' @description
-#' Retrieve all Records of the [Marine Gazetteer](https://marineregions.org/gazetteer.php) that contain one or more parameters in `names` in their `preferredGazetteerName`.
+#' Retrieve all Records of the Marine Gazetteer (\url{https://marineregions.org/gazetteer.php}) that contain one or more parameters in `names` in their `preferredGazetteerName`.
 #'
 #' @param names Names that are retrieved from the
 #' @param like Formats the name into a SQL-like syntax. Default = TRUE.
@@ -301,9 +301,9 @@ mr_gaz_records_by_names <- function(names, like = TRUE, fuzzy = FALSE){
 #'Retrieves marine gazetteer records that are related to a given input MRGID. Relationships can be parents (`upper`), children (`lower`) oder `both`.
 #'Geographic types of the relationships can be specified, for example `partof` and `adjacentto`.
 #'
-#' @param mrgid The [Marine Regions Geographic IDentifier](https://marineregions.org/mrgid.php).
+#' @param mrgid The Marine Regions Geographic IDentifier(\url{https://marineregions.org/mrgid.php}).
 #' @param direction The hierarchical structure. Must be one of `c("upper", "lower", "both")`. `"upper"` lists all parents of the record. `"lower"` lists all childs of the record. `"both"` lists parents and childs of the record.
-#' @param type must be one of `c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")`. Explanations of the `types` at: https://marineregions.org/ontology/documentation.html in chapter `Object Properties`.
+#' @param type must be one of `c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")`. Explanations of the `types` at: \url{https://marineregions.org/ontology/documentation.html#objectproperties}.
 #' @return a `tibble` with all relations for the given `MRGID`.
 #' @export
 #'
@@ -334,7 +334,7 @@ mr_gaz_relations_by_MRGID <- function(mrgid, direction = "upper", type = "partof
     httr2::req_url_query(
       `direction` = direction,
       `type` = type) %>%
-    req_error(is_error = function(resp) FALSE) %>%
+    httr2::req_error(is_error = function(resp) FALSE) %>%
     httr2::req_perform()
 
   resp %>% mr_http_error_message()
@@ -349,9 +349,8 @@ mr_gaz_relations_by_MRGID <- function(mrgid, direction = "upper", type = "partof
 #' @param mrgid The Marine Regions Geographic IDentifier.
 #'
 #' @return A `tibble` with all records that are related. The column `relation` contains the type of relation.
-#' Explanations of the relation types can be found at: https://marineregions.org/ontology/documentation.html#objectproperties.
+#' Explanations of the relation types can be found at: \url{https://marineregions.org/ontology/documentation.html#objectproperties}.
 #' @export
-#'
 #' @examples
 #' belgium_mrgid <- 14
 #' belgium_relations <- mr_gaz_relations_full_by_MRGID(belgium_mrgid)
@@ -365,9 +364,8 @@ mr_gaz_relations_full_by_MRGID <- function(mrgid){
   for (i in 1:length(relations)) {
     for (j in 1:length(relations[[i]])) {
       relative_url <- relations[[i]][[j]][["@id"]]
-      relative_mrgid <- relative_url %>%
-        gsub("http://marineregions.org/mrgid/", "", .)  %>%
-        as.integer()
+      relative_mrgid <- gsub("http://marineregions.org/mrgid/", "", relative_url)
+      relative_mrgid <- as.integer(relative_mrgid)
       temp_res_j <- mregions2::mr_gaz_record(relative_mrgid, add_geometry = FALSE)
       temp_res_j$relation <- gsub("mr:", "", names(relations[i]))
 
@@ -381,4 +379,7 @@ mr_gaz_relations_full_by_MRGID <- function(mrgid){
   }
 
   return(res)
+
+  # TODO: add assertions and unit tests
+  # TODO: turn for loops into lapply functions
 }

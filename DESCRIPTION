@@ -30,5 +30,6 @@ Imports:
     tidyr (>= 1.2.0),
     utils,
     rdflib,
-    mregions
+    mregions,
+    R6
 RoxygenNote: 7.1.2

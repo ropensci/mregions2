@@ -7,7 +7,7 @@
 mr_gaz_records_by_type(type, offset = 0)
 }
 \arguments{
-\item{type}{The placetype of which records are retrieved. Must be one of the types in `mr_gaz_info("placetypes")` and class `character`. Case insensitive.}
+\item{type}{The placetype of which records are retrieved. Must be one of the types in \code{\link{mr_gaz_info}} and class `character`. Case insensitive.}
 
 \item{offset}{Start record number, in order to page through next batch of results.}
 }
@@ -15,8 +15,8 @@ mr_gaz_records_by_type(type, offset = 0)
 A tibble with all Gazetteer records of the specified placetype.
 }
 \description{
-Every record in the [Marine Gazetteer](https://marineregions.org/gazetteer.php) has a placetype, e.g. `Sandbank` or `Marine Protected Area`.
-All placetypes currently available in the gazetteer can be retrieved via `mr_gaz_info("placetypes")`.
+Every record in the Marine Gazetteer (\url{https://marineregions.org/gazetteer.php}) has a placetype, e.g. `Sandbank` or `Marine Protected Area`.
+All placetypes currently available in the gazetteer can be retrieved via \code{\link{mr_gaz_info}}.
 }
 \examples{
 fao_subdivs <- mr_gaz_records_by_type("FAO Subdivisions")

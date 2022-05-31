@@ -50,6 +50,7 @@ mr_gaz_ldes <- function(mrgid, type = "list"){
 #' test <- mr_gaz_geometry(3293)
 #' test <- mr_gaz_geometry(26567)
 mr_gaz_geometry <- function(mrgid){
+  feed <- mr_gaz_ldes(mrgid)
   has_geometry <- mregions2::mr_has_geometry(mrgid)
 
   if(has_geometry){

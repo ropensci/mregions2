@@ -36,7 +36,7 @@ mr_req_URL <- function(api_type, file_format, method){
 #' @export
 #'
 #' @examples
-#' request("http://example.com") %>% req_mr_user_agent() %>% req_dry_run()
+#' httr2::request("http://example.com") %>% httr2::req_mr_user_agent() %>% httr2::req_dry_run()
 req_mr_user_agent <- function(.){
   httr2::req_user_agent(. , glue::glue("mregions2 {packageVersion('mregions')}"))
 }
@@ -106,9 +106,7 @@ mr_resp_to_tibble <- function(resp, unpack = FALSE){
 #' three = NULL,
 #' four = list(NULL) # does not change nested NULL for now
 #' )
-#' View(y)
 #' z <- mr_null_to_na(y)
-#' View(z)
 mr_null_to_na <- function(list_with_NULL){
 
   checkmate::check_list(list_with_NULL)
@@ -123,21 +121,7 @@ mr_null_to_na <- function(list_with_NULL){
   return(list_with_NA)
 }
 
-
-# f <- function(url) {
-#   tryCatch(stop_for_status(GET(url)),
-#            http_404 = function(c) "That url doesn't exist",
-#            http_403 = function(c) "You need to authenticate!",
-#            http_400 = function(c) "You made a mistake!",
-#            http_500 = function(c) "The server screwed up"
-#   )
-# }
-# f("http://httpbin.org/status/404")
-# f("http://httpbin.org/status/403")
-# f("http://httpbin.org/status/505")
-# # }
-
-#' Retrieve error message for some http errors
+#' Retrieve error message for frequent http errors
 #'
 #' @param response httr2 response object.
 #'
@@ -150,10 +134,18 @@ mr_null_to_na <- function(list_with_NULL){
 #' mr_http_error_message(successresp)
 #' mr_http_error_message(failresp)
 mr_http_error_message <- function(response) {
-  if(response$status_code == 404) message("That url doesn't exist")
-  if(response$status_code == 500) message("The server screwed up")
-  if(response$status_code == 400) message("You made a mistake!")
-  stop()
+  if(response$status_code == 404) {
+    return(message("That url doesn't exist"))
+    stop()
+    }
+  if(response$status_code == 500) {
+    return(message("The server screwed up"))
+    stop()
+  }
+  if(response$status_code == 400) {
+    return(message("You made a mistake!"))
+    stop()
+  }
 }
 
 #' Check if marine region has a geometry
@@ -170,7 +162,7 @@ mr_http_error_message <- function(response) {
 #' belgium_mrgid <- mr_gaz_records_by_name(name = "Belgium", count = 1)$MRGID
 #' belgium_hasgeometry <- mr_has_geometry(belgium_mrgid)
 mr_has_geometry <- function(mrgid) {
-  feed <- mr_gaz_ldes(mrgid, "list")
+  feed <- mregions2::mr_gaz_ldes(mrgid, "list")
   has_geometry <- "mr:hasGeometry" %in% names(feed)
   return(has_geometry)
 }

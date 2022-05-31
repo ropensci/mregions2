@@ -11,11 +11,11 @@ mr_gaz_info(info = c("sources", "placetypes"))
 }
 \value{
 Sources: A tibble with the source and source URL.
-Placetypes: A tibble with the ID, name and description of each Placetype available in the [Marine Gazetteer](https://marineregions.org/gazetteer.php).
+Placetypes: A tibble with the ID, name and description of each Placetype available in the Marine Gazetteer \url{https://marineregions.org/gazetteer.php}.
 }
 \description{
-Available Placetypes and Sources of [Marine Gazetteer](https://marineregions.org/gazetteer.php) Records.
-Useful for retrieving information about Gazetteer Records based on Placetypes (`mr_gaz_records_by_type()`) and Sources (`mr_gaz_records_by_source`).
+Available Placetypes and Sources of the Marine Gazetteer Records, available at: \url{https://marineregions.org/gazetteer.php}.
+Useful for retrieving information about Gazetteer Records based on Placetypes \code{\link{mr_gaz_records_by_type}} and Sources \code{\link{mr_gaz_records_by_source}}.
 }
 \examples{
 placetypes <- mr_gaz_info(info = "placetypes")

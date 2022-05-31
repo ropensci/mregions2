@@ -20,7 +20,7 @@ An instance of the class `MarineRegion`.
 If only a name is given, the MRGID from the first record found by `mr_gaz_record_by_name(name)` will be fetched. Since names are not unique, prefer to input MRGIDs.
 }
 \examples{
-german_part_north_sea <- mr_marine_region$new(name = "German Part of the North Sea")
-high_seas_mrgid <- mr_gaz_record_by_name("High Seas", count = 1)$MRGID
-high_seas <- mr_marine_region$new(high_seas_mrgid, add_geometry = FALSE)
+german_part_north_sea <- mr_marine_region(name = "German Part of the North Sea")
+high_seas_mrgid <- mregions2::mr_gaz_records_by_name("High Seas", count = 1)$MRGID
+high_seas <- mr_marine_region(mrgid = high_seas_mrgid, add_geometry = FALSE)
 }

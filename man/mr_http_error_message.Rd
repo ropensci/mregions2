@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{mr_http_error_message}
 \alias{mr_http_error_message}
-\title{Retrieve error message for some http errors}
+\title{Retrieve error message for frequent http errors}
 \usage{
 mr_http_error_message(response)
 }
@@ -13,7 +13,7 @@ mr_http_error_message(response)
 error message if the response status code is one of the status codes handled by the function.
 }
 \description{
-Retrieve error message for some http errors
+Retrieve error message for frequent http errors
 }
 \examples{
 failresp <- httr2::response(status_code = 404)

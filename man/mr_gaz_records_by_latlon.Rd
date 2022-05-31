@@ -19,7 +19,7 @@ mr_gaz_records_by_latlon(lat, lon, lat_radius = 0, lon_radius = 0)
 A tibble with the first 100 Gazetteer records of the specified coordinates.
 }
 \description{
-Get the first 100 [Marine Gazetteer](https://marineregions.org/gazetteer.php) records, where their centroid is within the bounding box calculated by latitude (+/- radius) and longitude (+/- radius)
+Get the first 100 Marine Gazetteer (\url{https://marineregions.org/gazetteer.php}) records, where their centroid is within the bounding box calculated by latitude (+/- radius) and longitude (+/- radius).
 }
 \examples{
 oostende_lat <- 51.21551

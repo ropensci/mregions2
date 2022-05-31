@@ -17,7 +17,7 @@ mr_gaz_records_by_names(names, like = TRUE, fuzzy = FALSE)
 Tibble with Gazetteer records.
 }
 \description{
-Retrieve all Records of the [Marine Gazetteer](https://marineregions.org/gazetteer.php) that contain one or more parameters in `names` in their `preferredGazetteerName`.
+Retrieve all Records of the Marine Gazetteer (\url{https://marineregions.org/gazetteer.php}) that contain one or more parameters in `names` in their `preferredGazetteerName`.
 }
 \examples{
 names <- c("Atlantic Ocean", "Vanuatu", "Mariana Trench")

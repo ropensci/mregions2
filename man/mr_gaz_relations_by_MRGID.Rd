@@ -7,11 +7,11 @@
 mr_gaz_relations_by_MRGID(mrgid, direction = "upper", type = "partof")
 }
 \arguments{
-\item{mrgid}{The [Marine Regions Geographic IDentifier](https://marineregions.org/mrgid.php).}
+\item{mrgid}{The Marine Regions Geographic IDentifier(\url{https://marineregions.org/mrgid.php}).}
 
 \item{direction}{The hierarchical structure. Must be one of `c("upper", "lower", "both")`. `"upper"` lists all parents of the record. `"lower"` lists all childs of the record. `"both"` lists parents and childs of the record.}
 
-\item{type}{must be one of `c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")`. Explanations of the `types` at: https://marineregions.org/ontology/documentation.html in chapter `Object Properties`.}
+\item{type}{must be one of `c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")`. Explanations of the `types` at: \url{https://marineregions.org/ontology/documentation.html#objectproperties}.}
 }
 \value{
 a `tibble` with all relations for the given `MRGID`.
