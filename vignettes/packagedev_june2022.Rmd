@@ -1,0 +1,53 @@
+---
+title: "mregions2 package development info"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{packagedev_june2022}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+This vignette serves to document the status of the `mregions2` package development process in June, 2022 after the IMBRSea professional practice internship of @whaleshark99 at VLIZ, Belgium.
+
+## package structure
+
+All relevant functions from the gazetteer webservices are in `mr_gaz_records.R`.
+
+I most recently worked in the branch `dev_OOP` that I did not merge into `main`.
+On this branch, there is one useful function called `mr_gaz_relations_full_by_MRGID` in `mr_gaz_records.R`, which does not use the webservices but fetches the relations from the open-linked data through `mr_gaz_ldes()`.
+ 
+
+## wrapup meeting 01.06.2022
+
+### points of discussion
+
+ - remove `_gaz_` in function names?
+ - 
+
+### agreed changes
+
+#### conventional approach
+
+ - [ ] rename `mr_gaz_ldes()`
+
+ 
+#### Object Oriented Programming (OOP) approach
+
+ - [ ] rename `mr_marine_region()` to `mr_GeoObject()`
+ - [ ] remove `area` in the object creation of `mr_marine_region()`
+
+## Next Steps
+
+ - [ ] explore and include lazy loading
+ - [ ] `mr_gaz_relations_full_by_MRGID()`: change the way a relation is retrieved from `mr_gaz_ldes()`.
+ - [ ] make CRS accessible in `mr_gaz_geometry()`, e.g.
+ 
+

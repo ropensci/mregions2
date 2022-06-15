@@ -33,3 +33,7 @@ Imports:
     mregions
 RoxygenNote: 7.1.2
 URL: https://lifewatch.github.io/mregions2/
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
