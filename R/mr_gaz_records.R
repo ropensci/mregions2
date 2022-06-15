@@ -98,36 +98,36 @@ mr_gaz_records_by_name <- function(name, count = 100, like = TRUE, fuzzy = FALSE
 #' Every record in the Marine Gazetteer (\url{https://marineregions.org/gazetteer.php}) has a placetype, e.g. `Sandbank` or `Marine Protected Area`.
 #' All placetypes currently available in the gazetteer can be retrieved via \code{\link{mr_gaz_info}}.
 #'
-#' @param type The placetype of which records are retrieved. Must be one of the types in \code{\link{mr_gaz_info}} and class `character`. Case insensitive.
+#' @param placetype The placetype of which records are retrieved. Must be one of the placetypes in \code{\link{mr_gaz_info}} and class `character`. Case insensitive.
 #' @param offset Start record number, in order to page through next batch of results.
 #'
 #' @return A tibble with all Gazetteer records of the specified placetype.
 #' @export
 #'
 #' @examples
-#' fao_subdivs <- mr_gaz_records_by_type("FAO Subdivisions")
+#' fao_subdivs <- mr_gaz_records_by_placetype("FAO Subdivisions")
 #' fao_subdivs$preferredGazetteerName[1]
 #' # [1] "Northern Alboran Sea"
-mr_gaz_records_by_type <- function(type, offset = 0){
+mr_gaz_records_by_placetype <- function(placetype, offset = 0){
 
   # Assertions
-  checkmate::assert_character(type)
-  tested_type <- tolower(type)
-  expected_types <- mr_gaz_info("placetypes") # takes much time to load, change somehow?
-  expected_types <- expected_types$type %>%
+  checkmate::assert_character(placetype)
+  tested_placetype <- tolower(placetype)
+  expected_placetypes <- mr_gaz_info("placetypes") # takes much time to load, change somehow?
+  expected_placetypes <- expected_placetypes$placetype %>%
     as.character() %>%
     tolower()
-  checkmate::assert_choice(tested_type, expected_types)
+  checkmate::assert_choice(tested_placetype, expected_placetypes)
 
   url <- mregions2::mr_req_URL(api_type = "rest", file_format = "json", method = "getGazetteerRecordsByType")
 
-  type <- utils::URLencode(type)
+  placetype <- utils::URLencode(placetype)
 
   req <- httr2::request(url) %>%
     httr2::req_headers(
       accept = "application/json")  %>%
     req_mr_user_agent() %>%
-    httr2::req_url_path_append(type) %>%
+    httr2::req_url_path_append(placetype) %>%
     httr2::req_url_path_append("/")
 
   resp <- req %>%

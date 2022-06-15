@@ -1,33 +1,12 @@
 # library(R6)
 # library(mregions2)
 
-# Structure:
-# - Make all functionalities retrieved from the geoserver & gazetteer private (we can choose if users can alter them or not)
-# - fetch all info about one record during the creation (initialisation)
-# - Write function that users can easily add things to the object without having to know anything about OOP
-# - make a wrapper function for the creaion of a new object (users don't have to write `new_obj <- mr_marine_region$new()`)
-# - have default private elements for the user to explore (MRGID 3293)
-# - outsource important variables like lat lon, source?, status into the private fields. make all 14 vars accessible via sth like `private$info_details`
-# - give the possibility to add own private elements with a wrapper function?
-# - get more info such as area when initialising the object (how to get the area? --> spatial operations)
-# - Question: necessary/good idea to write the object with pipes? Now there is quite some nesting but idk if using pipes will destroy anything in R6
-# - enable user to save more info in the object (i.e. wrapper function to create public elements)
-# - eventually look up bathymetry data from emodnet / gebco
-
 # TODO: create assertion when people want to override read-only elements, eg MRGID
 # bpns$mrgid <- 2393
 # error now: Error in (function ()  : unused argument (base::quote(2393))
 #error goal: this is read-only. create a new marineregion with your MRGID
-# TODO: document like https://roxygen2.r-lib.org/articles/rd.html#r6
-# TODO: function to check if geometry is available? sth like `mr_check_geometry_availability()`
-# TODO: add relationship function
 # TODO: make a pro function to access all info
 # TODO: what if system is in diff lang?
-# TODO: relations: make easily accessible functions like <marine_region>$children/parents/neighbors.
-#       Make message in `print()`: get more relations with <marine_region>$relations(direction, type)
-#       Remove "all relations".
-# TODO: change default values to NULL
-# TODO: link functions directly
 
 #' R6 Class Representing a Marine Region Object
 #'
@@ -81,13 +60,13 @@ marine_region <- R6::R6Class(
     get_geometry_info = function(geometry){
       if(is.list(geometry)){
         cat("class ", class(geometry)[1], "\n", sep = "")
-        cat("  area: ")
+        cat(message("             Tip: Run `library(mapview); mapview(<marine_region>$geometry)` to view the geometry."), sep = "")
+        cat("  $area: ")
         print(private$..area)
-        cat(message("Tip: run `library(mapview); mapview(<marine_region>$geometry)` to plot/visualise the geometry."),"\n", sep = "")
       } else {
         if(is.null(geometry)){
           cat("NULL\n", sep = "")
-          cat(message("  geometry not available at marineregions.org\n", sep = ""))
+          cat(message("             geometry not available at marineregions.org\n", sep = ""))
         } else{cat(geometry, "\n\n", sep = "")}
       }
     }
@@ -134,18 +113,19 @@ marine_region <- R6::R6Class(
 #' @description if an instance of `MarineRegion` is called, the `print` function will be run.
     print = function(){ #good style according to: https://adv-r.hadley.nz/r6.html
       cat( "Marine Region:\n")
-      cat("  Name: ", private$..name, "\n", sep = "")
-      cat("  MRGID: ", private$..mrgid, "\n", sep = "")
-      cat("  Latitude: ", private$..latitude, "\n", sep = "")
-      cat("  Longitude: ", private$..longitude, "\n", sep = "")
-      cat("  Placetype: ", private$..placetype, "\n", sep = "")
-      cat("  Source: ", private$..source, "\n", sep = "")
-      cat("  Status: ", private$..status, "\n", sep = "")
-      cat("  Relations: A ", class(private$..relations)[2], " with ", nrow(private$..relations), " related marine regions.", "\n", sep = "")
-      cat("  add_geometry: ", private$..add_geometry, "\n", sep = "")
-      cat("  geometry: ", sep = "")
+      cat("  $name: ", private$..name, "\n", sep = "")
+      cat("  $mrgid: ", private$..mrgid, "\n", sep = "")
+      cat("  $latitude: ", private$..latitude, "\n", sep = "")
+      cat("  $longitude: ", private$..longitude, "\n", sep = "")
+      cat("  $placetype: ", private$..placetype, "\n", sep = "")
+      cat("  $source: ", private$..source, "\n", sep = "")
+      cat("  $status: ", private$..status, "\n", sep = "")
+      cat("  $relations: A ", class(private$..relations)[2], " with ", nrow(private$..relations), " related marine regions.", "\n", sep = "")
+      cat(message("              Tip: Explanations of relation types at: https://marineregions.org/ontology/documentation.html#objectproperties"))
+      cat("  $add_geometry: ", private$..add_geometry, "\n", sep = "")
+      cat("  $geometry: ", sep = "")
       private$get_geometry_info(private$..geometry)
-      invisible(self) #TODO: make tip about visualisation appear below `geometry: TRUE`
+      invisible(self)
     }
   )
 )
@@ -182,38 +162,12 @@ mr_marine_region <- function(name = NA, mrgid = NA, add_geometry = TRUE){
       # get MRGID if only name is given
       checkmate::assert_string(name)
       # TODO: if name is misspelled: make tryCatch error msg from mr_gaz_records_by_name() visible here
-      message("Tip: Use `MRGID` to access elements unmistakeably. Find mrgids with `mr_gaz_records_by_name(<your_region_name>)`. For inputs with a `name`, the first result from `mr_gaz_records_by_name()` will be used as the marine region.")
+      message("Tip: Use `MRGID` to access elements unmistakeably. Find mrgids with `mr_gaz_records_by_name(<your_region_name>)`.\nFor inputs with a `name`, the first result from `mr_gaz_records_by_name()` will be used as the marine region.")
       mrgid <- mregions2::mr_gaz_records_by_name(name, count = 1)$MRGID
     }
     res <- marine_region$new(name = name, mrgid = mrgid, add_geometry = add_geometry)
-    }
+  }
   return(res)
 }
 
-#' Add elements to a marine region #DOES NOT WORK YET
-#'
-#' @param region Must be an object of the class `MarineRegion`
-#' @param extension_name Must be of class character.
-#' @param extension_value Can be a value or a function.
-#'
-#' @return Object that inherits of class `MarineRegion` that contains the new element specified.
-#' @export
-#'
-#' @examples
-#' mexico <- mr_marine_region(mrgid = 2224)
-#' children <- function(mrgid) mregions2::mr_gaz_relations_by_MRGID(mrgid, direction = "lower", type = "all")
-#' mr_marine_region_extend(region = mexico,  extension_name = "children", extension_value = children)
-mr_marine_region_extend <- function(region, extension_name, extension_value) {
 
-  marine_region_extension <- R6::R6Class(
-    region$name,
-    inherit = marine_region,
-    public = list(
-      extension_name = extension_value
-    )
-  )
-  res <- marine_region_extension$new(name = region$name, mrgid = region$mrgid, add_geometry = region$add_geometry)
-  # res <- marine_region$set(which = "public", name = extension_name, extension_value, overwrite = FALSE)
-  return(res)
-  # TODO: add something in print method, i.e. update method (if that's possible)
-}
