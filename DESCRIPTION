@@ -2,16 +2,15 @@ Package: mregions2
 Type: Package
 Title: Marine Regions Data from 'Marineregions.org'
 Version: 0.1.0
-Authors@R: c(person(given = "Lotte",
-           family = "Pohl",
-           role = "aut",
-           email = "lotte.pohl@imbrsea.eu",
-           comment = c(ORCID = "0000-0002-7607-7018", github = "whaleshark99")),
-           person(given = "Salvador",
-           family = "Fernandez",
-           role = c("aut", "cre"),
-           email = "salvador.fernandez@vliz.be",
-           comment = c(ORCID = "0000-0003-0535-7677", github = "salvafern")))
+Authors@R: c(
+  person(given = "Lotte",family = "Pohl", role = "aut",
+         email = "lotte.pohl@imbrsea.eu",
+         comment = c(ORCID = "0000-0002-7607-7018", github = "whaleshark99")),
+  person(given = "Salvador", family = "Fernandez", role = c("aut", "cre"),
+         email = "salvador.fernandez@vliz.be",
+         comment = c(ORCID = "0000-0003-0535-7677", github = "salvafern")),
+  person("LifeWatch Belgium", role = "fnd", comment = "https://lifewatch.be")
+  )
 Maintainer: The package maintainer <salvador.fernandez@vliz.be>
 Description: Retrieve marine geospatial information from the Marineregions gazetteer. Access and handle data products from the Flanders Marine Institute (VLIZ) geoserver.
 License: MIT + file LICENSE
