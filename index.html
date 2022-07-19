@@ -8,8 +8,8 @@
 <meta name="description" content="Retrieve marine geospatial information from the Marineregions gazetteer. Access and handle data products from the Flanders Marine Institute (VLIZ) geoserver.">
 <title>Marine Regions Data from Marineregions.org • mregions2</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Marine Regions Data from Marineregions.org">
 <meta property="og:description" content="Retrieve marine geospatial information from the Marineregions gazetteer. Access and handle data products from the Flanders Marine Institute (VLIZ) geoserver.">
@@ -69,17 +69,17 @@
 </h2>
 <p>You can install the development version of mregions2 from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"lifewatch/mregions2"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"lifewatch/mregions2"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lifewatch.github.io/mregions2/">mregions2</a></span><span class="op">)</span>
-
-<span class="co"># helper library</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/mapview" class="external-link">mapview</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lifewatch.github.io/mregions2/">mregions2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># helper library</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-spatial/mapview" class="external-link">mapview</a></span><span class="op">)</span></span></code></pre></div>
 <p>For more information about a function, type <code>?&lt;function_name&gt;</code> in the R console. This opens the function’s documentation.</p>
 <div class="section level3">
 <h3 id="mr_gaz_records_by_names">
@@ -87,31 +87,31 @@
 </h3>
 <p>This function retrieves records from the <a href="https://marineregions.org/gazetteer.php?p=search" class="external-link">Marine Gazetteer</a> by inputting one or more search terms, i.e. <code>"North Sea"</code> or <code>"Belgium"</code>. The result is a <a href="https://tibble.tidyverse.org" class="external-link"><code>tibble</code></a> with all records that contain one of the search terms in their <code>preferredGazetteerName</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">north_sea</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_records_by_names.html">mr_gaz_records_by_names</a></span><span class="op">(</span><span class="st">"North Sea"</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">north_sea</span><span class="op">$</span><span class="va">preferredGazetteerName</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Belgian part of the North Sea"            </span>
-<span class="co">#&gt; [2] "Central North Sea"                        </span>
-<span class="co">#&gt; [3] "Danish part of the North Sea"             </span>
-<span class="co">#&gt; [4] "Dutch part of the North Sea"              </span>
-<span class="co">#&gt; [5] "EMODnet-Biology reporting area: North Sea"</span>
-<span class="co">#&gt; [6] "French part of Greater North Sea"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">north_sea</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_records_by_names.html">mr_gaz_records_by_names</a></span><span class="op">(</span><span class="st">"North Sea"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">north_sea</span><span class="op">$</span><span class="va">preferredGazetteerName</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Belgian part of the North Sea"            </span></span>
+<span><span class="co">#&gt; [2] "Central North Sea"                        </span></span>
+<span><span class="co">#&gt; [3] "Danish part of the North Sea"             </span></span>
+<span><span class="co">#&gt; [4] "Dutch part of the North Sea"              </span></span>
+<span><span class="co">#&gt; [5] "EMODnet-Biology reporting area: North Sea"</span></span>
+<span><span class="co">#&gt; [6] "French part of Greater North Sea"</span></span></code></pre></div>
 <!-- When looking for the Belgian Part of the North Sea, for example, searching for `c("North Sea","Belgian")` will result in all records that contain one of the two terms. --><!-- ```{r example2 mr_gaz_records_by_names()} --><!-- northsea_belgian <- mr_gaz_records_by_names(c("North Sea", "Belgian")) --><!-- # Inspect all record names that were found --><!-- northsea_belgian$preferredGazetteerName --><!-- ``` --><p>Records can have the same name, however, the are always distinguishable by their <a href="https://marineregions.org/mrgid.php" class="external-link">MRGID</a>. Let’s look a bit closer at the records named <code>North Sea</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># north_sea_name &lt;- north_sea[north_sea$preferredGazetteerName == "North Sea", ]</span>
-<span class="va">north_sea_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">north_sea</span>, <span class="va">preferredGazetteerName</span> <span class="op">==</span> <span class="st">"North Sea"</span><span class="op">)</span>
-<span class="co"># View(north_sea_name)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># north_sea_name &lt;- north_sea[north_sea$preferredGazetteerName == "North Sea", ]</span></span>
+<span><span class="va">north_sea_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">north_sea</span>, <span class="va">preferredGazetteerName</span> <span class="op">==</span> <span class="st">"North Sea"</span><span class="op">)</span></span>
+<span><span class="co"># View(north_sea_name)</span></span></code></pre></div>
 <p>The 6 records with the same <code>preferredGazetteerName == "North Sea"</code> differ in their <code>Placetype</code>. The correct record to choose depends on the goal of the analysis. The status of the record can, however, help decide which one to choose. For example, the <code>status</code> of the 6 records in <code>north_sea_name</code> is either <code>standard</code>, <code>synonym</code> or <code>deleted</code>. In this case, <code>North Sea</code> with <code>Placetype == "IHO Sea Area"</code>, that has the <code>standard</code> status, should be preferred. <!-- provide link to further info about the status names --></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">north_sea_name</span><span class="op">$</span><span class="va">placeType</span>
-<span class="co">#&gt; [1] "IHO Sea Area"                        </span>
-<span class="co">#&gt; [2] "Large Marine Ecosystem"              </span>
-<span class="co">#&gt; [3] "Marine Ecoregion of the World (MEOW)"</span>
-<span class="co">#&gt; [4] "ICES Ecoregion"                      </span>
-<span class="co">#&gt; [5] "SeaVoX SeaArea - level 3"            </span>
-<span class="co">#&gt; [6] "SeaVoX SeaArea - sub-region"</span>
-<span class="va">north_sea_name</span><span class="op">$</span><span class="va">status</span>
-<span class="co">#&gt; [1] "standard" "synonym"  "synonym"  "deleted"  "synonym"  "synonym"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">north_sea_name</span><span class="op">$</span><span class="va">placeType</span></span>
+<span><span class="co">#&gt; [1] "IHO Sea Area"                        </span></span>
+<span><span class="co">#&gt; [2] "Large Marine Ecosystem"              </span></span>
+<span><span class="co">#&gt; [3] "Marine Ecoregion of the World (MEOW)"</span></span>
+<span><span class="co">#&gt; [4] "ICES Ecoregion"                      </span></span>
+<span><span class="co">#&gt; [5] "SeaVoX SeaArea - level 3"            </span></span>
+<span><span class="co">#&gt; [6] "SeaVoX SeaArea - sub-region"</span></span>
+<span><span class="va">north_sea_name</span><span class="op">$</span><span class="va">status</span></span>
+<span><span class="co">#&gt; [1] "standard" "synonym"  "synonym"  "deleted"  "synonym"  "synonym"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="mr_gaz_record">
@@ -120,14 +120,14 @@
 <p>This function retrieves a geometry from the <a href="http://geo.vliz.be/geoserver/web/wicket/bookmarkable/org.geoserver.web.demo.MapPreviewPage?1" class="external-link">VLIZ geoserver</a>. The geometry is a geospatial object of <code>class(sf)</code> (simple feature) from the <code>sf</code> R package. Here you can find an <a href="https://r-spatial.github.io/sf/" class="external-link">introduction</a> to <code>simple feature objects</code> in <code>sf</code> and an <a href="https://r-spatial.github.io/sf/reference/index.html" class="external-link">overview</a> of all available functions.</p>
 <p>In the following example, the geometry of the North Sea IHO Sea Area is retrieved and visualised.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">north_sea_IHO</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">north_sea</span>, <span class="va">placeType</span> <span class="op">==</span> <span class="st">"IHO Sea Area"</span> <span class="op">&amp;</span> <span class="va">preferredGazetteerName</span> <span class="op">==</span> <span class="st">"North Sea"</span><span class="op">)</span>
-<span class="va">mrgid</span> <span class="op">&lt;-</span> <span class="va">north_sea_IHO</span><span class="op">$</span><span class="va">MRGID</span>
-
-<span class="co"># check the outcome when a geom is there and when not</span>
-<span class="co"># IHO_geom &lt;- mr_gaz_record(mrgid)</span>
-<span class="co"># colnames(IHO_geom)</span>
-<span class="co"># </span>
-<span class="co"># mapview(IHO_geom)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">north_sea_IHO</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">north_sea</span>, <span class="va">placeType</span> <span class="op">==</span> <span class="st">"IHO Sea Area"</span> <span class="op">&amp;</span> <span class="va">preferredGazetteerName</span> <span class="op">==</span> <span class="st">"North Sea"</span><span class="op">)</span></span>
+<span><span class="va">mrgid</span> <span class="op">&lt;-</span> <span class="va">north_sea_IHO</span><span class="op">$</span><span class="va">MRGID</span></span>
+<span></span>
+<span><span class="co"># check the outcome when a geom is there and when not</span></span>
+<span><span class="co"># IHO_geom &lt;- mr_gaz_record(mrgid)</span></span>
+<span><span class="co"># colnames(IHO_geom)</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># mapview(IHO_geom)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="mr_gaz_info">
@@ -135,19 +135,19 @@
 </h3>
 <p>This function lists information about the <a href="https://marineregions.org/gazetteer.php?p=search" class="external-link">Marine Gazetteer</a> records, namely <code>placeTypes</code> and <code>sources</code>. This is especially useful when using <code><a href="reference/mr_gaz_records_by_type.html">mr_gaz_records_by_type()</a></code> and <code><a href="reference/mr_gaz_records_by_source.html">mr_gaz_records_by_source()</a></code>.The results are <a href="https://tibble.tidyverse.org" class="external-link"><code>tibbles</code></a> with the first 100 of all <code>sources</code> when using <code>mr_gaz_info("sources")</code> or with all possible placeTypes when using <code>mr_gaz_info("placetypes")</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">all_sources</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_info.html">mr_gaz_info</a></span><span class="op">(</span><span class="st">"sources"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">all_sources</span><span class="op">$</span><span class="va">source</span><span class="op">)</span>
-<span class="co">#&gt; [1] "SAIL"                                                                                                                                                                                                                                                  </span>
-<span class="co">#&gt; [2] "ASFA thesaurus"                                                                                                                                                                                                                                        </span>
-<span class="co">#&gt; [3] "Nationaal Instituut voor de Statistiek (NIS) / National Statistical Service"                                                                                                                                                                           </span>
-<span class="co">#&gt; [4] "Oosthoek Times Wereldatlas"                                                                                                                                                                                                                            </span>
-<span class="co">#&gt; [5] "Lausch, E. (2000). Atlas van de oceanen: met de dieptekaarten van de wereldzeeën, die de Canadese Hydrografische Dienst heeft gepubliceerd (General Bathymetric Chart of the Oceans, GEBCO). Tirion Uitgevers B.V.: Baarn. ISBN 90-7303-598-8. 264 pp."</span>
-<span class="co">#&gt; [6] "(2001). The Times comprehensive atlas of the world. 10th ed. Times Books: London. ISBN 0-7230-0792-6. 67, 220, 124 plates pp."</span>
-<span class="va">all_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_info.html">mr_gaz_info</a></span><span class="op">(</span><span class="st">"placetypes"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">all_types</span><span class="op">$</span><span class="va">type</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Town"                      "Arrondissement"           </span>
-<span class="co">#&gt; [3] "Department"                "Province (administrative)"</span>
-<span class="co">#&gt; [5] "Country"                   "Continent"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">all_sources</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_info.html">mr_gaz_info</a></span><span class="op">(</span><span class="st">"sources"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">all_sources</span><span class="op">$</span><span class="va">source</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "SAIL"                                                                                                                                                                                                                                                  </span></span>
+<span><span class="co">#&gt; [2] "ASFA thesaurus"                                                                                                                                                                                                                                        </span></span>
+<span><span class="co">#&gt; [3] "Nationaal Instituut voor de Statistiek (NIS) / National Statistical Service"                                                                                                                                                                           </span></span>
+<span><span class="co">#&gt; [4] "Oosthoek Times Wereldatlas"                                                                                                                                                                                                                            </span></span>
+<span><span class="co">#&gt; [5] "Lausch, E. (2000). Atlas van de oceanen: met de dieptekaarten van de wereldzeeën, die de Canadese Hydrografische Dienst heeft gepubliceerd (General Bathymetric Chart of the Oceans, GEBCO). Tirion Uitgevers B.V.: Baarn. ISBN 90-7303-598-8. 264 pp."</span></span>
+<span><span class="co">#&gt; [6] "(2001). The Times comprehensive atlas of the world. 10th ed. Times Books: London. ISBN 0-7230-0792-6. 67, 220, 124 plates pp."</span></span>
+<span><span class="va">all_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_info.html">mr_gaz_info</a></span><span class="op">(</span><span class="st">"placetypes"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">all_types</span><span class="op">$</span><span class="va">type</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Town"                      "Arrondissement"           </span></span>
+<span><span class="co">#&gt; [3] "Department"                "Province (administrative)"</span></span>
+<span><span class="co">#&gt; [5] "Country"                   "Continent"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="mr_gaz_records_by_type">
@@ -156,12 +156,12 @@
 <p>This function retrieves the first 100 records from the <a href="https://marineregions.org/gazetteer.php?p=search" class="external-link">Marine Gazetteer</a> by inputting a placetype. This can be <code>"Sandbank"</code> or <code>"Archipelago"</code>, for instance. The result of <code><a href="reference/mr_gaz_records_by_type.html">mr_gaz_records_by_type()</a></code> is a <a href="https://tibble.tidyverse.org" class="external-link"><code>tibble</code></a> with the first 100 records of the specified <code>Placetype</code>.</p>
 <p>In the following example, a list of all the available <code>placeTypes</code> will be fetched using <code>mr_gaz_info("placetypes")</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">placetypes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_info.html">mr_gaz_info</a></span><span class="op">(</span><span class="st">"placetypes"</span><span class="op">)</span>
-
-<span class="va">archipelagos</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_records_by_type.html">mr_gaz_records_by_type</a></span><span class="op">(</span><span class="st">"Archipelago"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">archipelagos</span><span class="op">$</span><span class="va">preferredGazetteerName</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Vainameri Archipelago" "Azores"                "Channel Islands"      </span>
-<span class="co">#&gt; [4] "Faeroe Islands"        "British Isles"         "Isles of Scilly"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">placetypes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_info.html">mr_gaz_info</a></span><span class="op">(</span><span class="st">"placetypes"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">archipelagos</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_records_by_type.html">mr_gaz_records_by_type</a></span><span class="op">(</span><span class="st">"Archipelago"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">archipelagos</span><span class="op">$</span><span class="va">preferredGazetteerName</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Vainameri Archipelago" "Azores"                "Channel Islands"      </span></span>
+<span><span class="co">#&gt; [4] "Faeroe Islands"        "British Isles"         "Isles of Scilly"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="mr_gaz_records_by_source">
@@ -169,12 +169,12 @@
 </h3>
 <p>This function retrieves the first 100 records from the <a href="https://marineregions.org/gazetteer.php?p=search" class="external-link">Marine Gazetteer</a> by inputting a source. This can be <code>"GeoNames"</code> or <code>"AlgaeNames"</code>, for instance. In the following example, a list of the first 100 available <code>sources</code> will be fetched using <code>mr_gaz_info("sources")</code>. The result of <code><a href="reference/mr_gaz_records_by_source.html">mr_gaz_records_by_source()</a></code> is a <a href="https://tibble.tidyverse.org" class="external-link"><code>tibble</code></a> with the first 100 records of the specified <code>source</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">placetypes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_info.html">mr_gaz_info</a></span><span class="op">(</span><span class="st">"placetypes"</span><span class="op">)</span>
-
-<span class="va">archipelagos</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_records_by_type.html">mr_gaz_records_by_type</a></span><span class="op">(</span><span class="st">"Archipelago"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">archipelagos</span><span class="op">$</span><span class="va">preferredGazetteerName</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Vainameri Archipelago" "Azores"                "Channel Islands"      </span>
-<span class="co">#&gt; [4] "Faeroe Islands"        "British Isles"         "Isles of Scilly"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">placetypes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_info.html">mr_gaz_info</a></span><span class="op">(</span><span class="st">"placetypes"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">archipelagos</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_records_by_type.html">mr_gaz_records_by_type</a></span><span class="op">(</span><span class="st">"Archipelago"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">archipelagos</span><span class="op">$</span><span class="va">preferredGazetteerName</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Vainameri Archipelago" "Azores"                "Channel Islands"      </span></span>
+<span><span class="co">#&gt; [4] "Faeroe Islands"        "British Isles"         "Isles of Scilly"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="mr_gaz_records_by_latlon">
@@ -183,28 +183,28 @@
 <p>This function retrieves the first 100 records from the <a href="https://marineregions.org/gazetteer.php?p=search" class="external-link">Marine Gazetteer</a> by inputting a Latitude and a Longitude. The result of <code><a href="reference/mr_gaz_records_by_latlon.html">mr_gaz_records_by_latlon()</a></code> is a <a href="https://tibble.tidyverse.org" class="external-link"><code>tibble</code></a> with the first 100 records of the specified <code>lat</code> and <code>lon</code>, where their centroid is within the bounding box calculated by latitude (+/- radius) and longitude (+/- radius).</p>
 <p>In the following examples, all records in the area of the Mariana Trench, will be retrieved.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mariana_trench</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_records_by_names.html">mr_gaz_records_by_names</a></span><span class="op">(</span><span class="st">"Mariana Trench"</span><span class="op">)</span>
-
-<span class="va">mariana_trench_lat</span> <span class="op">&lt;-</span> <span class="va">mariana_trench</span><span class="op">$</span><span class="va">latitude</span>
-<span class="va">mariana_trench_lon</span> <span class="op">&lt;-</span> <span class="va">mariana_trench</span><span class="op">$</span><span class="va">longitude</span>
-
-<span class="va">records_mariana_trench</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_records_by_latlon.html">mr_gaz_records_by_latlon</a></span><span class="op">(</span><span class="va">mariana_trench_lat</span>, <span class="va">mariana_trench_lon</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">records_mariana_trench</span><span class="op">$</span><span class="va">preferredGazetteerName</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Trinidad Seamount"      "Victoria Guyot"         "Vogt Guyot"            </span>
-<span class="co">#&gt; [4] "Lapulapu Ridge"         "Lowrie Guyot"           "Minami-Kasuga Seamount"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mariana_trench</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_records_by_names.html">mr_gaz_records_by_names</a></span><span class="op">(</span><span class="st">"Mariana Trench"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mariana_trench_lat</span> <span class="op">&lt;-</span> <span class="va">mariana_trench</span><span class="op">$</span><span class="va">latitude</span></span>
+<span><span class="va">mariana_trench_lon</span> <span class="op">&lt;-</span> <span class="va">mariana_trench</span><span class="op">$</span><span class="va">longitude</span></span>
+<span></span>
+<span><span class="va">records_mariana_trench</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_records_by_latlon.html">mr_gaz_records_by_latlon</a></span><span class="op">(</span><span class="va">mariana_trench_lat</span>, <span class="va">mariana_trench_lon</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">records_mariana_trench</span><span class="op">$</span><span class="va">preferredGazetteerName</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Trinidad Seamount"      "Victoria Guyot"         "Vogt Guyot"            </span></span>
+<span><span class="co">#&gt; [4] "Lapulapu Ridge"         "Lowrie Guyot"           "Minami-Kasuga Seamount"</span></span></code></pre></div>
 <p>There are many Guyots around Mariana Trench, apparently! Let’s explore them a bit.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">all_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_info.html">mr_gaz_info</a></span><span class="op">(</span><span class="st">"placetypes"</span><span class="op">)</span>
-
-<span class="va">guyot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">all_types</span>, <span class="va">type</span> <span class="op">==</span> <span class="st">"Guyot"</span><span class="op">)</span>
-<span class="va">guyot</span><span class="op">$</span><span class="va">description</span>
-<span class="co">#&gt; [1] "A seamount having a comparatively smooth flat top. Also called tablemount."</span>
-
-<span class="va">guyots_mariana_trench</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">records_mariana_trench</span>, <span class="va">placeType</span> <span class="op">==</span> <span class="st">"Guyot"</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">guyots_mariana_trench</span><span class="op">)</span>
-<span class="co">#&gt; [1] 21</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">all_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mr_gaz_info.html">mr_gaz_info</a></span><span class="op">(</span><span class="st">"placetypes"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">guyot</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">all_types</span>, <span class="va">type</span> <span class="op">==</span> <span class="st">"Guyot"</span><span class="op">)</span></span>
+<span><span class="va">guyot</span><span class="op">$</span><span class="va">description</span></span>
+<span><span class="co">#&gt; [1] "A seamount having a comparatively smooth flat top. Also called tablemount."</span></span>
+<span></span>
+<span><span class="va">guyots_mariana_trench</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">records_mariana_trench</span>, <span class="va">placeType</span> <span class="op">==</span> <span class="st">"Guyot"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">guyots_mariana_trench</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 21</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -229,6 +229,8 @@
 <ul class="list-unstyled">
 <li>Lotte Pohl <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-7607-7018" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Salvador Fernandez <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-0535-7677" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://lifewatch.be" class="external-link"><img src="https://www.lifewatch.be/sites/lifewatch.be/themes/lifewatchportal/images/header_lw_logo.png" width="72"></a> <br><small class="roles"> Funder </small>  </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -241,12 +243,12 @@
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Lotte Pohl, Salvador Fernandez.</p>
+<p>Developed by Lotte Pohl, Salvador Fernandez, <a href="https://lifewatch.be" class="external-link"><img src="https://www.lifewatch.be/sites/lifewatch.be/themes/lifewatchportal/images/header_lw_logo.png" width="72"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>
