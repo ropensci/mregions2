@@ -3,7 +3,7 @@ pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   packagedev_june2022: packagedev_june2022.html
-last_built: 2022-07-19T08:15Z
+last_built: 2022-09-27T14:23Z
 urls:
   reference: https://lifewatch.github.io/mregions2/reference
   article: https://lifewatch.github.io/mregions2/articles
