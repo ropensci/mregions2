@@ -68,25 +68,27 @@ mr_rdf_parse <- function(resp, ...){
 mr_graph_base_build <- function(){
 
   # Cache control
-  mr_base_graph_path = file.path(mr_cache(), "mr_graph_base.rds")
+  mr_graph_base_path = file.path(mr_cache(), "mr_graph_base.ttl")
 
-  if(file.exists(mr_base_graph_path)){
-    seconds_since_creation = as.numeric(difftime(Sys.time(), file.mtime(mr_base_graph_path), units = "secs"))
+  if(file.exists(mr_graph_base_path)){
+    seconds_since_creation = as.numeric(difftime(Sys.time(), file.mtime(mr_graph_base_path), units = "secs"))
     max_age = 604800
 
     if(seconds_since_creation < max_age){
-      out <- readRDS(mr_base_graph_path)
+      out <- readLines(mr_graph_base_path) %>%
+        paste0(collapse = "\n") %>%
+        rdf_parse("turtle")
 
       verbose <- getOption("verbose", default = TRUE)
       if(verbose){
-        cli::cli_alert_success(glue::glue("Cached base graph is fresh. Reading from `{mr_base_graph_path}`"))
+        cli::cli_alert_success(glue::glue("Cached base graph is fresh. Reading from `{mr_graph_base_path}`"))
       }
 
       # Premature end
       return(out)
 
     }else if(seconds_since_creation > max_age){
-      file.remove(seconds_since_creation)
+      file.remove(mr_graph_base_path)
 
     }
 
@@ -104,9 +106,9 @@ mr_graph_base_build <- function(){
 
   reqs_turtle <- lapply(uri_turtle, mr_request) %>%
     lapply(httr2::req_headers, accept = "text/turtle") %>%
-    httr2::multi_req_perform(cancel_on_error = F) %>%
-    lapply(mr_rdf_parse, format = "turtle")
-
+    httr2::multi_req_perform(cancel_on_error = T) %>%
+    lapply(httr2::resp_body_string) %>%
+    unlist()
 
   # Get RDFXML docs
   uri_rdfxml<- list(
@@ -114,54 +116,39 @@ mr_graph_base_build <- function(){
     gsp = 'http://www.opengis.net/ont/geosparql'
   )
 
-  reqs_rdfxml <- lapply(uri_rdfxml, mr_request) %>%
-    lapply(httr2::req_headers, accept = "application/xml+rdf") %>%
-    httr2::multi_req_perform(cancel_on_error = F) %>%
-    lapply(mr_rdf_parse, format = "rdfxml")
+  req_skos <- mr_request('https://www.w3.org/2009/08/skos-reference/skos.rdf') %>%
+    httr2::req_headers(accept = 'application/xml+rdf') %>%
+    mr_req_perform() %>%
+    httr2::resp_body_string() %>%
+    rdflib::rdf_parse("rdfxml") %>%
+    rdflib::rdf_serialize(format = "turtle")
+
+  req_gsp <- mr_request('http://www.opengis.net/ont/geosparql') %>%
+    httr2::req_headers(accept = 'application/xml+rdf') %>%
+    mr_req_perform() %>%
+    httr2::resp_body_string() %>%
+    rdflib::rdf_parse("rdfxml") %>%
+    rdflib::rdf_serialize(format = "turtle")
 
 
-  reqs <- c(reqs_turtle, reqs_rdfxml)
-
-  # Paste all documents together
-  out <- c(reqs[[1]])
-  for(i in 2:length(reqs)){
-    out <- c(out, reqs[[i]])
-  }
+  reqs <- reqs_turtle %>%
+    c(req_skos, req_gsp) %>%
+    paste0(collapse = "\n")
 
   # Cache
+  file.create(mr_graph_base_path)
+  writeLines(reqs, con = mr_graph_base_path)
 
-  saveRDS(out, file = mr_base_graph_path)
+
+  out <- reqs %>%
+    rdflib::rdf_parse("turtle")
 
   out
-
 }
 
-debug(mr_graph_base_build)
+options(verbose = TRUE)
+
 base_graph <- mr_graph_base_build()
-
-readRDS("./mr-cache/mr_graph_base.rds")
-
-
-
-
-mr_base_graph_path = file.path(mr_cache(), "mr_base_graph.rds")
-
-if(file.exists(mr_base_graph_path)){
-  seconds_since_creation = as.numeric(difftime(Sys.time(), file.mtime(mr_base_graph_path), units = "seconds"))
-  max_age = 604800
-
-  if(seconds_since_creation < max_age){
-    out <- readRDS(mr_base_graph_path)
-
-  }else if(seconds_since_creation > max_age){
-    file.remove(seconds_since_creation)
-
-  }
-
-}
-
-
-saveRDS(out, file = )
 
 
 
