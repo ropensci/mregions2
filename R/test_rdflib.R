@@ -21,8 +21,9 @@ mr_cache <- function(){
 # Creates a basic request with general settings
 mr_request <- function(url, ...){
   req <- httr2::request(url) %>%
-    httr2::req_user_agent("mregions2") %>%
-    httr2::req_cache(mr_cache())
+    httr2::req_user_agent("mregions2")
+  # %>%
+  #   httr2::req_cache(mr_cache())
 
   # Add messages if verbose = TRUE
   verbose <- getOption("verbose", default = FALSE)
@@ -35,35 +36,19 @@ mr_request <- function(url, ...){
   req
 }
 
-# Performs the request
-mr_req_perform <- function(req, method = "GET"){
-  resp <- req %>%
-    httr2::req_perform(method)
-
-  verbose <- getOption("verbose", default = FALSE)
-  if(verbose){
-    resp %>%
-      httr2::resp_body_string() %>%
-      cat()
-  }
-
-  resp
-}
-
 
 # Build base graph using known ontologies
 mr_graph_base_build <- function(){
 
   # Cache control
-  mr_graph_base_path = file.path(mr_cache(), "mr_graph_base.ttl")
+  mr_graph_base_path = file.path(mr_cache(), "mr_graph_base.rdf")
 
   if(file.exists(mr_graph_base_path)){
     seconds_since_creation = as.numeric(difftime(Sys.time(), file.mtime(mr_graph_base_path), units = "secs"))
     max_age = 604800
 
     if(seconds_since_creation < max_age){
-      out <- readLines(mr_graph_base_path) %>%
-        paste0(collapse = "\n")
+      graph <- rdflib::rdf_parse(mr_graph_base_path, format = "rdfxml")
 
       verbose <- getOption("verbose", default = TRUE)
       if(verbose){
@@ -71,7 +56,7 @@ mr_graph_base_build <- function(){
       }
 
       # Premature end
-      return(out)
+      return(graph)
 
     }else if(seconds_since_creation > max_age){
       file.remove(mr_graph_base_path)
@@ -82,62 +67,41 @@ mr_graph_base_build <- function(){
 
   # If not cached, then perform
 
-  # Get Turtle docs
-  uri_turtle <- list(
-    mr = "http://marineregions.org/ns/ontology",
-    mrt = "http://marineregions.org/ns/placetypes",
-    dcat = "https://www.w3.org/ns/dcat2",
-    prov = "http://www.w3.org/ns/prov"
+  # Define URIs
+  namespaces <- list(
+    mr = c(uri = "http://marineregions.org/ns/ontology#", accept = "text/turtle", format = "turtle"),
+    mrt = c(uri = "http://marineregions.org/ns/placetypes#", accept ="text/turtle", format = "turtle"),
+    dcat = c(uri = "https://www.w3.org/ns/dcat2#", accept ="text/turtle", format = "turtle"),
+    prov = c(uri = "http://www.w3.org/ns/prov#", accept ="text/turtle", format = "turtle"),
+    dc = c(uri = "http://purl.org/dc/terms/", accept ="text/turtle", format = "turtle"),
+    rdfs = c(uri = 'http://www.w3.org/2000/01/rdf-schema#',  accept = "text/turtle", format = "turtle"),
+    skos = c(uri = 'https://www.w3.org/2009/08/skos-reference/skos.rdf#', accept ="application/xml+rdf", format = "rdfxml"),
+    gsp = c(uri = 'http://www.opengis.net/ont/geosparql#',  accept = "application/xml+rdf", format = "rdfxml")
+    # xsd = c(uri = 'http://www.w3.org/2001/XMLSchema#',  accept = "application/xml", format = "rdfxml")
+    # alternates: {"XMLSchema.dtd" 1 {type text/plain} {length 16075}}, {"XMLSchema.html" 1 {type application/xhtml+xml} {charset utf-8} {length 5808}},{"XMLSchema.xsd" 1 {type application/xml} {length 87677}}
+
   )
 
-  reqs_turtle <- lapply(uri_turtle, mr_request) %>%
-    lapply(httr2::req_headers, accept = "text/turtle") %>%
-    httr2::multi_req_perform(cancel_on_error = T) %>%
-    lapply(httr2::resp_body_string) %>%
-    unlist()
+  # Initialize graph
+  graph <- rdflib::rdf()
 
-  # Get RDFXML docs
-  uri_rdfxml<- list(
-    skos = 'https://www.w3.org/2009/08/skos-reference/skos.rdf',
-    gsp = 'http://www.opengis.net/ont/geosparql'
-  )
+  # Fill graph
+  for (namespace in namespaces){
+    mr_request(namespace[1]) %>%
+      httr2::req_headers(accept = namespace[2]) %>%
+      httr2::req_perform() %>%
+      httr2::resp_body_string() %>%
+      rdflib::rdf_parse(rdf = graph, format = namespace[3]) %>%
+      invisible()
+  }
 
-  req_skos <- mr_request('https://www.w3.org/2009/08/skos-reference/skos.rdf') %>%
-    httr2::req_headers(accept = 'application/xml+rdf') %>%
-    mr_req_perform() %>%
-    httr2::resp_body_string() %>%
-    rdflib::rdf_parse("rdfxml") %>%
-    rdflib::rdf_serialize(format = "turtle")
+  # Cache graph
+  namespace <- do.call(rbind, namespaces)[,1]
+  rdflib::rdf_serialize(graph, doc = "./mr-cache/mr_graph_base.rdf", format = "rdf", namespace = namespace)
 
-  req_gsp <- mr_request('http://www.opengis.net/ont/geosparql') %>%
-    httr2::req_headers(accept = 'application/xml+rdf') %>%
-    mr_req_perform() %>%
-    httr2::resp_body_string() %>%
-    rdflib::rdf_parse("rdfxml") %>%
-    rdflib::rdf_serialize(format = "turtle")
-
-
-  out <- reqs_turtle %>%
-    c(req_skos, req_gsp) %>%
-    paste0(collapse = "\n")
-
-  # Cache
-  file.create(mr_graph_base_path)
-  writeLines(out, con = mr_graph_base_path)
-
-  out
+  # End
+  graph
 }
-#
-# options(verbose = TRUE)
-#
-# base_graph <- mr_graph_base_build()
-
-
-
-
-
-
-
 
 
 
