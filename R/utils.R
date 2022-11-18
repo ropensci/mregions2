@@ -1,125 +1,131 @@
-#' Create a base URL for a http request.
+#' Add geometry to a data frame containing a column named MRGID
 #'
-#' @param api_type Type of API architecture. Must be one of c("rest", "soap").
-#' @param file_format File format. Must be one of c("json", "xml", "ttl", "jsonld").
-#' @param method RESTful method. Check the Marineregions gazetteer at https://marineregions.org/gazetteer.php?p=webservices for available methods.
+#' @param x a data frame obtained via mr_gaz_record(s)_by_*()
 #'
-#' @return A base URL to append queries to.
+#' @return the same data frame with a new column the_geom
 #' @export
-#'
 #' @examples
-#' api <- "rest"
-#' file <- "json"
-#' method <- "getGazetteerRecordsByName"
-#' mr_req_URL(api_type = api, file_format = file, method = method)
-#' # https://marineregions.org//rest/getGazetteerRecordsByName.json/
+#' mr_gaz_record_by_mrgid(19518, with_geometry = TRUE)
+#'
+#' # It's the same as
+#' mr_gaz_record_by_mrgid(19518) %>% mr_add_geometry()
+#'
+#' mr_gaz_records_by_name("Belgium") %>% mr_add_geometry()
+mr_add_geometry <- function(x){
 
-mr_req_URL <- function(api_type, file_format, method){
-  URL <- "https://marineregions.org/"
-  base_url <- glue::glue("{URL}/{api_type}/{method}.{file_format}/")
+  # Assertions
+  checkmate::assert_data_frame(x)
+  stopifnot("MRGID" %in% names(x))
 
-  # write function mr_gaz_methods() where you can see the available methods & search for strings
-  methods <- c("getGazetteerRecordByMRGID", "getGazetteerGeometry" , "getGazetteerTypes", "getGazetteerGeometries", "getGazetteerRecordsByName", "getGazetteerRecordsByType", "getGazetteerWMSes", "getGazetteerRecordsByLatLong", "getGazetteerRecordsByNames", "getGazetteerSources", "getGazetteerNamesByMRGID", "getGazetteerRecordsBySource", "getFeed", "getGazetteerRelationsByMRGID")
+  # Config - get geometries
+  the_geom <- lapply(x$MRGID, mr_gaz_geometries, format = "sf", resp_return_error = TRUE) %>%
+    suppressWarnings()
 
-  checkmate::assert_choice(api_type, c("rest", "soap"))
-  checkmate::assert_choice(file_format, c("json", "xml", "ttl", "jsonld"))
-  checkmate::assert_choice(method, methods)
+  # Logic to add either bounding box or centroid if there is no geometry available
+  for(i in 1:length(the_geom)){
+    if("httr2_response" %in% class(the_geom[[i]])){
+      if(httr2::resp_status(the_geom[[i]]) == 404){
 
-  return(base_url)
-}
 
-#' Get user agent and package version
-#'
-#' @param . A http request.
-#'
-#' @return A character string that unites the user agent of the http request and the package version.
-#' @export
-#'
-#' @examples \dontrun{
-#' httr2::request("http://example.com") %>% req_mr_user_agent() %>% httr2::req_dry_run()
-#' }
-req_mr_user_agent <- function(.){
-  httr2::req_user_agent(. , glue::glue("mregions2 {packageVersion('mregions')}"))
-}
+        bbox_exists <- all(c("minLatitude" %in% names(x[i, ]),
+                          "minLongitude" %in% names(x[i, ]),
+                          "maxLatitude" %in% names(x[i, ]),
+                          "maxLongitude" %in% names(x[i, ])
+                          ))
 
-#' Transform httr2 response into tibble
-#'
-#' @param resp response from httr2 request.
-#' @param unpack Set `TRUE` when `mr_gaz_records_by_names()` is run. This webservice nests the result once more.
-#'
-#' @return A tibble containing the json response body from the httr2 response.
-#' @export
-#'
-#' @examples
-#' name <- "High Sea"
-#' count <- 5
-#' url <- "https://marineregions.org//rest/getGazetteerRecordsByName.json/"
-#'
-#' req <- httr2::request(url) %>%
-#'  httr2::req_url_path_append(utils::URLencode(name)) %>%
-#'  httr2::req_url_path_append("/")
-#'
-#' resp <- req %>%
-#'  httr2::req_url_query(
-#'   `like` = TRUE,
-#'   `fuzzy` = FALSE,
-#'   `offset` = 0,
-#'   `count` = count) %>%
-#'  httr2::req_perform()
-#'
-#' res <- mr_resp_to_tibble(resp)
-mr_resp_to_tibble <- function(resp, unpack = FALSE){
+        if(bbox_exists){
+          bbox_is_not_na <- all(c(!is.na(x[i, ]$minLatitude),
+            !is.na(x[i, ]$maxLatitude),
+            !is.na(x[i, ]$minLongitude),
+            !is.na(x[i, ]$maxLongitude)))
 
-  res_json <- resp %>%
-    httr2::resp_body_json()
+          if(bbox_is_not_na){
+            the_geom[[i]] <- sf::st_bbox(c(xmin = x[i, ]$minLongitude,
+                          xmax = x[i, ]$maxLongitude,
+                          ymax = x[i, ]$maxLatitude,
+                          ymin = x[i, ]$minLatitude),
+                        crs = sf::st_crs(4326))
 
-  if(unpack){
-    entries <- list()
-    for (i in 1:length(res_json)) {
-      entry <- res_json[[i]]
-      entries <- append(entries, entry)
+            the_geom[[i]] <- tibble::tibble(mrgid = x[i, ]$MRGID,
+                                       the_geom = sf::st_as_sfc(the_geom[[i]])) %>%
+              sf::st_as_sf()
+
+
+          }
+        }else{
+
+          centroid_exists <- all(c("latitude" %in% names(x[i, ]),
+                                   "longitude" %in% names(x[i, ])))
+
+          if(centroid_exists){
+            centroid_is_not_na <- all(c(
+              !is.na(x[i, ]$latitude),
+              !is.na(x[i, ]$longitude)
+            ))
+
+              if(centroid_is_not_na){
+
+                the_geom[[i]] <- tibble::tibble(
+                  mrgid = x[i, ]$MRGID,
+                  the_geom = sf::st_sfc(
+                    sf::st_point(c(x[i, ]$longitude, x[i, ]$latitude)),
+                    crs = sf::st_crs(4326)
+                  )
+                ) %>%
+                  sf::st_as_sf()
+
+              }
+
+            }else{
+              # If no centroid is available, end prematurely
+              msg = c(
+                "x" = glue::glue("There is no geometry for the GeoObject '{x[i, ]$preferredGazetteerName}' with MRGID: <{x[i, ]$MRGID}>")
+              )
+
+              if(x[i, ]$status == "deleted"){
+                msg = c(msg,
+                        "i" = "Reason: The GeoObject was deleted.",
+                       "i" = glue::glue("The preferred alternative is 'TODO mr_gaz_names_by_mrgid' with MRGID: {x[i, ]$accepted}")
+                )}else{
+                  msg = c(msg,
+                          "i" = "Please contact <info@marineregions.org>."
+                  )
+                }
+
+              cli::cli_abort(msg)
+              invisible(NULL)
+            }
+          }
+
+        }else{
+          httr2::resp_check_status(the_geom[[i]])
+          return(invisible(NULL))
       }
-    res_json <- entries
+    }
   }
 
-  res <- do.call(rbind, res_json) %>%
-    tibble::as_tibble(res_json)
+  # the_geom[id_rm] <- NULL
+  the_geom <- the_geom %>% dplyr::bind_rows()
 
-  col_names <- colnames(res)
-  res <- res %>%
-    tidyr::unnest(col_names)
+  out <- x %>%
+    dplyr::right_join(the_geom, by = c(
+      "MRGID" = "mrgid"
+    )) %>% sf::st_as_sf()
 
-  return(res)
+  return(out)
+
 }
 
-#' Replace NULL values with NA in list
-#'
-#' @description useful when running `tibble::as_tibble()` which does not accept NULL.
-#' @param list_with_NULL list element passed to be changed to NA if NULL.
-#'
-#' @return elements in e.g. a list with NA instead of NULL.
-#' @export
-#'
-#' @examples
-#' y <- list(
-#' one = c(month.abb, 5),
-#' two = c(NULL, 5, NA),
-#' three = NULL,
-#' four = list(NULL) # does not change nested NULL for now
-#' )
-#' str(y)
-#' z <- mr_null_to_na(y)
-#' str(z)
-mr_null_to_na <- function(list_with_NULL){
 
-  checkmate::check_list(list_with_NULL)
+# x <- mr_gaz_record_by_mrgid(19518) %>%
+#   dplyr::bind_rows(mr_gaz_record_by_mrgid(58)) %>%
+#   dplyr::bind_rows(mr_gaz_record_by_mrgid(97))
+#
+# x1 <- x %>% dplyr::bind_rows(mr_gaz_record_by_mrgid(8399))
+#
+# debug(mr_add_geometry)
+#
+# mr_add_geometry(x1)
 
-  null_to_na <- function(x){
-    if(is.null(x))
-    {x <- NA} else{x}
-    return(x)
-  }
-
-  list_with_NA <- lapply(list_with_NULL, null_to_na)
-  return(list_with_NA)
-}
+# User agent to send in all HTTP requests of this package
+mr_user_agent <- glue::glue("{getOption(\"HTTPUserAgent\")}; mregions2 {packageVersion(\"mregions2\")}")

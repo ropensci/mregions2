@@ -1,0 +1,784 @@
+---
+title: "mregions2-rdf"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{mregions2-rdf}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r rdf}
+library(mregions2)
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# cuba_eez_relations <- mr_relations(cuba_eez)
+#
+# cuba_eez %>% tidyr::as_tibble() %>% View()
+#
+# cuba_eez <- mr_get(8406)
+#
+#
+# test <- rdflib::rdf_query(cuba_eez, query = paste0(
+#   mr_prefixes(),
+#   "
+#   SELECT *
+#   WHERE {
+#     <http://marineregions.org/mrgid/8406> ?p ?o
+#
+#   }
+#   "
+#
+# ))
+#
+#
+# ## SHOW TO THE TEAM DIFFERENT OPTIONS AND DECIDE WHAT TO DO
+# ## OPTION 1: STICK TO REST WEBSERVICES AND PROVIDE LINKED DATA AS VIGNETTE
+# ## OPTION 2: PROVIDE ALL STUFF IN A GEOOBJECT AS A TABLE
+# ## OPTION 3: CURATE ALL STUFF IN A GEOOBJECT AS TABLES
+#
+#
+# test = cbind(s = "http://marineregions.org/mrgid/8406", test)
+#
+# test = rbind(test, c("http://marineregions.org/mrgid/845456",
+#                      "foo_name",
+#                     "foo value"))
+#
+# colnames(test)
+#
+# tidyr::pivot_wider(test, names_from = p, values_from = o) %>% View()
+#
+#
+#
+#
+#
+#
+# cuba_eez %>%
+#   rdflib::rdf_serialize(format = "turtle", namespace = c(
+#     mr = "http://marineregions.org/ns/ontology#",
+#     mrt = "http://marineregions.org/ns/placetypes#",
+#     dc = "http://purl.org/dc/terms/",
+#     xsd = "http://www.w3.org/2001/XMLSchema#",
+#     rdfs = "http://www.w3.org/2000/01/rdf-schema#",
+#     skos = "http://www.w3.org/2004/02/skos/core#",
+#     dcat = "http://www.w3.org/ns/dcat#",
+#     gsp = "http://www.opengis.net/ont/geosparql#",
+#     prov = "http://www.w3.org/ns/prov#"
+#   )) %>%
+#   cat()
+# # as_tibble.MRGeoObject(cuba_eez) %>% View()
+#
+#
+#
+# View(cuba_eez_relations)
+#
+#
+# # Do something with replaced by
+# bouvet <- mr_get(8399) %>% as.data.frame()
+#
+#
+#
+#
+# mr_get("http://marineregions.org/mrgid/8406") %>%
+#   rdflib::rdf_serialize(format = "turtle", namespace = c(
+#     mr = "http://marineregions.org/ns/ontology#",
+#     mrt = "http://marineregions.org/ns/placetypes#",
+#     dc = "http://purl.org/dc/terms/",
+#     xsd = "http://www.w3.org/2001/XMLSchema#",
+#     rdfs = "http://www.w3.org/2000/01/rdf-schema#",
+#     skos = "http://www.w3.org/2004/02/skos/core#",
+#     dcat = "http://www.w3.org/ns/dcat#",
+#     gsp = "http://www.opengis.net/ont/geosparql#",
+#     prov = "http://www.w3.org/ns/prov#"
+#   )) %>%
+#   cat()
+#
+#
+#
+# belgium <- mr_get("http://marineregions.org/mrgid/26567")
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# query <- paste0(
+#   "
+#   prefix mr: <http://marineregions.org/ns/ontology#>
+#   prefix mrt: <http://marineregions.org/ns/placetypes#>
+#   prefix dc: <http://purl.org/dc/terms/>
+#   prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+#   prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#   prefix skos: <http://www.w3.org/2004/02/skos/core#>
+#   prefix dcat: <http://www.w3.org/ns/dcat#>
+#   prefix gsp: <http://www.opengis.net/ont/geosparql#>
+#   prefix prov: <http://www.w3.org/ns/prov#>
+#
+#   SELECT ?subject ?predicate ?relation
+#
+#          # ?inContextOf ?isRelatedTo ?isPartOf
+#          # ?contains ?isAdministrativePartOf ?hasAdministrativePart
+#          # ?isPartlyPartOf ?partlyContains ?flowsInto ?hasTributary
+#          # ?risesIn ?containsSourceOf ?flowsThrough ?containsWatercourse
+#          # ?isInfluencedBy ?influences
+#
+#
+#   WHERE {
+#
+#     # Get label
+#     ?mrgid a ?placetype ;
+#            skos:prefLabel ?label ;
+#            dc:modified ?modified .
+#
+#     # Restrict to only the placetype
+#     ?placetype skos:inScheme <http://marineregions.org/ns/placetypes> .
+#
+#     # modified is the filter - it is or should be in all mrgid
+#
+#     # OPTIONAL { ?mrgid mr:inContextOf ?inContextOf }
+#     # OPTIONAL { ?mrgid mr:isRelatedTo ?isRelatedTo }
+#     # OPTIONAL { ?mrgid mr:isPartOf ?isPartOf }
+#     # OPTIONAL { ?mrgid mr:contains ?contains }
+#     # OPTIONAL { ?mrgid mr:isAdministrativePartOf ?isAdministrativePartOf }
+#     # OPTIONAL { ?mrgid mr:hasAdministrativePart ?hasAdministrativePart }
+#     # OPTIONAL { ?mrgid mr:isPartlyPartOf ?isPartlyPartOf }
+#     # OPTIONAL { ?mrgid mr:partlyContains ?partlyContains }
+#     # OPTIONAL { ?mrgid mr:flowsInto ?flowsInto }
+#     # OPTIONAL { ?mrgid mr:hasTributary ?hasTributary }
+#     # OPTIONAL { ?mrgid mr:risesIn ?risesIn }
+#     # OPTIONAL { ?mrgid mr:containsSourceOf ?containsSourceOf }
+#     # OPTIONAL { ?mrgid mr:flowsThrough ?flowsThrough }
+#     # OPTIONAL { ?mrgid mr:containsWatercourse ?containsWatercourse }
+#     # OPTIONAL { ?mrgid mr:isInfluencedBy ?isInfluencedBy }
+#     # OPTIONAL { ?mrgid mr:influences ?influences }
+#
+#     OPTIONAL {
+#     { <http://marineregions.org/mrgid/8406> mr:contains  ?relation } UNION { <http://marineregions.org/mrgid/8406> mr:partlyContains ?relation  }
+#     }
+#
+#     OPTIONAL {
+#     { ?mrgid mr:contains  ?relation } UNION { ?mrgid mr:partlyContains ?relation  }
+#     }
+#
+#   }"
+# )
+#
+#
+#
+#
+# query <- paste0(
+#   "
+#   prefix mr: <http://marineregions.org/ns/ontology#>
+#   prefix mrt: <http://marineregions.org/ns/placetypes#>
+#   prefix dc: <http://purl.org/dc/terms/>
+#   prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+#   prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+#   prefix skos: <http://www.w3.org/2004/02/skos/core#>
+#   prefix dcat: <http://www.w3.org/ns/dcat#>
+#   prefix gsp: <http://www.opengis.net/ont/geosparql#>
+#   prefix prov: <http://www.w3.org/ns/prov#>
+#
+#   SELECT ?mrgid
+#          (COALESCE(?altLabel, ?prefLabel) AS ?label)
+#          ?placetype
+#          ?modified
+#          ?source
+#          ?seeAlso
+#          ?centroid
+#          ?bbox
+#          ?the_geom
+#
+#   WHERE {
+#
+#     # Restrict to only the placetype
+#     ?mrgid a ?placetype .
+#     ?placetype skos:inScheme <http://marineregions.org/ns/placetypes> .
+#
+#     # Get some vars
+#     OPTIONAL { ?mrgid dc:modified ?modified }
+#     OPTIONAL { ?mrgid rdfs:seeAlso ?seeAlso }
+#     OPTIONAL { ?mrgid dcat:centroid ?centroid }
+#     OPTIONAL { ?mrgid dcat:bbox ?bbox }
+#     OPTIONAL { ?mrgid mr:hasGeometry ?the_geom }
+#
+#
+#     # Get the language
+#     OPTIONAL {
+#       ?mrgid skos:altLabel ?altLabel .
+#       filter langMatches(lang(?altLabel), \"nl\")
+#     }
+#     ?mrgid skos:prefLabel ?prefLabel .
+#
+#     # Get the source
+#     OPTIONAL { ?mrgid prov:hadPrimarySource ?primarySource }
+#     OPTIONAL { ?primarySource prov:wasAttributedTo ?wasAttributedTo }
+#     OPTIONAL { ?wasAttributedTo rdfs:label ?source }
+#
+#     # Approach using Property Paths, but seem like they are not supported
+#     # ?mrgid prov:hadPrimarySource/prov:wasAttributedTo/rdfs:label ?source .
+#
+#
+#
+#   }"
+# )
+#
+# x <- rdflib::rdf_query(belgium, query)
+#
+#
+# # Add base_graph
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# ##
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# # debug(mr_get_rdf)
+# options(verbose = F)
+#
+# belgium <- mr_get("http://marineregions.org/mrgid/14")
+# tidyr::as_tibble
+#
+#
+#
+#
+#
+# france <- mr_get("http://marineregions.org/mrgid/17")
+#
+# mr_
+#
+#
+# ## CREATE GENERAL FUNCTION TO MERGE MRGIDS
+# ## CREATE GENERAL FUNCTION TO APPLY SPARQL QUERY
+#
+# ## QUERIES
+# ## GET ALL BASIC INFO
+#
+#
+#
+#
+#
+# print(out, n = 100)
+#
+# #
+# # "
+# # prov:hadPrimarySource [
+# #   prov:wasAttributedTo [
+# #     rdfs:label
+# #       \"(2001). The Times comprehensive atlas of the world. 10th ed. Times Books:
+# #       London. ISBN 0-7230-0792-6. 67, 220, 124 plates pp.\"^^xsd:string
+# #   ]
+# # ]
+# #
+# # "
+#
+#
+#
+#
+#
+#
+#
+# ## GET ALL RELATIONSHIPS
+# query <- paste0(
+#   prefix,
+#   "
+#   SELECT ?mrgid ?placetype ?prefLabel
+#   WHERE {
+#     ?mrgid a ?placetype ;
+#           skos:prefLabel ?prefLabel .
+#
+#   }"
+# )
+#
+# cat(query)
+# out <- rdflib::rdf_query(rdf, query, data.frame = FALSE)
+# out <- subset(out, out$placetype != 'http://marineregions.org/ns/ontology#MRGeoObject')
+# out <- subset(out, out$mrgid != 'http://marineregions.org/mrgid/14')
+# print(out, n = 100)
+#
+# query <- paste0(
+#   prefix,
+#   "
+#   SELECT ?relationship ?value
+#   WHERE {
+#     <http://marineregions.org/mrgid/14> ?relationship ?value .
+#   }"
+# )
+#
+# relations <- rdflib::rdf_query(rdf, query, data.frame = FALSE)
+# relations <- subset(relations, grepl("http://marineregions.org/ns/ontology#", relations$relationship, fixed = TRUE))
+#
+# out <- subset(out, out$placetype != 'http://marineregions.org/ns/ontology#MRGeoObject')
+# out <- subset(out, out$mrgid != 'http://marineregions.org/mrgid/14')
+# print(out, n = 100)
+#
+#
+#
+#
+# ## GET GEOMETRY
+#
+#
+#
+#
+#
+#
+#
+#
+# ## GET PREFERRED LANGUAGE
+# query <- paste0(
+#   prefix,
+#   "
+#   SELECT (<http://marineregions.org/mrgid/14> as ?mrgid)
+#          (coalesce(?altLabel, ?prefLabel) as ?label)
+#   WHERE {
+#
+#
+#     OPTIONAL {
+#       <http://marineregions.org/mrgid/14> skos:altLabel ?altLabel
+#       filter langMatches(lang(?altLabel), \"nl\")
+#     }
+#     OPTIONAL {
+#       <http://marineregions.org/mrgid/14> skos:prefLabel ?prefLabel
+#     }
+#
+#   }
+#
+#
+#   "
+# )
+#
+# cat(query)
+# out <- rdflib::rdf_query(rdf, query, data.frame = FALSE)
+# out
+#
+#
+#
+# #
+# # cat(cont)
+# # query <- paste0(
+# #   prefix,
+# #   "
+# #   SELECT ?mrgid ?name ?placetype
+# #   WHERE {
+# #     ?mrgid a ?placetype .
+# #     ?mrgid skos:prefLabel ?name .
+# #   }"
+# # )
+# #
+# # cat(query)
+# # rdflib::rdf_query(rdf, query, data.frame = FALSE)
+#
+#
+# cat(cont)
+# query <- paste0(
+#   prefix,
+#   "
+#   SELECT ?mrgid ?label ?geoobject
+#   WHERE {
+#     ?mrgid a ?geoobject .
+#     ?mrgid skos:altLabel ?label .
+#     FILTER (lang(?label) = 'en')
+#   }
+#   LIMIT 15
+#   "
+# )
+#
+# cat(query)
+# rdflib::rdf_query(rdf, query, data.frame = FALSE)
+#
+#
+# # <http:\/\/marineregions.org\/ns\/ontology#(\w+)>
+# # FILTER (regex(?predicate, '/<http:\\/\\/marineregions.org\\/ns\\/ontology#(\\w+)>/g')) .
+#
+# FILTER (regex(?predicate, '/mr:(\\w+)/g')) .
+#
+#
+# # Set prefixes
+# todelete <- gsub("@prefix(.*?)\n", "", resp)
+# prefix <- gsub(todelete, "", resp, fixed = TRUE)
+# prefix <- gsub("@", "", prefix, fixed = TRUE)
+# prefix <- gsub(" .", "", prefix, fixed = TRUE)
+# Sys.setenv(mr_prefix = prefix)
+#
+#
+#
+# query <-
+#   "
+#   PREFIX mr: <http://marineregions.org/ns/ontology#>
+#   SELECT ?mrgid ?the_geom
+#   WHERE { ?mrgid mr:hasGeometry ?the_geom .}"
+#
+#
+# uri_geom <- rdflib::rdf_query(rdf, query)
+# #
+# # query <-
+# #   "
+# #   PREFIX mr: <http://marineregions.org/ns/ontology#>
+# #   SELECT ?a ?c
+# #   WHERE { ?a mr:contains ?c .}"
+# #
+# # contains <- rdflib::rdf_query(rdf, query, data.frame = FALSE)
+#
+#
+# query <-
+#   "
+#   PREFIX mr: <http://marineregions.org/ns/ontology#>
+#   PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+#   SELECT ?mrgid ?contains ?name ?other_names ?the_geom
+#   WHERE { ?mrgid mr:contains ?contains .
+#           ?mrgid skos:prefLabel ?name .
+#           ?mrgid skos:altLabel ?other_names .
+#           ?mrgid mr:hasGeometry ?the_geom .
+#         }
+# "
+#
+# contains <- rdflib::rdf_query(rdf, query, data.frame = T)
+#
+#
+# # How to select the skos:prefLabel from the relationships
+# # How to get the placetype?
+# # Create method to jump to next?
+#
+#
+# "http://marineregions.org/ns/ontology" # no cacheable
+# "http://marineregions.org/ns/placetypes.ttl" # no cacheable
+# "https://www.w3.org/ns/dcat2" # cache-control + expires
+# "http://www.w3.org/ns/prov" # cache-control + expires
+# "http://www.w3.org/2000/01/rdf-schema" # cache-control + expires
+# "http://www.opengis.net/ont/geosparql" # Last-Modified + ETag
+#
+# 'http://purl.org/dc/terms/'
+# "http://purl.org/dc/elements/1.1/"
+#
+
+```
+
+
+```{r mr_gazetteer}
+#' #' Create a new S3 object of class "MRGeoObject"
+#' #'
+#' #' Inherits the class "rdf" from the package "rdflib"
+#' #'
+#' #' @param x
+#' #'
+#' #' @return
+#' #'
+#' #' @examples
+#' new_MRGeoObject <- function(x = list()){
+#' 
+#'   structure(
+#'     x,
+#'     class = c("MRGeoObject", "rdf")
+#'   )
+#' 
+#' }
+#' 
+#' #' Get a Marine Regions GeoObject as RDF
+#' #'
+#' #' @param x a url, a mrgid or a name of a Marine Regions Geoobject as a string
+#' #' @param ... aditional params for furter inheritance
+#' #'
+#' #' @return an object of class c("MRGeoObject", "rdf")
+#' #' This is completely compatible with the rdflib package.
+#' #' For instance, you can apply sparql queries with rdflib::rdf_query()
+#' #'
+#' #' Or you can serialize the file with rdflib::rdf_serialize()
+#' #'
+#' #' Add extra RDF documents to and create your own knowledge graph
+#' #'
+#' #' @export
+#' #'
+#' #' @examples
+#' #' x <- mr_get("Belgium")
+#' #' x <- mr_get("http://marineregions.org/mrgid/14)
+#' #' x <- mr_get(14)
+#' mr_get <- function(x, ...){
+#'   UseMethod("mr_get")
+#' }
+#' 
+#' #' @rdname mr_get
+#' mr_get.default <- function(url, ...){
+#' 
+#'   resp <- mr_request(url) %>%
+#'     httr2::req_headers(accept = "text/turtle") %>%
+#'     httr2::req_perform("GET") %>%
+#'     httr2::resp_body_string()
+#' 
+#'   verbose <- getOption("verbose", default = FALSE)
+#'   if(verbose){
+#'     cat(resp)
+#'   }
+#' 
+#'   out <- resp %>%
+#'     rdflib::rdf_parse("turtle")
+#' 
+#'   new_MRGeoObject(out)
+#' 
+#' }
+#' 
+#' #' @rdname mr_get
+#' mr_get.numeric <- function(mrgid, ...){
+#'   url <- glue::glue("http://marineregions.org/mrgid/{mrgid}")
+#'   mr_get.default(url)
+#' }
+#' 
+#' #' @rdname mr_get
+#' mr_get.character <- function(string, ...){
+#' 
+#'   is_mr_url <- grepl("http://marineregions.org", string, fixed = TRUE)
+#' 
+#'   if(is_mr_url){
+#'     out <- mr_get.default(string)
+#'     return(out)
+#'   }
+#' 
+#'   if(!is_mr_url){
+#' 
+#'     search <- mregions2::mr_gaz_records_by_names(string)
+#' 
+#'     if(nrow(search) == 0){
+#'       warning(glue::glue("No matches found for \"{string}\""), .call = FALSE)
+#'       return(invisible(NULL))
+#'     }
+#' 
+#'     verbose <- getOption("verbose", default = FALSE)
+#'     if(verbose){
+#'       cli::cli_alert_warning(glue::glue("{nrow(search)} match(es) found for \"{string}\": '{paste0(search$preferredGazetteerName, collapse = '\', \'')}'"))
+#'     }
+#' 
+#'     return(mr_get.numeric(search$MRGID))
+#'   }
+#' }
+#' 
+#' 
+#' #' Returns all the prefixes for sparql queries
+#' #'
+#' #' @examples
+#' #' mr_prefixes()
+#' mr_prefixes <- function(){
+#'   prefixes <- c(
+#'   "prefix mr: <http://marineregions.org/ns/ontology#>",
+#'   "prefix mrt: <http://marineregions.org/ns/placetypes#>",
+#'   "prefix dc: <http://purl.org/dc/terms/>",
+#'   "prefix xsd: <http://www.w3.org/2001/XMLSchema#>",
+#'   "prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
+#'   "prefix skos: <http://www.w3.org/2004/02/skos/core#>",
+#'   "prefix dcat: <http://www.w3.org/ns/dcat#>",
+#'   "prefix gsp: <http://www.opengis.net/ont/geosparql#>",
+#'   "prefix prov: <http://www.w3.org/ns/prov#>"
+#'   )
+#' 
+#'   paste0(prefixes, collapse = "\n")
+#' 
+#' }
+#' 
+#' 
+#' 
+#' #' Extract information from a Marine Regions Geo Object as tabular data
+#' #'
+#' #' @param x an object of class c("MRGeoObject", "rdf")
+#' #' @param lang preferred language as 2c ISO_639_1. See details.
+#' #' @param ... aditional params for furter inheritance
+#' #'
+#' #' @details
+#' #'
+#' #' The Marine Regions Geo Objects can be labels in several
+#' #' languages. Choose your preferred language and, if the label exists
+#' #' in your language, it will be returned. Otherwise the label will be in the preferred language.
+#' #'
+#' #' @return a tibble with one row per Marine Regions Geo Object
+#' #' @export
+#' #'
+#' #' @examples
+#' as_tibble.MRGeoObject <- function(x, lang = "en", ...){
+#' 
+#'   checkmate::assert_choice(lang, c("en", "es", "fr", "de", "nl", "it"))
+#' 
+#'   query <- paste0(
+#'     mr_prefixes(),
+#'     "
+#'   SELECT ?mrgid
+#'          (COALESCE(?altLabel, ?prefLabel) AS ?label)
+#'          ?placetype
+#'          ?modified
+#'          ?source
+#'          ?seeAlso
+#'          ?centroid
+#'          ?bbox
+#'          ?the_geom
+#' 
+#'   WHERE {
+#' 
+#'     # Restrict to only the placetype
+#'     ?mrgid a ?placetype .
+#'       FILTER( STRSTARTS(STR(?placetype),str(mrt:)) )
+#' 
+#'     # modified is the filter - it is or should be in all mrgid
+#'     ?mrgid dc:modified ?modified
+#'     OPTIONAL { ?mrgid rdfs:seeAlso ?seeAlso }
+#'     OPTIONAL { ?mrgid dcat:centroid ?centroid }
+#'     OPTIONAL { ?mrgid dcat:bbox ?bbox }
+#'     OPTIONAL { ?mrgid mr:hasGeometry ?the_geom }
+#' 
+#' 
+#'     # Get the language
+#'     OPTIONAL {
+#'       ?mrgid skos:altLabel ?altLabel .
+#'       filter langMatches(lang(?altLabel), \"nl\")
+#'     }
+#'     ?mrgid skos:prefLabel ?prefLabel .
+#' 
+#'     # Get the source
+#'     OPTIONAL { ?mrgid prov:hadPrimarySource ?primarySource }
+#'     OPTIONAL { ?primarySource prov:wasAttributedTo ?wasAttributedTo }
+#'     OPTIONAL { ?wasAttributedTo rdfs:label ?source }
+#' 
+#'   }"
+#'   )
+#' 
+#'   # Perform Query
+#'   out <- rdflib::rdf_query(x, query) %>%
+#'     suppressMessages()
+#' 
+#'   out
+#' }
+#' 
+#' options(verbose = TRUE)
+#' 
+#' cuba_eez <- mr_get("Cuban Exclusive Economic Zone")
+#' 
+#' tidyr::as_tibble(cuba_eez) %>% View()
+#' 
+#' mr_relations(cuba_eez) %>% View()
+#' 
+#' test1 <- mregions2::mr_gaz_relations_by_MRGID(8406,
+#'                                      direction = "both",
+#'                                      type = "all")
+#' View(test1)
+#' 
+#' #' @rdname as_tibble.MRGeoObject
+#' as.data.frame.MRGeoObject <- function(x, ...){
+#'   x <- as_tibble.MRGeoObject(x)
+#'   as.data.frame(x)
+#' }
+#' 
+#' 
+#' #' Extract the relationships of a given MRGeoObject
+#' #'
+#' #' @param x a MRGeoObject
+#' #' @param ...
+#' #'
+#' #' @return
+#' #' @export
+#' #'
+#' #' @examples
+#' #' cuba_eez_relationships <- mr_get(8406) %>% mr_relationships()
+#' mr_relations <- function(x, ...){
+#'   # 1. Get all predictes of ontology mr:
+#'   # These are the relations plus hasGeometry
+#'   query <- paste0(
+#'     mr_prefixes(),
+#'     "
+#'   SELECT ?s ?relation ?mrgid
+#'   WHERE {
+#'     ?s ?relation ?mrgid .
+#'     FILTER( STRSTARTS(STR(?relation),str(mr:)) )
+#' 
+#'   }"
+#'   )
+#' 
+#'   suppressMessages(out <- rdflib::rdf_query(x, query, data.frame = FALSE))
+#' 
+#'   # Leave out geom, no idea how to do it in SPARQL
+#'   # out <- subset(out, out$relation != "http://marineregions.org/ns/ontology#hasGeometry")
+#' 
+#'   # 2. Get all placetypes and labels of relations
+#'   query2 <- paste0(
+#'     mr_prefixes(),
+#'     "
+#'     SELECT ?mrgid ?placetype ?label
+#'     WHERE {
+#'       ?mrgid a ?placetype.
+#'       FILTER( STRSTARTS(STR(?placetype),str(mrt:)) )
+#' 
+#'       ?mrgid skos:prefLabel ?label.
+#' 
+#' 
+#'     }
+#'     "
+#'   )
+#' 
+#'   suppressMessages(labels <- rdflib::rdf_query(x, query2, data.frame = FALSE))
+#' 
+#' 
+#'   # 3. Merge dataframes, rename and rearrange to provide human-readable dataset
+#'   out <- merge(out, labels)
+#' 
+#'   out <- data.frame(
+#'     relation = gsub("http://marineregions.org/ns/ontology#", "mr:",  out$relation),
+#'     label = out$label,
+#'     placetype = gsub("http://marineregions.org/ns/placetypes#", "mrt:", out$placetype),
+#'     mrgid = out$mrgid
+#'   )
+#' 
+#'   out <- out[order(out$relation, decreasing = FALSE), ]
+#' 
+#'   # End
+#'   tidyr::as_tibble(out)
+#' 
+#' }
+```
