@@ -1,3 +1,44 @@
+#' Search in the gazetteer by names or MRGIDs
+#'
+#' @param x a
+#' @param ... a
+#'
+#' @return a
+#' @export
+#'
+#' @examples
+#' gaz_search(c(14, 17))
+#' gaz_search("Belgian Part of the North Sea")
+#' gaz_search("Belgie", language = "nl", fuzzy = TRUE)
+gaz_search <- function(x, ...){
+  UseMethod("gaz_search")
+}
+
+#' @export
+#' @rdname gaz_search
+gaz_search.character <- function(x, ...){
+
+  is_plural <- length(x) > 1
+
+  if(is_plural){
+    mr_gaz_records_by_names(x, ...)
+  }
+
+  if(!is_plural){
+    mr_gaz_records_by_name(x, ...)
+  }
+
+}
+
+#' @export
+#' @rdname gaz_search
+gaz_search.numeric <- function(x, ...){
+  x <- lapply(x, mr_gaz_record_by_mrgid, rdf = FALSE, ...)
+  dplyr::bind_rows(x)
+}
+
+
+
 #' Get one record for the given MRGID
 #'
 #' @param mrgid An existing Marine Regions Gazetteer Identifier
@@ -8,11 +49,12 @@
 #' @export
 #'
 #' @examples
+#' mr_gaz_record_by_mrgid(3293)
 mr_gaz_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
 
   # Assertions
   mrgid = checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
-                                        null.ok = TRUE, coerce = TRUE)
+                                        null.ok = TRUE, coerce = TRUE, len = 1)
 
   # Config
   url <- glue::glue("https://marineregions.org/mrgid/{mrgid}")
@@ -28,7 +70,7 @@ mr_gaz_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
   # Add more info to error message if 404 not found
   if(httr2::resp_status(resp) == 404){
     httr2::resp_check_status(resp, c(
-      "x" = glue::glue("The mrgid: `{mrgid}` does not exists")
+      "x" = glue::glue("The MRGID <{mrgid}> does not exist.")
     ))
   }
 
@@ -56,7 +98,6 @@ mr_gaz_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
   return(out)
 
 }
-
 
 
 #' Get Gazetteer Records for a given name
@@ -247,7 +288,7 @@ mr_gaz_records_by_names <- function(names, with_geometries = FALSE, like = TRUE,
   names_url <- utils::URLencode(names_url)
   fuzzy_url = fuzzy %>% as.character() %>% tolower()
   like_url = like %>% as.character() %>% tolower()
-  url <- glue::glue("https://marineregions.org/rest/getGazetteerRecordsByNames.json/{like_url}/{fuzzy_url}/{names_url}")
+  url <- glue::glue("https://marineregions.org/rest/getGazetteerRecordsByNames.json/{like_url}/{fuzzy_url}/{names_url}/")
 
   # Perform
   out <- httr2::request(url) %>%
@@ -268,6 +309,71 @@ mr_gaz_records_by_names <- function(names, with_geometries = FALSE, like = TRUE,
 
 
 
+
+
+
+
+
+#' Get all gazetteer records that intersect with a point
+#'
+#' @param lon a
+#' @param lat a
+#' @param ... a
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' point <- sf::st_point(c(51.21551, 2.927))
+#' point_sfc <- sf::st_sfc(point)
+#' point_sf <- sf::st_as_sf(data.frame(point_sfc))
+#'
+#' gaz_intersection(51.21551, 2.927)
+#' gaz_intersection(point)
+#' gaz_intersection(point_sfc, typeid = c(255, 259))
+#' gaz_intersection(point_sf, typeid = c(255, 259))
+gaz_intersection <- function(longitude, latitude, ...){
+  UseMethod("gaz_intersection")
+}
+
+#' @export
+#' @rdname gaz_intersection
+gaz_intersection.default <- function(latitude, longitude, ...){
+  mr_gaz_records_by_lat_long(latitude, longitude, ...)
+}
+
+#' @export
+#' @rdname gaz_intersection
+gaz_intersection.sfg <- function(x, ...){
+  checkmate::assert_class(x, "POINT")
+
+  x <- sf::st_sfc(x)
+
+  gaz_intersection.sfc(x, ...)
+
+}
+
+#' @export
+#' @rdname gaz_intersection
+gaz_intersection.sf <- function(x, ...){
+  checkmate::assert_data_frame(x, nrows = 1)
+
+  x <- sf::st_geometry(x)
+
+  gaz_intersection.sfc(x, ...)
+}
+
+#' @export
+#' @rdname gaz_intersection
+gaz_intersection.sfc <- function(x, ...){
+  checkmate::assert_class(x, "sfc_POINT")
+
+  coords <- sf::st_coordinates(x)
+  longitude = coords[, 1]
+  latitude = coords[, 2]
+
+  gaz_intersection.default(latitude, longitude, ...)
+}
 
 
 #' Get all gazetteer records where the geometry intersects with the given latitude and longitude

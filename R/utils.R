@@ -1,120 +1,46 @@
-#' Add geometry to a data frame containing a column named MRGID
+#' Get the names for a given MRGID
 #'
-#' @param x a data frame obtained via mr_gaz_record(s)_by_*()
+#' @param mrgid An existing Marine Regions Gazetteer Identifier
 #'
-#' @return the same data frame with a new column the_geom
+#' @return a vector with all the names of a Marine Regions Gazetteer GeoObject
 #' @export
+#'
 #' @examples
-#' mr_gaz_record_by_mrgid(19518, with_geometry = TRUE)
-#'
-#' # It's the same as
-#' mr_gaz_record_by_mrgid(19518) %>% mr_add_geometry()
-#'
-#' mr_gaz_records_by_name("Belgium") %>% mr_add_geometry()
-mr_add_geometry <- function(x){
+#' mr_gaz_names_by_mrgid(3293)
+#' mr_gaz_names_by_mrgid(14)
+mr_gaz_names_by_mrgid <- function(mrgid){
 
   # Assertions
-  checkmate::assert_data_frame(x)
-  stopifnot("MRGID" %in% names(x))
+  mrgid = checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
+                                       null.ok = TRUE, coerce = TRUE, len = 1)
 
-  # Config - get geometries
-  the_geom <- lapply(x$MRGID, mr_gaz_geometries, format = "sf", resp_return_error = TRUE) %>%
-    suppressWarnings()
+  # Config
+  url = glue::glue("https://marineregions.org/rest/getGazetteerNamesByMRGID.json/{mrgid}/")
 
-  # Logic to add either bounding box or centroid if there is no geometry available
-  for(i in 1:length(the_geom)){
-    if("httr2_response" %in% class(the_geom[[i]])){
-      if(httr2::resp_status(the_geom[[i]]) == 404){
+  # perform
+  resp <- httr2::request(url) %>%
+    httr2::req_user_agent(mr_user_agent) %>%
+    httr2::req_headers(accept = "application/json") %>%
+    httr2::req_error(is_error = function(resp) FALSE) %>%
+    httr2::req_perform()
 
-
-        bbox_exists <- all(c("minLatitude" %in% names(x[i, ]),
-                          "minLongitude" %in% names(x[i, ]),
-                          "maxLatitude" %in% names(x[i, ]),
-                          "maxLongitude" %in% names(x[i, ])
-                          ))
-
-        if(bbox_exists){
-          bbox_is_not_na <- all(c(!is.na(x[i, ]$minLatitude),
-            !is.na(x[i, ]$maxLatitude),
-            !is.na(x[i, ]$minLongitude),
-            !is.na(x[i, ]$maxLongitude)))
-
-          if(bbox_is_not_na){
-            the_geom[[i]] <- sf::st_bbox(c(xmin = x[i, ]$minLongitude,
-                          xmax = x[i, ]$maxLongitude,
-                          ymax = x[i, ]$maxLatitude,
-                          ymin = x[i, ]$minLatitude),
-                        crs = sf::st_crs(4326))
-
-            the_geom[[i]] <- tibble::tibble(mrgid = x[i, ]$MRGID,
-                                       the_geom = sf::st_as_sfc(the_geom[[i]])) %>%
-              sf::st_as_sf()
-
-
-          }
-        }else{
-
-          centroid_exists <- all(c("latitude" %in% names(x[i, ]),
-                                   "longitude" %in% names(x[i, ])))
-
-          if(centroid_exists){
-            centroid_is_not_na <- all(c(
-              !is.na(x[i, ]$latitude),
-              !is.na(x[i, ]$longitude)
-            ))
-
-              if(centroid_is_not_na){
-
-                the_geom[[i]] <- tibble::tibble(
-                  mrgid = x[i, ]$MRGID,
-                  the_geom = sf::st_sfc(
-                    sf::st_point(c(x[i, ]$longitude, x[i, ]$latitude)),
-                    crs = sf::st_crs(4326)
-                  )
-                ) %>%
-                  sf::st_as_sf()
-
-              }
-
-            }else{
-              # If no centroid is available, end prematurely
-              msg = c(
-                "x" = glue::glue("There is no geometry for the GeoObject '{x[i, ]$preferredGazetteerName}' with MRGID: <{x[i, ]$MRGID}>")
-              )
-
-              if(x[i, ]$status == "deleted"){
-                msg = c(msg,
-                        "i" = "Reason: The GeoObject was deleted.",
-                       "i" = glue::glue("The preferred alternative is 'TODO mr_gaz_names_by_mrgid' with MRGID: {x[i, ]$accepted}")
-                )}else{
-                  msg = c(msg,
-                          "i" = "Please contact <info@marineregions.org>."
-                  )
-                }
-
-              cli::cli_abort(msg)
-              invisible(NULL)
-            }
-          }
-
-        }else{
-          httr2::resp_check_status(the_geom[[i]])
-          return(invisible(NULL))
-      }
-    }
+  # Add more info to error message if 404 not found
+  if(httr2::resp_status(resp) == 404){
+    httr2::resp_check_status(resp, c(
+      "x" = glue::glue("The MRGID <{mrgid}> does not exist.")
+    ))
   }
 
-  # the_geom[id_rm] <- NULL
-  the_geom <- the_geom %>% dplyr::bind_rows()
+  # Sanity check
+  httr2::resp_check_status(resp)
 
-  out <- x %>%
-    dplyr::right_join(the_geom, by = c(
-      "MRGID" = "mrgid"
-    )) %>% sf::st_as_sf()
-
-  return(out)
+  # End
+  resp %>%
+    httr2::resp_body_json() %>%
+    unlist()
 
 }
+
 
 
 # x <- mr_gaz_record_by_mrgid(19518) %>%
