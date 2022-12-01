@@ -23,34 +23,6 @@ mr_product_get <- function(product_name, ...){
 }
 
 
-#' List of all products available via MarineRegions
-#'
-#' @return a tibble
-#' @export
-#'
-#' @examples
-#' mr_products_info()
-mr_product_info <- function(){
-
-  # Get WFS connection and capabilities
-  wfs <- mr_init_wfs_client(silent = TRUE)
-  capabilities <- wfs$getCapabilities()
-  caps_ft <- purrr::map(products$layer_name, ~ capabilities$findFeatureTypeByName(.x))
-
-  # Create list dataset
-  products <- products %>% dplyr::mutate(
-    title = purrr::map_chr(caps_ft, ~ .x$getTitle()),
-    abstract = purrr::map_chr(caps_ft, ~ .x$getAbstract())
-  ) %>%
-    tidyr::separate(.data$layer_name,
-                    into = c("namespace", "layer"),
-                    sep = ":"
-  )
-
-  products
-
-}
-
 
 #' Creates WFS client in Marine Regions
 #'
@@ -114,61 +86,3 @@ mr_init_wfs_client <- function(version = "2.0.0", silent = FALSE){
   ))
 
 }
-
-
-
-
-# hard coded list of data products
-products <- tibble::tibble(
-  product_family = c(
-    "Maritime Boundaries",
-    "Maritime Boundaries",
-    "Maritime Boundaries",
-    "Maritime Boundaries",
-    "Maritime Boundaries",
-    "Maritime Boundaries",
-    "Maritime Boundaries",
-    "Maritime Boundaries",
-    "Maritime Boundaries",
-    "IHO Sea Areas",
-    "Global Oceans and Seas",
-    "Marineregions: intersect of EEZs and IHO areas",
-    "Marine and land zones: the union of world country boundaries and EEZ's",
-    "Longhurst Provinces",
-    "Global contourite distribution Shapefile",
-    "Emission Control Areas (ECAs)",
-    "Emission Control Areas (ECAs)",
-    "World Marine Heritage Sites",
-    "Large Marine Ecosystems of the World",
-    "Marine Ecoregions of the World, MEOW (Spalding et al., 2007)",
-    "The SeaVoX Salt and Fresh Water Body Gazetteer",
-    "The SeaVoX Salt and Fresh Water Body Gazetteer",
-    "The SeaVoX Salt and Fresh Water Body Gazetteer"
-  ),
-
-  layer_name = c(
-    "MarineRegions:eez",
-    "MarineRegions:eez_boundaries",
-    "MarineRegions:eez_12nm",
-    "MarineRegions:eez_24nm",
-    "MarineRegions:eez_internal_waters",
-    "MarineRegions:eez_archipelagic_waters",
-    "MarineRegions:high_seas",
-    "MarineRegions:ecs",
-    "MarineRegions:ecs_boundaries",
-    "MarineRegions:iho",
-    "MarineRegions:goas",
-    "MarineRegions:eez_iho",
-    "MarineRegions:eez_land",
-    "MarineRegions:longhurst",
-    "World:cds",
-    "MarineRegions:eca_reg13_nox",
-    "MarineRegions:eca_reg14_sox_pm",
-    "MarineRegions:worldheritagemarineprogramme",
-    "MarineRegions:lme",
-    "Ecoregions:ecoregions",
-    "MarineRegions:seavox_v16",
-    "MarineRegions:seavox_v17",
-    "MarineRegions:seavox_v18"
-  )
-)
