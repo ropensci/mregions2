@@ -1,6 +1,7 @@
 mr_gaz_wmses <- function(mrgid){
   # Assertions
-  checkmate::assert_int(mrgid, lower = 1)
+  mrgid = checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
+                                       null.ok = TRUE, coerce = TRUE, len = 1)
 
   # Config
   url <- glue::glue("https://marineregions.org/rest/getGazetteerWMSes.json/{mrgid}/")

@@ -1,39 +1,90 @@
-#' Get product
+#' Get data product
 #'
 #' @param product_name
-#' @param ...
+#' @param ... any params to be passed to $getFeatures()
 #'
 #' @return
 #' @export
 #'
 #' @examples
-#' mr_product_get("MarineRegions:eez_boundaries")
+#' mr_product_get("eez_boundaries", cql_filter = "territory1 = 'Spain'")
 mr_product_get <- function(product_name, ...){
 
   checkmate::assert_character(product_name, len = 1)
+  checkmate::assert_choice(product_name, mr_products()$layer)
 
-  # Get WFS connection and capabilities
-  wfs <- mr_init_wfs_client(silent = TRUE)
+  # Config
+  info <- mr_products() %>%
+    dplyr::filter(layer == product_name)
 
-  out <- wfs$getFeatures(product_name, ...)
+  # Perform request
+  out <- mr_init_wfs_client(silent = TRUE)$
+    getFeatures(info$id, ...)
 
   # Fix Geometry type
-  out
+  # Geoserver often returns exotic geometries
+  # It is better to turn into MULTILINESTRING / MULTIPOLYGON
+  geometry_class <- class(sf::st_geometry(out))
+
+  if("sfc_MULTICURVE" %in% geometry_class){
+    try({
+      out <- out %>% sf::st_cast("MULTILINESTRING")
+    })
+  }
+
+  if("sfc_MULTISURFACE" %in% geometry_class){
+    try({
+      out <- out %>%
+        sf::st_cast("GEOMETRYCOLLECTION") %>%
+        dplyr::mutate(id = seq_len(nrow(.))) %>%
+        sf::st_collection_extract("POLYGON") %>%
+        sf:::aggregate.sf(list(.$id), dplyr::first, do_union = FALSE) %>%
+        dplyr::select(-id, -Group.1)
+    })
+  }
+
+  out %>%
+    tibble::as_tibble() %>%
+    sf::st_as_sf()
+
+
+}
+
+
+#' Get the names of the columns and data type of the data product
+#'
+#' @param layer
+#'
+#' @details
+#'
+#' This function becomes useful to filter parts of a product when using mr_product_get().
+#'
+#' @return
+#' @export
+#'
+#' @examples
+mr_product_cols <- function(product_name){
+
+  checkmate::assert_character(product_name, len = 1)
+  checkmate::assert_choice(product_name, mr_products()$layer)
+
+  # Config
+  info <- mr_products() %>%
+    dplyr::filter(layer == product_name)
+
+  # Perform
+  mr_init_wfs_client(silent = TRUE)$
+    getCapabilities()$
+    findFeatureTypeByName(info$id)$
+    getDescription(pretty = TRUE) %>%
+    dplyr::transmute(column_name = name, type)
 
 }
 
 
 
-#' Creates WFS client in Marine Regions
-#'
-#' @param version The WFS version. Supported: c("1.0.0", "1.1.1", "2.0.0")
-#'
-#' @return an object of class c("WFSClient", "OWSClient", "OGCAbstractObject","R6"). See package ows4R.
-#' @export
-#'
-#' @examples
-#' wfs <- mr_init_wfs_client()
-mr_init_wfs_client <- function(version = "2.0.0", silent = FALSE){
+
+.mr_init_wfs_client <- function(version = "2.0.0", silent = FALSE, ...){
   checkmate::assert_character(version)
   checkmate::assert_choice(version, c("1.0.0", "1.1.1", "2.0.0"))
 
@@ -41,7 +92,7 @@ mr_init_wfs_client <- function(version = "2.0.0", silent = FALSE){
   url <- "https://geo.vliz.be/geoserver/wfs"
 
   try({
-    wfs <- ows4R::WFSClient$new(url, version, logger = NULL)
+    wfs <- ows4R::WFSClient$new(url, version, ...)
   }, silent = TRUE)
 
   if(exists("wfs")){
@@ -86,3 +137,14 @@ mr_init_wfs_client <- function(version = "2.0.0", silent = FALSE){
   ))
 
 }
+
+#' Creates WFS client in Marine Regions
+#'
+#' @param version The WFS version. Supported: c("1.0.0", "1.1.1", "2.0.0")
+#'
+#' @return an object of class c("WFSClient", "OWSClient", "OGCAbstractObject","R6"). See package ows4R.
+#' @export
+#'
+#' @examples
+#' wfs <- mr_init_wfs_client()
+mr_init_wfs_client <- memoise::memoise(.mr_init_wfs_client)
