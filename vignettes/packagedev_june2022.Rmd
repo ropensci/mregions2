@@ -52,7 +52,7 @@ On this branch, there is a function called `mr_gaz_relations_full_by_MRGID` in `
 
  - [ ] explore and include lazy loading
  - [ ] `mr_gaz_relations_full_by_MRGID()`: change the way a relation is retrieved from `mr_gaz_ldes()`.
- - [ ] make CRS accessible in `mr_gaz_geometry()`
+ - [ ] make CRS accessible in `gaz_geometry()`
  - [ ] print comprehensible error message when PC is not connected to internet. I started with this in `test-mr_gaz_records.R` but the test does not make much sense just yet.
  - [ ] include sth that checks the language of a gazetteer entry
  - [ ] make clearer function name for `mr_gaz_record()`. Here, the user fetches the geometry (if existent). Transport this information through the function name, e.g. by changing the name to `mr_gaz_record_geom()`?

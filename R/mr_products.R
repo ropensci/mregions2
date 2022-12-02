@@ -18,16 +18,32 @@
   mr_products %>% dplyr::mutate(
     title = purrr::map_chr(caps_ft, ~ .x$getTitle()),
     abstract = purrr::map_chr(caps_ft, ~ .x$getAbstract())
-  ) %>% dplyr::transmute(
-    title, layer = product_layer, license, citation, doi, imis, abstract
+  ) %>% dplyr::select(
+    title,
+    layer = product_layer,
+    license,
+    citation,
+    doi,
+    imis,
+    abstract,
+    id = geoserverID
   )
 }
 
-#' Available data products at MarineRegions
+#' Available layers at MarineRegions
 #'
-#' @return Tibble of available data products via MarineRegions
-#'
-#' @examples
-#' mr_products()
 #' @export
+#'
+#' @description
+#' A function returning  data frame including the name, abstract and
+#'   some other relevant about each layer.
+#'
+#' * `title`: name of the layer
+#' * `layer`: identifier of the layer. Use in [mr_product_get()]
+#' * `license`: terms of use of the layer
+#' * `citation`: preferred citation of the layer
+#' * `doi`: ISO 26324 \href{https://doi.org}{Digital Object Identifier}
+#' * `imis`: url of the layer in the \href{https://vliz.be/imis?}{Integrated Marine Information System (IMIS)}
+#' * `id`: geoserver ID, reserve for internal use. Format 'namespace:layer'
+#'
 mr_products <- memoise::memoise(.mr_products)

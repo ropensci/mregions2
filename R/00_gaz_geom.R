@@ -1,50 +1,101 @@
-#' Get the geometries of the gazetteer
+#' Get the geometries of a Marine Regions Geo-Object
 #'
-#' @param x a
-#' @param ... a
+#' @param x object to retrieve the geometries from
 #'
-#' @return
 #' @export
-#'
-#' @examples
-#' require(magrittr)
-#' gaz_search(14) %>% gaz_geometry()
-#' gaz_geometry(14)
 gaz_geometry <- function(x, ...){
   UseMethod("gaz_geometry")
 }
 
-#' @export
-#' @rdname gaz_geometry
-gaz_geometry.numeric <- function(x, ...){
-  mr_gaz_geometries(x, ...)
-}
-
-#' @export
-#' @rdname gaz_geometry
-gaz_geometry.data.frame <- function(x, ...){
-  x %>% mr_add_geometry()
-}
-
-#' Functions to return the geometry of a marine regions geoobject
+#' @name gaz_geometry
 #'
-#' @param mrgid int. A valid marine regions gazetteer identifier
-#' @param sourceid int. A source ID
-#' @param attribute_value char. The attribute value that identifies the geoobject
+#' @param x A valid Marine Regions Gazetteer Identifier (MRGID)
 #' @param format The preferred output format. One of:
 #' - "sfc": Simple Feature geometry object. See 'sf'
+#' - "sf": Simple Feature object. See 'sf'
 #' - "wkt": Geometry representation as Well-Known Text
 #' - "rdf": Geometry as an object of class 'rdf". See 'rdflib'
 #'
 #' Default is "sfc"
-#'
-#' @return the geometry of a marine regions geoobject
-#' @export
+#' @param multipart Some Geo-Objects are compound of more than one part
+#'   If FALSE, returns singlepart geometries (e.g. POLYGON, LINESTRING)
+#'   If TRUE, returns multipart geometries (e.g. MULTIPOLYGON, MULTILINESTRING)
+#'   Default is TRUE
 #'
 #' @examples
-#' mr_gaz_geometry(mrgid = 3293, sourceid = 79, attribute_value = 3293)
-#' mr_gaz_geometries(mrgid = 58, format = "wkt")
-mr_gaz_geometry <- function(mrgid, sourceid, attribute_value, format = "sfc", ...){
+#' gaz_geometry(3293)
+#' gaz_geometry(3293, format = "wkt")
+#' gaz_geometry(3293, format = "rdf")
+#'
+#' @export
+gaz_geometry.numeric <- function(x, ..., format = "sfc", multipart = TRUE){
+  gaz_rest_geometries(x, ..., format = format, multipart = multipart)
+}
+
+#' @name gaz_geometry
+#'
+#' @param x A data frame having a variables named MRGID and containing a
+#'  valid Marine Regions Gazetteer Identifier (MRGID). Typically retrieved
+#'  via [gaz_search()]
+#'
+#' @examples
+#' require(magrittr)
+#' gaz_search("Belgian Exclusive Economic Zone") %>% gaz_geometry()
+#'
+#' @export
+gaz_geometry.data.frame <- function(x){
+  x %>% gaz_add_geometry()
+}
+
+#' Get the geometries associated with a gazetteer record
+#'
+#' @param mrgid A valid Marine Regions Gazetteer Identifier (MRGID)
+#' @param format The preferred output format. One of:
+#' - "sfc": Simple Feature geometry object. See 'sf'
+#' - "wkt": Geometry representation as \href{https://wikipedia.org/wiki/Well-known_text}{Well-Known Text}
+#' - "rdf": Geometry as an object of class 'rdf". See 'rdflib'
+#' Default is "sfc"
+#' @param multipart Some Geo-Objects are compound of more than one part
+#'   If FALSE, returns singlepart geometries (e.g. POLYGON, LINESTRING)
+#'   If TRUE, returns multipart geometries (e.g. MULTIPOLYGON, MULTILINESTRING)
+#'   Default is TRUE
+#' @param ... reserved for internal use
+#'
+#' @examples
+#' gaz_rest_geometries(3293)
+#' gaz_rest_geometries(3293, format = "wkt")
+#' gaz_rest_geometries(3293, format = "rdf")
+#'
+#' @export
+gaz_rest_geometries <- function(mrgid, format = "sfc", multipart = TRUE, ...){
+
+  # Assertions
+  checkmate::assert_int(mrgid, lower = 1)
+
+  # Config
+  url = glue::glue("https://marineregions.org/rest/getGazetteerGeometries.ttl/{mrgid}/")
+
+  # Perform
+  geom_perform(url, format, multipart, mrgid = mrgid, ...)
+
+}
+
+#' Get one single geometry associated with a gazetteer record
+#'
+#' This function method is mainly for internal use. Please use
+#' [gaz_rest_geometries] instead.
+#'
+#' @param mrgid A valid Marine Regions Gazetteer Identifier (MRGID)
+#' @param sourceid A source ID
+#' @param attribute_value The attribute value that identifies the Geo-Object
+#' @param format The preferred output format. One of:
+#' - "sfc": Simple Feature geometry object. See 'sf'
+#' - "sf": Simple Feature object. See 'sf'
+#' - "wkt": Geometry representation as Well-Known Text
+#' - "rdf": Geometry as an object of class 'rdf". See 'rdflib'
+#'
+#' Default is "sfc"
+gaz_rest_geometry <- function(mrgid, sourceid, attribute_value, format = "sfc", ...){
 
   # Assertions
   checkmate::assert_int(mrgid, lower = 1)
@@ -58,21 +109,14 @@ mr_gaz_geometry <- function(mrgid, sourceid, attribute_value, format = "sfc", ..
 
 }
 
-#' @rdname mr_gaz_geometry
-mr_gaz_geometries <- function(mrgid, format = "sfc", multipart = TRUE, ...){
 
-  # Assertions
-  checkmate::assert_int(mrgid, lower = 1)
-
-  # Config
-  url = glue::glue("https://marineregions.org/rest/getGazetteerGeometries.ttl/{mrgid}/")
-
-  # Perform
-  geom_perform(url, format, multipart, mrgid = mrgid, ...)
-
-}
-
-# Performs the aquisition of geometry
+#' Performs the aquisition of geometry
+#'
+#' @inheritParams gaz_rest_geometry
+#' @param resp_return_error the response should raise an error if HTTP Status 3xx, 4xx or 5xxx.
+#'   Reserved for internal use
+#'
+#' @noRd
 geom_perform <- function(url, format, multipart = TRUE, mrgid, resp_return_error = FALSE){
   # Assert format
   checkmate::assert_choice(format, c("sfc", "sf", "wkt", "rdf"))
@@ -142,7 +186,7 @@ geom_perform <- function(url, format, multipart = TRUE, mrgid, resp_return_error
   }
 
   if(format == "wkt"){
-    wkt <- sf::st_as_text(geom)
+    wkt <- sf::st_as_text(geom$the_geom)
     return(wkt)
   }
 
@@ -162,25 +206,17 @@ geom_perform <- function(url, format, multipart = TRUE, mrgid, resp_return_error
 
 #' Add geometry to a data frame containing a column named MRGID
 #'
-#' @param x a data frame obtained via mr_gaz_record(s)_by_*()
+#' @param x a data frame with the column "MRGID"
 #'
-#' @return the same data frame with a new column the_geom
-#' @export
-#' @examples
-#' mr_gaz_record_by_mrgid(19518, with_geometry = TRUE)
-#'
-#' # It's the same as
-#' mr_gaz_record_by_mrgid(19518) %>% mr_add_geometry()
-#'
-#' mr_gaz_records_by_name("Belgium") %>% mr_add_geometry()
-mr_add_geometry <- function(x){
+#' @noRd
+gaz_add_geometry <- function(x){
 
   # Assertions
   checkmate::assert_data_frame(x)
   stopifnot("MRGID" %in% names(x))
 
   # Config - get geometries
-  the_geom <- lapply(x$MRGID, mr_gaz_geometries, format = "sf", resp_return_error = TRUE) %>%
+  the_geom <- lapply(x$MRGID, gaz_rest_geometries, format = "sf", resp_return_error = TRUE) %>%
     suppressWarnings()
 
   # Logic to add either bounding box or centroid if there is no geometry available

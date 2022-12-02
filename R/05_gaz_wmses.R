@@ -1,4 +1,14 @@
-mr_gaz_wmses <- function(mrgid){
+#' Get WMS information for the given MRGID
+#'
+#' @param mrgid a valid marine regions gazetteer identifier
+#'
+#' @return a tibble with information from the WMS services,
+#'   including the service url, the namespace, the featureType,
+#'   featureName and the value to filter on
+#' @export
+#'
+#' @example gaz_rest_wmses(3293)
+gaz_rest_wmses <- function(mrgid){
   # Assertions
   mrgid = checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
                                        null.ok = TRUE, coerce = TRUE, len = 1)

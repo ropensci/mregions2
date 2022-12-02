@@ -1,11 +1,19 @@
+#' @rdname gaz_rest_types
+#' @export
+gaz_types <- function(){
+  gaz_rest_types()
+}
+
 #' Get all the placetypes of the Marine Regions Gazetteer
 #'
 #' @return a tibble with the type and definition if available
 #' @export
 #'
 #' @examples
-#' types <- mr_gaz_types()
-mr_gaz_types <- function(){
+#' types <- gaz_rest_types()
+#' # Same as
+#' types <- gaz_types()
+gaz_rest_types <- function(){
   url <- "https://marineregions.org/rest/getGazetteerTypes.json/"
 
   resp <- httr2::request(url) %>%
@@ -20,16 +28,16 @@ mr_gaz_types <- function(){
 
 #' Retrieve Gazetteer Records by Placetype
 #'
-#' @param type The placetype from mr_gaz_types()
+#' @param type The placetype from gaz_rest_types()
 #' @param with_geometries Logical. Add geometries to the result data frame? Default = FALSE
 #'
 #' @return A tibble with all Gazetteer records of the specified placetype.
 #' @export
 #'
 #' @examples
-#' mr_gaz_records_by_type("FAO Subdivisions")
-#' mr_gaz_records_by_type("EEZ")
-mr_gaz_records_by_type <- function(placetype, with_geometries = FALSE){
+#' gaz_rest_records_by_type("FAO Subdivisions")
+#' gaz_rest_records_by_type("EEZ")
+gaz_rest_records_by_type <- function(placetype, with_geometries = FALSE){
 
   # Assertions
   checkmate::assert_character(placetype)
@@ -60,12 +68,12 @@ mr_gaz_records_by_type <- function(placetype, with_geometries = FALSE){
     # If first is 404, the placetype must not be correct. Assert.
     if(httr2::resp_status(resp) == 404){
 
-      list_placetypes <- tolower(mr_gaz_types()$type)
+      list_placetypes <- tolower(gaz_rest_types()$type)
 
       is_not_choice <- !(placetype %in% list_placetypes)
 
       if(is_not_choice){
-        stop(glue::glue("`placetype` must be element of set `mr_gaz_types()`, but is '{placetype}'"), call. = FALSE)
+        stop(glue::glue("`placetype` must be element of set `gaz_rest_types()`, but is '{placetype}'"), call. = FALSE)
       }
     }
 
@@ -97,7 +105,7 @@ mr_gaz_records_by_type <- function(placetype, with_geometries = FALSE){
         resp <- resp %>% dplyr::arrange(MRGID)
 
         if(with_geometries){
-          resp <- resp %>% mr_add_geometry()
+          resp <- resp %>% gaz_add_geometry()
         }
 
         return(resp)

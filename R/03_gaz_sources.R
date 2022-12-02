@@ -1,16 +1,16 @@
 #' Retrieve Gazetteer Records by Source
 #'
-#' @param source A source from mr_gaz_sources()
+#' @param source A source from gaz_rest_sources()
 #' @param with_geometries Logical. Add geometries to the result data frame? Default = FALSE
 #'
 #' @return A tibble with all Gazetteer records of the specified source
 #' @export
 #'
 #' @examples
-#' ecoregions <- mr_gaz_records_by_source("ICES Ecoregions")
+#' ecoregions <- gaz_rest_records_by_source("ICES Ecoregions")
 #' ecoregions$preferredGazetteerName[4]
 # [1] "Oceanic Northeast Atlantic"
-mr_gaz_records_by_source <- function(source, with_geometries = FALSE){
+gaz_rest_records_by_source <- function(source, with_geometries = FALSE){
 
   # Assertions
   checkmate::assert_character(source, len = 1, any.missing = FALSE, all.missing = FALSE)
@@ -32,11 +32,11 @@ mr_gaz_records_by_source <- function(source, with_geometries = FALSE){
   if(httr2::resp_is_error(resp)){
 
     if(httr2::resp_status(resp) == 404){
-      list_source <- tolower(mr_gaz_sources()$source)
+      list_source <- tolower(gaz_rest_sources()$source)
       is_not_choice <- !(tolower(source) %in% list_source)
 
       if(is_not_choice){
-        stop(glue::glue("`source` must be element of set `mr_gaz_sources()`, but is '{source}'"), call. = FALSE)
+        stop(glue::glue("`source` must be element of set `gaz_rest_sources()`, but is '{source}'"), call. = FALSE)
       }
 
     }
@@ -53,17 +53,21 @@ mr_gaz_records_by_source <- function(source, with_geometries = FALSE){
 
 
   if(with_geometries){
-    resp <- resp %>% mr_add_geometry()
+    resp <- resp %>% gaz_add_geometry()
   }
 
   resp
 }
 # src <- "Van Eck, B.T.M. (Ed.) (1999). De Scheldeatlas: een beeld van een estuarium. Rijksinstituut voor Kust en Zee/Schelde InformatieCentrum: Middelburg. ISBN 90-369-3434-6. 120 pp."
-# mr_gaz_records_by_source(src)
-# mr_gaz_records_by_source("this is not a source")
+# gaz_rest_records_by_source(src)
+# gaz_rest_records_by_source("this is not a source")
 
 
-
+#' @rdname gaz_rest_sources
+#' @export
+gaz_sources <- function(){
+  gaz_rest_sources()
+}
 
 #' Get all the Marine Regions sources
 #'
@@ -74,8 +78,10 @@ mr_gaz_records_by_source <- function(source, with_geometries = FALSE){
 #' @export
 #'
 #' @examples
-#' mr_gaz_sources()
-mr_gaz_sources <- function(){
+#' gaz_rest_sources()
+#' # same as
+#' gaz_sources()
+gaz_rest_sources <- function(){
 
   # Reusable http request that overrides automatic error check
   get_source <- function(offset){
@@ -137,9 +143,9 @@ mr_gaz_sources <- function(){
 #' @export
 #'
 #' @examples
-#' mr_gaz_source_by_sourceid(390)
-#' mr_gaz_source_by_sourceid(657)
-mr_gaz_source_by_sourceid <- function(sourceid){
+#' gaz_rest_source_by_sourceid(390)
+#' gaz_rest_source_by_sourceid(657)
+gaz_rest_source_by_sourceid <- function(sourceid){
 
   sourceid <- checkmate::assert_int(sourceid, lower = 1, coerce = TRUE)
 
