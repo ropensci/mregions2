@@ -6,9 +6,9 @@
 #' @export
 #'
 #' @examples
-#' mr_gaz_names_by_mrgid(3293)
-#' mr_gaz_names_by_mrgid(14)
-mr_gaz_names_by_mrgid <- function(mrgid){
+#' gaz_rest_names_by_mrgid(3293)
+#' gaz_rest_names_by_mrgid(14)
+gaz_rest_names_by_mrgid <- function(mrgid){
 
   # Assertions
   mrgid = checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,

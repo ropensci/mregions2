@@ -1,7 +1,7 @@
 #' Retrieve Gazetteer Records by Source
 #'
 #' @param source A source from gaz_rest_sources()
-#' @param with_geometries Logical. Add geometries to the result data frame? Default = FALSE
+#' @param with_geometry Logical. Add geometries to the result data frame? Default = FALSE
 #'
 #' @return A tibble with all Gazetteer records of the specified source
 #' @export
@@ -10,7 +10,7 @@
 #' ecoregions <- gaz_rest_records_by_source("ICES Ecoregions")
 #' ecoregions$preferredGazetteerName[4]
 # [1] "Oceanic Northeast Atlantic"
-gaz_rest_records_by_source <- function(source, with_geometries = FALSE){
+gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
 
   # Assertions
   checkmate::assert_character(source, len = 1, any.missing = FALSE, all.missing = FALSE)
@@ -36,7 +36,7 @@ gaz_rest_records_by_source <- function(source, with_geometries = FALSE){
       is_not_choice <- !(tolower(source) %in% list_source)
 
       if(is_not_choice){
-        stop(glue::glue("`source` must be element of set `gaz_rest_sources()`, but is '{source}'"), call. = FALSE)
+        stop(glue::glue("`source` must be element of set `gaz_sources()`, but is '{source}'"), call. = FALSE)
       }
 
     }
@@ -52,7 +52,7 @@ gaz_rest_records_by_source <- function(source, with_geometries = FALSE){
     dplyr::bind_rows()
 
 
-  if(with_geometries){
+  if(with_geometry){
     resp <- resp %>% gaz_add_geometry()
   }
 
@@ -62,12 +62,6 @@ gaz_rest_records_by_source <- function(source, with_geometries = FALSE){
 # gaz_rest_records_by_source(src)
 # gaz_rest_records_by_source("this is not a source")
 
-
-#' @rdname gaz_rest_sources
-#' @export
-gaz_sources <- function(){
-  gaz_rest_sources()
-}
 
 #' Get all the Marine Regions sources
 #'
@@ -133,6 +127,10 @@ gaz_rest_sources <- function(){
     }
   }
 }
+
+#' @rdname gaz_rest_sources
+#' @export
+gaz_sources <- memoise::memoise(gaz_rest_sources)
 
 
 #' Get the name of a source by providing a sourceID

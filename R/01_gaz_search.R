@@ -24,7 +24,7 @@
 #'
 #' # Get all the records intersecting with the longitude 51.21551
 #'   and latitude 2.927
-#' gaz_search(x = 51.21551, y = 2.927)
+#' gaz_search(x = 2.927, y = 51.21551)
 #'
 gaz_search <- function(x, ...){
   UseMethod("gaz_search")
@@ -36,14 +36,8 @@ gaz_search.character <- function(x, ...){
 
   is_plural <- length(x) > 1
 
-  if(is_plural){
-    gaz_rest_records_by_names(x, ...)
-  }
-
-  if(!is_plural){
-    gaz_rest_records_by_name(x, ...)
-  }
-
+  if(is_plural) return( gaz_rest_records_by_names(x, ...) )
+  if(!is_plural) return( gaz_rest_records_by_name(x, ...) )
 }
 
 #' @export
@@ -61,7 +55,22 @@ gaz_search.numeric <- function(x, ..., y = NULL){
 
   # If not, expected that x is an mrgid
   if(is.null(y)){
-    x <- lapply(x, gaz_rest_record_by_mrgid, rdf = FALSE, ...)
+    x <- lapply(x, gaz_rest_record_by_mrgid, ...)
+
+    # Logic to return an RDF document
+    if(hasArg("rdf")){
+      if(sys.call()$rdf){
+        if(length(x) == 1) return( x[[1]] )
+        if(length(x) > 1){
+          out <- x[[1]]
+          for(i in 2:length(x)){
+            out <- rdflib:::c.rdf(out, x[[i]])
+          }
+          return(out)
+        }
+      }
+    }
+
     out <- dplyr::bind_rows(x)
   }
 
@@ -142,7 +151,7 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
   # Add more info to error message if 404 not found
   if(httr2::resp_status(resp) == 404){
     httr2::resp_check_status(resp, c(
-      "x" = glue::glue("The MRGID {.val {mrgid}} does not exist.")
+      "i" = glue::glue("The MRGID <{mrgid}> does not exist.")
     ))
   }
 
@@ -175,7 +184,7 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
 #' Get Gazetteer Records for a given name
 #'
 #' @param name Term to search in the Marine Regions Gazetteer
-#' @param with_geometries Logical. Add geometries to the result data frame? Default = FALSE
+#' @param with_geometry Logical. Add geometries to the result data frame? Default = FALSE
 #' @param typeid Restrict to one or more placetypeIDs. See function gaz_rest_types() to retrieve a list of placetypeIDs. Default = NULL
 #' @param language Restrict to one language. Provide as a 2 digits ISO-639. Default = NULL
 #' @param like Logical. Add a '%'-sign before and after the name? (SQL LIKE function). Default = TRUE
@@ -188,7 +197,7 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
 #' gaz_rest_records_by_name("Bélgica", language = "es")
 #' gaz_rest_records_by_name("Belgica", language = "es", fuzzy = TRUE)
 #' gaz_rest_records_by_name("Belgium", typeid = c(350, 351))
-gaz_rest_records_by_name <- function(name, with_geometries = FALSE, typeid = NULL, language = NULL, like = TRUE, fuzzy = FALSE){
+gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL, language = NULL, like = TRUE, fuzzy = FALSE){
 
   # Assert name
   checkmate::assert_character(name, len = 1)
@@ -204,7 +213,7 @@ gaz_rest_records_by_name <- function(name, with_geometries = FALSE, typeid = NUL
     not_iso_639_2 <- !(language %in% unique(ISOcodes::ISO_639_2$Alpha_2))
     if(not_iso_639_2){
       cli::cli_abort(c(
-        "x" = "{.var language} must be a valid ISO-632 language code of two digits:",
+        "!" = "{.field language} must be a valid ISO-632 language code of two digits.",
         "i" = "Run {.var ISOcodes::ISO_639_2} to see the allowed language ISO codes."
       ))
     }
@@ -257,7 +266,7 @@ gaz_rest_records_by_name <- function(name, with_geometries = FALSE, typeid = NUL
 
         msg <- c(msg,
                  "i" = glue::glue("The term '{name}' may not be available for the selected type."),
-                 "*" = "Try with `typeid` = NULL."
+                 "*" = "Try with `typeid = NULL`."
                  )
         httr2::resp_check_status(resp, info = msg)
       }
@@ -274,7 +283,7 @@ gaz_rest_records_by_name <- function(name, with_geometries = FALSE, typeid = NUL
         lan <- strsplit(subset(ISOcodes::ISO_639_2$Name, ISOcodes::ISO_639_2$Alpha_2 == language)[1], split = ";")[[1]][1]
         msg <- c(msg,
                  "i" = glue::glue("The {lan} term '{name}' may not be available."),
-                 "*" = "Try with `language` = NULL."
+                 "*" = "Try with `language = NULL`."
         )
       }
       if(fuzzy & like & is.null(language)){
@@ -309,7 +318,7 @@ gaz_rest_records_by_name <- function(name, with_geometries = FALSE, typeid = NUL
         # End of the loop
         resp <- resp %>% dplyr::arrange(MRGID)
 
-        if(with_geometries){
+        if(with_geometry){
           resp <- resp %>% gaz_add_geometry()
         }
 
@@ -334,7 +343,7 @@ gaz_rest_records_by_name <- function(name, with_geometries = FALSE, typeid = NUL
 #' Retrieve all Records of the [Marine Gazetteer](https://marineregions.org/gazetteer.php) that contain one or more parameters in `names` in their `preferredGazetteerName`.
 #'
 #' @param names Terms to search in the Marine Regions Gazetteer given as a vector
-#' @param with_geometries Logical. Add geometries to the result data frame? Default = FALSE
+#' @param with_geometry Logical. Add geometries to the result data frame? Default = FALSE
 #' @param like Logical. Add a '%'-sign before and after the name? (SQL LIKE function). Default = TRUE
 #' @param fuzzy Logical. Use Levenshtein query to find nearest matches? Default = FALSE
 #'
@@ -342,8 +351,8 @@ gaz_rest_records_by_name <- function(name, with_geometries = FALSE, typeid = NUL
 #'
 #' @examples
 #' eez <- c("Belgian Exclusive Economic Zone", "Dutch Exclusive Economic Zone")
-#' gaz_rest_records_by_names(eez, with_geometries = TRUE)
-gaz_rest_records_by_names <- function(names, with_geometries = FALSE, like = TRUE, fuzzy = FALSE){
+#' gaz_rest_records_by_names(eez, with_geometry = TRUE)
+gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE, fuzzy = FALSE){
 
   # Assertions
   checkmate::assert_character(names, min.len = 1, unique = TRUE, any.missing = FALSE, all.missing = FALSE)
@@ -368,7 +377,7 @@ gaz_rest_records_by_names <- function(names, with_geometries = FALSE, like = TRU
     httr2::resp_body_json() %>%
     dplyr::bind_rows()
 
-  if(with_geometries){
+  if(with_geometry){
     out <- out %>% gaz_add_geometry()
   }
 
@@ -381,15 +390,15 @@ gaz_rest_records_by_names <- function(names, with_geometries = FALSE, like = TRU
 #'
 #' @param latitude A decimal number which ranges from -90 to 90. Coordinates are assumed to be in WGS84
 #' @param longitude A decimal number which ranges from -180 to 180. Coordinates are assumed to be in WGS84
-#' @param with_geometries Logical. Add geometries to the result data frame? Default = FALSE
+#' @param with_geometry Logical. Add geometries to the result data frame? Default = FALSE
 #' @param typeid Restrict to one or more placetypeIDs. See function gaz_rest_types() to retrieve a list of placetypeIDs. Default = NULL
 #'
 #' @export
 #'
 #' @examples
 #' gaz_rest_records_by_lat_long(51.21551, 2.927)
-#' gaz_rest_records_by_lat_long(51.21551, 2.927, with_geometries = TRUE, typeid = c(255, 259))
-gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometries = FALSE, typeid = NULL){
+#' gaz_rest_records_by_lat_long(51.21551, 2.927, with_geometry = TRUE, typeid = c(255, 259))
+gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FALSE, typeid = NULL){
 
   # Assertions
   checkmate::assert_double(latitude, lower = -90, upper = 90, len = 1)
@@ -457,7 +466,7 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometries = 
     if(nrow(resp) < 100){
       resp <- resp %>% dplyr::arrange(MRGID)
 
-      if(with_geometries){
+      if(with_geometry){
         resp <- resp %>% gaz_add_geometry()
       }
 
@@ -480,7 +489,7 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometries = 
         # End of the loop
         resp <- resp %>% dplyr::arrange(MRGID)
 
-        if(with_geometries){
+        if(with_geometry){
           resp <- resp %>% gaz_add_geometry()
         }
 

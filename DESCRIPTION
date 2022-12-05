@@ -38,5 +38,6 @@ URL: https://github.com/lifewatch/mregions2,
 BugReports: https://github.com/lifewatch/mregions2/issues
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    wk
 VignetteBuilder: knitr

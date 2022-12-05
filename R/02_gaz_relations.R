@@ -19,11 +19,15 @@ gaz_relations <- function(x, ...){
   UseMethod("gaz_relations")
 }
 
+#' @export
+#' @rdname gaz_relations
 gaz_relations.numeric <- function(x, ...){
   x <- lapply(x, gaz_rest_relations_by_mrgid, ...)
   dplyr::bind_rows(x)
 }
 
+#' @export
+#' @rdname gaz_relations
 gaz_relations.data.frame <- function(x, ...){
   stopifnot("MRGID" %in% names(x))
 
@@ -31,6 +35,8 @@ gaz_relations.data.frame <- function(x, ...){
   gaz_relations.numeric(mrgid)
 }
 
+#' @export
+#' @rdname gaz_relations
 gaz_relations.character <- function(x, ...){
   x <- gaz_search(x)
   gaz_relations.numeric(x)
@@ -42,7 +48,7 @@ gaz_relations.character <- function(x, ...){
 #'   Geographic types can also be specified, for example `partof` and `adjacentto`.
 #'
 #' @param mrgid The \href{https://marineregions.org/mrgid.php}{Marine Regions Geographic IDentifier}.
-#' @param with_geometries Logical. Add geometries to the result data frame? Default = FALSE
+#' @param  Logical. Add geometries to the result data frame? Default = FALSE
 #' @param direction The hierarchical structure. Must be one of `c("upper", "lower", "both")`. `"upper"` lists all parents of the
 #'   record. `"lower"` lists all childs of the record. `"both"` lists parents and childs of the record.
 #' @param type must be one of `c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")`.
@@ -56,7 +62,7 @@ gaz_relations.character <- function(x, ...){
 #'
 #' mariana_trench_relations <- gaz_rest_relations_by_mrgid(mariana_trench_mrgid)
 #' mariana_trench_relations$preferredGazetteerName
-gaz_rest_relations_by_mrgid <- function(mrgid, with_geometries = FALSE, direction = "both", type = "all"){
+gaz_rest_relations_by_mrgid <- function(mrgid, with_geometry = FALSE, direction = "both", type = "all"){
 
   # Assertions
   types <- c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")
@@ -76,7 +82,7 @@ gaz_rest_relations_by_mrgid <- function(mrgid, with_geometries = FALSE, directio
     httr2::resp_body_json() %>%
     dplyr::bind_rows()
 
-  if(with_geometries){
+  if(with_geometry){
     resp <- resp %>% gaz_add_geometry()
   }
 

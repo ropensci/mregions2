@@ -1,9 +1,3 @@
-#' @rdname gaz_rest_types
-#' @export
-gaz_types <- function(){
-  gaz_rest_types()
-}
-
 #' Get all the placetypes of the Marine Regions Gazetteer
 #'
 #' @return a tibble with the type and definition if available
@@ -26,10 +20,14 @@ gaz_rest_types <- function(){
   resp
 }
 
+#' @rdname gaz_rest_types
+#' @export
+gaz_types <- memoise::memoise(gaz_rest_types)
+
 #' Retrieve Gazetteer Records by Placetype
 #'
 #' @param type The placetype from gaz_rest_types()
-#' @param with_geometries Logical. Add geometries to the result data frame? Default = FALSE
+#' @param with_geometry Logical. Add geometries to the result data frame? Default = FALSE
 #'
 #' @return A tibble with all Gazetteer records of the specified placetype.
 #' @export
@@ -37,7 +35,7 @@ gaz_rest_types <- function(){
 #' @examples
 #' gaz_rest_records_by_type("FAO Subdivisions")
 #' gaz_rest_records_by_type("EEZ")
-gaz_rest_records_by_type <- function(placetype, with_geometries = FALSE){
+gaz_rest_records_by_type <- function(placetype, with_geometry = FALSE){
 
   # Assertions
   checkmate::assert_character(placetype)
@@ -104,7 +102,7 @@ gaz_rest_records_by_type <- function(placetype, with_geometries = FALSE){
         # End of the loop
         resp <- resp %>% dplyr::arrange(MRGID)
 
-        if(with_geometries){
+        if(with_geometry){
           resp <- resp %>% gaz_add_geometry()
         }
 
