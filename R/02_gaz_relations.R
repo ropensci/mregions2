@@ -22,7 +22,7 @@ gaz_relations <- function(x, ...){
 #' @export
 #' @rdname gaz_relations
 gaz_relations.numeric <- function(x, ...){
-  x <- lapply(x, gaz_rest_relations_by_mrgid, ...)
+  x <- lapply(unique(x), gaz_rest_relations_by_mrgid, ...)
   dplyr::bind_rows(x)
 }
 
@@ -31,16 +31,10 @@ gaz_relations.numeric <- function(x, ...){
 gaz_relations.data.frame <- function(x, ...){
   stopifnot("MRGID" %in% names(x))
 
-  mrgid = x$MRGID
-  gaz_relations.numeric(mrgid)
+  mrgid = unique(x$MRGID)
+  gaz_relations.numeric(mrgid, ...)
 }
 
-#' @export
-#' @rdname gaz_relations
-gaz_relations.character <- function(x, ...){
-  x <- gaz_search(x)
-  gaz_relations.numeric(x)
-}
 
 #' Retrieve Gazetter Relations by MRGID
 #'
@@ -67,17 +61,39 @@ gaz_rest_relations_by_mrgid <- function(mrgid, with_geometry = FALSE, direction 
   # Assertions
   types <- c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")
   checkmate::assert_character(c("type", "direction"))
-  checkmate::assert_integer(mrgid)
+  type = tolower(type)
+  direction = tolower(direction)
+
+  mrgid = checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
+                                       null.ok = TRUE, coerce = TRUE, len = 1)
   checkmate::assert_choice(type, types)
   checkmate::assert_choice(direction, c("upper", "lower", "both"))
 
   # Config
   url <- glue::glue("https://marineregions.org/rest/getGazetteerRelationsByMRGID.json/{mrgid}/?direction={direction}&type={type}")
 
+  # Extra info for status 404 not found
+  .is_error <- function(resp){
+    if(httr2::resp_status(resp) == 404){
+      httr2::resp_check_status(resp, info = c(
+        "i" = glue::glue("MRGID: <{mrgid}>"),
+        "i" = glue::glue("type: `{type}`"),
+        "i" = glue::glue("direction: `{direction}`")
+      ))
+    }
+
+    if(httr2::resp_is_error(resp)){
+      TRUE
+    }else{
+      FALSE
+    }
+  }
+
   # Perform
   resp <- httr2::request(url) %>%
     httr2::req_user_agent(mr_user_agent) %>%
     httr2::req_headers(accept = "application/json") %>%
+    httr2::req_error(is_error = .is_error) %>%
     httr2::req_perform() %>%
     httr2::resp_body_json() %>%
     dplyr::bind_rows()
@@ -86,8 +102,6 @@ gaz_rest_relations_by_mrgid <- function(mrgid, with_geometry = FALSE, direction 
     resp <- resp %>% gaz_add_geometry()
   }
 
-
   resp
 
 }
-

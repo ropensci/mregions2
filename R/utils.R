@@ -41,17 +41,5 @@ gaz_rest_names_by_mrgid <- function(mrgid){
 
 }
 
-
-
-# x <- mr_gaz_record_by_mrgid(19518) %>%
-#   dplyr::bind_rows(mr_gaz_record_by_mrgid(58)) %>%
-#   dplyr::bind_rows(mr_gaz_record_by_mrgid(97))
-#
-# x1 <- x %>% dplyr::bind_rows(mr_gaz_record_by_mrgid(8399))
-#
-# debug(gaz_add_geometry)
-#
-# gaz_add_geometry(x1)
-
 # User agent to send in all HTTP requests of this package
 mr_user_agent <- glue::glue("{getOption(\"HTTPUserAgent\")}; mregions2 {packageVersion(\"mregions2\")}")

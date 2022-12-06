@@ -1,5 +1,48 @@
 #' Retrieve Gazetteer Records by Source
 #'
+#' @param x source as free text or sourceID as integer
+#' @param ...  params to be passed to the rest methods
+#'
+#' @seealso gaz_sources(), gaz_rest_records_by_source()
+#'
+#' @return A data frame with the Geo-Objects associated to this source
+#' @export
+#'
+#' @examples
+#' # Check out all sources
+#' View(gaz_sources())
+#'
+#' # Look up by source name and include the geometries
+#' contiguous_zone_src = "Flanders Marine Institute (2019). Maritime Boundaries Geodatabase: Contiguous Zones (24NM), version 3. Available online at http://www.marineregions.org/. https://doi.org/10.14284/384
+#' gaz_search_by_source(contiguous_zone_src, with_geometry = TRUE)
+#'
+#' # Or pass the geometries later
+#' gaz_search_by_source(contiguous_zone_src) %>% gaz_geometry()
+#'
+#' # Or query by SourceID all the maritime boundaries
+#' gaz_search_by_source(630:634)
+gaz_search_by_source <- function(x, ...){
+  UseMethod("gaz_search_by_source")
+}
+
+#' @rdname gaz_search_by_source
+#' @export
+gaz_search_by_source.character <- function(x, ...){
+  lapply(unique(x), gaz_rest_records_by_source, ...) %>%
+    dplyr::bind_rows()
+}
+
+#' @rdname gaz_search_by_source
+#' @export
+gaz_search_by_source.numeric <- function(x, ...){
+  source = purrr::map_df(unique(x), ~gaz_rest_source_by_sourceid(.x))
+
+  lapply(source["source"], gaz_search_by_source.character, ...) %>%
+    dplyr::bind_rows()
+}
+
+#' Retrieve Gazetteer Records by Source
+#'
 #' @param source A source from gaz_rest_sources()
 #' @param with_geometry Logical. Add geometries to the result data frame? Default = FALSE
 #'
@@ -14,6 +57,7 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
 
   # Assertions
   checkmate::assert_character(source, len = 1, any.missing = FALSE, all.missing = FALSE)
+  checkmate::assert_logical(with_geometry, len = 1)
 
   # Config
   source_parsed <- gsub(" ", "+", source, fixed = TRUE)
@@ -51,6 +95,12 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
     httr2::resp_body_json() %>%
     dplyr::bind_rows()
 
+  if(nrow(resp) == 0){
+    cli::cli_abort(c(
+      "!" = "There are no Geo-Objects for this source.",
+      "i" = "Source: {.val {source}}"
+    ))
+  }
 
   if(with_geometry){
     resp <- resp %>% gaz_add_geometry()
@@ -159,7 +209,5 @@ gaz_rest_source_by_sourceid <- function(sourceid){
   resp
 
 }
-
-
 
 

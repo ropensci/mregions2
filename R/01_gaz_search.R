@@ -131,7 +131,7 @@ gaz_search.sfc <- function(x, ...){
 #'
 #' # As an RDF document
 #' gaz_rest_record_by_mrgid(3293, rdf = TRUE)
-gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
+gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE, ...){
 
   # Assertions
   mrgid = checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
@@ -197,7 +197,7 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
 #' gaz_rest_records_by_name("Bélgica", language = "es")
 #' gaz_rest_records_by_name("Belgica", language = "es", fuzzy = TRUE)
 #' gaz_rest_records_by_name("Belgium", typeid = c(350, 351))
-gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL, language = NULL, like = TRUE, fuzzy = FALSE){
+gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL, language = NULL, like = TRUE, fuzzy = FALSE, ...){
 
   # Assert name
   checkmate::assert_character(name, len = 1)
@@ -352,7 +352,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
 #' @examples
 #' eez <- c("Belgian Exclusive Economic Zone", "Dutch Exclusive Economic Zone")
 #' gaz_rest_records_by_names(eez, with_geometry = TRUE)
-gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE, fuzzy = FALSE){
+gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE, fuzzy = FALSE, ...){
 
   # Assertions
   checkmate::assert_character(names, min.len = 1, unique = TRUE, any.missing = FALSE, all.missing = FALSE)
@@ -398,7 +398,7 @@ gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE,
 #' @examples
 #' gaz_rest_records_by_lat_long(51.21551, 2.927)
 #' gaz_rest_records_by_lat_long(51.21551, 2.927, with_geometry = TRUE, typeid = c(255, 259))
-gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FALSE, typeid = NULL){
+gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FALSE, typeid = NULL, ...){
 
   # Assertions
   checkmate::assert_double(latitude, lower = -90, upper = 90, len = 1)
