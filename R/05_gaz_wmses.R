@@ -7,7 +7,8 @@
 #'   featureName and the value to filter on
 #' @export
 #'
-#' @example gaz_rest_wmses(3293)
+#' @examples
+#' gaz_rest_wmses(3293)
 gaz_rest_wmses <- function(mrgid){
   # Assertions
   mrgid = checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
