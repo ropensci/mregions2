@@ -22,15 +22,14 @@ gaz_relations <- function(x, ...){
 #' @export
 #' @rdname gaz_relations
 gaz_relations.numeric <- function(x, ...){
-  x <- lapply(unique(x), gaz_rest_relations_by_mrgid, ...)
-  dplyr::bind_rows(x)
+  lapply(unique(x), gaz_rest_relations_by_mrgid, ...) %>%
+    dplyr::bind_rows() %>%
+    new_mr_df()
 }
 
 #' @export
 #' @rdname gaz_relations
-gaz_relations.data.frame <- function(x, ...){
-  stopifnot("MRGID" %in% names(x))
-
+gaz_relations.mr_df <- function(x, ...){
   mrgid = unique(x$MRGID)
   gaz_relations.numeric(mrgid, ...)
 }

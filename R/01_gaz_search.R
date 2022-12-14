@@ -36,8 +36,10 @@ gaz_search.character <- function(x, ...){
 
   is_plural <- length(x) > 1
 
-  if(is_plural) return( gaz_rest_records_by_names(x, ...) )
-  if(!is_plural) return( gaz_rest_records_by_name(x, ...) )
+  if(is_plural) out <- gaz_rest_records_by_names(x, ...)
+  if(!is_plural) out <- gaz_rest_records_by_name(x, ...)
+
+  new_mr_df(out)
 }
 
 #' @export
@@ -74,7 +76,7 @@ gaz_search.numeric <- function(x, ..., y = NULL){
     out <- dplyr::bind_rows(x)
   }
 
-  out
+  new_mr_df(out)
 }
 
 
@@ -109,7 +111,9 @@ gaz_search.sfc <- function(x, ...){
   longitude = coords[, 1]
   latitude = coords[, 2]
 
-  gaz_rest_records_by_lat_long(latitude, longitude, ...)
+  out <- gaz_rest_records_by_lat_long(latitude, longitude, ...)
+
+  new_mr_df(out)
 }
 
 

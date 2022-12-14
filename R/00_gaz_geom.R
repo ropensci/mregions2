@@ -33,7 +33,7 @@ gaz_geometry.numeric <- function(x, ..., format = "sfc", multipart = TRUE){
   x <- lapply(x, gaz_rest_geometries, format = format, multipart = multipart)
 
   if(format == "sfc") return( sf::st_sfc(sapply(x, c), crs = 4326) )
-  if(format == "sf") return( dplyr::bind_rows(x) )
+  if(format == "sf") return( x %>% dplyr::bind_rows() )
   if(format == "wkt") return( unlist(x) )
   if(format == "rdf"){
 
@@ -61,8 +61,8 @@ gaz_geometry.numeric <- function(x, ..., format = "sfc", multipart = TRUE){
 #' gaz_search("Belgian Exclusive Economic Zone") %>% gaz_geometry()
 #'
 #' @export
-gaz_geometry.data.frame <- function(x){
-  x %>% gaz_add_geometry()
+gaz_geometry.mr_df <- function(x){
+  x %>% gaz_add_geometry() %>% new_mr_df()
 }
 
 #' Get the geometries associated with a gazetteer record

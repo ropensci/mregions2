@@ -29,7 +29,8 @@ gaz_search_by_source <- function(x, ...){
 #' @export
 gaz_search_by_source.character <- function(x, ...){
   lapply(unique(x), gaz_rest_records_by_source, ...) %>%
-    dplyr::bind_rows()
+    dplyr::bind_rows() %>%
+    new_mr_df()
 }
 
 #' @rdname gaz_search_by_source
@@ -38,7 +39,9 @@ gaz_search_by_source.numeric <- function(x, ...){
   source = purrr::map_df(unique(x), ~gaz_rest_source_by_sourceid(.x))
 
   lapply(source["source"], gaz_search_by_source.character, ...) %>%
-    dplyr::bind_rows()
+    dplyr::bind_rows() %>%
+    new_mr_df()
+
 }
 
 #' Retrieve Gazetteer Records by Source

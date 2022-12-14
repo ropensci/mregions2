@@ -43,3 +43,17 @@ gaz_rest_names_by_mrgid <- function(mrgid){
 
 # User agent to send in all HTTP requests of this package
 mr_user_agent <- glue::glue("{getOption(\"HTTPUserAgent\")}; mregions2 {packageVersion(\"mregions2\")}")
+
+# Create new s3 class mr_df
+new_mr_df <- function(x = data.frame()) {
+  stopifnot(is.data.frame(x))
+  stopifnot("MRGID" %in% names(x))
+
+  attr(x, "class") <- unique(c("mr_df", class(x)))
+
+  x
+}
+
+
+
+

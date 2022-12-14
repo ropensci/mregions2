@@ -29,7 +29,8 @@ gaz_types <- memoise::memoise(gaz_rest_types)
 #' @export
 gaz_search_by_type <- function(x, ...){
   lapply(x, gaz_rest_records_by_type, ...) %>%
-    dplyr::bind_rows()
+    dplyr::bind_rows() %>%
+    new_mr_df()
 }
 
 #' Retrieve Gazetteer Records by Placetype
