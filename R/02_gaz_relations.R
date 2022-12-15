@@ -40,7 +40,7 @@ gaz_relations.mr_df <- function(x, ...){
 #'   Gazetteer Records that are related to a given input MRGID. Relationships can be parents (`upper`), children (`lower`) or both.
 #'   Geographic types can also be specified, for example `partof` and `adjacentto`.
 #'
-#' @param mrgid The \href{https://marineregions.org/mrgid.php}{Marine Regions Geographic IDentifier}.
+#' @param mrgid The [Marine Regions Geographic IDentifier](https://marineregions.org/mrgid.php).
 #' @param  Logical. Add geometries to the result data frame? Default = FALSE
 #' @param direction The hierarchical structure. Must be one of `c("upper", "lower", "both")`. `"upper"` lists all parents of the
 #'   record. `"lower"` lists all childs of the record. `"both"` lists parents and childs of the record.

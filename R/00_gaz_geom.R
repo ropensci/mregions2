@@ -70,7 +70,7 @@ gaz_geometry.mr_df <- function(x){
 #' @param mrgid A valid Marine Regions Gazetteer Identifier (MRGID)
 #' @param format The preferred output format. One of:
 #' - "sfc": Simple Feature geometry object. See 'sf'
-#' - "wkt": Geometry representation as \href{https://wikipedia.org/wiki/Well-known_text}{Well-Known Text}
+#' - "wkt": Geometry representation as [Well-Known Text](https://wikipedia.org/wiki/Well-known_text)
 #' - "rdf": Geometry as an object of class 'rdf". See 'rdflib'
 #' Default is "sfc"
 #' @param multipart Some Geo-Objects are compound of more than one part

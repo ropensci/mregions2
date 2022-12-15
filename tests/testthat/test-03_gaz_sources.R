@@ -15,11 +15,13 @@ test_that("source search works", {
   # Test source search
   x <- gaz_search_by_source(101:102, with_geometry = TRUE)
   expect_type(x, "list")
+  expect_s3_class(x, "mr_df")
   expect_s3_class(x, "sf")
   expect_s3_class(x, c("tbl_df", "data.frame"))
 
   x <- gaz_search_by_source(difficult_text_src)
   expect_type(x, "list")
+  expect_s3_class(x, "mr_df")
   expect_s3_class(x, c("tbl_df", "data.frame"))
 
   # Errors - geometry not available

@@ -10,10 +10,13 @@ test_that("search by placetype works", {
   # Test search by type
   x <- gaz_search_by_type(c("Wreck", "Diving spot"))
   expect_type(x, "list")
+  expect_s3_class(x, "mr_df")
   expect_s3_class(x, c("tbl_df", "data.frame"))
 
   x <- gaz_search_by_type("Wreck", with_geometry = TRUE)
   expect_type(x, "list")
+  expect_s3_class(x, "sf")
+  expect_s3_class(x, "mr_df")
   expect_s3_class(x, c("tbl_df", "data.frame"))
 
   # Errors - placetype not available
