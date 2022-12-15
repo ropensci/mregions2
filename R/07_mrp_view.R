@@ -10,7 +10,7 @@
 #'   a Leaflet viewer of a Marine Regions data product. It uses [EMODnet Bathymetry](https://emodnet.ec.europa.eu) as background layer.
 #'
 #'
-#'   # Filters
+#'   ## Filters
 #'
 #'   Both the [Contextual Query Language (CQL) filter](https://portal.ogc.org/files/96288) and the [standard OGC filter specification](https://www.ogc.org/standards/filter) allow to
 #'   query the server before performing a request. This will boost performance as you will only retrieve the area of your interest. It is possible to query on attributes, but also perform
@@ -20,17 +20,17 @@
 #'   A tutorial on CQL filters is available in the [geoserver web site](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html).
 #'
 #'
-#'   # Helpers
+#'   ## Helpers
 #'
 #'   A series of helpers was made available to ease the visualization of the data products, try `mrp_view_*()`
 #'   with the identifier of the data product (see [mrp_list()])
 #'
 #' @export
 #'
-#' @seealso [mrp_list()], [mrp_colnames()], [mrp_get()]
+#' @seealso [mrp_list()] to describe the list of products, [mrp_colnames()] and [mrp_col_unique()] to get the name, data type and unique values of a the columns of a data product, useful to query
+#' with the arguments `cql_filter` or `filter`, [mrp_get()] to get the data products as a [simple feature][sf] object.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' # You can pass a product name from mrp_list()
 #' mrp_view('eez')
 #'
@@ -50,7 +50,6 @@
 #'
 #' # Or as timestamp
 #' mrp_view_eez_boundaries(cql_filter="doc_date AFTER 2000-01-01T00:00:00Z AND doc_date BEFORE 2009-12-31T00:00:00Z")
-#' }
 mrp_view <- function(data_product, cql_filter = NULL, filter = NULL){
 
   # Assertions

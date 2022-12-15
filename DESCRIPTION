@@ -41,3 +41,4 @@ Suggests:
     rmarkdown,
     wk
 VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)

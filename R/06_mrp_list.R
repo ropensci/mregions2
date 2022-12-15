@@ -112,7 +112,7 @@ mrp_list <- memoise::memoise(.mrp_list)
 #'
 #' @param version (character) The WFS version. Supported: `c("1.0.0", "1.1.1", "2.0.0")`
 #'
-#' @return An object of class `c("WFSClient", "OWSClient", "OGCAbstractObject","R6")`. See package [ows4R::ows4R].
+#' @return An object of class `c("WFSClient", "OWSClient", "OGCAbstractObject","R6")`. See package [ows4R].
 #' @export
 #'
 #' @examples

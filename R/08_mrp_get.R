@@ -1,7 +1,7 @@
 #' Get a data product
 #'
-#' @param product_name identifier of the data product. See [mrp_list()]
-#' @param ... any [vendor params](https://docs.geoserver.org/latest/en/user/services/wfs/vendor.html) to be passed to the [GetFeature](https://docs.geoserver.org/latest/en/user/services/wfs/reference.html?highlight=getfeatures#getfeature) request. See details.
+#' @param product_name (character) Identifier of the data product. See [mrp_list()]
+#' @param ... Any [vendor params](https://docs.geoserver.org/latest/en/user/services/wfs/vendor.html) to be passed to the [GetFeature](https://docs.geoserver.org/latest/en/user/services/wfs/reference.html?highlight=getfeatures#getfeature) request. See details.
 #'
 #' @details
 #'    This function uses [WFS services](https://en.wikipedia.org/wiki/Web_Feature_Service) to load retrieve the Marine Regions Data products. The data products
@@ -22,6 +22,9 @@
 #'
 #' @return An sf object with the Marine Regions data product
 #' @export
+#'
+#' @seealso [mrp_list()] to describe the list of products, [mrp_view()] to visualize the data product in advance, [mrp_colnames()] and [mrp_col_unique()] to get the name, data type and unique values of a the columns of a data product, useful to query
+#' with the arguments `cql_filter` or `filter`
 #'
 #' @examples
 #' \dontrun{
@@ -130,7 +133,7 @@ mrp_get <- function(product_name, ...){
 }
 #' Get the names of the columns and data type of the data product
 #'
-#' @param product_name identifier of the data product. See [mrp_list()]
+#' @param product_name (character) Identifier of the data product. See [mrp_list()]
 #'
 #' @details
 #'   This function becomes useful to write CQL or OGC filters that you can pass to [mrp_get()] or [mrp_view()] as
@@ -142,6 +145,10 @@ mrp_get <- function(product_name, ...){
 #'
 #' @return A data frame with the column names and data type in the Marine Regions data product
 #' @export
+#'
+#' @seealso [mrp_list()] to describe the list of products, [mrp_col_unique()] to get the unique values of a the
+#' columns of a data product, useful to write queries that can be passed to [mr_get()] or [mr_view()] via the
+#' arguments `cql_filter` or `filter`.
 #'
 #' @examples
 #' mrp_colnames("eez")
@@ -190,20 +197,24 @@ mrp_colnames <- memoise::memoise(.mrp_colnames)
 }
 #' Get all the possible values of a column of a Marine Regions data product
 #'
-#' @param product_name identifier of the data product. See [mrp_list()]
-#' @param colname column name in the data product. See [mrp_colnames()]
+#' @param product_name (character) Identifier of the data product. See [mrp_list()]
+#' @param colname (character) Column name in the data product. See [mrp_colnames()]
 #'
 #' @details
 #' This function becomes useful to write CQL or OGC filters that you can pass to [mrp_get()] or [mrp_view()] as
 #' it helps to know all the possible values in the column name that you want to query on beforehand. Use it
 #' together with [mrp_colnames()] to know the columns and data types in the data product.
 #'
-#' # Geometry columns
+#' ## Geometry columns
 #' Note that columns of type `geometry` are forbidden as their performance is sub-optimal and would likely
 #' crash your R session.
 #'
 #' @return A numeric or character vector with the unique values of a column of a Marine Regions data product.
 #' @export
+#'
+#' @seealso [mrp_list()] to describe the list of products, [mrp_colnames()] to get the names and data type of
+#' the columns of a data product, useful to write queries that can be passed to [mr_get()] or [mr_view()] via
+#' the arguments `cql_filter` or `filter`.
 #'
 #' @examples
 #' mrp_col_unique("ecs", "pol_type")
