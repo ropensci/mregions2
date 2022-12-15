@@ -1,12 +1,19 @@
-#' Get all the placetypes of the Marine Regions Gazetteer
+#' Get all the place types of the Marine Regions Gazetteer
 #'
-#' @return a tibble with the type and definition if available
+#' @return a data frame with three columns:
+#' - `typeID`: the identifier of the place type in the Marine Regions Gazetteer database.
+#' - `type`: the name of the place type.
+#' - `description`: if available, the description of the place type.
 #' @export
 #'
+#' @seealso [gaz_rest]
+#'
 #' @examples
-#' types <- gaz_rest_types()
-#' # Same as
-#' types <- gaz_types()
+#' # This
+#' gaz_rest_types()
+#'
+#' # is the same as
+#' gaz_types()
 gaz_rest_types <- function(){
   url <- "https://marineregions.org/rest/getGazetteerTypes.json/"
 
@@ -20,25 +27,31 @@ gaz_rest_types <- function(){
   resp
 }
 
-#' @rdname gaz_rest_types
+#' @name gaz_types
+#' @inherit gaz_rest_types
 #' @export
 gaz_types <- memoise::memoise(gaz_rest_types)
 
-
-#' @rdname gaz_rest_records_by_type
+#' Retrieve Gazetteer Records by Placetype
+#' @inheritDotParams gaz_rest_records_by_type
+#' @inherit gaz_rest_records_by_type return seealso
 #' @export
-gaz_search_by_type <- function(x, ...){
-  lapply(x, gaz_rest_records_by_type, ...) %>%
+#' @examples
+#' gaz_search_by_type("FAO Subdivisions")
+#' gaz_search_by_type("EEZ")
+gaz_search_by_type <- function(type, ...){
+  lapply(type, gaz_rest_records_by_type, ...) %>%
     dplyr::bind_rows() %>%
     new_mr_df()
 }
 
 #' Retrieve Gazetteer Records by Placetype
 #'
-#' @param type The placetype from gaz_rest_types()
-#' @param with_geometry Logical. Add geometries to the result data frame? Default = FALSE
+#' @param type (character) The placetype from [gaz_rest_types()]
+#' @param with_geometry (logical) Add geometries to the result data frame? Default = FALSE
 #'
-#' @return A tibble with all Gazetteer records of the specified placetype.
+#' @return A data frame with Gazetteer entries
+#' @seealso [gaz_rest]
 #' @export
 #'
 #' @examples

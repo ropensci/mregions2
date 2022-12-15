@@ -1,9 +1,10 @@
 #' Get the names for a given MRGID
 #'
-#' @param mrgid An existing Marine Regions Gazetteer Identifier
+#' @param mrgid (integer) A valid Marine Regions Gazetteer Identifier ([MRGID])
 #'
-#' @return a vector with all the names of a Marine Regions Gazetteer GeoObject
+#' @return a vector with all the names of a Marine Regions Gazetteer entry
 #' @export
+#' @seealso [gaz_rest], [MRGID]
 #'
 #' @examples
 #' gaz_rest_names_by_mrgid(3293)

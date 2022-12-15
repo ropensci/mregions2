@@ -1,31 +1,34 @@
-#' Search in the gazetteer by names, MRGID or get all the Geo-Objects
-#'   that intersect with a pair of WGS84 coordinates x and y
+#' Search in the Marine Regions Gazetteer by names, MRGID or reverse geocode with a pair of
+#' WGS84 coordinates x and y
 #'
 #' @param x object to perform the search with. Can be:
-#'   * Free text search
-#'   * Valid marine regions gazetteer identifiers as integer
-#'   * Longitude in WGS84
-#' @param y Optional: Latitude in WGS84.
-#' @param ... params to be passed to the REST methods
+#'   * (character) Free text search
+#'   * (integer) A valid Marine Regions Gazetteer Identifier ([MRGID])
+#'   * (double) Longitude in WGS84
+#'   * Aditionally, you can pass objects of class [sf::sf] or [sf::sfc] with geometry
+#'     of class `POINT`
+#' @param y (double) Latitude in WGS84 (Optional)
+#' @inheritDotParams gaz_rest_record_by_mrgid -mrgid
+#' @inheritDotParams gaz_rest_records_by_name -name
+#' @inheritDotParams gaz_rest_records_by_names -names
+#' @inheritDotParams gaz_rest_records_by_lat_long -latitude -longitude
 #'
-#' @return A data frame with the found Geo-Objects
+#' @return A data frame with Gazetteer entries
 #' @export
 #'
 #' @examples
-#' # Get the geo-objects of two known MRGID
-#' gaz_search(c(14, 17))
-#'
-#' # Or Look-up a name in the Gazetteer
+#' # Look-up a name in the Gazetteer
 #' gaz_search("Belgian Part of the North Sea")
+#'
+#' # Get the entries of two known MRGID including their geometry
+#' gaz_search(c(14, 17), with_geometry = TRUE)
 #'
 #' # Maybe the name is in another language...
 #' gaz_search("Belgie", language = "nl", fuzzy = TRUE)
 #' gaz_search("Bélgica", language = "es", fuzzy = TRUE)
 #'
-#' # Get all the records intersecting with the longitude 51.21551
-#'   and latitude 2.927
-#' gaz_search(x = 2.927, y = 51.21551)
-#'
+#' # Get all the records intersecting with the longitude 51.21551 and latitude 2.927, restricted to some placetypes
+#' gaz_search(x = 2.927, y = 51.21551, typeid = c(255, 259))
 gaz_search <- function(x, ...){
   UseMethod("gaz_search")
 }
@@ -119,21 +122,19 @@ gaz_search.sfc <- function(x, ...){
 
 #' Get one record for the given MRGID
 #'
-#' @param mrgid An existing Marine Regions Gazetteer Identifier
-#' @param with_geometry Logical. Add geometry to the result data frame? Default = FALSE
-#' @param rdf Logical. Return an object of class "rdf". See package 'rdflib'
+#' @param mrgid (integer) A valid Marine Regions Gazetteer Identifier ([MRGID])
+#' @param with_geometry (logical) Add geometry to the result data frame? Default = FALSE
+#' @param rdf (logical) Return an object of class [rdflib::rdf]?
 #'
 #' @export
 #'
+#' @seealso [gaz_rest], [MRGID]
+#'
+#' @return A data frame with the Gazetteer entry
+#'
 #' @examples
-#' # Get the Belgian Part of the North Sea
 #' gaz_rest_record_by_mrgid(3293)
-#'
-#' # Better with its geometry
-#' geo <- gaz_rest_record_by_mrgid(3293, with_geometry = TRUE)
-#' mapview::mapview(gaz)
-#'
-#' # As an RDF document
+#' gaz_rest_record_by_mrgid(3293, with_geometry = TRUE)
 #' gaz_rest_record_by_mrgid(3293, rdf = TRUE)
 gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE, ...){
 
@@ -187,14 +188,16 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE, 
 
 #' Get Gazetteer Records for a given name
 #'
-#' @param name Term to search in the Marine Regions Gazetteer
-#' @param with_geometry Logical. Add geometries to the result data frame? Default = FALSE
-#' @param typeid Restrict to one or more placetypeIDs. See function gaz_rest_types() to retrieve a list of placetypeIDs. Default = NULL
-#' @param language Restrict to one language. Provide as a 2 digits ISO-639. Default = NULL
-#' @param like Logical. Add a '%'-sign before and after the name? (SQL LIKE function). Default = TRUE
-#' @param fuzzy Logical. Use Levenshtein query to find nearest matches? Default = FALSE
+#' @param name (character) Term to search in the Marine Regions Gazetteer
+#' @param with_geometry (logical) Add geometry to the result data frame? Default = FALSE
+#' @param typeid (numeric) Restrict to one or more placetypeIDs. Retrieve a list of placetypeIDs with [gaz_rest_types()]
+#' @param language (character) Restrict to one language. Provide as a 2 digits ISO-639. See [ISOcodes::ISO_639_2].
+#' @param like (logical) Add a '%'-sign before and after the name? (SQL LIKE function). Default = TRUE
+#' @param fuzzy (logical) Use Levenshtein query to find nearest matches? Default = FALSE
 #'
 #' @export
+#' @seealso [gaz_rest], [MRGID]
+#' @return A data frame with Gazetteer entries
 #'
 #' @examples
 #' gaz_rest_records_by_name("Belgian Exclusive Economic Zone", with_geometry = TRUE)
@@ -343,19 +346,21 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
 
 #' Get Gazetteer Records for all given names
 #'
-#' @description
-#' Retrieve all Records of the [Marine Gazetteer](https://marineregions.org/gazetteer.php) that contain one or more parameters in `names` in their `preferredGazetteerName`.
+#' @param name (character) Term to search in the Marine Regions Gazetteer
+#' @param with_geometry (logical) Add geometry to the result data frame? Default = FALSE
+#' @param like (logical) Add a '%'-sign before and after the name? (SQL LIKE function). Default = TRUE
+#' @param fuzzy (logical) Use Levenshtein query to find nearest matches? Default = FALSE
 #'
-#' @param names Terms to search in the Marine Regions Gazetteer given as a vector
-#' @param with_geometry Logical. Add geometries to the result data frame? Default = FALSE
-#' @param like Logical. Add a '%'-sign before and after the name? (SQL LIKE function). Default = TRUE
-#' @param fuzzy Logical. Use Levenshtein query to find nearest matches? Default = FALSE
+#' @export
+#' @seealso [gaz_rest]
+#' @return A data frame with Gazetteer entries
 #'
 #' @export
 #'
 #' @examples
-#' eez <- c("Belgian Exclusive Economic Zone", "Dutch Exclusive Economic Zone")
-#' gaz_rest_records_by_names(eez, with_geometry = TRUE)
+#' gaz_rest_records_by_names(
+#'   c("Belgian Exclusive Economic Zone", "Dutch Exclusive Economic Zone")
+#' )
 gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE, fuzzy = FALSE, ...){
 
   # Assertions
@@ -392,16 +397,18 @@ gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE,
 
 #' Get all gazetteer records where the geometry intersects with the given latitude and longitude
 #'
-#' @param latitude A decimal number which ranges from -90 to 90. Coordinates are assumed to be in WGS84
-#' @param longitude A decimal number which ranges from -180 to 180. Coordinates are assumed to be in WGS84
-#' @param with_geometry Logical. Add geometries to the result data frame? Default = FALSE
-#' @param typeid Restrict to one or more placetypeIDs. See function gaz_rest_types() to retrieve a list of placetypeIDs. Default = NULL
+#' @param latitude (double) A decimal number which ranges from -90 to 90. Coordinates are assumed to be in WGS84
+#' @param longitude (double) A decimal number which ranges from -180 to 180. Coordinates are assumed to be in WGS84
+#' @param with_geometry (logical) Add geometries to the result data frame? Default = FALSE
+#' @param typeid (numeric) Restrict to one or more placetypeIDs. Retrieve a list of placetypeIDs with [gaz_rest_types()]
 #'
 #' @export
+#' @seealso [gaz_rest]
 #'
-#' @examples
+#' @examples \dontrun{
 #' gaz_rest_records_by_lat_long(51.21551, 2.927)
 #' gaz_rest_records_by_lat_long(51.21551, 2.927, with_geometry = TRUE, typeid = c(255, 259))
+#' }
 gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FALSE, typeid = NULL, ...){
 
   # Assertions

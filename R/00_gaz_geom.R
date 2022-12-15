@@ -1,34 +1,38 @@
 #' Get the geometries of a Marine Regions Geo-Object
 #'
-#' @param x object to retrieve the geometries from
+#' @param x object to retrieve the geometries from. Accepted:
+#' * (integer) A valid Marine Regions Gazetteer Identifier ([MRGID])
+#' * A data frame retrieved with [mregions2] via its functions [gaz_search()],
+#' [gaz_search_by_source()], [gaz_search_by_type()] or [gaz_relations()]. See details.
+#'
+#' @details
+#' You can pass the output of most `gaz_*` functions to `gaz_geometry()` to retrieve the
+#' geometry the gazetteer entry. The data frame is then transformed into a [sf::sf] object.
+#'
+#' ## Developer info
+#' This is done in the method [gaz_geometry.mr_df()]. [mr_df][new_mr_df] is a class defined in
+#' this package to ensure the data frame passed to gaz_geometry has a variable with [MRGID].
 #'
 #' @export
+#'
+#' @examples
+#' require(magrittr)
+#'
+#' gaz_geometry(3293)
+#' gaz_geometry(3293, format = "wkt")
+#' gaz_geometry(3293, format = "rdf")
+#'
+#' gaz_search(3293) %>% gaz_geometry()
 gaz_geometry <- function(x, ...){
   UseMethod("gaz_geometry")
 }
 
 #' @name gaz_geometry
 #'
-#' @param x A valid Marine Regions Gazetteer Identifier (MRGID)
-#' @param format The preferred output format. One of:
-#' - "sfc": Simple Feature geometry object. See 'sf'
-#' - "sf": Simple Feature object. See 'sf'
-#' - "wkt": Geometry representation as Well-Known Text
-#' - "rdf": Geometry as an object of class 'rdf". See 'rdflib'
-#'
-#' Default is "sfc"
-#' @param multipart Some Geo-Objects are compound of more than one part
-#'   If FALSE, returns singlepart geometries (e.g. POLYGON, LINESTRING)
-#'   If TRUE, returns multipart geometries (e.g. MULTIPOLYGON, MULTILINESTRING)
-#'   Default is TRUE
-#'
-#' @examples
-#' gaz_geometry(3293)
-#' gaz_geometry(3293, format = "wkt")
-#' gaz_geometry(3293, format = "rdf")
+#' @inheritDotParams gaz_rest_geometries -mrgid
 #'
 #' @export
-gaz_geometry.numeric <- function(x, ..., format = "sfc", multipart = TRUE){
+gaz_geometry.numeric <- function(x, ...){
 
   x <- lapply(x, gaz_rest_geometries, format = format, multipart = multipart)
 
@@ -52,14 +56,6 @@ gaz_geometry.numeric <- function(x, ..., format = "sfc", multipart = TRUE){
 
 #' @name gaz_geometry
 #'
-#' @param x A data frame having a variables named MRGID and containing a
-#'  valid Marine Regions Gazetteer Identifier (MRGID). Typically retrieved
-#'  via [gaz_search()]
-#'
-#' @examples
-#' require(magrittr)
-#' gaz_search("Belgian Exclusive Economic Zone") %>% gaz_geometry()
-#'
 #' @export
 gaz_geometry.mr_df <- function(x){
   x %>% gaz_add_geometry() %>% new_mr_df()
@@ -67,17 +63,20 @@ gaz_geometry.mr_df <- function(x){
 
 #' Get the geometries associated with a gazetteer record
 #'
-#' @param mrgid A valid Marine Regions Gazetteer Identifier (MRGID)
-#' @param format The preferred output format. One of:
+#' @param mrgid (integer) A valid Marine Regions Gazetteer Identifier ([MRGID])
+#' @param format (character) The preferred output format. One of:
 #' - "sfc": Simple Feature geometry object. See 'sf'
 #' - "wkt": Geometry representation as [Well-Known Text](https://wikipedia.org/wiki/Well-known_text)
 #' - "rdf": Geometry as an object of class 'rdf". See 'rdflib'
+#'
 #' Default is "sfc"
-#' @param multipart Some Geo-Objects are compound of more than one part
-#'   If FALSE, returns singlepart geometries (e.g. POLYGON, LINESTRING)
-#'   If TRUE, returns multipart geometries (e.g. MULTIPOLYGON, MULTILINESTRING)
-#'   Default is TRUE
+#' @param multipart (logical) Some Geo-Objects are compound of more than one part.
+#' - If FALSE, returns singlepart geometries (e.g. POLYGON, LINESTRING)
+#' - If TRUE (default), returns multipart geometries (e.g. MULTIPOLYGON, MULTILINESTRING)
+#'
 #' @param ... reserved for internal use
+#'
+#' @seealso [gaz_rest]
 #'
 #' @examples
 #' gaz_rest_geometries(3293)
@@ -101,18 +100,13 @@ gaz_rest_geometries <- function(mrgid, format = "sfc", multipart = TRUE, ...){
 #' Get one single geometry associated with a gazetteer record
 #'
 #' This function method is mainly for internal use. Please use
-#' [gaz_rest_geometries] instead.
+#' [gaz_rest_geometries()] instead.
 #'
-#' @param mrgid A valid Marine Regions Gazetteer Identifier (MRGID)
+#' @inheritParams gaz_rest_geometries
 #' @param sourceid A source ID
 #' @param attribute_value The attribute value that identifies the Geo-Object
-#' @param format The preferred output format. One of:
-#' - "sfc": Simple Feature geometry object. See 'sf'
-#' - "sf": Simple Feature object. See 'sf'
-#' - "wkt": Geometry representation as Well-Known Text
-#' - "rdf": Geometry as an object of class 'rdf". See 'rdflib'
 #'
-#' Default is "sfc"
+#' @noRd
 gaz_rest_geometry <- function(mrgid, sourceid, attribute_value, format = "sfc", ...){
 
   # Assertions

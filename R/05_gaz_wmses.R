@@ -1,11 +1,17 @@
-#' Get WMS information for the given MRGID
+#' Get WMS information for a given MRGID
 #'
-#' @param mrgid a valid marine regions gazetteer identifier
+#' @param mrgid (integer) A valid Marine Regions Gazetteer Identifier ([MRGID])
 #'
-#' @return a tibble with information from the WMS services,
-#'   including the service url, the namespace, the featureType,
-#'   featureName and the value to filter on
+#' @return a data frame with information from the WMS services including:
+#' - `value`: the value to filter on
+#' - `MRGID` : see [MRGID]
+#' - `url`: the base URL of the WMS service
+#' - `namespace`: see [mrp_view()] details
+#' - `featureType`: see [mrp_view()] details
+#' - `featureName`: see [mrp_view()] details
+#'
 #' @export
+#' @seealso [gaz_rest], [MRGID], [mrp_view()]
 #'
 #' @examples
 #' gaz_rest_wmses(3293)

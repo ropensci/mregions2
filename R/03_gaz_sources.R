@@ -1,11 +1,10 @@
 #' Retrieve Gazetteer Records by Source
 #'
-#' @param x source as free text or sourceID as integer
-#' @param ...  params to be passed to the rest methods
+#' @param x source as free text or `sourceID` as integer
 #'
-#' @seealso gaz_sources(), gaz_rest_records_by_source()
+#' @seealso [gaz_sources()], [gaz_rest_records_by_source()], [gaz_rest_source_by_sourceid()]
 #'
-#' @return A data frame with the Geo-Objects associated to this source
+#' @return A data frame with Gazetteer entries
 #' @export
 #'
 #' @examples
@@ -46,16 +45,16 @@ gaz_search_by_source.numeric <- function(x, ...){
 
 #' Retrieve Gazetteer Records by Source
 #'
-#' @param source A source from gaz_rest_sources()
-#' @param with_geometry Logical. Add geometries to the result data frame? Default = FALSE
+#' @param source (character) A source from [gaz_rest_sources()]
+#' @param with_geometry (logical) Add geometries to the result data frame? Default = FALSE
 #'
-#' @return A tibble with all Gazetteer records of the specified source
+#' @return A data frame with Gazetteer entries
 #' @export
 #'
+#' @seealso [gaz_rest]
+#'
 #' @examples
-#' ecoregions <- gaz_rest_records_by_source("ICES Ecoregions")
-#' ecoregions$preferredGazetteerName[4]
-# [1] "Oceanic Northeast Atlantic"
+#' gaz_rest_records_by_source("ICES Ecoregions")
 gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
 
   # Assertions
@@ -118,15 +117,19 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
 
 #' Get all the Marine Regions sources
 #'
-#' @return a tibble with three columns:
-#' - sourceID: the identifier of the source in the database.
-#' - source: the name of the source
-#' - sourceURL: if available, the URL of the source.
+#' @return a data frame with three columns:
+#' - `sourceID`: the identifier of the source in the Marine Regions Gazetteer database.
+#' - `source`: the name of the source.
+#' - `sourceURL`: if available, the URL of the source.
 #' @export
 #'
+#' @seealso [gaz_rest]
+#'
 #' @examples
+#' # This
 #' gaz_rest_sources()
-#' # same as
+#'
+#' # is the same as
 #' gaz_sources()
 gaz_rest_sources <- function(){
 
@@ -181,17 +184,20 @@ gaz_rest_sources <- function(){
   }
 }
 
-#' @rdname gaz_rest_sources
+#' @name gaz_sources
+#' @inherit gaz_rest_sources
 #' @export
 gaz_sources <- memoise::memoise(gaz_rest_sources)
 
 
 #' Get the name of a source by providing a sourceID
 #'
-#' @param sourceid int. A valid sourceID
+#' @param sourceid (integer) A valid sourceID
 #'
 #' @return a named vector with the source name and, if available, the url to the source.
 #' @export
+#'
+#' @seealso [gaz_rest], [gaz_sources()]
 #'
 #' @examples
 #' gaz_rest_source_by_sourceid(390)

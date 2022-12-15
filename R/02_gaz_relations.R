@@ -1,8 +1,16 @@
-#' Walk the hierarchy of the MarineRegions Gazetter given a Geo-Object
+#' Walk the hierarchy of the MarineRegions Gazetter given a Gazetteer MRGID, name or Gazetteer entries
 #'
-#' @param x the object from which the relations are retrieved
-#' @param ... params to be passed to the REST method [gaz_rest_relations_by_mrgid]
+#' @param x the object from which the relations are retrieved. Can be:
+#'   * (character) Free text search, passed to [gaz_search()]
+#'   * (integer) A valid Marine Regions Gazetteer Identifier ([MRGID]), passed to [gaz_rest_relations_by_mrgid()]
+#'   * A data frame retrieved with [mregions2] via its functions [gaz_search()],
+#'     [gaz_search_by_source()] or [gaz_search_by_type()]. See details.
+#' @inheritDotParams gaz_rest_relations_by_mrgid -mrgid
+#' @inheritDotParams gaz_rest_record_by_mrgid -mrgid
+#' @inheritDotParams gaz_rest_records_by_name -name
+#' @inheritDotParams gaz_rest_records_by_names -names
 #'
+#' @inherit gaz_geometry details
 #' @export
 #'
 #' @examples
@@ -37,24 +45,21 @@ gaz_relations.mr_df <- function(x, ...){
 
 #' Retrieve Gazetter Relations by MRGID
 #'
-#'   Gazetteer Records that are related to a given input MRGID. Relationships can be parents (`upper`), children (`lower`) or both.
-#'   Geographic types can also be specified, for example `partof` and `adjacentto`.
 #'
-#' @param mrgid The [Marine Regions Geographic IDentifier](https://marineregions.org/mrgid.php).
-#' @param  Logical. Add geometries to the result data frame? Default = FALSE
-#' @param direction The hierarchical structure. Must be one of `c("upper", "lower", "both")`. `"upper"` lists all parents of the
-#'   record. `"lower"` lists all childs of the record. `"both"` lists parents and childs of the record.
-#' @param type must be one of `c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")`.
-#'   Explanations of the `types` [here](https://marineregions.org/ontology/documentation.html) in chapter *Object Properties*.
+#' @param mrgid (integer) A valid Marine Regions Gazetteer Identifier ([MRGID])
+#' @param with_geometry (logical) Add geometries to the result data frame? Default = FALSE
+#' @param direction (character) Must be one of `r c("upper", "lower", "both")`:
+#' *  `upper`: lists all parents of the record.
+#' * `lower`: lists all childs of the record.
+#' * `both`: lists parents and childs of the record (default)
+#' @param type (character) Must be one of `r c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")`.
 #'
 #' @export
 #'
-#' @examples
-#' mariana_trench <- gaz_search("Mariana Trench")
-#' mariana_trench_mrgid <- mariana_trench$MRGID
+#' @seealso [List of types (Object Properties)](https://marineregions.org/ontology/documentation.html), [gaz_rest], [MRGID]
 #'
-#' mariana_trench_relations <- gaz_rest_relations_by_mrgid(mariana_trench_mrgid)
-#' mariana_trench_relations$preferredGazetteerName
+#' @examples
+#' gaz_rest_relations_by_mrgid(7378)
 gaz_rest_relations_by_mrgid <- function(mrgid, with_geometry = FALSE, direction = "both", type = "all"){
 
   # Assertions
