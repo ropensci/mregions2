@@ -196,7 +196,7 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE, 
 #' @param fuzzy (logical) Use Levenshtein query to find nearest matches? Default = FALSE
 #'
 #' @export
-#' @seealso [gaz_rest], [MRGID]
+#' @seealso [gaz_rest], [gaz_rest_records_by_name]
 #' @return A data frame with Gazetteer entries
 #'
 #' @examples
@@ -352,7 +352,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
 #' @param fuzzy (logical) Use Levenshtein query to find nearest matches? Default = FALSE
 #'
 #' @export
-#' @seealso [gaz_rest]
+#' @seealso [gaz_rest], [gaz_rest_records_by_name]
 #' @return A data frame with Gazetteer entries
 #'
 #' @export

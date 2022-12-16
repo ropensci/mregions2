@@ -33,5 +33,5 @@ gaz_rest_records_by_names(
 )
 }
 \seealso{
-\link{gaz_rest}
+\link{gaz_rest}, \link{gaz_rest_records_by_name}
 }

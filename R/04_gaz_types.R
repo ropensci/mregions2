@@ -32,17 +32,63 @@ gaz_rest_types <- function(){
 #' @export
 gaz_types <- memoise::memoise(gaz_rest_types)
 
+
 #' Retrieve Gazetteer Records by Placetype
+#'
+#' @param x A [gaz_types()][place type]. Either:
+#' - (character) The name of a place type.
+#' - (integer) The typeid of a place type.
 #' @inheritDotParams gaz_rest_records_by_type
-#' @inherit gaz_rest_records_by_type return seealso
+#'
+#' @seealso [gaz_types()]
+#'
+#' @return A data frame with Gazetteer entries
 #' @export
+#'
 #' @examples
-#' gaz_search_by_type("FAO Subdivisions")
+#' # This
 #' gaz_search_by_type("EEZ")
-gaz_search_by_type <- function(type, ...){
-  lapply(type, gaz_rest_records_by_type, ...) %>%
+#'
+#' # is the same as
+#' gaz_search_by_type(70)
+gaz_search_by_type <- function(x, ...){
+  UseMethod("gaz_search_by_type")
+}
+
+#' @rdname gaz_search_by_type
+#' @export
+gaz_search_by_type.character <- function(x, ...){
+  x = sort(unique(x))
+
+  lapply(x, gaz_rest_records_by_type, ...) %>%
     dplyr::bind_rows() %>%
     new_mr_df()
+}
+
+#' @rdname gaz_search_by_type
+#' @export
+gaz_search_by_type.numeric <- function(x, ...){
+  x = checkmate::assert_integerish(x, lower = 1, upper = 999999999, min.len = 1,
+                                   any.missing = FALSE, all.missing = FALSE,
+                                   coerce = TRUE)
+  x <- sort(unique(x))
+
+  # There is no REST method to return records by typeid
+  # Instead, filter gaz_types() to look up the type as a place name
+
+  # Assert choice
+  are_not_choice <- !all(x %in% gaz_types()$typeID)
+  if(are_not_choice){
+    typeid_not_part_of <- subset(x, !(x %in% gaz_types()$typeID))
+    stop(glue::glue("`typeid` must be element of set `gaz_types()`, but is/are '{paste0(typeid_not_part_of, collapse = ', ')}'"), call. = FALSE)
+  }
+
+  # Perform
+  x <- gaz_types() %>%
+    dplyr::filter(typeID %in% x)
+
+  gaz_search_by_type.character(x$type)
+
 }
 
 #' Retrieve Gazetteer Records by Placetype
@@ -51,7 +97,7 @@ gaz_search_by_type <- function(type, ...){
 #' @param with_geometry (logical) Add geometries to the result data frame? Default = FALSE
 #'
 #' @return A data frame with Gazetteer entries
-#' @seealso [gaz_rest]
+#' @seealso [gaz_rest], [gaz_rest_types()]
 #' @export
 #'
 #' @examples
@@ -88,7 +134,7 @@ gaz_rest_records_by_type <- function(placetype, with_geometry = FALSE){
     # If first is 404, the placetype must not be correct. Assert.
     if(httr2::resp_status(resp) == 404){
 
-      list_placetypes <- tolower(gaz_rest_types()$type)
+      list_placetypes <- tolower(gaz_types()$type)
 
       is_not_choice <- !(placetype %in% list_placetypes)
 
