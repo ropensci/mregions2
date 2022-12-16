@@ -1,6 +1,8 @@
 url: https://lifewatch.github.io/mregions2/
 template:
   bootstrap: 5
+deploy:
+  install_metadata: true
 authors:
   Salvador Fernández:
     href: https://twitter.com/salvafern

@@ -1,0 +1,39 @@
+---
+title: "Why mregions and mregions2"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Why two packages for Marine Regions? mregions vs mregions2}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Since 2021, the geometries of the [Marine Regions gazetteer](https://marineregions.org/gazetteer.php?p=webservices) are available as Well-Known Text, coming directly from the Data Base and offered as Open Linked Data and Open Linked Data Event Streams. Previously, they were just a WMS link, in many cases coming form the Marine Regions OGC Web Services hosted at the [Flanders Marine Institute (VLIZ) geoserver](https://geo.vliz.be). Therefore, the functions of `mregions` did not use the `MRGID` in an effort to unify the geometries that were in geoserver and the gazetteer.
+
+This method is not needed anymore since the geometries are in the Gazetteer. `mregions2` makes a very clear distinction between the Gazetteer database and the Data Products created by Marine Regions.
+
+We decided to create a new package to not break compatibility. We will continue to maintain `mregions` but we won't add new developments.
+
+# What's new in `mregions2`?
+
+During 2021, new webservices were developed to access the Marine Regions Gazetteer. In essence, two major changes happened:
+* The database can be accessed now through Open Linked Data standards: JSON-LD and TTL. 
+* The geometry associated to each gazetteer record is now available through RESTful services.
+
+More information in: 
+
+> Lonneville B. et al. (2021) Publishing the Marine Regions Gazetteer as a Linked Data Event Stream. S4BioDiv 2021. http://ceur-ws.org/Vol-2969/paper8-s4biodiv.pdf
+
+The `mregions2` package uses these two new functionalities to serve geometries in R as `sf` objects from the [sf R package](https://r-spatial.github.io/sf/), and allows to retrieve the Gazetteer database as `rdf` objects from the [rdflib R package](https://docs.ropensci.org/rdflib/). 
+
+The [mregions2-rdf] vignette describes more in detail how to use `mregions2` and `rdflib` together with examples.
+
+```r
+vignette("mrgions2-rdf", package = "mregions2")
+```

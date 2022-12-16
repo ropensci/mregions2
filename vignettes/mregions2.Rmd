@@ -1,0 +1,69 @@
+---
+title: "Introduction to mregions2"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{mregions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(mregions2)
+```
+
+mregions2 allows to access the [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) and the [Marine Regions Data Products](https://marineregions.org/sources.php) in R.
+
+# What's Marine Regions?
+
+[Marine Regions](https://marineregions.org/) is part of the [LifeWatch project](https://www.lifewatch.be/). Its activities  focus on two main outputs: The [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) and the [Marine Regions Data Products](https://marineregions.org/sources.php).
+
+The [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) is a standard list of marine georeferenced place names.
+
+> Gazetteer: a dictionary of geographical names. 
+
+<sup>https://www.thefreedictionary.com/gazetteer</sup>
+
+All geographic objects of the Marine Regions Gazetteer database have a unique ID, named the [**MRGID**](https://marineregions.org/mrgid.php)
+
+> Syntax `http://marineregions.org/mrgid/<number>`
+
+<sup>E.g. https://marineregions.org/mrgid/3293</sup>
+
+In addition to the Marine Regions Gazetteer, the Marine Regions Team creates and hosts geographical Data Products, being the most popular one the [Marine Regions Maritime Boundaries](https://marineregions.org/eez.php).
+
+
+![140389_marineregions-v11---eez](https://user-images.githubusercontent.com/54405067/156809171-1487bb9f-35af-4418-8e2f-93c24a59aad0.gif)
+
+<sup>(Source: https://www.vliz.be/en/news?p=show&id=8160)</sup>
+
+# What's mregions2?
+
+mregions2 aims to retrieve marine geospatial information from the [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php?p=webservices) and access the  [Marine Regions Data Products](https://marineregions.org/sources.php).
+
+The mregions2 package makes this difference clear from the naming of its functions:
+* Gazetteer functions: `gaz_*()`
+* Data Products functions: `mrp_()*`
+
+These differences are not trivial as mregions2 uses different methods to access the Marine Regions Gazetteer than the Marine Regions Data Products: the Marine Regions Gazetteer is accessible using [RESTful methods](https://www.marineregions.org/gazetteer.php?p=webservices) with `gaz_search()`. The Marine Regions Data Products can be accessed using [OGC Web Services](https://www.marineregions.org/webservices.php). They are hosted at the [Flanders Marine Institute (VLIZ) geoserver](https://geo.vliz.be): 
+
+> `http://geo.vliz.be/`
+
+They can be visualized via [Web Map Services (WMS)](https://en.wikipedia.org/wiki/Web_Map_Service) with `mrp_view()` or downloaded by [Web Feature Services (WFS)](https://en.wikipedia.org/wiki/Web_Feature_Service) with `mrp_get()`
+
+# Why mregions2 instead of mregions?
+mregions2 supersedes {`mregions`}. The need of mregions2 is further explained in `vignette("why_mregions2")`
+
+
+>**NOTE**
+>
+> The naming `mrp_*()` instead of `mr_()` was decided to avoid overlapping with the functions from {`mregions`}
+
+
+

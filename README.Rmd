@@ -16,11 +16,12 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-mregions2 supersedes [mregions](https://github.com/ropensci/mregions).
-It aims to:
+mregions2 allows to access the [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) and the [Marine Regions Data Products](https://marineregions.org/sources.php) in R.
 
-* Retrieve marine geospatial information from the [Marineregions gazetteer](https://marineregions.org/gazetteer.php?p=webservices). 
-* Access and handle data products from the [Flanders Marine Institute (VLIZ) geoserver](http://geo.vliz.be/geoserver/web/wicket/bookmarkable/org.geoserver.web.demo.MapPreviewPage?1).
+You can find detailed information in the vignettes:
+* Introduction to mregions2: `vignette("mregions2")`
+* Why mregions and mregions2?: `vignette("why_mregions2")`
+* mregions2 as RDF: `vignette("mregions2-rdf")`
 
 
 ## Installation
@@ -32,128 +33,100 @@ You can install the development version of mregions2 from [GitHub](https://githu
 devtools::install_github("lifewatch/mregions2")
 ```
 
-## Examples
+# Search the Marine Regions Gazetteer
 
-```{r load libraries}
-library(mregions2)
+The [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) is a standard list of marine georeferenced place names.
 
-# helper library
-library(mapview)
+> Gazetteer: a dictionary of geographical names. 
+
+<sup>https://www.thefreedictionary.com/gazetteer</sup>
+
+You can look up for marine places the Marine Regions Gazetteer with a free text search:
+
+```{r gaz1}
+require(mregions2)
+
+gaz_search("Belgian")
+```
+You can also make a fuzzy search or restrict to names in a certain language: 
+
+```{r gaz5}
+# Make a fuzzy search to find Belgium in the Dutch language.
+# Note the term Belgie is mispelled: it should be België. This is ignored thanks to the fuzzy search.
+
+gaz_search("Belgie", language = "nl", fuzzy = TRUE)
 ```
 
-For more information about a function, type `?<function_name>` in the R console. This opens the function's documentation.
+## Search by MRGID
 
-### `mr_gaz_records_by_names()`
-This function retrieves records from the [Marine Gazetteer](https://marineregions.org/gazetteer.php?p=search) by inputting one or more search terms, i.e. `"North Sea"` or `"Belgium"`. The result is a [`tibble`](https://tibble.tidyverse.org) with all records that contain one of the search terms in their `preferredGazetteerName`.
+The entries in the Marine Regions Gazetteer are identified with an unique and persistent identifier: the Marine Regions Global Identifier or MRGID. The concept of MRGID is further explained in `vignette("mregions2")`.
 
-```{r example mr_gaz_records_by_names()}
-north_sea <- mr_gaz_records_by_names("North Sea")
+You can pass this identifier to `gaz_search()` to get only that record. E.g. in the previous example, the Belgian Exclusive Economic Zone has the MRGID 3293:
 
-head(north_sea$preferredGazetteerName)
+```{r gaz2}
+gaz_search(3293)
 ```
 
-<!-- When looking for the Belgian Part of the North Sea, for example, searching for `c("North Sea","Belgian")` will result in all records that contain one of the two terms. -->
+## Include geometries
 
-<!-- ```{r example2 mr_gaz_records_by_names()} -->
-<!-- northsea_belgian <- mr_gaz_records_by_names(c("North Sea", "Belgian")) -->
+To avoid overloading the server, the geometry of the record is not returned by default. You can pass the result of `gaz_search()` to `gaz_geometry()` if you want to also get the geometry of the record. It will return an object of class `sf::sf`. 
 
-<!-- # Inspect all record names that were found -->
-<!-- northsea_belgian$preferredGazetteerName -->
-<!-- ``` -->
+```{r gaz3}
+require(magrittr)
 
-Records can have the same name, however, the are always distinguishable by their [MRGID](https://marineregions.org/mrgid.php). Let's look a bit closer at the records named `North Sea`.
-
-```{r example3 mr_gaz_records_by_names()}
-# north_sea_name <- north_sea[north_sea$preferredGazetteerName == "North Sea", ]
-north_sea_name <- subset(north_sea, preferredGazetteerName == "North Sea")
-# View(north_sea_name)
-```
-The 6 records with the same `preferredGazetteerName == "North Sea"` differ in their ` placeType`. The correct record to choose depends on the goal of the analysis. The status of the record can, however, help decide which one to choose. For example, the `status` of the 6 records in `north_sea_name` is either `standard`, `synonym` or `deleted`. In this case, `North Sea` with ` placeType == "IHO Sea Area"`, that has the `standard` status, should be preferred.
-<!-- provide link to further info about the status names -->
-
-```{r example4 mr_gaz_records_by_names()}
-north_sea_name$placeType
-north_sea_name$status
+gaz_search(3293) %>% gaz_geometry()
 ```
 
-### `mr_gaz_record()`
+You can also use the argument `with_geometry` as `gaz_search(3293, with_geometry = TRUE)` to load the geometry directly
 
-This function retrieves a geometry from the [VLIZ geoserver](http://geo.vliz.be/geoserver/web/wicket/bookmarkable/org.geoserver.web.demo.MapPreviewPage?1). The geometry is a geospatial object of `class(sf)` (simple feature) from the `sf` R package. Here you can find an [introduction](https://r-spatial.github.io/sf/) to `simple feature objects` in `sf` and an [overview](https://r-spatial.github.io/sf/reference/index.html) of all available functions.
+Several MRGIDs can be returned in one call:
 
-In the following example, the geometry of the North Sea IHO Sea Area is retrieved and visualised.
-```{r example mr_gaz_record()}
-north_sea_IHO <- subset(north_sea, placeType == "IHO Sea Area" & preferredGazetteerName == "North Sea")
-mrgid <- north_sea_IHO$MRGID
-
-# check the outcome when a geom is there and when not
-# IHO_geom <- mr_gaz_record(mrgid)
-# colnames(IHO_geom)
-# 
-# mapview(IHO_geom)
-```
-### `mr_gaz_info()`
-
-This function lists information about the [Marine Gazetteer](https://marineregions.org/gazetteer.php?p=search) records, namely `placeTypes` and `sources`. This is especially useful when using `mr_gaz_records_by_type()` and `mr_gaz_records_by_source()`.The result is a [`tibble`](https://tibble.tidyverse.org) with the first 100 of all available `sources` when using `mr_gaz_info("sources")` or with all available `placeTypes` when using `mr_gaz_info("placetypes")`.
-
-```{r example mr_gaz_info()}
-all_sources <- mr_gaz_info("sources")
-head(all_sources$source)
-all_types <- mr_gaz_info("placetypes")
-head(all_types$type)
+```{r gaz4}
+gaz_search(c(14, 3293))
 ```
 
-### `mr_gaz_records_by_type()`
+## Reverse Geocode: Search by longitude-latitude
 
-This function retrieves the first 100 records from the [Marine Gazetteer](https://marineregions.org/gazetteer.php?p=search) by inputting a placetype. This can be `"Sandbank"` or `"Archipelago"`, for instance. 
-The result of `mr_gaz_records_by_type()` is a [`tibble`](https://tibble.tidyverse.org) with the first 100 records of the specified `placeType`.
+You can do a reverse geocode with mregions2: passing a pair longitude-latitude coordinates in WGS84 will return all records that intersect with the point.
 
-In the following example, a list of all the available `placeTypes` will first be fetched using `mr_gaz_info("placetypes")`.
-```{r mr_gaz_records_by_type()}
-all_types <- mr_gaz_info("placetypes")
+e.g. the pair [longitude 2.927 - latitude 51.21551](https://www.openstreetmap.org/search?query=51.21551%252C%202.927) lays on the city of [Ostend](https://wikipedia.org/wiki/Ostend) at the Belgian coast 
 
-archipelagos <- mr_gaz_records_by_type("Archipelago")
-head(archipelagos$preferredGazetteerName)
+```{r gaz6}
+gaz_search(x = 2.927, y = 51.21551)
 ```
 
-### `mr_gaz_records_by_source()`
+Passing an `sf::sfg` geometry object is also allowed:
 
-This function retrieves the first 100 records from the [Marine Gazetteer](https://marineregions.org/gazetteer.php?p=search) by inputting a source. This can be `"GeoNames"` or `"AlgaeNames"`, for instance. In the following example, a list of the first 100 available `sources` will be fetched using `mr_gaz_info("sources")`.
-The result of `mr_gaz_records_by_source()` is a [`tibble`](https://tibble.tidyverse.org) with the first 100 records of the specified `source`.
+```{r gaz7}
+require(sf)
 
-```{r mr_gaz_records_by_source()}
-placetypes <- mr_gaz_info("placetypes")
+pt <- st_point(c(x = 2.927, y = 51.21551))
+pt
 
-archipelagos <- mr_gaz_records_by_type("Archipelago")
-head(archipelagos$preferredGazetteerName)
+gaz_search(pt)
 ```
 
-### `mr_gaz_records_by_latlon()`
+## Search by place type
 
-This function retrieves the first 100 records from the [Marine Gazetteer](https://marineregions.org/gazetteer.php?p=search) by inputting a Latitude and a Longitude.
-The result of `mr_gaz_records_by_latlon()` is a [`tibble`](https://tibble.tidyverse.org) with the first 100 records of the specified `lat` and `lon`, where their centroid is within the bounding box calculated by latitude (+/- radius) and longitude (+/- radius).
-A latitude and longitude radius can be given as a function argument. Check `?mr_gaz_records_by_latlon` for details.
+The records of the Marine Regions Gazetteer have a place types assigned, either physical such as sea mounts or banks, or administrative like Territorial Sea or Exclusive Economic Zone. 
 
-In the following example, all records in the area of the Mariana Trench will be retrieved.
+You can find the full list, descriptions and its identifier in the database with [gaz_types()]:
 
-```{r example mr_gaz_records_by_latlon()}
-mariana_trench <- mr_gaz_records_by_names("Mariana Trench")
-
-mariana_trench_lat <- mariana_trench$latitude
-mariana_trench_lon <- mariana_trench$longitude
-
-records_mariana_trench <- mr_gaz_records_by_latlon(mariana_trench_lat, mariana_trench_lon)
-
-head(records_mariana_trench$preferredGazetteerName)
+```{r gaz8}
+gaz_types()
 ```
 
-There are many *Guyots* around Mariana Trench, apparently! Let's explore them a bit.
-```{r example Guyots}
-all_types <- mr_gaz_info("placetypes")
+You can restrict your search to a certain typeid:
 
-guyot <- subset(all_types, type == "Guyot")
-guyot$description
+```{r gaz9}
+gaz_search("Oostende", typeid = 1)
+```
 
-guyots_mariana_trench <- subset(records_mariana_trench, placeType == "Guyot")
+Or you can look up all the records with a certain place type, either passed as text or with the typeid
+```{r gaz10}
+gaz_search_by_type("EEZ")
+```
 
-nrow(guyots_mariana_trench)
+```{r gaz11}
+gaz_search_by_type(c(350, 351))
 ```

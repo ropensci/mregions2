@@ -40,5 +40,5 @@ gaz_rest_records_by_name("Belgica", language = "es", fuzzy = TRUE)
 gaz_rest_records_by_name("Belgium", typeid = c(350, 351))
 }
 \seealso{
-\link{gaz_rest}, \link{MRGID}
+\link{gaz_rest}, \link{gaz_rest_records_by_name}
 }

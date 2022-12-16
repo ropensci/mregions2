@@ -1,5 +1,5 @@
 ---
-title: "mregions2-rdf"
+title: "mregions2 as RDF"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{mregions2-rdf}
@@ -14,7 +14,56 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r rdf}
+# Introduction
+
+The Marine Regions Gazetteer is accessible as Linked Data Event Streams. This is described with high detail in: 
+
+> Lonneville B. et al. (2021) Publishing the Marine Regions Gazetteer as a Linked Data Event Stream. S4BioDiv 2021. http://ceur-ws.org/Vol-2969/paper8-s4biodiv.pdf
+
+# Retrieving the Marine Regions Gazetteer as RDF
+
+Known an [MRGID][mregions2], you can get it as RDF. 
+
+E.g. the Belgian Exclusive Economic Zone or Belgian Part of the North Sea has the MRGID: <https://marineregions.org/mrgid/3293> 
+
+Using `gaz_search()` or the underlying service `gaz_rest_record_by_mrgid()` with the argument `rdf = TRUE` will:
+1. Use content negotiation to get the MRGID in Turtle format. 
+2. Read this document as RDF using the [rdflib](https://docs.ropensci.org/rdflib/) R package. 
+
+HTTP requests are handled with the R package [httr2](https://httr2.r-lib.org/)
+
+```{r chunk1}
+library(mregions2)
+
+bpns <- gaz_rest_record_by_mrgid(3293, rdf = TRUE)
+
+bpns
+
+```
+
+The MRGID includes info about the Gazetteer record and its hierarchy. The relations are explained the Marine Regions Ontology:
+> `http://marineregions.org/ns/ontology`
+
+There is also information about the Place Type. The Place Types are defined in:
+> `http://marineregions.org/ns/placetypes`
+
+Both the ontology and the placetypes are available as HTML when using a web browser, but also as Turtle or JSON-LD by using content negotiation.
+
+You can then use the [rdflib](https://docs.ropensci.org/rdflib/) R package further to apply common RDF applications. 
+
+E.g. you can serialize the record as JSON-LD
+```{r chunk2}
+library(rdflib)
+
+# doc = rdf()
+
+# rdf_serialize(bpns, doc = doc, format = "jsonld")
+
+```
+
+
+
+```{r rdf, include = FALSE}
 library(mregions2)
 
 #

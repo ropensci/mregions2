@@ -2,11 +2,23 @@
 % Please edit documentation in R/04_gaz_types.R
 \name{gaz_search_by_type}
 \alias{gaz_search_by_type}
+\alias{gaz_search_by_type.character}
+\alias{gaz_search_by_type.numeric}
 \title{Retrieve Gazetteer Records by Placetype}
 \usage{
-gaz_search_by_type(type, ...)
+gaz_search_by_type(x, ...)
+
+\method{gaz_search_by_type}{character}(x, ...)
+
+\method{gaz_search_by_type}{numeric}(x, ...)
 }
 \arguments{
+\item{x}{A \link[=place type]{gaz_types()}. Either:
+\itemize{
+\item (character) The name of a place type.
+\item (integer) The typeid of a place type.
+}}
+
 \item{...}{
   Arguments passed on to \code{\link[=gaz_rest_records_by_type]{gaz_rest_records_by_type}}
   \describe{
@@ -20,9 +32,12 @@ A data frame with Gazetteer entries
 Retrieve Gazetteer Records by Placetype
 }
 \examples{
-gaz_search_by_type("FAO Subdivisions")
+# This
 gaz_search_by_type("EEZ")
+
+# is the same as
+gaz_search_by_type(70)
 }
 \seealso{
-\link{gaz_rest}
+\code{\link[=gaz_types]{gaz_types()}}
 }
