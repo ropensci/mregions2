@@ -1,14 +1,10 @@
 #' Walk the hierarchy of the MarineRegions Gazetter given a Gazetteer MRGID, name or Gazetteer entries
 #'
 #' @param x the object from which the relations are retrieved. Can be:
-#'   * (character) Free text search, passed to [gaz_search()]
 #'   * (integer) A valid Marine Regions Gazetteer Identifier ([MRGID]), passed to [gaz_rest_relations_by_mrgid()]
 #'   * A data frame retrieved with [mregions2] via its functions [gaz_search()],
-#'     [gaz_search_by_source()] or [gaz_search_by_type()]. See details.
+#'     [gaz_search_by_source()] or [gaz_search_by_type()].
 #' @inheritDotParams gaz_rest_relations_by_mrgid -mrgid
-#' @inheritDotParams gaz_rest_record_by_mrgid -mrgid
-#' @inheritDotParams gaz_rest_records_by_name -name
-#' @inheritDotParams gaz_rest_records_by_names -names
 #'
 #' @inherit gaz_geometry details
 #' @export

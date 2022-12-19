@@ -193,7 +193,7 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE, 
 #' @param typeid (numeric) Restrict to one or more placetypeIDs. Retrieve a list of placetypeIDs with [gaz_rest_types()]
 #' @param language (character) Restrict to one language. Provide as a 2 digits ISO-639. See [ISOcodes::ISO_639_2].
 #' @param like (logical) Add a '%'-sign before and after the name? (SQL LIKE function). Default = TRUE
-#' @param fuzzy (logical) Use Levenshtein query to find nearest matches? Default = FALSE
+#' @param fuzzy (logical) Use Levenshtein query to find nearest matches? Default = TRUE
 #'
 #' @export
 #' @seealso [gaz_rest], [gaz_rest_records_by_name]
@@ -202,9 +202,8 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE, 
 #' @examples
 #' gaz_rest_records_by_name("Belgian Exclusive Economic Zone", with_geometry = TRUE)
 #' gaz_rest_records_by_name("Bélgica", language = "es")
-#' gaz_rest_records_by_name("Belgica", language = "es", fuzzy = TRUE)
 #' gaz_rest_records_by_name("Belgium", typeid = c(350, 351))
-gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL, language = NULL, like = TRUE, fuzzy = FALSE, ...){
+gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL, language = NULL, like = TRUE, fuzzy = TRUE, ...){
 
   # Assert name
   checkmate::assert_character(name, len = 1)
@@ -349,7 +348,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
 #' @param name (character) Term to search in the Marine Regions Gazetteer
 #' @param with_geometry (logical) Add geometry to the result data frame? Default = FALSE
 #' @param like (logical) Add a '%'-sign before and after the name? (SQL LIKE function). Default = TRUE
-#' @param fuzzy (logical) Use Levenshtein query to find nearest matches? Default = FALSE
+#' @param fuzzy (logical) Use Levenshtein query to find nearest matches? Default = TRUE
 #'
 #' @export
 #' @seealso [gaz_rest], [gaz_rest_records_by_name]
@@ -361,7 +360,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
 #' gaz_rest_records_by_names(
 #'   c("Belgian Exclusive Economic Zone", "Dutch Exclusive Economic Zone")
 #' )
-gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE, fuzzy = FALSE, ...){
+gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE, fuzzy = TRUE, ...){
 
   # Assertions
   checkmate::assert_character(names, min.len = 1, unique = TRUE, any.missing = FALSE, all.missing = FALSE)
