@@ -34,7 +34,10 @@ gaz_geometry <- function(x, ...){
 #' @export
 gaz_geometry.numeric <- function(x, ...){
 
-  x <- lapply(x, gaz_rest_geometries, format = format, multipart = multipart)
+  x <- lapply(x, gaz_rest_geometries, ...)
+
+  format <- substitute(list(...))$format
+  if(is.null(format)) format <- "sfc"
 
   if(format == "sfc") return( sf::st_sfc(sapply(x, c), crs = 4326) )
   if(format == "sf") return( x %>% dplyr::bind_rows() )
@@ -51,7 +54,6 @@ gaz_geometry.numeric <- function(x, ...){
     }
   }
 
-  # gaz_rest_geometries(x, ..., format = format, multipart = multipart)
 }
 
 #' @name gaz_geometry
@@ -127,6 +129,7 @@ gaz_rest_geometry <- function(mrgid, sourceid, attribute_value, format = "sfc", 
 #' @inheritParams gaz_rest_geometry
 #' @param resp_return_error the response should raise an error if HTTP Status 3xx, 4xx or 5xxx.
 #'   Reserved for internal use
+#' @param multipart return multipart?
 #'
 #' @noRd
 geom_perform <- function(url, format, multipart = TRUE, mrgid, resp_return_error = FALSE){
