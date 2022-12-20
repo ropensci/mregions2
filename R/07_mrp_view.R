@@ -120,8 +120,8 @@ base_map <- function(){
 
   if(url_not_up){
     cli::cli_abort(c(
-      "x" = "Connection to {.val {url_test}} failed",
-      "i" = "Check status of {.val https://portal.emodnet-bathymetry.eu/}"
+      "x" = "Connection to {.url {url_test}} failed",
+      "i" = "Check status of {.url https://portal.emodnet-bathymetry.eu/}"
     ))
   }
 

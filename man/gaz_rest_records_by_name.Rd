@@ -10,7 +10,7 @@ gaz_rest_records_by_name(
   typeid = NULL,
   language = NULL,
   like = TRUE,
-  fuzzy = FALSE,
+  fuzzy = TRUE,
   ...
 )
 }
@@ -25,7 +25,7 @@ gaz_rest_records_by_name(
 
 \item{like}{(logical) Add a '\%'-sign before and after the name? (SQL LIKE function). Default = TRUE}
 
-\item{fuzzy}{(logical) Use Levenshtein query to find nearest matches? Default = FALSE}
+\item{fuzzy}{(logical) Use Levenshtein query to find nearest matches? Default = TRUE}
 }
 \value{
 A data frame with Gazetteer entries
@@ -36,7 +36,6 @@ Get Gazetteer Records for a given name
 \examples{
 gaz_rest_records_by_name("Belgian Exclusive Economic Zone", with_geometry = TRUE)
 gaz_rest_records_by_name("Bélgica", language = "es")
-gaz_rest_records_by_name("Belgica", language = "es", fuzzy = TRUE)
 gaz_rest_records_by_name("Belgium", typeid = c(350, 351))
 }
 \seealso{

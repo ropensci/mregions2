@@ -2,7 +2,7 @@
 #'
 #' @param x source as free text or `sourceID` as integer
 #'
-#' @seealso [gaz_sources()], [gaz_rest_records_by_source()], [gaz_rest_source_by_sourceid()]
+#' @seealso [gaz_sources()]
 #'
 #' @return A data frame with Gazetteer entries
 #' @export
@@ -123,7 +123,7 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
 #' - `sourceURL`: if available, the URL of the source.
 #' @export
 #'
-#' @seealso [gaz_rest]
+#' @seealso [gaz_rest], [gaz_search_by_source()], [gaz_rest_records_by_source()], [gaz_rest_source_by_sourceid()]
 #'
 #' @examples
 #' # This

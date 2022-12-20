@@ -14,6 +14,9 @@ knitr::opts_chunk$set(
 # mregions2
 
 <!-- badges: start -->
+[![Funding](https://img.shields.io/static/v1?label=powered+by&message=lifewatch.be&labelColor=1a4e8a&color=f15922)](http://lifewatch.be)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 mregions2 allows to access the [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) and the [Marine Regions Data Products](https://marineregions.org/sources.php) in R.
@@ -33,7 +36,7 @@ You can install the development version of mregions2 from [GitHub](https://githu
 devtools::install_github("lifewatch/mregions2")
 ```
 
-# Search the Marine Regions Gazetteer
+## Query the Marine Regions Gazetteer
 
 The [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) is a standard list of marine georeferenced place names.
 
@@ -41,92 +44,74 @@ The [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) is a sta
 
 <sup>https://www.thefreedictionary.com/gazetteer</sup>
 
-You can look up for marine places the Marine Regions Gazetteer with a free text search:
+You can search the Gazetteer in many ways:
 
 ```{r gaz1}
-require(mregions2)
-
+# Search by free text
 gaz_search("Belgian")
+
+# Search by unique identifier. See ?MRGID
+gaz_search(3293)
+
+# Search by location
+gaz_search(x = 2.927, y = 51.21551)
+
+# Search by placetype
+gaz_search_by_type("EEZ")
+
+# Search by source
+gaz_search_by_source("Flanders Marine Institute (VLIZ)")
 ```
-You can also make a fuzzy search or restrict to names in a certain language: 
 
-```{r gaz5}
-# Make a fuzzy search to find Belgium in the Dutch language.
-# Note the term Belgie is mispelled: it should be België. This is ignored thanks to the fuzzy search.
+The list of place types and sources are available with [gaz_types()] and [gaz_sources()] respectively.
 
-gaz_search("Belgie", language = "nl", fuzzy = TRUE)
-```
-
-## Search by MRGID
-
-The entries in the Marine Regions Gazetteer are identified with an unique and persistent identifier: the Marine Regions Global Identifier or MRGID. The concept of MRGID is further explained in `vignette("mregions2")`.
-
-You can pass this identifier to `gaz_search()` to get only that record. E.g. in the previous example, the Belgian Exclusive Economic Zone has the MRGID 3293:
+You can add the geometry of the Gazetteer entries with [gaz_geometry()]:
 
 ```{r gaz2}
-gaz_search(3293)
+# Get a record and turn into a sf object with geometry
+gaz_search(3293) %>% gaz_geometry()
+
+# Or get only the geometry 
+gaz_geometry(3293, format = "sfc")
 ```
 
-## Include geometries
-
-To avoid overloading the server, the geometry of the record is not returned by default. You can pass the result of `gaz_search()` to `gaz_geometry()` if you want to also get the geometry of the record. It will return an object of class `sf::sf`. 
+The entries of the Marine Regions Gazetteer are organized hierarchiely. You can browse this hierarchy up and down with [gaz_relations()]
 
 ```{r gaz3}
-require(magrittr)
+# Get all relations
+gaz_search(3293) %>% gaz_relations()
 
-gaz_search(3293) %>% gaz_geometry()
+# Or get the relations directly
+gaz_relations(3293)
 ```
 
-You can also use the argument `with_geometry` as `gaz_search(3293, with_geometry = TRUE)` to load the geometry directly
 
-Several MRGIDs can be returned in one call:
 
-```{r gaz4}
-gaz_search(c(14, 3293))
+## Marine Regions Data Products
+
+In addition to the Marine Regions Gazetteer, the Marine Regions Team creates and hosts geographical Data Products, being the most popular one the [Marine Regions Maritime Boundaries](https://marineregions.org/eez.php).
+
+![140389_marineregions-v11---eez](https://user-images.githubusercontent.com/54405067/156809171-1487bb9f-35af-4418-8e2f-93c24a59aad0.gif)
+
+<sup>(Source: https://www.vliz.be/en/news?p=show&id=8160)</sup>
+
+
+You can visualize the data products with [mrp_view()] or load them into R with [mrp_get()]
+
+```{r prod1}
+mrp_view("eez")
 ```
 
-## Reverse Geocode: Search by longitude-latitude
-
-You can do a reverse geocode with mregions2: passing a pair longitude-latitude coordinates in WGS84 will return all records that intersect with the point.
-
-e.g. the pair [longitude 2.927 - latitude 51.21551](https://www.openstreetmap.org/search?query=51.21551%252C%202.927) lays on the city of [Ostend](https://wikipedia.org/wiki/Ostend) at the Belgian coast 
-
-```{r gaz6}
-gaz_search(x = 2.927, y = 51.21551)
+```{r prod2}
+mrp_get("eez")
 ```
 
-Passing an `sf::sfg` geometry object is also allowed:
+Get to know more in the Introduction to mregions2 vignette `vignette("mregions2")`
 
-```{r gaz7}
-require(sf)
-
-pt <- st_point(c(x = 2.927, y = 51.21551))
-pt
-
-gaz_search(pt)
+## Citation
+```{r citation}
+citation("mregions2")
 ```
 
-## Search by place type
-
-The records of the Marine Regions Gazetteer have a place types assigned, either physical such as sea mounts or banks, or administrative like Territorial Sea or Exclusive Economic Zone. 
-
-You can find the full list, descriptions and its identifier in the database with [gaz_types()]:
-
-```{r gaz8}
-gaz_types()
-```
-
-You can restrict your search to a certain typeid:
-
-```{r gaz9}
-gaz_search("Oostende", typeid = 1)
-```
-
-Or you can look up all the records with a certain place type, either passed as text or with the typeid
-```{r gaz10}
-gaz_search_by_type("EEZ")
-```
-
-```{r gaz11}
-gaz_search_by_type(c(350, 351))
-```
+## License
+MIT

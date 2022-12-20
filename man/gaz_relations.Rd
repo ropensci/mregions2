@@ -4,7 +4,7 @@
 \alias{gaz_relations}
 \alias{gaz_relations.numeric}
 \alias{gaz_relations.mr_df}
-\title{Walk the hierarchy of the MarineRegions Gazetter given a Gazetteer MRGID, name or Gazetteer entries}
+\title{Walk the hierarchy of the MarineRegions Gazetter given a Gazetteer MRGID or Gazetteer entries}
 \usage{
 gaz_relations(x, ...)
 
@@ -15,14 +15,13 @@ gaz_relations(x, ...)
 \arguments{
 \item{x}{the object from which the relations are retrieved. Can be:
 \itemize{
-\item (character) Free text search, passed to \code{\link[=gaz_search]{gaz_search()}}
 \item (integer) A valid Marine Regions Gazetteer Identifier (\link{MRGID}), passed to \code{\link[=gaz_rest_relations_by_mrgid]{gaz_rest_relations_by_mrgid()}}
 \item A data frame retrieved with \link{mregions2} via its functions \code{\link[=gaz_search]{gaz_search()}},
-\code{\link[=gaz_search_by_source]{gaz_search_by_source()}} or \code{\link[=gaz_search_by_type]{gaz_search_by_type()}}. See details.
+\code{\link[=gaz_search_by_source]{gaz_search_by_source()}} or \code{\link[=gaz_search_by_type]{gaz_search_by_type()}}.
 }}
 
 \item{...}{
-  Arguments passed on to \code{\link[=gaz_rest_relations_by_mrgid]{gaz_rest_relations_by_mrgid}}, \code{\link[=gaz_rest_record_by_mrgid]{gaz_rest_record_by_mrgid}}, \code{\link[=gaz_rest_records_by_name]{gaz_rest_records_by_name}}, \code{\link[=gaz_rest_records_by_names]{gaz_rest_records_by_names}}
+  Arguments passed on to \code{\link[=gaz_rest_relations_by_mrgid]{gaz_rest_relations_by_mrgid}}
   \describe{
     \item{\code{with_geometry}}{(logical) Add geometries to the result data frame? Default = FALSE}
     \item{\code{direction}}{(character) Must be one of upper, lower, both:
@@ -32,30 +31,22 @@ gaz_relations(x, ...)
 \item \code{both}: lists parents and childs of the record (default)
 }}
     \item{\code{type}}{(character) Must be one of partof, partlypartof, adjacentto, similarto, administrativepartof, influencedby, all.}
-    \item{\code{rdf}}{(logical) Return an object of class \link[rdflib:rdf]{rdflib::rdf}?}
-    \item{\code{typeid}}{(numeric) Restrict to one or more placetypeIDs. Retrieve a list of placetypeIDs with \code{\link[=gaz_rest_types]{gaz_rest_types()}}}
-    \item{\code{language}}{(character) Restrict to one language. Provide as a 2 digits ISO-639. See \link[ISOcodes:ISO_639]{ISOcodes::ISO_639_2}.}
-    \item{\code{like}}{(logical) Add a '\%'-sign before and after the name? (SQL LIKE function). Default = TRUE}
-    \item{\code{fuzzy}}{(logical) Use Levenshtein query to find nearest matches? Default = FALSE}
   }}
 }
 \description{
-Walk the hierarchy of the MarineRegions Gazetter given a Gazetteer MRGID, name or Gazetteer entries
+Walk the hierarchy of the MarineRegions Gazetter given a Gazetteer MRGID or Gazetteer entries
 }
 \details{
-You can pass the output of most \verb{gaz_*} functions to \code{gaz_geometry()} to retrieve the
-geometry the gazetteer entry. The data frame is then transformed into a \link[sf:sf]{sf::sf} object.
+You can pass the output of most \verb{gaz_*} functions to \code{gaz_relations()} to retrieve the
+related gazetteer entries
 \subsection{Developer info}{
 
-This is done in the method \code{\link[=gaz_geometry.mr_df]{gaz_geometry.mr_df()}}. \link[=new_mr_df]{mr_df} is a class defined in
-this package to ensure the data frame passed to gaz_geometry has a variable with \link{MRGID}.
+This is done in the method \code{\link[=gaz_relations.mr_df]{gaz_relations.mr_df()}}. \link[=new_mr_df]{mr_df} is a class defined in
+this package to ensure the data frame passed to gaz_relations has a variable with \link{MRGID}.
 }
 }
 \examples{
 # Get the relations of the Belgian Exclusive Economic Zone
-gaz_relations("Belgian Exclusive Economic Zone")
-
-# Or via gaz_search()
 require(magrittr)
 gaz_search("Belgian Exclusive Economic Zone") \%>\% gaz_relations()
 

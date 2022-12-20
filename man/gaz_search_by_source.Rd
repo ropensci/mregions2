@@ -36,5 +36,5 @@ gaz_search_by_source(contiguous_zone_src) \%>\% gaz_geometry()
 gaz_search_by_source(630:634)
 }
 \seealso{
-\code{\link[=gaz_sources]{gaz_sources()}}, \code{\link[=gaz_rest_records_by_source]{gaz_rest_records_by_source()}}, \code{\link[=gaz_rest_source_by_sourceid]{gaz_rest_source_by_sourceid()}}
+\code{\link[=gaz_sources]{gaz_sources()}}
 }

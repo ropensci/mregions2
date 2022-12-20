@@ -1,4 +1,4 @@
-#' Walk the hierarchy of the MarineRegions Gazetter given a Gazetteer MRGID, name or Gazetteer entries
+#' Walk the hierarchy of the MarineRegions Gazetter given a Gazetteer MRGID or Gazetteer entries
 #'
 #' @param x the object from which the relations are retrieved. Can be:
 #'   * (integer) A valid Marine Regions Gazetteer Identifier ([MRGID]), passed to [gaz_rest_relations_by_mrgid()]
@@ -6,14 +6,18 @@
 #'     [gaz_search_by_source()] or [gaz_search_by_type()].
 #' @inheritDotParams gaz_rest_relations_by_mrgid -mrgid
 #'
-#' @inherit gaz_geometry details
+#' @details
+#' You can pass the output of most `gaz_*` functions to `gaz_relations()` to retrieve the
+#' related gazetteer entries
+#'
+#' ## Developer info
+#' This is done in the method [gaz_relations.mr_df()]. [mr_df][new_mr_df] is a class defined in
+#' this package to ensure the data frame passed to gaz_relations has a variable with [MRGID].
+#'
 #' @export
 #'
 #' @examples
 #' # Get the relations of the Belgian Exclusive Economic Zone
-#' gaz_relations("Belgian Exclusive Economic Zone")
-#'
-#' # Or via gaz_search()
 #' require(magrittr)
 #' gaz_search("Belgian Exclusive Economic Zone") %>% gaz_relations()
 #'

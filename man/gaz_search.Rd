@@ -40,7 +40,7 @@ of class \code{POINT}
     \item{\code{typeid}}{(numeric) Restrict to one or more placetypeIDs. Retrieve a list of placetypeIDs with \code{\link[=gaz_rest_types]{gaz_rest_types()}}}
     \item{\code{language}}{(character) Restrict to one language. Provide as a 2 digits ISO-639. See \link[ISOcodes:ISO_639]{ISOcodes::ISO_639_2}.}
     \item{\code{like}}{(logical) Add a '\%'-sign before and after the name? (SQL LIKE function). Default = TRUE}
-    \item{\code{fuzzy}}{(logical) Use Levenshtein query to find nearest matches? Default = FALSE}
+    \item{\code{fuzzy}}{(logical) Use Levenshtein query to find nearest matches? Default = TRUE}
   }}
 
 \item{y}{(double) Latitude in WGS84 (Optional)}

@@ -8,7 +8,7 @@ gaz_rest_records_by_names(
   names,
   with_geometry = FALSE,
   like = TRUE,
-  fuzzy = FALSE,
+  fuzzy = TRUE,
   ...
 )
 }
@@ -17,7 +17,7 @@ gaz_rest_records_by_names(
 
 \item{like}{(logical) Add a '\%'-sign before and after the name? (SQL LIKE function). Default = TRUE}
 
-\item{fuzzy}{(logical) Use Levenshtein query to find nearest matches? Default = FALSE}
+\item{fuzzy}{(logical) Use Levenshtein query to find nearest matches? Default = TRUE}
 
 \item{name}{(character) Term to search in the Marine Regions Gazetteer}
 }
