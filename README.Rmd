@@ -23,6 +23,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 mregions2 allows to access the [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) and the [Marine Regions Data Products](https://marineregions.org/sources.php) in R.
 
 You can find detailed information in the vignettes:
+
 * Introduction to mregions2: `vignette("mregions2")`
 * Why mregions and mregions2?: `vignette("why_mregions2")`
 * mregions2 as RDF: `vignette("mregions2-rdf")`

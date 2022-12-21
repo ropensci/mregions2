@@ -4,9 +4,9 @@
 \name{mregions2-package}
 \alias{mregions2}
 \alias{mregions2-package}
-\title{mregions2: Marine Regions Data from 'Marineregions.org'}
+\title{mregions2: Access data from marineregions.org: the Marine Regions Gazetteer and the Marine Regions Data Products}
 \description{
-Retrieve marine geospatial information from the Marineregions gazetteer. Access and handle data products from the Flanders Marine Institute (VLIZ) geoserver.
+Explore and retrieve marine geospatial data from the Marine Regions Gazetteer and the Marine Regions Data Products, including the Maritime Boundaries.
 }
 \seealso{
 Useful links:

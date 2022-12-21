@@ -12,10 +12,11 @@ mregions2 allows to access the [Marine Regions
 Gazetteer](https://marineregions.org/gazetteer.php) and the [Marine
 Regions Data Products](https://marineregions.org/sources.php) in R.
 
-You can find detailed information in the vignettes: \* Introduction to
-mregions2: `vignette("mregions2")` \* Why mregions and mregions2?:
-`vignette("why_mregions2")` \* mregions2 as RDF:
-`vignette("mregions2-rdf")`
+You can find detailed information in the vignettes:
+
+-   Introduction to mregions2: `vignette("mregions2")`
+-   Why mregions and mregions2?: `vignette("why_mregions2")`
+-   mregions2 as RDF: `vignette("mregions2-rdf")`
 
 ![140389_marineregions-v11—eez](https://user-images.githubusercontent.com/54405067/156809171-1487bb9f-35af-4418-8e2f-93c24a59aad0.gif)
 
@@ -247,7 +248,7 @@ mrp_view("eez")
 #> Loading ISO 19115 codelists...
 ```
 
-<img src="man/figures/README-prod1-1.png" width="60%" />
+<img src="man/figures/README-prod1-1.png" width="100%" />
 
 Or you can load the data products into R with \[mrp_get()\]
 
