@@ -101,7 +101,7 @@ with the identifier of the data product (see \code{\link[=mrp_list]{mrp_list()}}
 }
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 # You can pass a product name from mrp_list()
 mrp_view('eez')
 
@@ -121,7 +121,7 @@ mrp_view_ecs_boundaries(cql_filter="doc_date > '2000-01-01' AND doc_date < '2009
 
 # Or as timestamp
 mrp_view_eez_boundaries(cql_filter="doc_date AFTER 2000-01-01T00:00:00Z AND doc_date BEFORE 2009-12-31T00:00:00Z")
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 \code{\link[=mrp_list]{mrp_list()}} to describe the list of products, \code{\link[=mrp_colnames]{mrp_colnames()}} and \code{\link[=mrp_col_unique]{mrp_col_unique()}} to get the name, data type and unique values of a the columns of a data product, useful to query

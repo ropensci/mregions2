@@ -59,7 +59,8 @@ gaz_geometry.numeric <- function(x, ...){
 #' @name gaz_geometry
 #'
 #' @export
-gaz_geometry.mr_df <- function(x){
+gaz_geometry.mr_df <- function(x, ...){
+  wrapr::stop_if_dot_args(substitute(list(...)), "Must not provide aditional arguments")
   x %>% gaz_add_geometry()
 }
 

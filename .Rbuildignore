@@ -6,3 +6,6 @@
 ^docs$
 ^pkgdown$
 ^\.github$
+^\./README_cache$
+^\./vignettes/mregions2_cache$
+^\./vignettes/mregions2-rdf_cache$

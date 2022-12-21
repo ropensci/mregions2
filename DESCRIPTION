@@ -31,9 +31,20 @@ Imports:
     tidyr (>= 1.2.0),
     utils,
     rdflib,
-    mregions,
     ISOcodes,
-    memoise
+    memoise,
+    cli,
+    curl,
+    dplyr,
+    leaflet,
+    leaflet.extras2,
+    lubridate,
+    ows4R (>= 0.3),
+    purrr,
+    readr,
+    shiny,
+    xml2,
+    wrapr
 RoxygenNote: 7.2.0
 URL: https://github.com/lifewatch/mregions2,
     https://lifewatch.github.io/mregions2/
@@ -42,6 +53,7 @@ Suggests:
     knitr,
     mapview,
     rmarkdown,
-    wk
+    wk,
+    mregions
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)

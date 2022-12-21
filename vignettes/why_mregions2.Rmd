@@ -12,6 +12,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+options(rmarkdown.html_vignette.check_title = FALSE)
 ```
 
 Since 2021, the geometries of the [Marine Regions gazetteer](https://marineregions.org/gazetteer.php?p=webservices) are available as Well-Known Text, coming directly from the data base and offered as Open Linked Data and Open Linked Data Event Streams. Previously, they were just a WMS link, in many cases coming from the Marine Regions OGC Web Services hosted at the [Flanders Marine Institute (VLIZ) geoserver](https://geo.vliz.be). Therefore, the functions of `mregions` did not use the `MRGID` in an effort to unify the geometries that were in geoserver with the gazetteer entries.

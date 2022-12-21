@@ -17,17 +17,8 @@ knitr::opts_chunk$set(
   out.width = "100%",
   cache = TRUE
 )
-```
 
-```{r setup, results='hide', message=FALSE}
-library(mregions2)
-
-# To use the pipe operator `%>%`
-library(magrittr) 
-
-# For illustrative purposes
-library(sf) 
-library(dplyr) 
+options(rmarkdown.html_vignette.check_title = FALSE)
 ```
 
 mregions2 allows to access the [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) and the [Marine Regions Data Products](https://marineregions.org/sources.php) in R.
@@ -78,6 +69,18 @@ mregions2 supersedes {`mregions`}. The need of mregions2 is further explained in
 > The naming `mrp_*()` instead of `mr_()` was decided to avoid overlapping with the functions from {`mregions`}
 
 # Marine Regions Gazetteer
+
+```{r setup, results='hide', message=FALSE}
+library(mregions2)
+
+# To use the pipe operator `%>%`
+library(magrittr) 
+
+# For illustrative purposes
+library(sf) 
+library(dplyr) 
+```
+
 
 ## Search
 

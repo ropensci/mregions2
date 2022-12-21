@@ -23,7 +23,7 @@ Retrieve Gazetteer Records by Source
 }
 \examples{
 # Check out all sources
-View(gaz_sources())
+gaz_sources()
 
 # Look up by source name and include the geometries
 contiguous_zone_src = "Flanders Marine Institute (2019). Maritime Boundaries Geodatabase: Contiguous Zones (24NM), version 3. Available online at http://www.marineregions.org/. https://doi.org/10.14284/384"

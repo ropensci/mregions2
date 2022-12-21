@@ -10,7 +10,7 @@ gaz_geometry(x, ...)
 
 \method{gaz_geometry}{numeric}(x, ...)
 
-\method{gaz_geometry}{mr_df}(x)
+\method{gaz_geometry}{mr_df}(x, ...)
 }
 \arguments{
 \item{x}{object to retrieve the geometries from. Accepted:
