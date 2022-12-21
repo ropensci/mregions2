@@ -7,7 +7,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  cache = TRUE
 )
 ```
 
@@ -26,6 +27,9 @@ You can find detailed information in the vignettes:
 * Why mregions and mregions2?: `vignette("why_mregions2")`
 * mregions2 as RDF: `vignette("mregions2-rdf")`
 
+![140389_marineregions-v11---eez](https://user-images.githubusercontent.com/54405067/156809171-1487bb9f-35af-4418-8e2f-93c24a59aad0.gif)
+
+<sup>(Source: https://www.vliz.be/en/news?p=show&id=8160)</sup>
 
 ## Installation
 
@@ -47,6 +51,8 @@ The [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) is a sta
 You can search the Gazetteer in many ways:
 
 ```{r gaz1}
+library(mregions2)
+
 # Search by free text
 gaz_search("Belgian")
 
@@ -91,16 +97,19 @@ gaz_relations(3293)
 
 In addition to the Marine Regions Gazetteer, the Marine Regions Team creates and hosts geographical Data Products, being the most popular one the [Marine Regions Maritime Boundaries](https://marineregions.org/eez.php).
 
-![140389_marineregions-v11---eez](https://user-images.githubusercontent.com/54405067/156809171-1487bb9f-35af-4418-8e2f-93c24a59aad0.gif)
+An overview of all available products can be consulted with [mrp_list()]
 
-<sup>(Source: https://www.vliz.be/en/news?p=show&id=8160)</sup>
+```{r prod_list}
+mrp_list()
+```
 
-
-You can visualize the data products with [mrp_view()] or load them into R with [mrp_get()]
+You can visualize the Marine Regions Data Products with [mrp_view()]. It opens an interactive leaflet viewer.
 
 ```{r prod1}
 mrp_view("eez")
 ```
+
+Or you can load the data products into R with [mrp_get()]
 
 ```{r prod2}
 mrp_get("eez")
@@ -109,7 +118,7 @@ mrp_get("eez")
 Get to know more in the Introduction to mregions2 vignette `vignette("mregions2")`
 
 ## Citation
-```{r citation}
+```{r citation, cache=FALSE}
 citation("mregions2")
 ```
 

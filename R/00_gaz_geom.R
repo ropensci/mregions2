@@ -60,7 +60,7 @@ gaz_geometry.numeric <- function(x, ...){
 #'
 #' @export
 gaz_geometry.mr_df <- function(x){
-  x %>% gaz_add_geometry() %>% new_mr_df()
+  x %>% gaz_add_geometry()
 }
 
 #' Get the geometries associated with a gazetteer record

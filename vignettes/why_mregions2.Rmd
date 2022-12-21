@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Since 2021, the geometries of the [Marine Regions gazetteer](https://marineregions.org/gazetteer.php?p=webservices) are available as Well-Known Text, coming directly from the Data Base and offered as Open Linked Data and Open Linked Data Event Streams. Previously, they were just a WMS link, in many cases coming form the Marine Regions OGC Web Services hosted at the [Flanders Marine Institute (VLIZ) geoserver](https://geo.vliz.be). Therefore, the functions of `mregions` did not use the `MRGID` in an effort to unify the geometries that were in geoserver and the gazetteer.
+Since 2021, the geometries of the [Marine Regions gazetteer](https://marineregions.org/gazetteer.php?p=webservices) are available as Well-Known Text, coming directly from the data base and offered as Open Linked Data and Open Linked Data Event Streams. Previously, they were just a WMS link, in many cases coming from the Marine Regions OGC Web Services hosted at the [Flanders Marine Institute (VLIZ) geoserver](https://geo.vliz.be). Therefore, the functions of `mregions` did not use the `MRGID` in an effort to unify the geometries that were in geoserver with the gazetteer entries.
 
 This method is not needed anymore since the geometries are in the Gazetteer. `mregions2` makes a very clear distinction between the Gazetteer database and the Data Products created by Marine Regions.
 
@@ -22,7 +22,8 @@ We decided to create a new package to not break compatibility. We will continue 
 
 # What's new in `mregions2`?
 
-During 2021, new webservices were developed to access the Marine Regions Gazetteer. In essence, two major changes happened:
+During 2021, new web services were developed to access the Marine Regions Gazetteer. In essence, two major changes happened:
+
 * The database can be accessed now through Open Linked Data standards: JSON-LD and TTL. 
 * The geometry associated to each gazetteer record is now available through RESTful services.
 

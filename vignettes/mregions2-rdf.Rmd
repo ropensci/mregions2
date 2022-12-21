@@ -1,5 +1,6 @@
 ---
 title: "mregions2 as RDF"
+author: Salvador Fernández
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{mregions2-rdf}
@@ -10,15 +11,30 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  cache = TRUE
 )
 ```
 
-# Introduction
 
-The Marine Regions Gazetteer is accessible as Linked Data Event Streams. This is described with high detail in: 
+The Marine Regions Gazetteer is accessible as Open Linked Data, and can be mirrored and synchronized via Linked Data Event Streams. This is described with high detail in: 
 
 > Lonneville B. et al. (2021) Publishing the Marine Regions Gazetteer as a Linked Data Event Stream. S4BioDiv 2021. http://ceur-ws.org/Vol-2969/paper8-s4biodiv.pdf
+
+# Setup
+
+We will need the following libraries
+
+```{r setup, results='hide', message=FALSE}
+library(mregions2)
+library(rdflib)
+
+# Use the pipe operator `%>%`
+library(magrittr)
+
+# For visualizing
+library(mapview)
+```
 
 # Retrieving the Marine Regions Gazetteer as RDF
 
@@ -26,44 +42,165 @@ Known an [MRGID][mregions2], you can get it as RDF.
 
 E.g. the Belgian Exclusive Economic Zone or Belgian Part of the North Sea has the MRGID: <https://marineregions.org/mrgid/3293> 
 
+```{r}
+gaz_search(3293) %>% 
+  gaz_geometry() %>%
+  mapview()
+```
+
+
 Using `gaz_search()` or the underlying service `gaz_rest_record_by_mrgid()` with the argument `rdf = TRUE` will:
+
 1. Use content negotiation to get the MRGID in Turtle format. 
 2. Read this document as RDF using the [rdflib](https://docs.ropensci.org/rdflib/) R package. 
 
-HTTP requests are handled with the R package [httr2](https://httr2.r-lib.org/)
+HTTP requests are handled with [httr2](https://httr2.r-lib.org/)
 
-```{r chunk1}
-library(mregions2)
+```{r}
+bpns <- gaz_search(3293, rdf = TRUE)
 
-bpns <- gaz_rest_record_by_mrgid(3293, rdf = TRUE)
+class(bpns)
 
 bpns
-
 ```
 
-The MRGID includes info about the Gazetteer record and its hierarchy. The relations are explained the Marine Regions Ontology:
+There are many stores returned. This is because the returned object includes not only info about the Gazetteer record, but also about its hierarchy. The Marine Regions Gazetteer is hierarchical and there are many relations between their records
+
+The relations are explained the Marine Regions Ontology:
+
 > `http://marineregions.org/ns/ontology`
 
 There is also information about the Place Type. The Place Types are defined in:
+
 > `http://marineregions.org/ns/placetypes`
 
 Both the ontology and the placetypes are available as HTML when using a web browser, but also as Turtle or JSON-LD by using content negotiation.
 
-You can then use the [rdflib](https://docs.ropensci.org/rdflib/) R package further to apply common RDF applications. 
+You can then use the [rdflib](https://docs.ropensci.org/rdflib/) R package to apply common RDF applications. 
 
-E.g. you can serialize the record as JSON-LD
-```{r chunk2}
-library(rdflib)
+## Serialize
 
-# doc = rdf()
+You can serialize the record in other formats, e.g. JSON-LD
+```{r}
+# Create a placeholder file
+bpns_as_jsonld <- tempfile(fileext = ".rdf")
 
-# rdf_serialize(bpns, doc = doc, format = "jsonld")
+# Serialize
+bpns %>% rdf_serialize(
+  doc = bpns_as_jsonld, 
+  format = "jsonld", 
+  namespace = prefix
+)
 
+readLines(bpns_as_jsonld, n = 13) %>% cat()
 ```
 
 
+## SPARQL Queries
 
-```{r rdf, include = FALSE}
+SPARQL queries can be applied to the RDF document. Note: The MRGID of the Belgian Part of the North Sea is `<http://marineregions.org/mrgid/3293>`
+
+### Extract all info from the record
+
+```{r}
+sparql <- "
+  SELECT ?p ?o
+  WHERE {
+    <http://marineregions.org/mrgid/3293> ?p ?o
+  }"
+
+rdf_query(bpns, query = sparql)
+```
+
+### Extract all relationship
+
+The relationships are contained in the Marine Regions Ontology at <http://marineregions.org/ns/ontology>. The following example extracts all the predicates with the prefix `mr:`, pointing to the ontology:
+
+```{r}
+sparql <- "
+  PREFIX mr: <http://marineregions.org/ns/ontology#> 
+  SELECT ?s ?p ?o
+  WHERE {
+    ?s ?p ?o .
+    FILTER( STRSTARTS(STR(?p), str(mr:)) )
+  }"
+
+rdf_query(bpns, query = sparql)
+```
+
+### Extract geometries
+
+You can see in the predicates that one of the relationships is `mr:hasGeometry`, pointing to the object <http://marineregions.org/mrgid/3293/geometries?source=79&attributeValue=3293>
+
+This URI can be requested as Turtle or JSON-LD and load as an [rdf] object of the [rdflib] R package. 
+
+But you could also use [gaz_geometry()], which already takes care of this:
+
+```{r }
+bpns_geom <- gaz_geometry(3293, format = "rdf")
+bpns_geom
+```
+
+The geometry is provided as WKT. this is the same logic that `gaz_geometry(format = "wkt")` uses to extract the geometry:
+
+```{r}
+sparql <- "
+  PREFIX gsp: <http://www.opengis.net/ont/geosparql#>
+  SELECT ?o
+  WHERE {
+    ?s gsp:asWKT ?o .
+  }"
+
+rdf_query(bpns_geom, query = sparql)
+```
+
+### Extract the label in another language
+
+Using the SPARQL syntax you can extract the label of the record in a specific language, if this is available. If not, the preferred label will be returned
+
+Example: Get the Gazetteer entry for "Belgium" with MRGID `<http://marineregions.org/mrgid/14>` and extract the label in Dutch (nl) if available.
+
+```{r}
+belgium <- gaz_search(14, rdf = TRUE)
+
+sparql <- '
+  PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+  SELECT (COALESCE(?altLabel, ?prefLabel) AS ?o)
+  WHERE {
+    OPTIONAL {
+      ?s skos:altLabel ?altLabel .
+      filter langMatches(lang(?altLabel), "nl")
+    }
+    ?s skos:prefLabel ?prefLabel .
+  }
+'
+
+rdf_query(belgium, query = sparql)
+```
+
+# Mirror the Marine Regions Gazetteer using the LDES Feed
+
+As described in [Loneville B. et al. (2021)](http://ceur-ws.org/Vol-2969/paper8-s4biodiv.pdf), Marine Regions offers a Linked Data Event Stream (LDES) that can be used for replication and synchronization.
+
+Building such API in R is, at the moment, out of the scope of mregions2. An interested user could however make use of mregions2 and rdflib to mirror the Marine Regions Gazetteer. 
+
+## Initialize a database
+
+By design, mregions2 stores the RDF triples in memory. This is because the package does not aim at replicating the Marine Regions Gazetteer, but only consult small subsets. 
+
+rdflib allows to store the triples in a database. This is further explained in the vignette [Working with Database Storage Backends in `rdflib`](https://docs.ropensci.org/rdflib/articles/storage.html)
+
+## Linked Data Event Stream Feed
+
+The LDES feed is available at:
+
+> `https://marineregions.org/feed`
+
+This feed can be paginated by time stamps. This allows to see if some gazetteer entries have changed over time. Eventually, if the records included in your local graph of the Marine Regions Gazetter are outdated, you can write a service that checks if the record has been modified and synchronize with your local graph.
+
+
+
+```{r rdf, include = FALSE, echo=FALSE}
 library(mregions2)
 
 #
@@ -294,39 +431,6 @@ library(mregions2)
 #
 #
 # # Add base_graph
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-# ##
-#
-#
-#
-#
-#
-#
-#
-#
-#
 #
 #
 #
@@ -709,33 +813,33 @@ library(mregions2)
 #'          ?centroid
 #'          ?bbox
 #'          ?the_geom
-#' 
+#'
 #'   WHERE {
-#' 
+#'
 #'     # Restrict to only the placetype
 #'     ?mrgid a ?placetype .
 #'       FILTER( STRSTARTS(STR(?placetype),str(mrt:)) )
-#' 
+#'
 #'     # modified is the filter - it is or should be in all mrgid
 #'     ?mrgid dc:modified ?modified
 #'     OPTIONAL { ?mrgid rdfs:seeAlso ?seeAlso }
 #'     OPTIONAL { ?mrgid dcat:centroid ?centroid }
 #'     OPTIONAL { ?mrgid dcat:bbox ?bbox }
 #'     OPTIONAL { ?mrgid mr:hasGeometry ?the_geom }
-#' 
-#' 
+#'
+#'
 #'     # Get the language
 #'     OPTIONAL {
 #'       ?mrgid skos:altLabel ?altLabel .
 #'       filter langMatches(lang(?altLabel), \"nl\")
 #'     }
 #'     ?mrgid skos:prefLabel ?prefLabel .
-#' 
+#'
 #'     # Get the source
 #'     OPTIONAL { ?mrgid prov:hadPrimarySource ?primarySource }
 #'     OPTIONAL { ?primarySource prov:wasAttributedTo ?wasAttributedTo }
 #'     OPTIONAL { ?wasAttributedTo rdfs:label ?source }
-#' 
+#'
 #'   }"
 #'   )
 #' 
@@ -745,6 +849,8 @@ library(mregions2)
 #' 
 #'   out
 #' }
+#' 
+
 #' 
 #' options(verbose = TRUE)
 #' 
