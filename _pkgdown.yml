@@ -9,3 +9,49 @@ authors:
   LifeWatch Belgium:
     href: https://lifewatch.be
     html: "<img src='https://www.lifewatch.be/sites/lifewatch.be/themes/lifewatchportal/images/header_lw_logo.png' width=72>"
+reference:
+- title: "Marine Regions Gazetteer"
+  desc: >
+    Functions to access the Marine Regions Gazetteer
+  contents:
+  - MRGID
+  - gaz_search
+  - gaz_search_by_type
+  - gaz_search_by_source
+  - gaz_types
+  - gaz_sources
+  - gaz_geometry
+  - gaz_relations
+- title: "Marine Regions Data Products"
+  desc: >
+    List, visualize and download the Marine Regions Data Products, such as the Maritime Boundaries
+  contents:
+  - mrp_list
+  - mrp_view
+  - mrp_get
+  - mrp_colnames
+  - mrp_col_unique
+  - mrp_col_distinct
+- title: "RESTful services"
+  desc: >
+    Low-level functions that interact with the Marine Regions Gazetteer REST web services
+  contents:
+  - gaz_rest
+  - gaz_rest_records_by_name
+  - gaz_rest_records_by_names
+  - gaz_rest_record_by_mrgid
+  - gaz_rest_records_by_lat_long
+  - gaz_rest_records_by_type
+  - gaz_rest_records_by_source
+  - gaz_rest_relations_by_mrgid
+  - gaz_rest_source_by_sourceid
+  - gaz_rest_types
+  - gaz_rest_sources
+  - gaz_rest_geometries
+  - gaz_rest_names_by_mrgid
+  - gaz_rest_wmses
+- title: "Initialize a Web Feature Service Client"
+  desc: >
+    Override mregions2 and make your own WFS calls
+  contents:
+  - mrp_init_wfs_client

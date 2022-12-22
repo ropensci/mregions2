@@ -34,7 +34,7 @@ You can find detailed information in the vignettes:
 
 ## Installation
 
-You can install the development version of mregions2 from [GitHub](https://github.com/) with:
+You can install the development version of mregions2 from GitHub with:
 
 ``` r
 # install.packages("devtools")
@@ -70,9 +70,9 @@ gaz_search_by_type("EEZ")
 gaz_search_by_source("Flanders Marine Institute (VLIZ)")
 ```
 
-The list of place types and sources are available with [gaz_types()] and [gaz_sources()] respectively.
+The list of place types and sources are available with `gaz_types()` and `gaz_sources()` respectively.
 
-You can add the geometry of the Gazetteer entries with [gaz_geometry()]:
+You can add the geometry of the Gazetteer entries with `gaz_geometry()`:
 
 ```{r gaz2}
 # Get a record and turn into a sf object with geometry
@@ -82,7 +82,7 @@ gaz_search(3293) %>% gaz_geometry()
 gaz_geometry(3293, format = "sfc")
 ```
 
-The entries of the Marine Regions Gazetteer are organized hierarchiely. You can browse this hierarchy up and down with [gaz_relations()]
+The entries of the Marine Regions Gazetteer are organized hierarchically. You can browse this hierarchy up and down with `gaz_relations()`
 
 ```{r gaz3}
 # Get all relations
@@ -98,25 +98,25 @@ gaz_relations(3293)
 
 In addition to the Marine Regions Gazetteer, the Marine Regions Team creates and hosts geographical Data Products, being the most popular one the [Marine Regions Maritime Boundaries](https://marineregions.org/eez.php).
 
-An overview of all available products can be consulted with [mrp_list()]
+An overview of all available products can be consulted with `mrp_list()`
 
 ```{r prod_list}
 mrp_list()
 ```
 
-You can visualize the Marine Regions Data Products with [mrp_view()]. It opens an interactive leaflet viewer.
+You can visualize the Marine Regions Data Products with `mrp_view()`. It opens an interactive `leaflet::leaflet` viewer.
 
 ```{r prod1}
 mrp_view("eez")
 ```
 
-Or you can load the data products into R with [mrp_get()]
+Or you can load the data products into R with `mrp_get()`
 
 ```{r prod2}
 mrp_get("eez")
 ```
 
-Get to know more in the Introduction to mregions2 vignette `vignette("mregions2")`
+Get to know more in `vignette("mregions2")`
 
 ## Citation
 ```{r citation, cache=FALSE}

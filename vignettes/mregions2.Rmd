@@ -18,22 +18,24 @@ knitr::opts_chunk$set(
   cache = TRUE
 )
 
+options(rdf_print_format = "turtle")
 options(rmarkdown.html_vignette.check_title = FALSE)
 ```
 
-mregions2 allows to access the [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) and the [Marine Regions Data Products](https://marineregions.org/sources.php) in R.
+[Marine Regions](https://marineregions.org/) is part of the [LifeWatch project](https://www.lifewatch.be/). Its activities focus on two main outputs: 
 
-# What's Marine Regions?
+* The [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php)
+* The [Marine Regions Data Products](https://marineregions.org/sources.php)
 
-[Marine Regions](https://marineregions.org/) is part of the [LifeWatch project](https://www.lifewatch.be/). Its activities focus on two main outputs: The [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) and the [Marine Regions Data Products](https://marineregions.org/sources.php).
+mregions2 allows to retrieve marine geospatial information from the Marine Regions Gazetteer and the Marine Regions Data Products in R.
 
-The [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) is a standard list of marine georeferenced place names.
+The **Marine Regions Gazetteer** is a standard list of marine georeferenced place names.
 
 > Gazetteer: a dictionary of geographical names. 
 
 <sup>https://www.thefreedictionary.com/gazetteer</sup>
 
-All geographic objects of the Marine Regions Gazetteer database have a unique ID, named the [**MRGID**](https://marineregions.org/mrgid.php)
+The entries in the Marine Regions Gazetteer are identified with an unique and persistent identifier, named the `MRGID` (Marine Regions Gazetteer Unique Identifier)
 
 > Syntax `http://marineregions.org/mrgid/<number>`
 
@@ -46,27 +48,23 @@ In addition to the Marine Regions Gazetteer, the Marine Regions Team creates and
 
 <sup>(Source: https://www.vliz.be/en/news?p=show&id=8160)</sup>
 
-# What's mregions2?
+The mregions2 package aims to difference these two domains as clearly as possible, starting with the naming of its functions:
 
-mregions2 aims to retrieve marine geospatial information from the [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php?p=webservices) and access the  [Marine Regions Data Products](https://marineregions.org/sources.php).
-
-The mregions2 package makes this difference clear from the naming of its functions:
 * Gazetteer functions: `gaz_*()`
 * Data Products functions: `mrp_()*`
 
-These differences are not trivial as mregions2 uses different methods to access the Marine Regions Gazetteer than the Marine Regions Data Products: the Marine Regions Gazetteer is accessible using [RESTful methods](https://www.marineregions.org/gazetteer.php?p=webservices) with [gaz_search()]. The Marine Regions Data Products can be accessed using [OGC Web Services](https://www.marineregions.org/webservices.php). They are hosted at the [Flanders Marine Institute (VLIZ) geoserver](https://geo.vliz.be): 
+These intentions are trivial, as mregions2 uses different methods to access the Marine Regions Gazetteer than the Marine Regions Data Products: the Marine Regions Gazetteer is accessed using [RESTful methods](https://www.marineregions.org/gazetteer.php?p=webservices) with `gaz_search()`. The Marine Regions Data Products can be accessed using [OGC Web Services](https://www.marineregions.org/webservices.php). These are hosted at the [Flanders Marine Institute (VLIZ) geoserver](https://geo.vliz.be): 
 
 > `http://geo.vliz.be/`
 
-They can be visualized via [Web Map Services (WMS)](https://en.wikipedia.org/wiki/Web_Map_Service) with [mrp_view()] or downloaded by [Web Feature Services (WFS)](https://en.wikipedia.org/wiki/Web_Feature_Service) with [mrp_get()]
+The data products can be visualized via [Web Map Services (WMS)](https://en.wikipedia.org/wiki/Web_Map_Service) with `mrp_view()` or downloaded by [Web Feature Services (WFS)](https://en.wikipedia.org/wiki/Web_Feature_Service) with `mrp_get()`.
 
-# Why mregions2 instead of mregions?
-mregions2 supersedes {`mregions`}. The need of mregions2 is further explained in `vignette("why_mregions2")`
-
+## Wasn't there a package to read Marine Regions already? mregions?
+mregions2 supersedes [mregions](https://docs.ropensci.org/mregions/). The need of mregions2 is further explained in `vignette("why_mregions2")`
 
 >**NOTE**
 >
-> The naming `mrp_*()` instead of `mr_()` was decided to avoid overlapping with the functions from {`mregions`}
+> The naming `mrp_*()` instead of `mr_()` was decided to avoid overlapping with the functions from mregions
 
 # Marine Regions Gazetteer
 
@@ -103,15 +101,13 @@ gaz_search("Belgium", like = FALSE, fuzzy = FALSE)
 
 ### Search by MRGID
 
-The entries in the Marine Regions Gazetteer are identified with an unique and persistent identifier: the Marine Regions Global Identifier or MRGID. The concept of MRGID is further explained in `vignette("mregions2")`.
-
-You can pass this identifier to [gaz_search()] to get only that record. E.g. in the previous example, the Belgian Exclusive Economic Zone has the MRGID `3293`:
+Pass a MRGID to `gaz_search()` to get only that record. E.g. in the previous example, the Belgian Exclusive Economic Zone has the MRGID `3293`:
 
 ```{r}
 gaz_search(3293)
 ```
 
-You can get the gazetteer entry as Open Linked Data, in the form of an object of class `rdflib::rdf`:
+You can get the gazetteer entry as **Open Linked Data**, in the form of an object of class `rdflib::rdf`:
 
 ```{r}
 gaz_search(3293, rdf = TRUE)
@@ -122,15 +118,15 @@ Learn more about using the mregions2 to access the Marine Regions Gazetteer as R
 
 ### Search by longitude and latitude
 
-You can do a reverse geocode with mregions2: passing a pair longitude-latitude coordinates in the WGS84 projection will return all records that intersect with the point.
+[**Reverse geocoding**](https://en.wikipedia.org/wiki/Reverse_geocoding) is possible with mregions2: pass geographical coordinates in the WGS84 projection will return all records that intersect with the point.
 
-e.g. the pair [longitude 2.927 - latitude 51.21551](https://www.openstreetmap.org/search?query=51.21551%252C%202.927) lays on the city of [Ostend](https://wikipedia.org/wiki/Ostend) at the Belgian coast 
+e.g. the coordinates [longitude 2.927 - latitude 51.21551](https://www.openstreetmap.org/search?query=51.21551%252C%202.927) lay on the city of [Ostend](https://wikipedia.org/wiki/Ostend) at the Belgian coast 
 
 ```{r}
 gaz_search(x = 2.927, y = 51.21551)
 ```
 
-Passing an `sf::sfg` geometry object is also allowed:
+Passing an `sfg` geometry object from `sf::st_point()` is also allowed:
 
 ```{r}
 pt <- st_point(c(x = 2.927, y = 51.21551))
@@ -142,21 +138,21 @@ gaz_search(pt)
 
 ### Search by place type
 
-The records of the Marine Regions Gazetteer have a place types assigned, either physical such as sea mounts or banks, or administrative like Territorial Sea or Exclusive Economic Zone.
+The records of the Marine Regions Gazetteer have **place types** assigned, either **physical** such as sea mounts or banks, or **administrative** like Territorial Sea or Exclusive Economic Zone.
 
-You can find the full list, descriptions and its identifier in the database with [gaz_types()]:
+You can find the full list, descriptions and its identifier in the database with `gaz_types()`:
 
 ```{r}
 gaz_types()
 ```
 
-You can restrict your search to a certain typeid:
+You can restrict your search to a certain type ID in the argument `typeid`
 
 ```{r}
 gaz_search("Oostende", typeid = 1)
 ```
 
-Or you can look up all the records with a certain place type.
+Or you can look up all the records with a certain place type with `gaz_search_by_type()`
 ```{r}
 # With text
 gaz_search_by_type("Town")
@@ -168,14 +164,18 @@ gaz_search_by_type(1)
 
 ### Search by source document
 
-The entries in the Marine Regions Gazetteer are always based on a source. This is either a document, a web site or any sort of authority. 
+The entries in the Marine Regions Gazetteer are always based on a **source**. This is either a document, a web site or any sort of authority. 
 
-The list of sources is available with [gaz_sources()]
+The list of sources is available with `gaz_sources()`
 
 ```{r}
 # List sources
 gaz_sources()
+```
 
+Search by source is possible with the function `gaz_search_by_source()`, either with the source as text or passing a sourceID
+
+```{r}
 # With text
 gaz_search_by_source("Flanders Marine Institute (VLIZ)")
 
@@ -184,28 +184,28 @@ gaz_search_by_source(695)
 ```
 
 
-## Geometries
+## Geocoding
 
-### Add the geometries
+Geocoding marine places is possible with mregions2. As a bare minimum, the entries of the Marine Regions Gazetteer should always have a the **centroid** of the feature, in the fields `latitude` and `longitude`. The **bounding box** of the feature may also be available via the fields `minLatitude`, `maxLatitude`, `minLongitude` and `maxLongitude`.
 
-The entries of the Marine Regions Gazetteer have geometry associated. To avoid overloading the server, these are not returned by default. You can pass the result of [gaz_search()] to [gaz_geometry()] to also get the geometry of the record. It will return an object of class `sf::sf`. 
+Moreover, many of the entries of the Marine Regions Gazetteer have actual **geometries** associated. These are typically Polygons or Linestrings. To avoid overloading the server, the geometries are not returned by default with `gaz_search()`. Adding the geometries is possible with `gaz_geometry()`: passing the result of `gaz_search()` will turn the data frame into a `sf::sf` object with geometry in the field `the_geom`, of class `sf::sfc`.
 
 ```{r}
 gaz_search(3293) %>% gaz_geometry()
 ```
 
+This is possible cause the result of `gaz_search` is a data frame including the class `mr_df`, unique of the mregions2 R package. The geometry function has a S3 method defined for this class: `gaz_geometry.mr_df()`.
+
 You can also use the argument `with_geometry` as `gaz_search(3293, with_geometry = TRUE)` to load the geometry directly.
 
-
-### Get only the geometries
-
-Geometries can be also retrieved by providing an MRGID. By default, this is a simple feature geometry list column, an object of class `sf::sfc`
+In addition, fetching only the geometries is possible using an `MRGID` on `gaz_geometry()`
 
 ```{r}
+# By MRGID
 gaz_geometry(3293)
 ```
 
-But other formats are possible:
+By default, this is a simple feature geometry list column, an object of class `sf::sfc`. But other formats are possible:
 
 ```{r}
 # As Well-Known Text (WKT)
@@ -224,7 +224,7 @@ Learn more about using the mregions2 to access the Marine Regions Gazetteer as R
 
 ## Relations
 
-The Marine Regions Gazetteer is hierarchically: This means that all the records got relations with each other. You can either pass the result of [gaz_search()] to [gaz_relations()] or an MRGID:
+The Marine Regions Gazetteer is **hierarchically**: All the records got relations with each other. You can either pass the result of `gaz_search()` to `gaz_relations()` or an `MRGID`:
 
 ```{r}
 # With gaz_search()
@@ -244,21 +244,22 @@ gaz_relations(3293, direction = "upper", type = "partof")
 
 mregions2 can access the Marine Regions Gazetteer by using [RESTful web services](https://marineregions.org/gazetteer.php?p=webservices&type=rest). There is a set of functions in mregions2 named as `gaz_rest_*()` that read the web services via [HTTP](https://httr2.r-lib.org/). These are closer to the definition of the web services. All the gazetteer functions shown before make use of this set of functions. 
 
-| Main function          | REST function                  | REST web service             |
-|------------------------|--------------------------------|------------------------------|
-| gaz_search()           | gaz_rest_records_by_name()     | getGazetteerRecordsByName    |
-| gaz_search()           | gaz_rest_records_by_names()    | getGazetteerRecordsByNames   |
-| gaz_search()           | gaz_rest_record_by_mrgid()     | getGazetteerRecordByMRGID    |
-| gaz_search()           | gaz_rest_records_by_lat_long() | getGazetteerRecordsByLatLong |
-| gaz_search_by_type()   | gaz_rest_records_by_type()     | getGazetteerRecordsByType    |
-| gaz_search_by_source() | gaz_rest_records_by_source()   | getGazetteerRecordsBySource  |
-| gaz_search_by_source() | gaz_rest_source_by_sourceid()  | getGazetteerSourceBySourceID |
-| gaz_types()            | gaz_rest_types()               | getGazetteerTypes            |
-| gaz_sources()          | gaz_rest_sources()             | getGazetteerSources          |
-| gaz_geometry()         | gaz_rest_geometries()          | getGazetteerGeometries       |
-| NA                     | gaz_rest_names_by_mrgid()      | getGazetteerNamesByMRGID     |
-| NA                     | gaz_rest_wmses()               | getGazetteerWMSes            |
-| NA                     | NA                             | getFeed                      |
+| Main function            | REST function                    | REST web service               |
+|--------------------------|----------------------------------|--------------------------------|
+| `gaz_search()`           | `gaz_rest_records_by_name()`     | `getGazetteerRecordsByName`    |
+| `gaz_search()`           | `gaz_rest_records_by_names()`    | `getGazetteerRecordsByNames`   |
+| `gaz_search()`           | `gaz_rest_record_by_mrgid()`     | `getGazetteerRecordByMRGID`    |
+| `gaz_search()`           | `gaz_rest_records_by_lat_long()` | `getGazetteerRecordsByLatLong` |
+| `gaz_search_by_type()`   | `gaz_rest_records_by_type()`     | `getGazetteerRecordsByType`    |
+| `gaz_search_by_source()` | `gaz_rest_records_by_source()`   | `getGazetteerRecordsBySource`  |
+| `gaz_relations()`        | `gaz_rest_relations_by_mrgid()`  | `getGazetteerRelationsByMRGID` |
+| `gaz_search_by_source()` | `gaz_rest_source_by_sourceid()`  | `getGazetteerSourceBySourceID` |
+| `gaz_types()`            | `gaz_rest_types()`               | `getGazetteerTypes`            |
+| `gaz_sources()`          | `gaz_rest_sources()`             | `getGazetteerSources`          |
+| `gaz_geometry()`         | `gaz_rest_geometries()`          | `getGazetteerGeometries`       |
+| NA                       | `gaz_rest_names_by_mrgid()`      | `getGazetteerNamesByMRGID`     |
+| NA                       | `gaz_rest_wmses()`               | `getGazetteerWMSes`            |
+| NA                       | NA                               | `getFeed`                      |
 
 
 ## Marine Regions Gazetteer as RDF - Open Linked Data 
@@ -271,11 +272,11 @@ gaz_search(3293, rdf = TRUE)
 gaz_geometry(3293, format = "rdf")
 ```
 
-See `vignette("mregions-rdf")` for more information.
+See `vignette("mregions2-rdf")` for more information.
 
 # Marine Regions Data Products
 
-The main function to load a Marine Regions Data Product into R is [mrp_get()]. To select a data product, you have to pass the `product_name` of one
+The main function to load a Marine Regions Data Product into R is `mrp_get()`. To select a data product, you have to pass the `data_product`.
 
 ```{r}
 # See the full list of data products
@@ -285,19 +286,19 @@ mrp_list()
 mrp_get("ecs")
 ```
 
-However, this is a request that may take some time to complete. An interactive visualization without the need to download can be rendered with [mrp_view()]:
+However, this is an expensive request that **may take some time** to complete. It is a better approach to first have a quick look instead of downloading the full product. `mrp_view()` renders an in **interactive visualization**:
 
 ```{r}
 # Click on a feature to see some information
 mrp_view("ecs")
 ```
 
-This returns a Leaflet interactive map with the data product requested added via Web Map Services.
+It returns a `leaflet::leaflet` interactive map with the data product requested added via Web Map Services.
 
 
 ## Filtering
 
-In some cases, you may be interested in retrieving only a certain amount of records. Or filter out some features. You could download the product with [mrp_get()] and then apply a filter with R base or with the tidyverse. But getting the data is an expensive operation that takes long. 
+In some cases, you may be interested in retrieving only a certain amount of records. Or **filter out some features**. You could download the product with `mrp_get()` and then apply a filter with R base or with the Tidyverse (`tidyverse::tidyverse`). But **getting the full product is slow**:
 
 ```{r}
 system.time({
@@ -306,7 +307,7 @@ system.time({
 
 ```
 
-Instead, you can write a filter that is applied on the server side:
+Instead, you can write a **filter** that is applied on the **server side**:
 
 ```{r}
 system.time({
@@ -315,14 +316,13 @@ system.time({
 
 ```
 
-
-This type of filter is written in [Contextual Query Language (CQL)](https://portal.ogc.org/files/96288). This is a relatively simple syntax close to SQL. 
+This filter is written in [Contextual Query Language (CQL)](https://portal.ogc.org/files/96288). This is a relatively simple syntax close to SQL. 
 
 ### Colnames and unique values
 
-Writting these filters can be challenging without knowing in advance the names of the columns in a data product, or the unique values that these columns have. If you have to retrieve the full product to get to know the columns and their values then well, the filter misses a bit its point.
+Writing these filters can be challenging without knowing in advance the names of the columns in a data product, or the unique values that these columns have. If you have to retrieve the full product to get to know the columns and their values then, well, the filter misses a bit its point.
 
-mregions2 has two helpers that help on this mission: [mrp_colnames()] gets you a data frame with the columns and data type of a data product. [mrp_col_unique()] (or [mrp_col_distinct()], they are the same function) return the unique values of a column in a data product.
+mregions2 has two helpers that help on this mission: `mrp_colnames()` gets a data frame with the **columns and data type** of a data product. `mrp_col_unique()` (or `mrp_col_distinct()`, they are synonyms) returns the **unique values** of a column in a data product.
 
 ```{r}
 # Columns of the Extended Continental Shelves data product
@@ -338,14 +338,14 @@ mrp_get("ecs", cql_filter = "pol_type = 'ECS Overlapping claim'")
 
 ### OGC, CQL and ECQL Filters
 
-There are many types of filter allowed via standard OGC or CQL filters. [mrp_get()] and [mrp_view()] use OGC [WFS](https://en.wikipedia.org/wiki/Web_Feature_Service) and [WMS](https://en.wikipedia.org/wiki/Web_Map_Service) respectively. On the R side, [mrp_get()] uses the package [ows4R], and any vendor parameters can be passed to the method `getFeatures()` as e.g. `count` (WFS version 2.0.0). 
+There are many types of filter allowed via standard OGC or CQL filters. `mrp_get()` and `mrp_view()` use OGC [WFS](https://en.wikipedia.org/wiki/Web_Feature_Service) and [WMS](https://en.wikipedia.org/wiki/Web_Map_Service) respectively. On the R side, `mrp_get()` uses the package `ows4R::ows4R`, and any vendor parameters can be passed to the method `getFeatures()` as e.g. `count` (WFS version 2.0.0). 
 
 ```{r prod5}
 # Get only one feature
 mrp_get("ecs", count = 1)
 ```
 
-[mrp_view()] uses [leaflet.extras2::addWMS()], which [enables passing the filters together with the base URL](https://github.com/trafficonese/leaflet.extras2/issues/42) in the argument `baseURL`.
+`mrp_view()` uses `leaflet.extras2::addWMS()`, which [enables passing the filters together with the base URL](https://github.com/trafficonese/leaflet.extras2/issues/42) in the argument `baseURL`.
 
 ```{r}
 # View all Joint submissions, recommendations of deposit to DOALOS with an area larger than 1M square kilometers
@@ -362,6 +362,44 @@ Note that all the data products of Marine Regions are served via the [VLIZ geose
 
 Whenever the documentation refers to CQL, ECQL syntax can be used as well.
 
-I recommend [the CQL/ECQL filtering vignette](https://emodnet.github.io/EMODnetWFS/articles/ecql_filtering.html) in the [EMODnetWFS] R package to know more. The principles explained there are useful also for mregions2.
+I recommend the `vignette("ecql_filtering", package = "EMODnetWFS")` of the `?EMODnetWFS::EMODnetWFS` R package to know more. The principles explained there are useful also for mregions2.
 
+## WFS Client and more
+
+Using directly `ows4R::ows4R` instead of mregions2 is always an option. mregions2 exports `mrp_init_wfs_client()`. This will start a WFS client at:
+
+> `https://geo.vliz.be/geoserver/wfs`
+
+```{r}
+wfs <- mrp_init_wfs_client()
+
+class(wfs)
+```
+
+As a reference, the layers with Marine Regions Data Products are defined together with its namespace in `mrp_list()` in the field `id`:
+
+```{r}
+mrp_list() %>% select(id)
+```
+
+Bypassing `mrp_get()` would look like:
+
+```{r}
+wfs$getFeatures("MarineRegions:ecs", count = 1)
+```
+
+But there is also extra information that is not surfaced in mregions2. For instance, if you would like to know the bounding box of a data product:
+
+```{r}
+# Get Capabilities
+caps <- wfs$getCapabilities()
+
+# Find a data product
+ft <- caps$findFeatureTypeByName("MarineRegions:ecs")
+
+# Get Bounding Box
+ft$getBoundingBox()
+```
+
+More information at the `ows4R::ows4R` wiki page: <https://github.com/eblondel/ows4R/wiki>.
 

@@ -24,8 +24,9 @@
 #' gaz_search(c(14, 17), with_geometry = TRUE)
 #'
 #' # Maybe the name is in another language...
-#' gaz_search("Belgie", language = "nl", fuzzy = TRUE)
-#' gaz_search("Bélgica", language = "es", fuzzy = TRUE)
+#' gaz_search("Belgie", language = "nl")
+#'
+#' gaz_search("Bélgica", language = "es")
 #'
 #' # Get all the records intersecting with the longitude 51.21551 and latitude 2.927, restricted to some placetypes
 #' gaz_search(x = 2.927, y = 51.21551, typeid = c(255, 259))

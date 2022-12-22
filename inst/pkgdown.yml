@@ -1,0 +1,12 @@
+pandoc: 2.17.1.1
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  mregions2-rdf: mregions2-rdf.html
+  mregions2: mregions2.html
+  why_mregions2: why_mregions2.html
+last_built: 2022-12-22T15:17Z
+urls:
+  reference: https://lifewatch.github.io/mregions2/reference
+  article: https://lifewatch.github.io/mregions2/articles
+

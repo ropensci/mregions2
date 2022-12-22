@@ -24,8 +24,7 @@ You can find detailed information in the vignettes:
 
 ## Installation
 
-You can install the development version of mregions2 from
-[GitHub](https://github.com/) with:
+You can install the development version of mregions2 from GitHub with:
 
 ``` r
 # install.packages("devtools")
@@ -133,11 +132,10 @@ gaz_search_by_source("Flanders Marine Institute (VLIZ)")
 #> #   maxLatitude <dbl>, maxLongitude <dbl>
 ```
 
-The list of place types and sources are available with \[gaz_types()\]
-and \[gaz_sources()\] respectively.
+The list of place types and sources are available with `gaz_types()` and
+`gaz_sources()` respectively.
 
-You can add the geometry of the Gazetteer entries with
-\[gaz_geometry()\]:
+You can add the geometry of the Gazetteer entries with `gaz_geometry()`:
 
 ``` r
 # Get a record and turn into a sf object with geometry
@@ -166,8 +164,9 @@ gaz_geometry(3293, format = "sfc")
 #> MULTIPOLYGON (((3.370403 51.36696, 3.369459 51....
 ```
 
-The entries of the Marine Regions Gazetteer are organized hierarchiely.
-You can browse this hierarchy up and down with \[gaz_relations()\]
+The entries of the Marine Regions Gazetteer are organized
+hierarchically. You can browse this hierarchy up and down with
+`gaz_relations()`
 
 ``` r
 # Get all relations
@@ -216,8 +215,7 @@ creates and hosts geographical Data Products, being the most popular one
 the [Marine Regions Maritime
 Boundaries](https://marineregions.org/eez.php).
 
-An overview of all available products can be consulted with
-\[mrp_list()\]
+An overview of all available products can be consulted with `mrp_list()`
 
 ``` r
 mrp_list()
@@ -239,8 +237,8 @@ mrp_list()
 #> # … with 11 more rows
 ```
 
-You can visualize the Marine Regions Data Products with \[mrp_view()\].
-It opens an interactive leaflet viewer.
+You can visualize the Marine Regions Data Products with `mrp_view()`. It
+opens an interactive `leaflet::leaflet` viewer.
 
 ``` r
 mrp_view("eez")
@@ -250,7 +248,7 @@ mrp_view("eez")
 
 <img src="man/figures/README-prod1-1.png" width="100%" />
 
-Or you can load the data products into R with \[mrp_get()\]
+Or you can load the data products into R with `mrp_get()`
 
 ``` r
 mrp_get("eez")
@@ -281,8 +279,7 @@ mrp_get("eez")
 #> #   geometry <MULTIPOLYGON [°]>
 ```
 
-Get to know more in the Introduction to mregions2 vignette
-`vignette("mregions2")`
+Get to know more in `vignette("mregions2")`
 
 ## Citation
 
