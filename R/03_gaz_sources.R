@@ -1,6 +1,7 @@
 #' Retrieve Gazetteer Records by Source
 #'
 #' @param x source as free text or `sourceID` as integer
+#' @inheritDotParams gaz_rest_records_by_source -source
 #'
 #' @seealso [gaz_sources()]
 #'
@@ -12,7 +13,7 @@
 #' gaz_sources()
 #'
 #' # Look up by source name and include the geometries
-#' contiguous_zone_src = "Flanders Marine Institute (2019). Maritime Boundaries Geodatabase: Contiguous Zones (24NM), version 3. Available online at http://www.marineregions.org/. https://doi.org/10.14284/384"
+#' contiguous_zone_src = "Australian Antarctic Gazetteer"
 #' gaz_search_by_source(contiguous_zone_src, with_geometry = TRUE)
 #'
 #' # Or pass the geometries later
@@ -132,6 +133,7 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
 #' # is the same as
 #' gaz_sources()
 gaz_rest_sources <- function(){
+  sourceID <- NULL
 
   # Reusable http request that overrides automatic error check
   get_source <- function(offset){

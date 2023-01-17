@@ -4,12 +4,12 @@
 \alias{gaz_rest_records_by_type}
 \title{Retrieve Gazetteer Records by Placetype}
 \usage{
-gaz_rest_records_by_type(placetype, with_geometry = FALSE)
+gaz_rest_records_by_type(type, with_geometry = FALSE)
 }
 \arguments{
-\item{with_geometry}{(logical) Add geometries to the result data frame? Default = FALSE}
-
 \item{type}{(character) The placetype from \code{\link[=gaz_rest_types]{gaz_rest_types()}}}
+
+\item{with_geometry}{(logical) Add geometries to the result data frame? Default = FALSE}
 }
 \value{
 A data frame with Gazetteer entries

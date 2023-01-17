@@ -8,18 +8,17 @@ gaz_rest_records_by_names(
   names,
   with_geometry = FALSE,
   like = TRUE,
-  fuzzy = TRUE,
-  ...
+  fuzzy = TRUE
 )
 }
 \arguments{
+\item{names}{(character) Vector with the terms to search in the Marine Regions Gazetteer}
+
 \item{with_geometry}{(logical) Add geometry to the result data frame? Default = FALSE}
 
 \item{like}{(logical) Add a '\%'-sign before and after the name? (SQL LIKE function). Default = TRUE}
 
 \item{fuzzy}{(logical) Use Levenshtein query to find nearest matches? Default = TRUE}
-
-\item{name}{(character) Term to search in the Marine Regions Gazetteer}
 }
 \value{
 A data frame with Gazetteer entries

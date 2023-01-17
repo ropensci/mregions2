@@ -8,6 +8,10 @@ mrp_init_wfs_client(version = "2.0.0", silent = FALSE, ...)
 }
 \arguments{
 \item{version}{(character) The WFS version. Supported: \code{c("1.0.0", "1.1.1", "2.0.0")}}
+
+\item{silent}{(logical) Hide success or fail message? Default = FALSE}
+
+\item{...}{params to be passed to \code{ows4R::WFSClient$new}}
 }
 \value{
 An object of class \code{c("WFSClient", "OWSClient", "OGCAbstractObject","R6")}. See package \link{ows4R}.

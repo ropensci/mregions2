@@ -64,6 +64,7 @@ gaz_search("Belgie", language = "nl")
 
 gaz_search("Bélgica", language = "es")
 
-# Get all the records intersecting with the longitude 51.21551 and latitude 2.927, restricted to some placetypes
+# Get all the records intersecting with the longitude 51.21551 and latitude 2.927
+# restricting to some placetypes
 gaz_search(x = 2.927, y = 51.21551, typeid = c(255, 259))
 }

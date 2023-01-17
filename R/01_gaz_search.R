@@ -28,7 +28,8 @@
 #'
 #' gaz_search("Bélgica", language = "es")
 #'
-#' # Get all the records intersecting with the longitude 51.21551 and latitude 2.927, restricted to some placetypes
+#' # Get all the records intersecting with the longitude 51.21551 and latitude 2.927
+#' # restricting to some placetypes
 #' gaz_search(x = 2.927, y = 51.21551, typeid = c(255, 259))
 gaz_search <- function(x, ...){
   UseMethod("gaz_search")
@@ -64,13 +65,13 @@ gaz_search.numeric <- function(x, ..., y = NULL){
     x <- lapply(x, gaz_rest_record_by_mrgid, ...)
 
     # Logic to return an RDF document
-    if(hasArg("rdf")){
+    if(methods::hasArg("rdf")){
       if(sys.call()$rdf){
         if(length(x) == 1) return( x[[1]] )
         if(length(x) > 1){
           out <- x[[1]]
           for(i in 2:length(x)){
-            out <- rdflib:::c.rdf(out, x[[i]])
+            out <- c_rdf(out, x[[i]])
           }
           return(out)
         }
@@ -137,7 +138,7 @@ gaz_search.sfc <- function(x, ...){
 #' gaz_rest_record_by_mrgid(3293)
 #' gaz_rest_record_by_mrgid(3293, with_geometry = TRUE)
 #' gaz_rest_record_by_mrgid(3293, rdf = TRUE)
-gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE, ...){
+gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
 
   # Assertions
   mrgid = checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
@@ -204,7 +205,8 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE, 
 #' gaz_rest_records_by_name("Belgian Exclusive Economic Zone", with_geometry = TRUE)
 #' gaz_rest_records_by_name("Bélgica", language = "es")
 #' gaz_rest_records_by_name("Belgium", typeid = c(350, 351))
-gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL, language = NULL, like = TRUE, fuzzy = TRUE, ...){
+gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL, language = NULL, like = TRUE, fuzzy = TRUE){
+  MRGID <- NULL
 
   # Assert name
   checkmate::assert_character(name, len = 1)
@@ -346,7 +348,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
 
 #' Get Gazetteer Records for all given names
 #'
-#' @param name (character) Term to search in the Marine Regions Gazetteer
+#' @param names (character) Vector with the terms to search in the Marine Regions Gazetteer
 #' @param with_geometry (logical) Add geometry to the result data frame? Default = FALSE
 #' @param like (logical) Add a '%'-sign before and after the name? (SQL LIKE function). Default = TRUE
 #' @param fuzzy (logical) Use Levenshtein query to find nearest matches? Default = TRUE
@@ -361,7 +363,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
 #' gaz_rest_records_by_names(
 #'   c("Belgian Exclusive Economic Zone", "Dutch Exclusive Economic Zone")
 #' )
-gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE, fuzzy = TRUE, ...){
+gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE, fuzzy = TRUE){
 
   # Assertions
   checkmate::assert_character(names, min.len = 1, unique = TRUE, any.missing = FALSE, all.missing = FALSE)
@@ -409,7 +411,8 @@ gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE,
 #' gaz_rest_records_by_lat_long(51.21551, 2.927)
 #' gaz_rest_records_by_lat_long(51.21551, 2.927, with_geometry = TRUE, typeid = c(255, 259))
 #' }
-gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FALSE, typeid = NULL, ...){
+gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FALSE, typeid = NULL){
+  MRGID <- NULL
 
   # Assertions
   checkmate::assert_double(latitude, lower = -90, upper = 90, len = 1)

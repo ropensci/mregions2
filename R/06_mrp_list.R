@@ -1,11 +1,14 @@
 .mrp_list <- function() {
+  # Avoid "no visible binding for global variable" R CMD Check NOTE
+  title <- abstract <- data_product <- product_layer <- geoserverID <- NULL
+  license <- citation <- doi <- imis <- abstract <- id <- NULL
 
-  mrp_list <- readr::read_delim(
+  mrp_list <- utils::read.delim2(
     system.file("mrp_list.csv", package = "mregions2"),
-    col_types = readr::cols(
-      readr::col_character()
-    ),
-    delim = ";"
+    header = TRUE,
+    sep = ";",
+    dec = ".",
+    fileEncoding = "UTF-8"
   ) %>% dplyr::mutate(
     geoserverID = glue::glue("{product_namespace}:{product_layer}")
   )
@@ -15,7 +18,7 @@
   capabilities <- wfs$getCapabilities()
   caps_ft <- purrr::map(mrp_list$geoserverID, ~ capabilities$findFeatureTypeByName(.x))
 
-  mrp_list %>% dplyr::mutate(
+  mrp_list <- mrp_list %>% dplyr::mutate(
     title = purrr::map_chr(caps_ft, ~ .x$getTitle()),
     abstract = purrr::map_chr(caps_ft, ~ .x$getAbstract())
   ) %>% dplyr::select(
@@ -28,6 +31,11 @@
     abstract,
     id = geoserverID
   )
+
+  # Turn into tibble
+  attr(mrp_list, "class") <- c("tbl_df", "tbl", "data.frame")
+
+  mrp_list
 }
 
 #' Available data products at Marine Regions
@@ -111,6 +119,8 @@ mrp_list <- memoise::memoise(.mrp_list)
 #' Creates WFS client in Marine Regions
 #'
 #' @param version (character) The WFS version. Supported: `c("1.0.0", "1.1.1", "2.0.0")`
+#' @param silent (logical) Hide success or fail message? Default = FALSE
+#' @param ... params to be passed to `ows4R::WFSClient$new`
 #'
 #' @return An object of class `c("WFSClient", "OWSClient", "OGCAbstractObject","R6")`. See package [ows4R].
 #' @export

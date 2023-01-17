@@ -41,7 +41,7 @@ You can pass the output of most \verb{gaz_*} functions to \code{gaz_relations()}
 related gazetteer entries
 \subsection{Developer info}{
 
-This is done in the method \code{\link[=gaz_relations.mr_df]{gaz_relations.mr_df()}}. \link[=new_mr_df]{mr_df} is a class defined in
+This is done in the method \code{\link[=gaz_relations.mr_df]{gaz_relations.mr_df()}}. \code{mr_df} is a class defined in
 this package to ensure the data frame passed to gaz_relations has a variable with \link{MRGID}.
 }
 }

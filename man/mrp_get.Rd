@@ -44,10 +44,11 @@ View(mrp_list())
 # We want the Exclusive Economic Zones of Portugal. Let's first visualize the product:
 mrp_view("eez")
 
-# Let's see all the columns on this data product
+# See all the columns on this data product
 mrp_colnames("eez")
 
-# We should query on sovereign. Let's see all the possible values of sovereign1, sovereign2 and sovereign3
+# We should query on sovereign
+# See all the possible values of sovereign1, sovereign2 and sovereign3
 sov1 = mrp_col_unique("eez", "sovereign1")
 sov2 = mrp_col_unique("eez", "sovereign2")
 sov3 = mrp_col_unique("eez", "sovereign3")
@@ -62,8 +63,8 @@ sov3 = mrp_col_unique("eez", "sovereign3")
 "Portugal" \%in\% sov3
 #> [1] FALSE
 
-# Portugal is only in sovereign1. Let's write a CQL filter to get only the EEZs of Portugal, or those
-# where Portugal is a party of a dispute or a joint regime
+# Portugal is only in sovereign1. Let's write a CQL filter to get only
+# the EEZs of Portugal, or those where Portugal is a party of a dispute or a joint regime
 portugal_eez <- mrp_get("eez", cql_filter = "sovereign1 = 'Portugal'")
 
 # You can also limit the number of features to be requested

@@ -46,7 +46,7 @@ You can pass the output of most \verb{gaz_*} functions to \code{gaz_geometry()} 
 geometry the gazetteer entry. The data frame is then transformed into a \link[sf:sf]{sf::sf} object.
 \subsection{Developer info}{
 
-This is done in the method \code{\link[=gaz_geometry.mr_df]{gaz_geometry.mr_df()}}. \link[=new_mr_df]{mr_df} is a class defined in
+This is done in the method \code{\link[=gaz_geometry.mr_df]{gaz_geometry.mr_df()}}. \code{mr_df} is a class defined in
 this package to ensure the data frame passed to gaz_geometry has a variable with \link{MRGID}.
 }
 }

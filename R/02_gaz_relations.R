@@ -11,7 +11,7 @@
 #' related gazetteer entries
 #'
 #' ## Developer info
-#' This is done in the method [gaz_relations.mr_df()]. [mr_df][new_mr_df] is a class defined in
+#' This is done in the method [gaz_relations.mr_df()]. `mr_df` is a class defined in
 #' this package to ensure the data frame passed to gaz_relations has a variable with [MRGID].
 #'
 #' @export

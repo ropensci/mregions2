@@ -35,7 +35,7 @@ gaz_types <- memoise::memoise(gaz_rest_types)
 
 #' Retrieve Gazetteer Records by Placetype
 #'
-#' @param x A [gaz_types()][place type]. Either:
+#' @param x A [place type][gaz_types()]. Either:
 #' - (character) The name of a place type.
 #' - (integer) The typeid of a place type.
 #' @inheritDotParams gaz_rest_records_by_type
@@ -68,6 +68,8 @@ gaz_search_by_type.character <- function(x, ...){
 #' @rdname gaz_search_by_type
 #' @export
 gaz_search_by_type.numeric <- function(x, ...){
+  typeID <- NULL
+
   x = checkmate::assert_integerish(x, lower = 1, upper = 999999999, min.len = 1,
                                    any.missing = FALSE, all.missing = FALSE,
                                    coerce = TRUE)
@@ -103,7 +105,9 @@ gaz_search_by_type.numeric <- function(x, ...){
 #' @examples
 #' gaz_rest_records_by_type("FAO Subdivisions")
 #' gaz_rest_records_by_type("EEZ")
-gaz_rest_records_by_type <- function(placetype, with_geometry = FALSE){
+gaz_rest_records_by_type <- function(type, with_geometry = FALSE){
+  placetype = type; rm(type)
+  MRGID <- NULL
 
   # Assertions
   checkmate::assert_character(placetype)

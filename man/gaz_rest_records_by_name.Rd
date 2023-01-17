@@ -10,8 +10,7 @@ gaz_rest_records_by_name(
   typeid = NULL,
   language = NULL,
   like = TRUE,
-  fuzzy = TRUE,
-  ...
+  fuzzy = TRUE
 )
 }
 \arguments{

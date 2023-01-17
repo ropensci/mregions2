@@ -25,10 +25,6 @@ Imports:
     httr2,
     magrittr,
     sf,
-    roxygen2,
-    testthat,
-    tibble,
-    tidyr (>= 1.2.0),
     utils,
     rdflib,
     ISOcodes,
@@ -41,10 +37,9 @@ Imports:
     lubridate,
     ows4R (>= 0.3),
     purrr,
-    readr,
-    shiny,
     xml2,
-    wrapr
+    wrapr,
+    methods
 RoxygenNote: 7.2.0
 URL: https://github.com/lifewatch/mregions2,
     https://lifewatch.github.io/mregions2/
@@ -54,6 +49,7 @@ Suggests:
     mapview,
     rmarkdown,
     wk,
-    mregions
+    mregions,
+    testthat
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)

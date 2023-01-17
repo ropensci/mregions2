@@ -4,7 +4,7 @@
 \alias{gaz_rest_record_by_mrgid}
 \title{Get one record for the given MRGID}
 \usage{
-gaz_rest_record_by_mrgid(mrgid, with_geometry = FALSE, rdf = FALSE, ...)
+gaz_rest_record_by_mrgid(mrgid, with_geometry = FALSE, rdf = FALSE)
 }
 \arguments{
 \item{mrgid}{(integer) A valid Marine Regions Gazetteer Identifier (\link{MRGID})}

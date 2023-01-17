@@ -34,10 +34,11 @@
 #' # We want the Exclusive Economic Zones of Portugal. Let's first visualize the product:
 #' mrp_view("eez")
 #'
-#' # Let's see all the columns on this data product
+#' # See all the columns on this data product
 #' mrp_colnames("eez")
 #'
-#' # We should query on sovereign. Let's see all the possible values of sovereign1, sovereign2 and sovereign3
+#' # We should query on sovereign
+#' # See all the possible values of sovereign1, sovereign2 and sovereign3
 #' sov1 = mrp_col_unique("eez", "sovereign1")
 #' sov2 = mrp_col_unique("eez", "sovereign2")
 #' sov3 = mrp_col_unique("eez", "sovereign3")
@@ -52,14 +53,15 @@
 #' "Portugal" %in% sov3
 #' #> [1] FALSE
 #'
-#' # Portugal is only in sovereign1. Let's write a CQL filter to get only the EEZs of Portugal, or those
-#' # where Portugal is a party of a dispute or a joint regime
+#' # Portugal is only in sovereign1. Let's write a CQL filter to get only
+#' # the EEZs of Portugal, or those where Portugal is a party of a dispute or a joint regime
 #' portugal_eez <- mrp_get("eez", cql_filter = "sovereign1 = 'Portugal'")
 #'
 #' # You can also limit the number of features to be requested
 #' mrp_get("eez", count = 5)
 #' }
 mrp_get <- function(product_name, ...){
+  data_product <- . <- id <- Group.1 <- NULL
 
   checkmate::assert_character(product_name, len = 1)
   checkmate::assert_choice(product_name, mrp_list()$data_product)
@@ -92,15 +94,14 @@ mrp_get <- function(product_name, ...){
         sf::st_cast("GEOMETRYCOLLECTION") %>%
         dplyr::mutate(id = seq_len(nrow(.))) %>%
         sf::st_collection_extract("POLYGON") %>%
-        sf:::aggregate.sf(list(.$id), dplyr::first, do_union = FALSE) %>%
+        aggregate_sf(list(.$id), dplyr::first, do_union = FALSE) %>%
         dplyr::select(-id, -Group.1)
     })
   }
 
+  attr(out, "class") <- c("tbl_df", "tbl", "data.frame")
 
-  out <- out %>%
-    tibble::as_tibble() %>%
-    sf::st_as_sf()
+  out <- sf::st_as_sf(out)
 
   out$gml_id <- NULL
 
@@ -115,6 +116,7 @@ mrp_get <- function(product_name, ...){
 
 
 .mrp_colnames <- function(product_name){
+  data_product <- name <- type <- NULL
 
   checkmate::assert_character(product_name, len = 1)
   checkmate::assert_choice(product_name, mrp_list()$data_product)
@@ -147,7 +149,7 @@ mrp_get <- function(product_name, ...){
 #' @export
 #'
 #' @seealso [mrp_list()] to describe the list of products, [mrp_col_unique()] to get the unique values of a the
-#' columns of a data product, useful to write queries that can be passed to [mr_get()] or [mr_view()] via the
+#' columns of a data product, useful to write queries that can be passed to [mrp_get()] or [mrp_view()] via the
 #' arguments `cql_filter` or `filter`.
 #'
 #' @examples
@@ -159,6 +161,7 @@ mrp_colnames <- memoise::memoise(.mrp_colnames)
 
 
 .mrp_col_unique <- function(product_name, colname){
+  data_product <- NULL
 
   checkmate::assert_character(product_name, len = 1)
   checkmate::assert_choice(product_name, mrp_list()$data_product)
@@ -213,7 +216,7 @@ mrp_colnames <- memoise::memoise(.mrp_colnames)
 #' @export
 #'
 #' @seealso [mrp_list()] to describe the list of products, [mrp_colnames()] to get the names and data type of
-#' the columns of a data product, useful to write queries that can be passed to [mr_get()] or [mr_view()] via
+#' the columns of a data product, useful to write queries that can be passed to [mrp_get()] or [mrp_view()] via
 #' the arguments `cql_filter` or `filter`.
 #'
 #' @examples

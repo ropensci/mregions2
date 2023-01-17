@@ -39,17 +39,28 @@
 #'
 #' # Example: filter a the Ecoregions 'Azores Canaries Madeira' with mrgid 21885
 #' # You can check the names of the columns beforehand with mrp_colnames('ecoregions')
-#' mrp_view_ecoregions(filter = "<Filter><PropertyIsEqualTo><PropertyName>ecoregion</PropertyName><Literal>Azores Canaries Madeira</Literal></PropertyIsEqualTo></Filter>")
+#' mrp_view_ecoregions(filter = "
+#'   <Filter>
+#'     <PropertyIsEqualTo>
+#'       <PropertyName>ecoregion</PropertyName>
+#'       <Literal>Azores Canaries Madeira</Literal>
+#'     </PropertyIsEqualTo>
+#'   </Filter>
+#' ")
 #'
 #' # OGC filter are very verbose... but luckily you can use a CQL filter instead
 #' mrp_view_ecoregions(cql_filter = "ecoregion = 'Azores Canaries Madeira'")
 #'
 #' # View all the Extended Continental Shelf (ECS) boundary lines published during the first
 #' # decade of the 21st century
-#' mrp_view_ecs_boundaries(cql_filter="doc_date > '2000-01-01' AND doc_date < '2009-12-31'")
+#' mrp_view_ecs_boundaries(
+#'   cql_filter = "doc_date > '2000-01-01' AND doc_date < '2009-12-31'"
+#' )
 #'
 #' # Or as timestamp
-#' mrp_view_eez_boundaries(cql_filter="doc_date AFTER 2000-01-01T00:00:00Z AND doc_date BEFORE 2009-12-31T00:00:00Z")
+#' mrp_view_eez_boundaries(
+#'   cql_filter = "doc_date AFTER 2000-01-01T00:00:00Z AND doc_date BEFORE 2009-12-31T00:00:00Z"
+#' )
 #'}
 mrp_view <- function(data_product, cql_filter = NULL, filter = NULL){
 
@@ -57,7 +68,7 @@ mrp_view <- function(data_product, cql_filter = NULL, filter = NULL){
   checkmate::assert_character(data_product, len = 1)
   checkmate::assert_choice(data_product, mrp_list()$data_product)
 
-  both_filters_given <- hasArg(cql_filter) & hasArg(filter)
+  both_filters_given <- methods::hasArg(cql_filter) & methods::hasArg(filter)
   if(both_filters_given) stop("You must provide one of `cql_filter` or `filter`, not both.", call. = FALSE)
 
   checkmate::assert_character(cql_filter, null.ok = TRUE, len = 1)
@@ -81,13 +92,18 @@ mrp_view <- function(data_product, cql_filter = NULL, filter = NULL){
 
 
   # Add filters
-  if(hasArg(cql_filter)){
-    wms <- paste0(wms, "cql_filter=", URLencode(cql_filter))
+  if(methods::hasArg(cql_filter)){
+    wms <- paste0(wms, "cql_filter=", utils::URLencode(cql_filter))
   }
 
-  if(hasArg(filter)){
-    wms <- paste0(wms, "filter=", URLencode(filter))
+  if(methods::hasArg(filter)){
+    wms <- paste0(wms, "filter=", utils::URLencode(filter))
   }
+
+
+  # Add HTML class to citation
+  cite_mr <- "<a href='https://marineregions.org/'>Marine Regions</a>"
+  attr(cite_mr, "class") <- c("html", "character")
 
   # Perform
   mrp_map <- base_map() %>%
@@ -99,7 +115,7 @@ mrp_view <- function(data_product, cql_filter = NULL, filter = NULL){
         format = "image/png",
         info_format = "text/html"
       ),
-      attribution = shiny::HTML("<a href='https://marineregions.org/'>Marine Regions</a>")
+      attribution = cite_mr
     ) %>% add_labels()
 
   return(mrp_map)
@@ -126,6 +142,10 @@ base_map <- function(){
     ))
   }
 
+  # Add HTML class to citation
+  cite_emodnet <- "<a href='https://emodnet.ec.europa.eu'>EMODnet</a>"
+  attr(cite_emodnet, "class") <- c("html", "character")
+
   # Perform
   base_map <- leaflet::leaflet(
     options = leaflet::leafletOptions(crs = leaflet::leafletCRS("L.CRS.EPSG4326"))
@@ -133,7 +153,7 @@ base_map <- function(){
     leaflet::addTiles(
       urlTemplate = emodnet_tiles,
       options = leaflet::tileOptions(tms = FALSE),
-      attribution = shiny::HTML("<a href='https://emodnet.ec.europa.eu'>EMODnet</a>")
+      attribution = cite_emodnet
     )
 
   return(base_map)

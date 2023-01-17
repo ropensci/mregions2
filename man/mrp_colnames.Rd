@@ -29,6 +29,6 @@ mrp_colnames("ecoregions")
 }
 \seealso{
 \code{\link[=mrp_list]{mrp_list()}} to describe the list of products, \code{\link[=mrp_col_unique]{mrp_col_unique()}} to get the unique values of a the
-columns of a data product, useful to write queries that can be passed to \code{\link[=mr_get]{mr_get()}} or \code{\link[=mr_view]{mr_view()}} via the
+columns of a data product, useful to write queries that can be passed to \code{\link[=mrp_get]{mrp_get()}} or \code{\link[=mrp_view]{mrp_view()}} via the
 arguments \code{cql_filter} or \code{filter}.
 }

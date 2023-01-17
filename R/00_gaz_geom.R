@@ -10,7 +10,7 @@
 #' geometry the gazetteer entry. The data frame is then transformed into a [sf::sf] object.
 #'
 #' ## Developer info
-#' This is done in the method [gaz_geometry.mr_df()]. [mr_df][new_mr_df] is a class defined in
+#' This is done in the method [gaz_geometry.mr_df()]. `mr_df` is a class defined in
 #' this package to ensure the data frame passed to gaz_geometry has a variable with [MRGID].
 #'
 #' @export
@@ -48,7 +48,7 @@ gaz_geometry.numeric <- function(x, ...){
     if(length(x) > 1){
       out <- x[[1]]
       for(i in 2:length(x)){
-        out <- rdflib:::c.rdf(out, x[[i]])
+        out <- c_rdf(out, x[[i]])
       }
       return(out)
     }
@@ -134,6 +134,8 @@ gaz_rest_geometry <- function(mrgid, sourceid, attribute_value, format = "sfc", 
 #'
 #' @noRd
 geom_perform <- function(url, format, multipart = TRUE, mrgid, resp_return_error = FALSE){
+  s <- the_geom <- NULL
+
   # Assert format
   checkmate::assert_choice(format, c("sfc", "sf", "wkt", "rdf"))
 
@@ -274,10 +276,15 @@ gaz_add_geometry <- function(x){
                                            ymin = x[i, ]$minLatitude),
                                          crs = sf::st_crs(4326))
 
-            the_geom[[i]] <- tibble::tibble(MRGID = x[i, ]$MRGID,
-                                            the_geom = sf::st_as_sfc(the_geom[[i]])) %>%
-              sf::st_as_sf()
+            the_geom[[i]] <- data.frame(
+              MRGID = x[i, ]$MRGID,
+              the_geom = sf::st_as_sfc(the_geom[[i]]),
+              stringsAsFactors = FALSE
+            )
 
+            attr(the_geom[[i]], "class") <- c("tbl_df", "tbl", "data.frame")
+
+            the_geom[[i]] <- sf::st_as_sf(the_geom[[i]])
 
           }
         }
@@ -296,14 +303,19 @@ gaz_add_geometry <- function(x){
 
             if(centroid_is_not_na){
 
-              the_geom[[i]] <- tibble::tibble(
+              the_geom[[i]] <- data.frame(
                 MRGID = x[i, ]$MRGID,
                 the_geom = sf::st_sfc(
                   sf::st_point(c(x[i, ]$longitude, x[i, ]$latitude)),
-                  crs = sf::st_crs(4326)
+                  crs = sf::st_crs(4326),
+                  stringsAsFactors = FALSE
                 )
-              ) %>%
-                sf::st_as_sf()
+              )
+
+              attr(the_geom[[i]], "class") <- c("tbl_df", "tbl", "data.frame")
+
+              the_geom[[i]] <- sf::st_as_sf(the_geom[[i]])
+
             }
           }
         }

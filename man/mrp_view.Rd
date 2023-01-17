@@ -110,17 +110,28 @@ mrp_view_eez()
 
 # Example: filter a the Ecoregions 'Azores Canaries Madeira' with mrgid 21885
 # You can check the names of the columns beforehand with mrp_colnames('ecoregions')
-mrp_view_ecoregions(filter = "<Filter><PropertyIsEqualTo><PropertyName>ecoregion</PropertyName><Literal>Azores Canaries Madeira</Literal></PropertyIsEqualTo></Filter>")
+mrp_view_ecoregions(filter = "
+  <Filter>
+    <PropertyIsEqualTo>
+      <PropertyName>ecoregion</PropertyName>
+      <Literal>Azores Canaries Madeira</Literal>
+    </PropertyIsEqualTo>
+  </Filter>
+")
 
 # OGC filter are very verbose... but luckily you can use a CQL filter instead
 mrp_view_ecoregions(cql_filter = "ecoregion = 'Azores Canaries Madeira'")
 
 # View all the Extended Continental Shelf (ECS) boundary lines published during the first
 # decade of the 21st century
-mrp_view_ecs_boundaries(cql_filter="doc_date > '2000-01-01' AND doc_date < '2009-12-31'")
+mrp_view_ecs_boundaries(
+  cql_filter = "doc_date > '2000-01-01' AND doc_date < '2009-12-31'"
+)
 
 # Or as timestamp
-mrp_view_eez_boundaries(cql_filter="doc_date AFTER 2000-01-01T00:00:00Z AND doc_date BEFORE 2009-12-31T00:00:00Z")
+mrp_view_eez_boundaries(
+  cql_filter = "doc_date AFTER 2000-01-01T00:00:00Z AND doc_date BEFORE 2009-12-31T00:00:00Z"
+)
 }
 }
 \seealso{

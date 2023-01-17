@@ -14,6 +14,12 @@ gaz_search_by_source(x, ...)
 }
 \arguments{
 \item{x}{source as free text or \code{sourceID} as integer}
+
+\item{...}{
+  Arguments passed on to \code{\link[=gaz_rest_records_by_source]{gaz_rest_records_by_source}}
+  \describe{
+    \item{\code{with_geometry}}{(logical) Add geometries to the result data frame? Default = FALSE}
+  }}
 }
 \value{
 A data frame with Gazetteer entries
@@ -26,7 +32,7 @@ Retrieve Gazetteer Records by Source
 gaz_sources()
 
 # Look up by source name and include the geometries
-contiguous_zone_src = "Flanders Marine Institute (2019). Maritime Boundaries Geodatabase: Contiguous Zones (24NM), version 3. Available online at http://www.marineregions.org/. https://doi.org/10.14284/384"
+contiguous_zone_src = "Australian Antarctic Gazetteer"
 gaz_search_by_source(contiguous_zone_src, with_geometry = TRUE)
 
 # Or pass the geometries later

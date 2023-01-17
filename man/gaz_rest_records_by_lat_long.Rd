@@ -8,8 +8,7 @@ gaz_rest_records_by_lat_long(
   latitude,
   longitude,
   with_geometry = FALSE,
-  typeid = NULL,
-  ...
+  typeid = NULL
 )
 }
 \arguments{

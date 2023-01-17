@@ -55,6 +55,82 @@ new_mr_df <- function(x = data.frame()) {
   x
 }
 
+## Functions to fix issues in R CMD Check
 
+# Namespace in Imports field not imported from: 'memoise'
+# memoise is not called inside a function but directly to memoise a function. e.g.
+#    .f <- function(){"do something"}
+#    f <- memoise::memoise(.f)
+# but then, memoise is imported but not used in any function.
+# solution: create a dummy function that uses memoise. wont be used
+mr_memoise <- function(...) memoise::memoise(...)
 
+# Unexported objects imported by ':::' calls:
+# `:::` only allowed when the maintainer of the original and target package is the same person
+# If not, the safest workaround is to copy&paste the functions in this package
+# See https://stat.ethz.ch/pipermail/r-devel/2013-August/067189.html
+
+# rdflib:::c.rdf
+# v0.2.5
+c_rdf <- function(...){
+  rdfs <- list(...)
+  loc <- tempdir()
+  rdf <- rdfs[[1]]
+  for (i in seq_along(rdfs)) {
+    f <- file.path(loc, paste0(i, ".rdf"))
+    rdflib::rdf_serialize(rdfs[[i]], f, format = "turtle")
+    rdflib::rdf_parse(f, rdf = rdf, format = "turtle")
+    file.remove(f)
+  }
+  unlink(loc)
+  rdf
+}
+
+# sf:::aggregate.sf
+# v1.0.7
+aggregate_sf <- function (x, by, FUN, ..., do_union = TRUE, simplify = TRUE,
+          join = sf::st_intersects)
+{
+  if (inherits(by, "sf") || inherits(by, "sfc")) {
+    if (inherits(by, "sfc"))
+      by = sf::st_sf(by)
+    i = join(sf::st_geometry(by), sf::st_geometry(x))
+    sf::st_geometry(x) = NULL
+    a = stats::aggregate(x[unlist(i), , drop = FALSE], list(rep(seq_len(nrow(by)),
+                                                         lengths(i))), FUN, ...)
+    nrow_diff = nrow(by) - nrow(a)
+    if (nrow_diff > 0) {
+      a_na = a[rep(NA, nrow(by)), ]
+      a_na[a$Group.1, ] = a
+      a = a_na
+    }
+    a$Group.1 = NULL
+    row.names(a) = row.names(by)
+    sf::st_set_geometry(a, sf::st_geometry(by))
+  }
+  else {
+    crs = sf::st_crs(x)
+    lst = lapply(split(sf::st_geometry(x), by), function(y) do.call(c,
+                                                                    y))
+    geom = do.call(sf::st_sfc, lst[!sapply(lst, is.null)])
+    if (do_union)
+      geom = sf::st_union(sf::st_set_precision(geom, sf::st_precision(x)),
+                      by_feature = TRUE)
+    sf::st_geometry(x) = NULL
+    x = stats::aggregate(x, by, FUN, ..., simplify = simplify)
+    sf::st_geometry(x) = geom
+    sf::st_crs(x) = crs
+    geoms = which(vapply(x, function(vr) inherits(vr, "sfc"),
+                         TRUE))
+    agr_names = names(x)[-geoms]
+    agr = rep("aggregate", length(agr_names))
+    names(agr) = agr_names
+    n = if (!is.null(names(by)))
+      names(by)
+    else paste0("Group.", seq_along(by))
+    agr[n] = "identity"
+    sf::st_agr(x) = agr
+    x
+  }
+}
 

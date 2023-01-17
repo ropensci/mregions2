@@ -13,7 +13,7 @@ gaz_search_by_type(x, ...)
 \method{gaz_search_by_type}{numeric}(x, ...)
 }
 \arguments{
-\item{x}{A \link[=place type]{gaz_types()}. Either:
+\item{x}{A \link[=gaz_types]{place type}. Either:
 \itemize{
 \item (character) The name of a place type.
 \item (integer) The typeid of a place type.
@@ -22,6 +22,7 @@ gaz_search_by_type(x, ...)
 \item{...}{
   Arguments passed on to \code{\link[=gaz_rest_records_by_type]{gaz_rest_records_by_type}}
   \describe{
+    \item{\code{type}}{(character) The placetype from \code{\link[=gaz_rest_types]{gaz_rest_types()}}}
     \item{\code{with_geometry}}{(logical) Add geometries to the result data frame? Default = FALSE}
   }}
 }
