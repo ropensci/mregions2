@@ -13,7 +13,13 @@
     <loc>https://lifewatch.github.io/mregions2/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://lifewatch.github.io/mregions2/articles/packagedev_june2022.html</loc>
+    <loc>https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/articles/mregions2.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/articles/why_mregions2.html</loc>
   </url>
   <url>
     <loc>https://lifewatch.github.io/mregions2/authors.html</loc>
@@ -22,51 +28,96 @@
     <loc>https://lifewatch.github.io/mregions2/index.html</loc>
   </url>
   <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/MRGID.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_geometry.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_relations.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_rest.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_rest_geometries.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_rest_names_by_mrgid.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_rest_record_by_mrgid.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_rest_records_by_lat_long.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_rest_records_by_name.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_rest_records_by_names.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_rest_records_by_source.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_rest_records_by_type.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_rest_relations_by_mrgid.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_rest_source_by_sourceid.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_rest_sources.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_rest_types.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_rest_wmses.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_search.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_search_by_source.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_search_by_type.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_sources.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/gaz_types.html</loc>
+  </url>
+  <url>
     <loc>https://lifewatch.github.io/mregions2/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://lifewatch.github.io/mregions2/reference/mr_gaz_geometry.html</loc>
+    <loc>https://lifewatch.github.io/mregions2/reference/mregions2-package.html</loc>
   </url>
   <url>
-    <loc>https://lifewatch.github.io/mregions2/reference/mr_gaz_info.html</loc>
+    <loc>https://lifewatch.github.io/mregions2/reference/mrp_col_unique.html</loc>
   </url>
   <url>
-    <loc>https://lifewatch.github.io/mregions2/reference/mr_gaz_ldes.html</loc>
+    <loc>https://lifewatch.github.io/mregions2/reference/mrp_colnames.html</loc>
   </url>
   <url>
-    <loc>https://lifewatch.github.io/mregions2/reference/mr_gaz_record.html</loc>
+    <loc>https://lifewatch.github.io/mregions2/reference/mrp_get.html</loc>
   </url>
   <url>
-    <loc>https://lifewatch.github.io/mregions2/reference/mr_gaz_records_by_latlon.html</loc>
+    <loc>https://lifewatch.github.io/mregions2/reference/mrp_init_wfs_client.html</loc>
   </url>
   <url>
-    <loc>https://lifewatch.github.io/mregions2/reference/mr_gaz_records_by_name.html</loc>
+    <loc>https://lifewatch.github.io/mregions2/reference/mrp_list.html</loc>
   </url>
   <url>
-    <loc>https://lifewatch.github.io/mregions2/reference/mr_gaz_records_by_names.html</loc>
-  </url>
-  <url>
-    <loc>https://lifewatch.github.io/mregions2/reference/mr_gaz_records_by_source.html</loc>
-  </url>
-  <url>
-    <loc>https://lifewatch.github.io/mregions2/reference/mr_gaz_records_by_type.html</loc>
-  </url>
-  <url>
-    <loc>https://lifewatch.github.io/mregions2/reference/mr_gaz_relations_by_MRGID.html</loc>
-  </url>
-  <url>
-    <loc>https://lifewatch.github.io/mregions2/reference/mr_null_to_na.html</loc>
-  </url>
-  <url>
-    <loc>https://lifewatch.github.io/mregions2/reference/mr_req_URL.html</loc>
-  </url>
-  <url>
-    <loc>https://lifewatch.github.io/mregions2/reference/mr_resp_to_tibble.html</loc>
+    <loc>https://lifewatch.github.io/mregions2/reference/mrp_view.html</loc>
   </url>
   <url>
     <loc>https://lifewatch.github.io/mregions2/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://lifewatch.github.io/mregions2/reference/req_mr_user_agent.html</loc>
   </url>
 </urlset>
