@@ -1,12 +1,6 @@
 ---
 title: "Introduction to mregions2"
-author: Salvador Fernández
-output: rmarkdown::html_vignette
 df_print: "tibble"
-vignette: >
-  %\VignetteIndexEntry{mregions}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}

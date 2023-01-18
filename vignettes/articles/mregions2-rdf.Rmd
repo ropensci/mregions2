@@ -1,11 +1,6 @@
 ---
 title: "mregions2 as RDF"
 author: Salvador Fernández
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{mregions2-rdf}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}

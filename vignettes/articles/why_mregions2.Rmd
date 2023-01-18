@@ -1,10 +1,5 @@
 ---
 title: "Why mregions and mregions2?"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Why two packages for Marine Regions? mregions vs mregions2}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
