@@ -6,6 +6,7 @@
 [![Funding](https://img.shields.io/static/v1?label=powered+by&message=lifewatch.be&labelColor=1a4e8a&color=f15922)](http://lifewatch.be)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 mregions2 allows to access the [Marine Regions
@@ -242,12 +243,9 @@ opens an interactive `leaflet::leaflet` viewer.
 
 ``` r
 mrp_view("eez")
-#> Loading ISO 19139 XML schemas...
-#> Loading ISO 19115 codelists...
 ```
 
-<img src="man/figures/README-prod1-1.png" width="100%" />
-
+![](https://raw.githubusercontent.com/lifewatch/mregions2/main/man/figures/README-prod1-1.png)
 Or you can load the data products into R with `mrp_get()`
 
 ``` r

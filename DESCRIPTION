@@ -50,6 +50,7 @@ Suggests:
     rmarkdown,
     wk,
     mregions,
-    testthat
+    testthat,
+    jsonlite
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)

@@ -12,15 +12,11 @@
 #' # Check out all sources
 #' gaz_sources()
 #'
-#' # Look up by source name and include the geometries
-#' contiguous_zone_src = "Australian Antarctic Gazetteer"
-#' gaz_search_by_source(contiguous_zone_src, with_geometry = TRUE)
+#' # Look up by source name
+#' gaz_search_by_source("Gazetteer of Greenland")
 #'
-#' # Or pass the geometries later
-#' gaz_search_by_source(contiguous_zone_src) %>% gaz_geometry()
-#'
-#' # Or query by SourceID all the maritime boundaries
-#' gaz_search_by_source(630:634)
+#' # Or query by SourceID
+#' gaz_search_by_source(386)
 gaz_search_by_source <- function(x, ...){
   UseMethod("gaz_search_by_source")
 }

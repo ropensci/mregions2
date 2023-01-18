@@ -7,5 +7,6 @@
 ^pkgdown$
 ^\.github$
 ^\./README_cache$
-^\./vignettes/mregions2_cache$
-^\./vignettes/mregions2-rdf_cache$
+^codemeta\.json$
+^README_cache
+^vignettes/articles$

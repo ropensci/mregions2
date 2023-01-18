@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 [![Funding](https://img.shields.io/static/v1?label=powered+by&message=lifewatch.be&labelColor=1a4e8a&color=f15922)](http://lifewatch.be)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 mregions2 allows to access the [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) and the [Marine Regions Data Products](https://marineregions.org/sources.php) in R.
@@ -106,10 +107,10 @@ mrp_list()
 
 You can visualize the Marine Regions Data Products with `mrp_view()`. It opens an interactive `leaflet::leaflet` viewer.
 
-```{r prod1}
+```{r prod1, eval=FALSE}
 mrp_view("eez")
 ```
-
+![](https://raw.githubusercontent.com/lifewatch/mregions2/main/man/figures/README-prod1-1.png)
 Or you can load the data products into R with `mrp_get()`
 
 ```{r prod2}

@@ -307,9 +307,8 @@ gaz_add_geometry <- function(x){
                 MRGID = x[i, ]$MRGID,
                 the_geom = sf::st_sfc(
                   sf::st_point(c(x[i, ]$longitude, x[i, ]$latitude)),
-                  crs = sf::st_crs(4326),
-                  stringsAsFactors = FALSE
-                )
+                  crs = sf::st_crs(4326)
+                ), stringsAsFactors = FALSE
               )
 
               attr(the_geom[[i]], "class") <- c("tbl_df", "tbl", "data.frame")
