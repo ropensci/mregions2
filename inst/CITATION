@@ -1,0 +1,7 @@
+year <- 2023
+
+bibentry(bibtype = "Manual",
+         title = "{mregions2}: Access data from marineregions.org: the Marine Regions Gazetteer and the Marine Regions Data Products",
+         author = c(person("Salvador", "Fernandez-Bejarano"), person("Lotte", "Pohl")),
+         year = year,
+         url = "https://github.com/lifewatch/mregions2")
