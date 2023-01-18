@@ -26,6 +26,9 @@ Default is "sfc"}
 
 \item{...}{reserved for internal use}
 }
+\value{
+A sfc object (default), a sf data frame, a WKT string or an RDF object
+}
 \description{
 Get the geometries associated with a gazetteer record
 }

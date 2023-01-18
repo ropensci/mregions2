@@ -407,6 +407,8 @@ gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE,
 #' @export
 #' @seealso [gaz_rest]
 #'
+#' @return A data frame with Gazetteer entries
+#'
 #' @examples \dontrun{
 #' gaz_rest_records_by_lat_long(51.21551, 2.927)
 #' gaz_rest_records_by_lat_long(51.21551, 2.927, with_geometry = TRUE, typeid = c(255, 259))

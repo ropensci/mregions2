@@ -16,6 +16,8 @@
 #'
 #' @export
 #'
+#' @return A data frame with Gazetteer entries
+#'
 #' @examples
 #' # Get the relations of the Belgian Exclusive Economic Zone
 #' require(magrittr)
@@ -55,6 +57,8 @@ gaz_relations.mr_df <- function(x, ...){
 #' @param type (character) Must be one of `r c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")`.
 #'
 #' @export
+#'
+#' @return A data frame with Gazetteer entries
 #'
 #' @seealso [List of types (Object Properties)](https://marineregions.org/ontology/documentation.html), [gaz_rest], [MRGID]
 #'

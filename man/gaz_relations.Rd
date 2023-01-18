@@ -33,6 +33,9 @@ gaz_relations(x, ...)
     \item{\code{type}}{(character) Must be one of partof, partlypartof, adjacentto, similarto, administrativepartof, influencedby, all.}
   }}
 }
+\value{
+A data frame with Gazetteer entries
+}
 \description{
 Walk the hierarchy of the MarineRegions Gazetter given a Gazetteer MRGID or Gazetteer entries
 }

@@ -6,6 +6,9 @@
 \usage{
 mrp_list()
 }
+\value{
+A data frame. See description.
+}
 \description{
 A function returning data frame including the name, abstract and
 some other relevant about each data product in Marine Regions.
@@ -17,6 +20,11 @@ some other relevant about each data product in Marine Regions.
 \item \code{doi}: ISO 26324 \href{https://doi.org}{Digital Object Identifier}
 \item \code{imis}: url of the data products in the \href{https://vliz.be/imis?}{Integrated Marine Information System (IMIS)}
 \item \code{id}: geoserver ID, reserved for internal use. Format 'namespace:data_product'
+}
+}
+\examples{
+if(FALSE){
+ View(mrp_list)
 }
 }
 \references{

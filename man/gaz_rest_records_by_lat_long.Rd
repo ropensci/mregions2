@@ -20,6 +20,9 @@ gaz_rest_records_by_lat_long(
 
 \item{typeid}{(numeric) Restrict to one or more placetypeIDs. Retrieve a list of placetypeIDs with \code{\link[=gaz_rest_types]{gaz_rest_types()}}}
 }
+\value{
+A data frame with Gazetteer entries
+}
 \description{
 Get all gazetteer records where the geometry intersects with the given latitude and longitude
 }

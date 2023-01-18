@@ -78,6 +78,9 @@ mrp_view_seavox_v18(...)
 
 \item{...}{pass the \code{cql_filter} and \code{filter} parameters to \code{\link[=mrp_view]{mrp_view()}} when using one of the helpers}
 }
+\value{
+A leaflet map with a data product visualized via WMS
+}
 \description{
 Visualize a Marine Regions data product without downloading
 }

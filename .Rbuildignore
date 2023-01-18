@@ -10,3 +10,4 @@
 ^codemeta\.json$
 ^README_cache
 ^vignettes/articles$
+^CODE_OF_CONDUCT\.md$

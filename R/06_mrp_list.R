@@ -60,6 +60,13 @@
 #' * Sources: <https://marineregions.org/sources.php>
 #' * Methodology of the creation of the Maritime Boundaries: <https://marineregions.org/eezmethodology.php>
 #' * Direct download: <https://marineregions.org/downloads.php>
+#'
+#' @return A data frame. See description.
+#'
+#' @examples
+#' if(FALSE){
+#'  View(mrp_list)
+#' }
 mrp_list <- memoise::memoise(.mrp_list)
 
 

@@ -15,6 +15,8 @@
 #'
 #' @export
 #'
+#' @inheritSection gaz_rest_geometries return
+#'
 #' @examples
 #' require(magrittr)
 #'
@@ -80,6 +82,8 @@ gaz_geometry.mr_df <- function(x, ...){
 #' @param ... reserved for internal use
 #'
 #' @seealso [gaz_rest]
+#'
+#' @return A sfc object (default), a sf data frame, a WKT string or an RDF object
 #'
 #' @examples
 #' gaz_rest_geometries(3293)

@@ -25,6 +25,9 @@ gaz_rest_relations_by_mrgid(
 
 \item{type}{(character) Must be one of partof, partlypartof, adjacentto, similarto, administrativepartof, influencedby, all.}
 }
+\value{
+A data frame with Gazetteer entries
+}
 \description{
 Retrieve Gazetter Relations by MRGID
 }
