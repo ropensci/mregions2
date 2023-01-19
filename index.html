@@ -88,6 +88,9 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"lifewatch/mregions2"</span><span class="op">)</span></span></code></pre></div>
+<p>Load the library with</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lifewatch/mregions2" class="external-link">mregions2</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="query-the-marine-regions-gazetteer">Query the Marine Regions Gazetteer<a class="anchor" aria-label="anchor" href="#query-the-marine-regions-gazetteer"></a>
@@ -98,11 +101,9 @@
 </blockquote>
 <p><sup><a href="https://www.thefreedictionary.com/gazetteer" class="external-link uri">https://www.thefreedictionary.com/gazetteer</a></sup></p>
 <p>You can search the Gazetteer in many ways:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lifewatch/mregions2" class="external-link">mregions2</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Search by free text</span></span>
-<span><span class="fu"><a href="reference/gaz_search.html">gaz_search</a></span><span class="op">(</span><span class="st">"Belgian"</span><span class="op">)</span></span>
+<p>Search by free text:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/gaz_search.html">gaz_search</a></span><span class="op">(</span><span class="st">"Belgian"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 9 × 14</span></span>
 <span><span class="co">#&gt;   MRGID gazetteerSource       placeType preferredGazett… preferredGazett… status</span></span>
 <span><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;                 &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt; </span></span>
@@ -117,20 +118,20 @@
 <span><span class="co">#&gt; 9 49243 "Flanders Marine Ins… Contiguo… Belgian 24 NM    English          stand…</span></span>
 <span><span class="co">#&gt; # … with 8 more variables: accepted &lt;int&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   minLatitude &lt;dbl&gt;, minLongitude &lt;dbl&gt;, maxLatitude &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   maxLongitude &lt;dbl&gt;, precision &lt;dbl&gt;</span></span>
-<span></span>
-<span><span class="co"># Search by unique identifier. See ?MRGID</span></span>
-<span><span class="fu"><a href="reference/gaz_search.html">gaz_search</a></span><span class="op">(</span><span class="fl">3293</span><span class="op">)</span></span>
+<span><span class="co">#&gt; #   maxLongitude &lt;dbl&gt;, precision &lt;dbl&gt;</span></span></code></pre></div>
+<p>Search by unique identifier. See [MRGID]</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/gaz_search.html">gaz_search</a></span><span class="op">(</span><span class="fl">3293</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 14</span></span>
 <span><span class="co">#&gt;   MRGID gazetteerSource    placeType latitude longitude minLatitude minLongitude</span></span>
 <span><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; 1  3293 Flanders Marine I… EEZ           51.5      2.71        51.1         2.24</span></span>
 <span><span class="co">#&gt; # … with 7 more variables: maxLatitude &lt;dbl&gt;, maxLongitude &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   precision &lt;dbl&gt;, preferredGazetteerName &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   preferredGazetteerNameLang &lt;chr&gt;, status &lt;chr&gt;, accepted &lt;int&gt;</span></span>
-<span></span>
-<span><span class="co"># Search by location</span></span>
-<span><span class="fu"><a href="reference/gaz_search.html">gaz_search</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2.927</span>, y <span class="op">=</span> <span class="fl">51.21551</span><span class="op">)</span></span>
+<span><span class="co">#&gt; #   preferredGazetteerNameLang &lt;chr&gt;, status &lt;chr&gt;, accepted &lt;int&gt;</span></span></code></pre></div>
+<p>Search by location:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/gaz_search.html">gaz_search</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2.927</span>, y <span class="op">=</span> <span class="fl">51.21551</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 54 × 14</span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource          placeType minLatitude minLongitude maxLatitude</span></span>
 <span><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;                    &lt;chr&gt;           &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span></span>
@@ -147,10 +148,10 @@
 <span><span class="co">#&gt; # … with 44 more rows, and 8 more variables: maxLongitude &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   preferredGazetteerName &lt;chr&gt;, preferredGazetteerNameLang &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   status &lt;chr&gt;, accepted &lt;int&gt;, latitude &lt;dbl&gt;, longitude &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   precision &lt;dbl&gt;</span></span>
-<span></span>
-<span><span class="co"># Search by placetype</span></span>
-<span><span class="fu"><a href="reference/gaz_search_by_type.html">gaz_search_by_type</a></span><span class="op">(</span><span class="st">"EEZ"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; #   precision &lt;dbl&gt;</span></span></code></pre></div>
+<p>Search by place type:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/gaz_search_by_type.html">gaz_search_by_type</a></span><span class="op">(</span><span class="st">"EEZ"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 254 × 14</span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude</span></span>
 <span><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;</span></span>
@@ -166,10 +167,10 @@
 <span><span class="co">#&gt; 10  5677 Flanders Marine … EEZ           46.0     -1.97        41.2        -9.88</span></span>
 <span><span class="co">#&gt; # … with 244 more rows, and 7 more variables: maxLatitude &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   maxLongitude &lt;dbl&gt;, precision &lt;dbl&gt;, preferredGazetteerName &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   preferredGazetteerNameLang &lt;chr&gt;, status &lt;chr&gt;, accepted &lt;int&gt;</span></span>
-<span></span>
-<span><span class="co"># Search by source</span></span>
-<span><span class="fu"><a href="reference/gaz_search_by_source.html">gaz_search_by_source</a></span><span class="op">(</span><span class="st">"Flanders Marine Institute (VLIZ)"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; #   preferredGazetteerNameLang &lt;chr&gt;, status &lt;chr&gt;, accepted &lt;int&gt;</span></span></code></pre></div>
+<p>Search by authortative source:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/gaz_search_by_source.html">gaz_search_by_source</a></span><span class="op">(</span><span class="st">"Flanders Marine Institute (VLIZ)"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 23 × 13</span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource           placeType latitude longitude preferredGazett…</span></span>
 <span><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;                     &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;           </span></span>
@@ -188,7 +189,7 @@
 <span><span class="co">#&gt; #   maxLatitude &lt;dbl&gt;, maxLongitude &lt;dbl&gt;</span></span></code></pre></div>
 <p>The list of place types and sources are available with <code><a href="reference/gaz_types.html">gaz_types()</a></code> and <code><a href="reference/gaz_sources.html">gaz_sources()</a></code> respectively.</p>
 <p>You can add the geometry of the Gazetteer entries with <code><a href="reference/gaz_geometry.html">gaz_geometry()</a></code>:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get a record and turn into a sf object with geometry</span></span>
 <span><span class="fu"><a href="reference/gaz_search.html">gaz_search</a></span><span class="op">(</span><span class="fl">3293</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/gaz_geometry.html">gaz_geometry</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 1 feature and 14 fields</span></span>
@@ -214,7 +215,7 @@
 <span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
 <span><span class="co">#&gt; MULTIPOLYGON (((3.370403 51.36696, 3.369459 51....</span></span></code></pre></div>
 <p>The entries of the Marine Regions Gazetteer are organized hierarchically. You can browse this hierarchy up and down with <code><a href="reference/gaz_relations.html">gaz_relations()</a></code></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get all relations</span></span>
 <span><span class="fu"><a href="reference/gaz_search.html">gaz_search</a></span><span class="op">(</span><span class="fl">3293</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/gaz_relations.html">gaz_relations</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 31 × 14</span></span>
@@ -258,7 +259,7 @@
 </h2>
 <p>In addition to the Marine Regions Gazetteer, the Marine Regions Team creates and hosts geographical Data Products, being the most popular one the <a href="https://marineregions.org/eez.php" class="external-link">Marine Regions Maritime Boundaries</a>.</p>
 <p>An overview of all available products can be consulted with <code><a href="reference/mrp_list.html">mrp_list()</a></code></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/mrp_list.html">mrp_list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading ISO 19139 XML schemas...</span></span>
 <span><span class="co">#&gt; Loading ISO 19115 codelists...</span></span>
@@ -277,10 +278,11 @@
 <span><span class="co">#&gt; 10 IHO Sea Areas (v3)   iho          Creati… "Flande… http… http… "World … Mari…</span></span>
 <span><span class="co">#&gt; # … with 11 more rows</span></span></code></pre></div>
 <p>You can visualize the Marine Regions Data Products with <code><a href="reference/mrp_view.html">mrp_view()</a></code>. It opens an interactive <code><a href="https://rdrr.io/pkg/leaflet/man/leaflet.html" class="external-link">leaflet::leaflet</a></code> viewer.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/mrp_view.html">mrp_view</a></span><span class="op">(</span><span class="st">"eez"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="https://raw.githubusercontent.com/lifewatch/mregions2/main/man/figures/README-prod1-1.png"> Or you can load the data products into R with <code><a href="reference/mrp_get.html">mrp_get()</a></code></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p><img src="https://raw.githubusercontent.com/lifewatch/mregions2/main/man/figures/README-prod1-1.png"></p>
+<p>Or you can load the data products into R with <code><a href="reference/mrp_get.html">mrp_get()</a></code></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"eez"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 281 features and 31 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
@@ -307,35 +309,33 @@
 <span><span class="co">#&gt; #   iso_sov1 &lt;chr&gt;, iso_sov2 &lt;chr&gt;, iso_sov3 &lt;chr&gt;, un_sov1 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   un_sov2 &lt;dbl&gt;, un_sov3 &lt;dbl&gt;, un_ter1 &lt;dbl&gt;, un_ter2 &lt;dbl&gt;, un_ter3 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   geometry &lt;MULTIPOLYGON [°]&gt;</span></span></code></pre></div>
-<p>Get to know more in <code><a href="articles/mregions2.html">vignette("mregions2")</a></code></p>
+<p>Get to know more in the <a href="https://lifewatch.github.io/mregions2/articles/mregions2.html">Get Started article</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"mregions2"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; To cite package 'mregions2' in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Fernandez S, Pohl L (2022). _mregions2: Access data from</span></span>
+<span><span class="co">#&gt;   Fernandez-Bejarano S, Pohl L (2023). _mregions2: Access data from</span></span>
 <span><span class="co">#&gt;   marineregions.org: the Marine Regions Gazetteer and the Marine</span></span>
-<span><span class="co">#&gt;   Regions Data Products_. https://github.com/lifewatch/mregions2,</span></span>
-<span><span class="co">#&gt;   https://lifewatch.github.io/mregions2/.</span></span>
+<span><span class="co">#&gt;   Regions Data Products_. &lt;https://github.com/lifewatch/mregions2&gt;.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   @Manual{,</span></span>
-<span><span class="co">#&gt;     title = {mregions2: Access data from marineregions.org: the Marine Regions Gazetteer and the Marine Regions Data Products},</span></span>
-<span><span class="co">#&gt;     author = {Salvador Fernandez and Lotte Pohl},</span></span>
-<span><span class="co">#&gt;     year = {2022},</span></span>
-<span><span class="co">#&gt;     note = {https://github.com/lifewatch/mregions2,</span></span>
-<span><span class="co">#&gt; https://lifewatch.github.io/mregions2/},</span></span>
+<span><span class="co">#&gt;     title = {{mregions2}: Access data from marineregions.org: the Marine Regions Gazetteer and the Marine Regions Data Products},</span></span>
+<span><span class="co">#&gt;     author = {Salvador Fernandez-Bejarano and Lotte Pohl},</span></span>
+<span><span class="co">#&gt;     year = {2023},</span></span>
+<span><span class="co">#&gt;     url = {https://github.com/lifewatch/mregions2},</span></span>
 <span><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
 </h2>
-<p>MIT</p>
+<p>MIT. See <code>LICENSE.md</code></p>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
