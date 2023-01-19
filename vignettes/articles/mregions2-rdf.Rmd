@@ -14,7 +14,7 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 options(rdf_print_format = "turtle")
 ```
 
-This vignette describes how to access the Marine Regions Gazetteer entries and geometries as RDF, which are loaded into R via `rdflib::rdf`. Mirroring the Marine Regions Gazetteer via [Linked Data Event Streams](https://w3id.org/ldes/specification) is discussed.
+This article describes how to access the Marine Regions Gazetteer entries and geometries as RDF, which are loaded into R via `rdflib::rdf`. Mirroring the Marine Regions Gazetteer via [Linked Data Event Streams](https://w3id.org/ldes/specification) is discussed.
 
 The following libraries are required
 

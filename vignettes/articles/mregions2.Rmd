@@ -54,7 +54,7 @@ These intentions are trivial, as mregions2 uses different methods to access the 
 The data products can be visualized via [Web Map Services (WMS)](https://en.wikipedia.org/wiki/Web_Map_Service) with `mrp_view()` or downloaded by [Web Feature Services (WFS)](https://en.wikipedia.org/wiki/Web_Feature_Service) with `mrp_get()`.
 
 ## Wasn't there a package to read Marine Regions already? mregions?
-mregions2 supersedes [mregions](https://docs.ropensci.org/mregions/). The need of mregions2 is further explained in `vignette("why_mregions2")`
+mregions2 supersedes [mregions](https://docs.ropensci.org/mregions/). The need of mregions2 is further explained in the article: [Why mregions and mregions2?](https://lifewatch.github.io/mregions2/articles/why_mregions2.html)
 
 >**NOTE**
 >
@@ -78,18 +78,21 @@ library(dplyr)
 
 ### Search by free text
 
-You can look up for marine places the Marine Regions Gazetteer with a free text search.
+You can look up for marine places the Marine Regions Gazetteer with a free text search. Some examples:
 
+Find any term with the word 'Belgian'
 ```{r}
-# Any term with the word 'Belgian'
 gaz_search("Belgian")
+```
 
-# Search names in different languages (provide ISO 2c code)
+Search names in different languages (provide ISO 2c code)
+```{r}
 gaz_search("Belgie", language = "nl")
+```
 
-# Restrict your search
+Restrict your search to only exact matches
+```{r}
 gaz_search("Belgium", like = FALSE, fuzzy = FALSE)
-
 ```
 
 
@@ -107,7 +110,7 @@ You can get the gazetteer entry as **Open Linked Data**, in the form of an objec
 gaz_search(3293, rdf = TRUE)
 ```
 
-Learn more about using the mregions2 to access the Marine Regions Gazetteer as RDF in `vignette("mregions2-rdf")`
+Learn more about using the mregions2 to access the [Marine Regions Gazetteer as RDF article](https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html).
 
 
 ### Search by longitude and latitude
@@ -201,19 +204,23 @@ gaz_geometry(3293)
 
 By default, this is a simple feature geometry list column, an object of class `sf::sfc`. But other formats are possible:
 
+As [Well-Known Text](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) (WKT):
 ```{r}
-# As Well-Known Text (WKT)
 gaz_geometry(3293, format = "wkt")
+```
 
-# As RDF
+# As a `rdflib::rdf` object:
+```{r}
 gaz_geometry(3293, format = "rdf")
+```
 
-# As sf
+As a `sf::sf` object:
+```{r}
 gaz_geometry(3293, format = "sf")
 
 ```
 
-Learn more about using the mregions2 to access the Marine Regions Gazetteer as RDF in `vignette("mregions2-rdf")`
+Learn more about using the mregions2 to access the [Marine Regions Gazetteer as RDF article](https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html).
 
 
 ## Relations
@@ -266,7 +273,8 @@ gaz_search(3293, rdf = TRUE)
 gaz_geometry(3293, format = "rdf")
 ```
 
-See `vignette("mregions2-rdf")` for more information.
+See the [Marine Regions Gazetteer as RDF article](https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html) for more information.
+
 
 # Marine Regions Data Products
 

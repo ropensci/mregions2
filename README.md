@@ -38,6 +38,12 @@ You can install the development version of mregions2 from GitHub with:
 devtools::install_github("lifewatch/mregions2")
 ```
 
+Load the library with
+
+``` r
+library(mregions2)
+```
+
 ## Query the Marine Regions Gazetteer
 
 The [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php)
@@ -49,10 +55,9 @@ is a standard list of marine georeferenced place names.
 
 You can search the Gazetteer in many ways:
 
-``` r
-library(mregions2)
+Search by free text:
 
-# Search by free text
+``` r
 gaz_search("Belgian")
 #> # A tibble: 9 × 14
 #>   MRGID gazetteerSource       placeType preferredGazett… preferredGazett… status
@@ -69,8 +74,11 @@ gaz_search("Belgian")
 #> # … with 8 more variables: accepted <int>, latitude <dbl>, longitude <dbl>,
 #> #   minLatitude <dbl>, minLongitude <dbl>, maxLatitude <dbl>,
 #> #   maxLongitude <dbl>, precision <dbl>
+```
 
-# Search by unique identifier. See ?MRGID
+Search by unique identifier. See \[MRGID\]
+
+``` r
 gaz_search(3293)
 #> # A tibble: 1 × 14
 #>   MRGID gazetteerSource    placeType latitude longitude minLatitude minLongitude
@@ -79,8 +87,11 @@ gaz_search(3293)
 #> # … with 7 more variables: maxLatitude <dbl>, maxLongitude <dbl>,
 #> #   precision <dbl>, preferredGazetteerName <chr>,
 #> #   preferredGazetteerNameLang <chr>, status <chr>, accepted <int>
+```
 
-# Search by location
+Search by location:
+
+``` r
 gaz_search(x = 2.927, y = 51.21551)
 #> # A tibble: 54 × 14
 #>    MRGID gazetteerSource          placeType minLatitude minLongitude maxLatitude
@@ -99,8 +110,11 @@ gaz_search(x = 2.927, y = 51.21551)
 #> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
 #> #   status <chr>, accepted <int>, latitude <dbl>, longitude <dbl>,
 #> #   precision <dbl>
+```
 
-# Search by placetype
+Search by place type:
+
+``` r
 gaz_search_by_type("EEZ")
 #> # A tibble: 254 × 14
 #>    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude
@@ -118,8 +132,11 @@ gaz_search_by_type("EEZ")
 #> # … with 244 more rows, and 7 more variables: maxLatitude <dbl>,
 #> #   maxLongitude <dbl>, precision <dbl>, preferredGazetteerName <chr>,
 #> #   preferredGazetteerNameLang <chr>, status <chr>, accepted <int>
+```
 
-# Search by source
+Search by authortative source:
+
+``` r
 gaz_search_by_source("Flanders Marine Institute (VLIZ)")
 #> # A tibble: 23 × 13
 #>    MRGID gazetteerSource           placeType latitude longitude preferredGazett…
@@ -252,6 +269,7 @@ mrp_view("eez")
 ```
 
 ![](https://raw.githubusercontent.com/lifewatch/mregions2/main/man/figures/README-prod1-1.png)
+
 Or you can load the data products into R with `mrp_get()`
 
 ``` r
@@ -283,7 +301,8 @@ mrp_get("eez")
 #> #   geometry <MULTIPOLYGON [°]>
 ```
 
-Get to know more in `vignette("mregions2")`
+Get to know more in the [Get Started
+article](https://lifewatch.github.io/mregions2/articles/mregions2.html).
 
 ## Citation
 
@@ -292,25 +311,23 @@ citation("mregions2")
 #> 
 #> To cite package 'mregions2' in publications use:
 #> 
-#>   Fernandez S, Pohl L (2022). _mregions2: Access data from
+#>   Fernandez-Bejarano S, Pohl L (2023). _mregions2: Access data from
 #>   marineregions.org: the Marine Regions Gazetteer and the Marine
-#>   Regions Data Products_. https://github.com/lifewatch/mregions2,
-#>   https://lifewatch.github.io/mregions2/.
+#>   Regions Data Products_. <https://github.com/lifewatch/mregions2>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {mregions2: Access data from marineregions.org: the Marine Regions Gazetteer and the Marine Regions Data Products},
-#>     author = {Salvador Fernandez and Lotte Pohl},
-#>     year = {2022},
-#>     note = {https://github.com/lifewatch/mregions2,
-#> https://lifewatch.github.io/mregions2/},
+#>     title = {{mregions2}: Access data from marineregions.org: the Marine Regions Gazetteer and the Marine Regions Data Products},
+#>     author = {Salvador Fernandez-Bejarano and Lotte Pohl},
+#>     year = {2023},
+#>     url = {https://github.com/lifewatch/mregions2},
 #>   }
 ```
 
 ## License
 
-MIT
+MIT. See `LICENSE.md`
 
 ## Code of Conduct
 

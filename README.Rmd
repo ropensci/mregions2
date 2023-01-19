@@ -45,6 +45,11 @@ You can install the development version of mregions2 from GitHub with:
 devtools::install_github("lifewatch/mregions2")
 ```
 
+Load the library with
+```{r, results='hide', warning=FALSE, message=FALSE}
+library(mregions2)
+```
+
 ## Query the Marine Regions Gazetteer
 
 The [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) is a standard list of marine georeferenced place names.
@@ -55,22 +60,28 @@ The [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) is a sta
 
 You can search the Gazetteer in many ways:
 
-```{r gaz1}
-library(mregions2)
-
-# Search by free text
+Search by free text:
+```{r}
 gaz_search("Belgian")
+```
 
-# Search by unique identifier. See ?MRGID
+Search by unique identifier. See [MRGID]
+```{r}
 gaz_search(3293)
+```
 
-# Search by location
+Search by location:
+```{r}
 gaz_search(x = 2.927, y = 51.21551)
+```
 
-# Search by placetype
+Search by place type:
+```{r}
 gaz_search_by_type("EEZ")
+```
 
-# Search by source
+Search by authortative source:
+```{r}
 gaz_search_by_source("Flanders Marine Institute (VLIZ)")
 ```
 
@@ -114,13 +125,14 @@ You can visualize the Marine Regions Data Products with `mrp_view()`. It opens a
 mrp_view("eez")
 ```
 ![](https://raw.githubusercontent.com/lifewatch/mregions2/main/man/figures/README-prod1-1.png)
+
 Or you can load the data products into R with `mrp_get()`
 
 ```{r prod2}
 mrp_get("eez")
 ```
 
-Get to know more in `vignette("mregions2")`
+Get to know more in the [Get Started article](https://lifewatch.github.io/mregions2/articles/mregions2.html).
 
 ## Citation
 ```{r citation, cache=FALSE}
@@ -128,7 +140,7 @@ citation("mregions2")
 ```
 
 ## License
-MIT
+MIT. See `LICENSE.md`
 
 ## Code of Conduct
 
