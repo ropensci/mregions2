@@ -108,7 +108,7 @@ with the identifier of the data product (see \code{\link[=mrp_list]{mrp_list()}}
 # You can pass a product name from mrp_list()
 mrp_view('eez')
 
-Or use the helper
+# Or use the helper
 mrp_view_eez()
 
 # Example: filter a the Ecoregions 'Azores Canaries Madeira' with mrgid 21885

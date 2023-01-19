@@ -32,11 +32,12 @@
 #'
 #' @return A leaflet map with a data product visualized via WMS
 #'
-#' @examples \dontrun{
+#' @examples
+#' \dontrun{
 #' # You can pass a product name from mrp_list()
 #' mrp_view('eez')
 #'
-#' Or use the helper
+#' # Or use the helper
 #' mrp_view_eez()
 #'
 #' # Example: filter a the Ecoregions 'Azores Canaries Madeira' with mrgid 21885

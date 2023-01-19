@@ -4,7 +4,7 @@
 \alias{gaz_rest}
 \title{Marine Regions Gazetteer RESTful services}
 \value{
-.
+Returns a help page
 }
 \description{
 \emph{RESTful service}
@@ -14,5 +14,5 @@ REST (REpresentational State Transfer) is a simple stateless architecture that g
 information at the overview of the \href{https://marineregions.org/gazetteer.php?p=webservices}{Marine Regions Gazetteer web services}
 }
 \examples{
-\dontrun{}
+\dontrun{?gaz_rest}
 }

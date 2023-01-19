@@ -4,7 +4,7 @@
 \alias{MRGID}
 \title{Marine Regions Global Identifier (MRGID)}
 \value{
-.
+Returns a help page
 }
 \description{
 Many functions of \link{mregions2} make use of the argument \code{mrgid} or return data with the numeric variable \code{MRGID}.
@@ -50,5 +50,5 @@ a strategy for managing the domain and the web servers.
 }
 }
 \examples{
-\dontrun{}
+\dontrun{?MRGID}
 }
