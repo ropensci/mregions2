@@ -122,6 +122,12 @@
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>A leaflet map with a data product visualized via WMS</p>
+    </div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This function uses <a href="https://en.wikipedia.org/wiki/Web_Map_Service" class="external-link">WMS services</a> to load quickly
 a Leaflet viewer of a Marine Regions data product. It uses <a href="https://emodnet.ec.europa.eu" class="external-link">EMODnet Bathymetry</a> as background layer.</p><div class="section">
@@ -152,7 +158,39 @@ with the arguments <code>cql_filter</code> or <code>filter</code>, <code><a href
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># You can pass a product name from mrp_list()</span></span></span>
+<span class="r-in"><span><span class="fu">mrp_view</span><span class="op">(</span><span class="st">'eez'</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Or use the helper</span></span></span>
+<span class="r-in"><span><span class="fu">mrp_view_eez</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Example: filter a the Ecoregions 'Azores Canaries Madeira' with mrgid 21885</span></span></span>
+<span class="r-in"><span><span class="co"># You can check the names of the columns beforehand with mrp_colnames('ecoregions')</span></span></span>
+<span class="r-in"><span><span class="fu">mrp_view_ecoregions</span><span class="op">(</span>filter <span class="op">=</span> <span class="st">"</span></span></span>
+<span class="r-in"><span><span class="st">  &lt;Filter&gt;</span></span></span>
+<span class="r-in"><span><span class="st">    &lt;PropertyIsEqualTo&gt;</span></span></span>
+<span class="r-in"><span><span class="st">      &lt;PropertyName&gt;ecoregion&lt;/PropertyName&gt;</span></span></span>
+<span class="r-in"><span><span class="st">      &lt;Literal&gt;Azores Canaries Madeira&lt;/Literal&gt;</span></span></span>
+<span class="r-in"><span><span class="st">    &lt;/PropertyIsEqualTo&gt;</span></span></span>
+<span class="r-in"><span><span class="st">  &lt;/Filter&gt;</span></span></span>
+<span class="r-in"><span><span class="st">"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># OGC filter are very verbose... but luckily you can use a CQL filter instead</span></span></span>
+<span class="r-in"><span><span class="fu">mrp_view_ecoregions</span><span class="op">(</span>cql_filter <span class="op">=</span> <span class="st">"ecoregion = 'Azores Canaries Madeira'"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># View all the Extended Continental Shelf (ECS) boundary lines published during the first</span></span></span>
+<span class="r-in"><span><span class="co"># decade of the 21st century</span></span></span>
+<span class="r-in"><span><span class="fu">mrp_view_ecs_boundaries</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  cql_filter <span class="op">=</span> <span class="st">"doc_date &gt; '2000-01-01' AND doc_date &lt; '2009-12-31'"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Or as timestamp</span></span></span>
+<span class="r-in"><span><span class="fu">mrp_view_eez_boundaries</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  cql_filter <span class="op">=</span> <span class="st">"doc_date AFTER 2000-01-01T00:00:00Z AND doc_date BEFORE 2009-12-31T00:00:00Z"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+</code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
