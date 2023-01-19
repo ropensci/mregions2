@@ -3,6 +3,9 @@
 \name{gaz_rest}
 \alias{gaz_rest}
 \title{Marine Regions Gazetteer RESTful services}
+\value{
+.
+}
 \description{
 \emph{RESTful service}
 REST (REpresentational State Transfer) is a simple stateless architecture that generally runs over HTTP.

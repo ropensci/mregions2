@@ -3,6 +3,9 @@
 \name{MRGID}
 \alias{MRGID}
 \title{Marine Regions Global Identifier (MRGID)}
+\value{
+.
+}
 \description{
 Many functions of \link{mregions2} make use of the argument \code{mrgid} or return data with the numeric variable \code{MRGID}.
 

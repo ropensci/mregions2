@@ -15,7 +15,7 @@
 #'
 #' @export
 #'
-#' @inheritSection gaz_rest_geometries return
+#' @return A sfc object (default), a sf data frame, a WKT string or an RDF object
 #'
 #' @examples
 #' require(magrittr)

@@ -50,7 +50,7 @@ NULL
 #' of the Flanders Marine Institute, issuing the identifier to maintain the http domain registration, and
 #' a strategy for managing the domain and the web servers.
 #'
-#' @return NULL
+#' @return .
 #'
 #' @examples \dontrun{}
 NULL
@@ -67,7 +67,7 @@ NULL
 #' [mregions2] makes use of the RESTful services created and maintained by Marine Regions. You can find more
 #' information at the overview of the [Marine Regions Gazetteer web services](https://marineregions.org/gazetteer.php?p=webservices)
 #'
-#' @return NULL
+#' @return .
 #'
 #' @examples \dontrun{}
 NULL

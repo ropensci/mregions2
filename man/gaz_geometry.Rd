@@ -38,6 +38,9 @@ Default is "sfc"}
 }}
   }}
 }
+\value{
+A sfc object (default), a sf data frame, a WKT string or an RDF object
+}
 \description{
 Get the geometries of a Marine Regions Geo-Object
 }
