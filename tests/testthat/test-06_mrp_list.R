@@ -1,3 +1,5 @@
+use_httptest2()
+
 httptest2::with_mock_dir("mrp_list", {
   test_that("mrp_list() works", {
     skip_if_offline()

@@ -1,3 +1,5 @@
+use_httptest()
+
 httptest::with_mock_dir("mrp_get", {
   test_that("mrp_get() works", {
 

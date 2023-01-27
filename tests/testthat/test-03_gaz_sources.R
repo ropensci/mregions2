@@ -1,3 +1,5 @@
+use_httptest2()
+
 httptest2::with_mock_dir("gaz_sources", {
   test_that("source search works", {
 

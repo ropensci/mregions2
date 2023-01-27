@@ -1,3 +1,5 @@
+use_httptest2()
+
 httptest2::with_mock_dir("gaz_type", {
   test_that("search by placetype works", {
 

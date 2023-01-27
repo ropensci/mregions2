@@ -1,8 +1,6 @@
-suppressWarnings(
-  require(httptest2, warn.conflicts = FALSE)
-)
-
 # Config
+use_httptest2()
+
 # POLYGON ((1 0, 1 1, 0 1, 0 0, 1 0))
 b24nm = 49243
 med_east = 4280 # several polygons, same source PROBLEM

@@ -1,3 +1,5 @@
+use_httptest2()
+
 httptest2::with_mock_dir("gaz_relations", {
   test_that("relations work", {
 

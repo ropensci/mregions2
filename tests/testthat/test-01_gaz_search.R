@@ -1,4 +1,6 @@
 # Config
+use_httptest2()
+
 b24nm = 49243
 n24nm = 49244
 

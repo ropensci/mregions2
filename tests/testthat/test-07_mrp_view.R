@@ -1,8 +1,4 @@
-# clean up httptest2 to not mask functions
-suppressWarnings({
-  detach("package:httptest2", unload = TRUE)
-  library(httptest, warn.conflicts = FALSE)
-})
+use_httptest()
 
 httptest::with_mock_dir("mrp_view", {
   test_that("mrp_view() work", {
