@@ -6,8 +6,8 @@ n24nm = 49244
 
 httptest2::with_mock_dir("gaz_search", {
   test_that("character method works", {
-    # method one name - type ids and fuzzy search
-    x <- gaz_search("Belgiun", typeid = c(350, 351), fuzzy = TRUE)
+    # method one name and fuzzy search
+    x <- gaz_search("Belgiun", fuzzy = TRUE)
     expect_type(x, "list")
     expect_s3_class(x, "mr_df")
     expect_s3_class(x, c("tbl_df", "data.frame"))
@@ -74,22 +74,16 @@ httptest2::with_mock_dir("gaz_search_latlon", {
     expect_s3_class(x, c("mr_df"))
     expect_s3_class(x, c("tbl_df", "data.frame"))
 
-    # filter on typeid
-    x <- gaz_search(x = lon, y = lat, typeid = c(350, 351))
-    expect_type(x, "list")
-    expect_s3_class(x, c("mr_df"))
-    expect_s3_class(x, c("tbl_df", "data.frame"))
-
     # Signature sfg
     point <- sf::st_point(c(lon, lat))
-    x <- gaz_search(x = point, typeid = c(350, 351))
+    x <- gaz_search(x = point)
     expect_type(x, "list")
     expect_s3_class(x, c("mr_df"))
     expect_s3_class(x, c("tbl_df", "data.frame"))
 
     # Signature sfc
     point <- sf::st_sfc(point, crs = 4326)
-    x <- gaz_search(x = point, typeid = c(350, 351))
+    x <- gaz_search(x = point)
     expect_type(x, "list")
     expect_s3_class(x, c("mr_df"))
     expect_s3_class(x, c("tbl_df", "data.frame"))

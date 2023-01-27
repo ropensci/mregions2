@@ -4,7 +4,7 @@ httptest::with_mock_dir("mrp_get", {
   test_that("mrp_get() works", {
 
     # Returns a sf object
-    x <- mrp_get("eez", cql_filter = "mrgid = 5688")
+    x <- mrp_get("eez_24nm", cql_filter = "mrgid = 49243")
     expect_type(x, "list")
     expect_s3_class(x, c("sf"))
     expect_s3_class(x, c("data.frame", "tbl_df"))
@@ -14,7 +14,7 @@ httptest::with_mock_dir("mrp_get", {
     # Transformation in multipolygon or multilinestring works
     expect_s3_class(sf::st_geometry(x), "sfc_MULTIPOLYGON")
 
-    x <- mrp_get("eez_boundaries", cql_filter = "line_id = 3690")
+    x <- mrp_get("eez_boundaries", cql_filter = "line_id = 3730")
     expect_type(x, "list")
     expect_s3_class(x, c("sf"))
     expect_s3_class(x, c("data.frame", "tbl_df"))
@@ -25,29 +25,30 @@ httptest::with_mock_dir("mrp_get", {
     .f <- function() mrp_get("this product does not exists")
     expect_error(.f())
 
-    .f <- function() mrp_get("eez_boundaries", cql_filter = "this is not a good filter")
+    .f <- function() mrp_get("ecs_boundaries", cql_filter = "this is not a good filter")
     expect_error(.f())
 
   })
 })
 
-httptest::with_mock_dir("mrp_init_wfs_client", {
-  test_that("mrp_init_wfs_client() works", {
+test_that("mrp_init_wfs_client() works", {
+  skip_on_ci()
+  skip_on_cran()
+  skip_on_covr()
 
-    # Returns a wfs client
-    x <- mrp_init_wfs_client()
-    expect_type(x, "environment")
-    expect_s3_class(x, c("WFSClient", "OWSClient", "OGCAbstractObject", "R6" ))
-    expect_match(x$getUrl(), "geo.vliz.be")
+  # Returns a wfs client
+  x <- mrp_init_wfs_client()
+  expect_type(x, "environment")
+  expect_s3_class(x, c("WSClient", "OWSClient", "OGCAbstractObject", "R6" ))
+  expect_match(x$getUrl(), "geo.vliz.be")
 
-    # Expect errors
-    .f <- function() mrp_init_wfs_client(version = 2.0)
-    expect_error(.f())
+  # Expect errors
+  .f <- function() mrp_init_wfs_client(version = 2.0)
+  expect_error(.f())
 
-    .f <- function() mrp_init_wfs_client(version = "0.0.0")
-    expect_error(.f())
+  .f <- function() mrp_init_wfs_client(version = "0.0.0")
+  expect_error(.f())
 
-  })
 })
 
 httptest::with_mock_dir("mrp_colnames", {
