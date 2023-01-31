@@ -43,9 +43,10 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
-      - name: Folder with real tests
+      - name: Remove sub directories with mock up tests
         run: |
-          rm -rf tests/testthat && cp -r real-tests tests/testthat
+          for item in tests/testthat/*; do [ -d "$item" ] && rm -rf "$item"; done
+
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
