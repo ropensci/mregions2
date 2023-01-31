@@ -45,8 +45,7 @@ jobs:
 
       - name: Remove sub directories with mock up tests
         run: |
-          for item in tests/testthat/*; do [ -d "$item" ] && mv "$item" "$item.bak"; done
-        run-with: privileged
+          sudo sh -c "for item in tests/testthat/*; do [ -d \"$item\" ] && mv \"$item\" \"$item.bak\"; done"
 
       - uses: r-lib/actions/check-r-package@v2
         with:
