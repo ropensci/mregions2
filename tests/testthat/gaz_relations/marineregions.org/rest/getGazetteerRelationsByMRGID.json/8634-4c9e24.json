@@ -1,0 +1,18 @@
+[
+    {
+        "MRGID": 2252,
+        "gazetteerSource": "(2001). The Times comprehensive atlas of the world. 10th ed. Times Books: London. ISBN 0-7230-0792-6. 67, 220, 124 plates pp.",
+        "placeType": "Nation",
+        "latitude": 69.391350000000003,
+        "longitude": 12.276960000000001,
+        "minLatitude": 57.960299999999997,
+        "minLongitude": -9.0785,
+        "maxLatitude": 80.822400000000002,
+        "maxLongitude": 33.632420000000003,
+        "precision": 1444430,
+        "preferredGazetteerName": "Norway",
+        "preferredGazetteerNameLang": "English",
+        "status": "standard",
+        "accepted": 2252
+    }
+]

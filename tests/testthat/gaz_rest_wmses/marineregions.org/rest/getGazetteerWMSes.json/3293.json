@@ -1,0 +1,10 @@
+[
+    {
+        "value": "3293",
+        "MRGID": 3293,
+        "url": "https://geo.vliz.be/geoserver/wms?",
+        "namespace": "MarineRegions",
+        "featureType": "eez",
+        "featureName": "mrgid"
+    }
+]

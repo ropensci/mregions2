@@ -1,0 +1,18 @@
+[
+    {
+        "MRGID": 14,
+        "gazetteerSource": "(2001). The Times comprehensive atlas of the world. 10th ed. Times Books: London. ISBN 0-7230-0792-6. 67, 220, 124 plates pp.",
+        "placeType": "Nation",
+        "latitude": 50.500749588012695,
+        "longitude": 4.4770499467849731,
+        "minLatitude": 49.497299194335938,
+        "minLongitude": 2.5466001033782959,
+        "maxLatitude": 51.504199981689453,
+        "maxLongitude": 6.4074997901916504,
+        "precision": 176337.31954732546,
+        "preferredGazetteerName": "België",
+        "preferredGazetteerNameLang": "Dutch",
+        "status": "standard",
+        "accepted": 14
+    }
+]

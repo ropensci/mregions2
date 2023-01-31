@@ -1,0 +1,18 @@
+[
+    {
+        "MRGID": 8634,
+        "gazetteerSource": "Getty thesaurus of geographic names",
+        "placeType": "Dependency",
+        "latitude": -54.423189999999998,
+        "longitude": 3.4132639999999999,
+        "minLatitude": -54.462780000000002,
+        "minLongitude": 3.3423639999999999,
+        "maxLatitude": -54.383609999999997,
+        "maxLongitude": 3.4841639999999998,
+        "precision": 6359.0129999999999,
+        "preferredGazetteerName": "Bouvet",
+        "preferredGazetteerNameLang": "English",
+        "status": "standard",
+        "accepted": 8634
+    }
+]

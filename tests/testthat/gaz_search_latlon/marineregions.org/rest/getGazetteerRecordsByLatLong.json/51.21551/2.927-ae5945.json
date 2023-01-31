@@ -1,0 +1,34 @@
+[
+    {
+        "MRGID": 47978,
+        "gazetteerSource": "TDWG - World Geographical Scheme for Recording Plant Distributions",
+        "placeType": "TDWG - level 4",
+        "latitude": 50.642247535646597,
+        "longitude": 4.6715571975690899,
+        "minLatitude": 49.504165649414098,
+        "minLongitude": 2.5416665077210001,
+        "maxLatitude": 51.503608703613303,
+        "maxLongitude": 6.3982038497925098,
+        "precision": null,
+        "preferredGazetteerName": "Belgium",
+        "preferredGazetteerNameLang": "English",
+        "status": "synonym",
+        "accepted": 14
+    },
+    {
+        "MRGID": 47551,
+        "gazetteerSource": "TDWG - World Geographical Scheme for Recording Plant Distributions",
+        "placeType": "TDWG - level 3",
+        "latitude": 50.575078571722251,
+        "longitude": 4.7835647449537442,
+        "minLatitude": 49.448326110961318,
+        "minLongitude": 2.5416665073034892,
+        "maxLatitude": 51.503608703878626,
+        "maxLongitude": 6.5247220992455368,
+        "precision": null,
+        "preferredGazetteerName": "Belgium",
+        "preferredGazetteerNameLang": "English",
+        "status": "synonym",
+        "accepted": 14
+    }
+]

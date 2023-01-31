@@ -29,7 +29,7 @@ httptest::with_mock_dir("mrp_get", {
     expect_error(.f())
 
   })
-})
+}, simplify = TRUE)
 
 test_that("mrp_init_wfs_client() works", {
   skip_on_ci()
@@ -73,7 +73,7 @@ httptest::with_mock_dir("mrp_colnames", {
     .f <- function() mrp_colnames(1)
     expect_error(.f())
   })
-})
+}, simplify = TRUE)
 
 httptest::with_mock_dir("mrp_col_unique", {
   test_that("mrp_col_unique() works", {
@@ -110,4 +110,4 @@ httptest::with_mock_dir("mrp_col_unique", {
     .f <- function() mrp_col_unique("high_seas", "the_geom")
     expect_error(.f())
   })
-})
+}, simplify = TRUE)

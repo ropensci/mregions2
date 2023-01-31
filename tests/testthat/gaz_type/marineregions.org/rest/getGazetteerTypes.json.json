@@ -1,0 +1,1627 @@
+[
+    {
+        "typeID": 1,
+        "type": "Town",
+        "description": "The lowest administrative unit in Belgium and the Netherlands."
+    },
+    {
+        "typeID": 2,
+        "type": "Arrondissement",
+        "description": "The administrative unit in Belgium that lies between 'Gemeente' and Province."
+    },
+    {
+        "typeID": 3,
+        "type": "Department",
+        "description": "A high-level administrative unit that is used in a lot of countries."
+    },
+    {
+        "typeID": 4,
+        "type": "Province (administrative)",
+        "description": "A medium-level administrative unit that is used in a lot of countries."
+    },
+    {
+        "typeID": 5,
+        "type": "Country",
+        "description": "A high-level administrative unit that only has been used for the four divisions of the United Kingdom."
+    },
+    {
+        "typeID": 6,
+        "type": "Continent",
+        "description": "The highest subdivision of the world. There are 7 continents distinguished: Africa, Antarctica, Asia, Europe, North America, Oceania, South America."
+    },
+    {
+        "typeID": 7,
+        "type": "Region",
+        "description": "A high-level administrative unit that is used in a lot of countries."
+    },
+    {
+        "typeID": 8,
+        "type": "Ward",
+        "description": "The lowest administrative unit in the United Kingdom."
+    },
+    {
+        "typeID": 9,
+        "type": "Commune",
+        "description": "The lowest administrative unit in a lot of countries."
+    },
+    {
+        "typeID": 10,
+        "type": "District",
+        "description": "A medium-level administrative unit that is used in a lot of countries."
+    },
+    {
+        "typeID": 11,
+        "type": "Canton",
+        "description": "A medium-level administrative unit that is used in France."
+    },
+    {
+        "typeID": 12,
+        "type": "Sub-Province",
+        "description": "A medium-level administrative unit that is used in the Netherlands."
+    },
+    {
+        "typeID": 13,
+        "type": "Nation",
+        "description": "The highest administrative unit."
+    },
+    {
+        "typeID": 14,
+        "type": "County",
+        "description": "A medium-level administrative unit that is used in a lot of countries."
+    },
+    {
+        "typeID": 15,
+        "type": "Unitary Authority",
+        "description": "A medium-level administrative unit that is used in a lot of countries."
+    },
+    {
+        "typeID": 17,
+        "type": "Borough",
+        "description": "A medium-level administrative unit that is used in a lot of countries."
+    },
+    {
+        "typeID": 18,
+        "type": "World",
+        "description": "The world"
+    },
+    {
+        "typeID": 19,
+        "type": "Ocean",
+        "description": "Very large sea between different continents."
+    },
+    {
+        "typeID": 20,
+        "type": "Sea",
+        "description": "A large surface salt water that covers a large part of the world"
+    },
+    {
+        "typeID": 21,
+        "type": "Dependent State",
+        "description": "A state that is dependent on another nation."
+    },
+    {
+        "typeID": 22,
+        "type": "Island",
+        "description": "A land mass that is totally enclosed by water and that doesn't form a continent."
+    },
+    {
+        "typeID": 23,
+        "type": "Former Nation",
+        "description": "A nation that doesn't exist anymore."
+    },
+    {
+        "typeID": 24,
+        "type": "Gulf",
+        "description": "A large bay."
+    },
+    {
+        "typeID": 25,
+        "type": "Basin",
+        "description": "A depression, in the sea floor, more or less equidimensional in plan and of variable extent."
+    },
+    {
+        "typeID": 26,
+        "type": "Current",
+        "description": "A moving watermass."
+    },
+    {
+        "typeID": 27,
+        "type": "Water mass",
+        "description": "A large amount of water."
+    },
+    {
+        "typeID": 28,
+        "type": "Strait",
+        "description": "A narrow, natural connection between seas."
+    },
+    {
+        "typeID": 29,
+        "type": "Sandbank",
+        "description": "Shallow accumulation of sand that rises never above sealevel but alltough forms a substantial hazard for navigation."
+    },
+    {
+        "typeID": 30,
+        "type": "Ridge",
+        "description": "(a) An elongated narrow elevation of varying complexity having steep sides. (b) An elongated narrow elevation, often separating ocean BASINS. (c) The linked major mid-oceanic mountain systems of global extent. Also called MIDOCEANIC RIDGE."
+    },
+    {
+        "typeID": 31,
+        "type": "Channel",
+        "description": "A narrow, natural connection between seas."
+    },
+    {
+        "typeID": 32,
+        "type": "Front",
+        "description": "The dividing line between different water masses."
+    },
+    {
+        "typeID": 33,
+        "type": "Bight",
+        "description": "Round indentation of the sea in the continent."
+    },
+    {
+        "typeID": 34,
+        "type": "Field",
+        "description": null
+    },
+    {
+        "typeID": 35,
+        "type": "Ground",
+        "description": null
+    },
+    {
+        "typeID": 36,
+        "type": "Sandbank System",
+        "description": "The aggregate of adjoining sandbanks and swales."
+    },
+    {
+        "typeID": 37,
+        "type": "Deep",
+        "description": "A small depression in the seafloor."
+    },
+    {
+        "typeID": 38,
+        "type": "Plateau",
+        "description": "A flat or nearly flat elevation of considerable areal extent, dropping off abruptly on one or more sides."
+    },
+    {
+        "typeID": 39,
+        "type": "Bay",
+        "description": "Round indentation of the sea in the continent."
+    },
+    {
+        "typeID": 42,
+        "type": "Island Group",
+        "description": "Group of nearby lying islands that form a geographical entity."
+    },
+    {
+        "typeID": 43,
+        "type": "Archipelago",
+        "description": "Group of nearby lying islands that form a geographical entity."
+    },
+    {
+        "typeID": 44,
+        "type": "Deelgemeente",
+        "description": "The subdivision of a 'Gemeente' in Belgium and the Netherlands."
+    },
+    {
+        "typeID": 45,
+        "type": "Lake",
+        "description": "A basin filled with water that is totally enclosed by water."
+    },
+    {
+        "typeID": 46,
+        "type": "River",
+        "description": "A natural water current that always flows out in another river or stream but never in a sea."
+    },
+    {
+        "typeID": 47,
+        "type": "Lagoon",
+        "description": "A small lake that is separated from the sea by a long and narrow tongue of land."
+    },
+    {
+        "typeID": 48,
+        "type": "Fjord",
+        "description": "Narrow, deep inlet in a mountainous coast that came into being during the ice age."
+    },
+    {
+        "typeID": 49,
+        "type": "General Region",
+        "description": "Area with a specific name that can't be classified otherwise."
+    },
+    {
+        "typeID": 51,
+        "type": "Stream",
+        "description": "A river that flows out in the sea."
+    },
+    {
+        "typeID": 52,
+        "type": "Estuary",
+        "description": "River mouth under tidal influence."
+    },
+    {
+        "typeID": 53,
+        "type": "Swale",
+        "description": "Depression between two sandbanks."
+    },
+    {
+        "typeID": 54,
+        "type": "Canal",
+        "description": "Man-made waterway."
+    },
+    {
+        "typeID": 55,
+        "type": "Fracture Zone",
+        "description": "An extensive linear zone of irregular topography, mountainous or faulted, characterized by steepsided or asymmetrical ridges, clefts, troughs or escarpments."
+    },
+    {
+        "typeID": 56,
+        "type": "Sound",
+        "description": "A narrow, natural connection between seas."
+    },
+    {
+        "typeID": 57,
+        "type": "Seamount(s)",
+        "description": "A discrete (or group of) large isolated elevation(s), greater than 1,000m in relief above the sea floor, characteristically of conical form."
+    },
+    {
+        "typeID": 58,
+        "type": "Canyon(s)",
+        "description": "A relatively narrow, deep depression (or group of depressions) with steep sides, the bottom of which generally deepens continuously, developed characteristically on some continental slopes."
+    },
+    {
+        "typeID": 59,
+        "type": "Trough",
+        "description": "A long depression of the sea floor characteristically flat bottomed and steep sided and normally shallower than a trench."
+    },
+    {
+        "typeID": 60,
+        "type": "Spur",
+        "description": "A subordinate elevation or ridge protruding from a larger feature, such as a plateau or island foundation."
+    },
+    {
+        "typeID": 61,
+        "type": "Slope",
+        "description": "The deepening sea floor out from the shelfedge to the upper limit of the continental rise, or the point where there is a general decrease in steepness."
+    },
+    {
+        "typeID": 62,
+        "type": "Hill(s)",
+        "description": "An isolated (or group of) elevation(s), smaller than a SEAMOUNT."
+    },
+    {
+        "typeID": 63,
+        "type": "Plain",
+        "description": "An extensive, flat, gently sloping or nearly level undersea region."
+    },
+    {
+        "typeID": 64,
+        "type": "Caldera",
+        "description": "A collapsed or partially-collapsed seamount, commonly of annular shape."
+    },
+    {
+        "typeID": 66,
+        "type": "Guyot",
+        "description": "A seamount having a comparatively smooth flat top. Also called tablemount."
+    },
+    {
+        "typeID": 67,
+        "type": "Abyssal Plain",
+        "description": "An extensive, flat, gently sloping or nearly level region at abyssal depths."
+    },
+    {
+        "typeID": 69,
+        "type": "Coast",
+        "description": "Part of the land that is adjacent to the sea."
+    },
+    {
+        "typeID": 70,
+        "type": "EEZ",
+        "description": "In international maritime law, an exclusive economic zone (EEZ) is a seazone extending from a state's coast over which the state has special rights over the exploration and use of marine resources. Generally a state's EEZ extends 200 nautical miles out from its coast, except where resulting points would be closer to another country."
+    },
+    {
+        "typeID": 71,
+        "type": "Inhabited Place",
+        "description": "Place with permanent or temporary habitation."
+    },
+    {
+        "typeID": 72,
+        "type": "Inlet",
+        "description": "Small indentation of the sea in the continent."
+    },
+    {
+        "typeID": 74,
+        "type": "Hole",
+        "description": "A small local depression, often steep sided, in the sea floor."
+    },
+    {
+        "typeID": 75,
+        "type": "General Sea Area",
+        "description": "Sea area with a specific name that can't be classified otherwise."
+    },
+    {
+        "typeID": 77,
+        "type": "Delta",
+        "description": "Branching river mouth."
+    },
+    {
+        "typeID": 78,
+        "type": "State",
+        "description": "A high-level administrative unit that is used in a lot of countries."
+    },
+    {
+        "typeID": 79,
+        "type": "Bank",
+        "description": "An elevation of the sea floor, over which the depth of water is relatively shallow, but sufficient for safe surface navigation."
+    },
+    {
+        "typeID": 81,
+        "type": "Seachannel",
+        "description": "A continuously sloping elongated discrete depression found in fans or abyssal plains and customarily bordered by levees on one or both sides."
+    },
+    {
+        "typeID": 82,
+        "type": "Escarpment",
+        "description": "An elongated, characteristically linear, steep slope separating horizontal or gently sloping sectors of the sea floor in non-shelf areas. Also abbreviated to scarp."
+    },
+    {
+        "typeID": 83,
+        "type": "Valley",
+        "description": "A relatively shallow, wide depression, the bottom of which usually has a continuous gradient. This term is generally not used for features that have canyon-like characteristics for a significant portion of their extent. Also called SUBMARINE VALLEY or SEA VALLEY."
+    },
+    {
+        "typeID": 84,
+        "type": "Knoll(s)",
+        "description": "An elevation somewhat smaller than a SEAMOUNT and of rounded profile, characteristically isolated or as a cluster on the sea floor."
+    },
+    {
+        "typeID": 86,
+        "type": "Fan",
+        "description": "A relatively smooth, fan-like, depositional feature normally sloping away from the outer termination of a canyon or canyon system. Also called cone."
+    },
+    {
+        "typeID": 87,
+        "type": "Seamount Chain",
+        "description": "A linear or arcuate alignment of discrete seamounts, with their bases clearly separated."
+    },
+    {
+        "typeID": 88,
+        "type": "Reef",
+        "description": "A mass of rock or other indurated material lying at or near the sea surface that may constitute a hazard to surface navigation."
+    },
+    {
+        "typeID": 89,
+        "type": "Rise",
+        "description": "(a) A broad elevation that rises gently and generally smoothly from the sea floor. (b) The linked major mid-oceanic mountain systems of global extent. Also called midoceanic ridge."
+    },
+    {
+        "typeID": 91,
+        "type": "Trench",
+        "description": "A long narrow, characteristically very deep and asymmetrical depression of the sea floor, with relatively steep sides."
+    },
+    {
+        "typeID": 92,
+        "type": "Continental Shelf (Physical)",
+        "description": "A zone adjacent to a continent (or around an island) and extending from the low water line to a depth at which there is usually a marked increase of slope towards oceanic depths."
+    },
+    {
+        "typeID": 93,
+        "type": "Oil Field",
+        "description": "Sea area where oil is drilled."
+    },
+    {
+        "typeID": 94,
+        "type": "Gas Field",
+        "description": "Sea area where gas is drilled."
+    },
+    {
+        "typeID": 95,
+        "type": "Autonomous Region",
+        "description": "Part of a country that has certain autonomy."
+    },
+    {
+        "typeID": 97,
+        "type": "Apron",
+        "description": "A gently dipping surface, underlain primarily by sediment, at the base of any steeper slope. ACUF defines it as 'a gentle slope with a generally smooth surface of the sea floor, characteristically found around groups of islands or seamounts.'"
+    },
+    {
+        "typeID": 99,
+        "type": "Borderland",
+        "description": "A region adjacent to a continent, normally occupied by or bordering a shelf and sometimes emerging as islands, that is irregular or blocky in plan or profile, with depths well in excess of those typical of a shelf."
+    },
+    {
+        "typeID": 100,
+        "type": "Continental Margin",
+        "description": "The zone, generally consisting of shelf, slope and continental rise, separating the continent from the deep sea floor or abyssal plain. Occasionally a trench may be present in place of a continental rise."
+    },
+    {
+        "typeID": 102,
+        "type": "Levee",
+        "description": "A depositional natural embankment bordering a canyon, valley or seachannel on the ocean floor."
+    },
+    {
+        "typeID": 104,
+        "type": "Moat",
+        "description": "An annular depression that may not be continuous, located at the base of many SEAMOUNTS, oceanic islands and other isolated elevations."
+    },
+    {
+        "typeID": 105,
+        "type": "Passage",
+        "description": "A narrow break in a RIDGE or a RISE. Also called GAP."
+    },
+    {
+        "typeID": 106,
+        "type": "Peak",
+        "description": "A prominent elevation either pointed or of a very limited extent across the summit."
+    },
+    {
+        "typeID": 107,
+        "type": "Pinnacle",
+        "description": "Any high tower or spire-shaped pillar of rock, or coral, alone or cresting a summit."
+    },
+    {
+        "typeID": 108,
+        "type": "Promontory",
+        "description": "A major SPUR-like protrusion of the continental SLOPE extending to the deep seafloor. Characteristically, the crest deepens seaward."
+    },
+    {
+        "typeID": 110,
+        "type": "Saddle",
+        "description": "A broad pass or col, resembling in shape a riding saddle, in a RIDGE or between contiguous elevations."
+    },
+    {
+        "typeID": 111,
+        "type": "Shelf Edge",
+        "description": "The line along which there is marked increase of slope at the seaward margin of a CONTINENTAL (or island) SHELF. Also called SHELF BREAK."
+    },
+    {
+        "typeID": 112,
+        "type": "Shoal",
+        "description": "An offshore hazard to surface navigation with substantially less clearance than the surrounding area and composed of unconsolidated material."
+    },
+    {
+        "typeID": 113,
+        "type": "Sill",
+        "description": "A sea floor barrier of relatively shallow depth restricting water movement between BASINS."
+    },
+    {
+        "typeID": 114,
+        "type": "Terrace",
+        "description": "A relatively flat horizontal or gently inclined surface, sometimes long and narrow, which is bounded by a steeper ascending slope on one side and by a steeper descending slope on the opposite side."
+    },
+    {
+        "typeID": 115,
+        "type": "Dike",
+        "description": null
+    },
+    {
+        "typeID": 116,
+        "type": "Mud Flat",
+        "description": null
+    },
+    {
+        "typeID": 117,
+        "type": "Salt Marsh",
+        "description": null
+    },
+    {
+        "typeID": 119,
+        "type": "Polder",
+        "description": null
+    },
+    {
+        "typeID": 120,
+        "type": "Harbour",
+        "description": null
+    },
+    {
+        "typeID": 121,
+        "type": "Dock",
+        "description": null
+    },
+    {
+        "typeID": 122,
+        "type": "Sluice",
+        "description": null
+    },
+    {
+        "typeID": 123,
+        "type": "Continental Slope",
+        "description": null
+    },
+    {
+        "typeID": 124,
+        "type": "Submarine lava tube",
+        "description": null
+    },
+    {
+        "typeID": 125,
+        "type": "Cave",
+        "description": null
+    },
+    {
+        "typeID": 126,
+        "type": "Natural Reserve",
+        "description": null
+    },
+    {
+        "typeID": 127,
+        "type": "Marine Park",
+        "description": null
+    },
+    {
+        "typeID": 128,
+        "type": "Cape",
+        "description": null
+    },
+    {
+        "typeID": 129,
+        "type": "Sampling Station",
+        "description": "Standard sampling sation"
+    },
+    {
+        "typeID": 130,
+        "type": "Peninsula",
+        "description": null
+    },
+    {
+        "typeID": 131,
+        "type": "Flat",
+        "description": "Nonspeciefic 'flat' marine area."
+    },
+    {
+        "typeID": 132,
+        "type": "Cliffs",
+        "description": "a significant vertical, or near vertical, rock exposure"
+    },
+    {
+        "typeID": 133,
+        "type": "Dunes",
+        "description": null
+    },
+    {
+        "typeID": 134,
+        "type": "Former administrative division",
+        "description": null
+    },
+    {
+        "typeID": 135,
+        "type": "Reservoir",
+        "description": null
+    },
+    {
+        "typeID": 136,
+        "type": "National Park",
+        "description": null
+    },
+    {
+        "typeID": 137,
+        "type": "National District",
+        "description": null
+    },
+    {
+        "typeID": 138,
+        "type": "Mountain range",
+        "description": "a series of mountains"
+    },
+    {
+        "typeID": 139,
+        "type": "Land basin",
+        "description": null
+    },
+    {
+        "typeID": 140,
+        "type": "Gap",
+        "description": null
+    },
+    {
+        "typeID": 141,
+        "type": "Seamount Province",
+        "description": null
+    },
+    {
+        "typeID": 142,
+        "type": "Tablemount",
+        "description": null
+    },
+    {
+        "typeID": 143,
+        "type": "Zone",
+        "description": null
+    },
+    {
+        "typeID": 144,
+        "type": "Shelf",
+        "description": "The flat or gently sloping region adjacent to a continent or around an island that extends from the low water line to a depth, generally about 200m, where there is a marked increase in downward slope."
+    },
+    {
+        "typeID": 146,
+        "type": "Large Marine Ecosystem",
+        "description": null
+    },
+    {
+        "typeID": 147,
+        "type": "Disputed Territory",
+        "description": null
+    },
+    {
+        "typeID": 148,
+        "type": "Union Territory",
+        "description": null
+    },
+    {
+        "typeID": 149,
+        "type": "Possession",
+        "description": null
+    },
+    {
+        "typeID": 150,
+        "type": "Territory",
+        "description": null
+    },
+    {
+        "typeID": 151,
+        "type": "Occupied Territory",
+        "description": null
+    },
+    {
+        "typeID": 152,
+        "type": "Dependency",
+        "description": null
+    },
+    {
+        "typeID": 153,
+        "type": "Overseas Territory",
+        "description": null
+    },
+    {
+        "typeID": 154,
+        "type": "National Division",
+        "description": "A high-level administrative unit."
+    },
+    {
+        "typeID": 155,
+        "type": "Rock",
+        "description": null
+    },
+    {
+        "typeID": 156,
+        "type": "Light(house)",
+        "description": "Tower with a light serving for navigation."
+    },
+    {
+        "typeID": 157,
+        "type": "Beach",
+        "description": "Flat strip of gravel or sand bordering the sea or an inland water."
+    },
+    {
+        "typeID": 158,
+        "type": "FAO fishing area",
+        "description": "Sea areas that have been designated as fishing areas by FAO."
+    },
+    {
+        "typeID": 159,
+        "type": "Pit",
+        "description": "Small depression in a river bed."
+    },
+    {
+        "typeID": 161,
+        "type": "Plate",
+        "description": "Intertidal flats in an estuary that have no connection with the mainland."
+    },
+    {
+        "typeID": 162,
+        "type": "Atoll",
+        "description": null
+    },
+    {
+        "typeID": 163,
+        "type": "Parish",
+        "description": null
+    },
+    {
+        "typeID": 164,
+        "type": "Prefecture",
+        "description": null
+    },
+    {
+        "typeID": 165,
+        "type": "Controlled flood zone",
+        "description": null
+    },
+    {
+        "typeID": 166,
+        "type": "Bird Directive Area",
+        "description": null
+    },
+    {
+        "typeID": 168,
+        "type": "Glacier",
+        "description": "slowly collapsing field of ice"
+    },
+    {
+        "typeID": 169,
+        "type": "Point",
+        "description": "Geographical"
+    },
+    {
+        "typeID": 170,
+        "type": "Cove",
+        "description": "part of a coast which partly encloses an area of water"
+    },
+    {
+        "typeID": 171,
+        "type": "Mount",
+        "description": "mountain"
+    },
+    {
+        "typeID": 172,
+        "type": "Sea floor",
+        "description": "bottom of the ocean"
+    },
+    {
+        "typeID": 173,
+        "type": "Nunatak",
+        "description": "a mountain top that is not covered by land ice (see glaciation and ice age), and protrudes out of a surrounding glacier"
+    },
+    {
+        "typeID": 174,
+        "type": "Nunataks",
+        "description": "a series of Nunatasks"
+    },
+    {
+        "typeID": 175,
+        "type": "Snowfield",
+        "description": "an extensive terrain covered by a smooth surface of snow. Normally the term is applied to mountainous and glacial terrain"
+    },
+    {
+        "typeID": 177,
+        "type": "Heights",
+        "description": "series of points (usually on the terrain surface, such as a mountain top) vertically above a reference surface such as mean sea level"
+    },
+    {
+        "typeID": 179,
+        "type": "Gate",
+        "description": "an opening in a wall or fence, in this case stone walls or an entry between vertical surrounding concretions"
+    },
+    {
+        "typeID": 180,
+        "type": "Anchorage",
+        "description": "where a ship lies at anchor"
+    },
+    {
+        "typeID": 181,
+        "type": "Buttress",
+        "description": "structure built against or projecting from a wall which serves to support or reinforce the wall, or rather its geographical equivalent"
+    },
+    {
+        "typeID": 182,
+        "type": "Pass",
+        "description": "a low place in a mountain range allowing easier passage"
+    },
+    {
+        "typeID": 183,
+        "type": "Crag",
+        "description": "A Cliff or vertical rock exposure in mountainous areas"
+    },
+    {
+        "typeID": 184,
+        "type": "Bluff",
+        "description": "a steep hill or small cliff (often of limestone) next to a river"
+    },
+    {
+        "typeID": 185,
+        "type": "Gully",
+        "description": "a landform created by running water eroding sharply into a hillside. Gullies resemble large ditches or small valleys, but are metres to tens of metres in height and width"
+    },
+    {
+        "typeID": 186,
+        "type": "Creek",
+        "description": "a inlet of the sea, narrower than a cove"
+    },
+    {
+        "typeID": 187,
+        "type": "Icefall",
+        "description": "a portion of some glaciers characterized by rapid flow and a chaotic crevassed surface"
+    },
+    {
+        "typeID": 191,
+        "type": "Col",
+        "description": "mountain pass or low point between two hills"
+    },
+    {
+        "typeID": 192,
+        "type": "Base",
+        "description": "The bottom supporting part of a structure"
+    },
+    {
+        "typeID": 193,
+        "type": "Rocks",
+        "description": "a naturally occurring aggregate of minerals and/or mineraloids"
+    },
+    {
+        "typeID": 195,
+        "type": "Diving spot",
+        "description": null
+    },
+    {
+        "typeID": 196,
+        "type": "City",
+        "description": null
+    },
+    {
+        "typeID": 197,
+        "type": "Oblast",
+        "description": "Type of country subdivision of Bulgaria, Belarus, Kyrgyzstan, Russia, Ukraine, and the now-defunct Soviet Union, ..."
+    },
+    {
+        "typeID": 198,
+        "type": "Spit",
+        "description": "A spit is a deposition landform found off coasts. A spit is a type of bar or beach that develops where a re-entrant occurs. Spits are formed by the movement of sediment along a shore by a process known as longshore drift (wikipedia). "
+    },
+    {
+        "typeID": 199,
+        "type": "Headland",
+        "description": null
+    },
+    {
+        "typeID": 202,
+        "type": "Village",
+        "description": null
+    },
+    {
+        "typeID": 203,
+        "type": "Firth",
+        "description": null
+    },
+    {
+        "typeID": 204,
+        "type": "Marsh(es)",
+        "description": "a wetland dominated by grass-like vegetation"
+    },
+    {
+        "typeID": 205,
+        "type": "Roadstead",
+        "description": "an open anchorage affording less protection than a harbor"
+    },
+    {
+        "typeID": 206,
+        "type": "Swamp",
+        "description": "a wetland dominated by tree vegetation"
+    },
+    {
+        "typeID": 207,
+        "type": "Isthmus",
+        "description": "a narrow strip of land connecting two larger land masses and bordered by water"
+    },
+    {
+        "typeID": 208,
+        "type": "Lowland",
+        "description": "is any broad expanse of land with a general low level"
+    },
+    {
+        "typeID": 209,
+        "type": "Arm",
+        "description": "A part, usually narrow and elongate, of a feature projecting from the main body, e.g. arm of the sea"
+    },
+    {
+        "typeID": 210,
+        "type": "Entrance",
+        "description": null
+    },
+    {
+        "typeID": 211,
+        "type": "Depression",
+        "description": "A poorly defined sunken area, not indicated by contours"
+    },
+    {
+        "typeID": 212,
+        "type": "Stack(s)",
+        "description": "High and precipitous detached pillar of rock near shore"
+    },
+    {
+        "typeID": 213,
+        "type": "Subglacial basin",
+        "description": "Subglacial: a term meaning 'beneath the ice'. Basin: a very large depression occupied by sea water, ie. an ocean basin"
+    },
+    {
+        "typeID": 214,
+        "type": "Rim",
+        "description": "A rocky outer edge of a volcanic crater"
+    },
+    {
+        "typeID": 215,
+        "type": "Station",
+        "description": "A place where there is permanent human habitation and infrastructure serving as a base for scientific research"
+    },
+    {
+        "typeID": 217,
+        "type": "Tongue",
+        "description": "A projection of the ice edge up to several km in length caused by wind and current"
+    },
+    {
+        "typeID": 218,
+        "type": "Ice Shelf",
+        "description": "A floating ice sheet of considerable thickness attached to a coast. Ice shelves are usually of great horizontal extent and have a level or gently undulating surface. They are nourished by the accumulation of snow and often by seaward extension of land glaciers. Limited areas may be aground. The seaward edge is termed an ice front"
+    },
+    {
+        "typeID": 219,
+        "type": "Ice Sheet",
+        "description": "A mass of ice and snow of considerable thickness and large area. Ice sheets may be resting on rock or floating. Ice sheets of less than about 50,000 square km resting on rock are called ice caps"
+    },
+    {
+        "typeID": 220,
+        "type": "Wreck",
+        "description": null
+    },
+    {
+        "typeID": 221,
+        "type": "Fort",
+        "description": "a defensive structure or earthworks"
+    },
+    {
+        "typeID": 223,
+        "type": "Beacon",
+        "description": "a fixed artificial navigation mark"
+    },
+    {
+        "typeID": 224,
+        "type": "Tower",
+        "description": null
+    },
+    {
+        "typeID": 225,
+        "type": "River Outlet",
+        "description": null
+    },
+    {
+        "typeID": 226,
+        "type": "Camping",
+        "description": null
+    },
+    {
+        "typeID": 227,
+        "type": "Resort",
+        "description": null
+    },
+    {
+        "typeID": 229,
+        "type": "Protected Area",
+        "description": null
+    },
+    {
+        "typeID": 230,
+        "type": "Research Station",
+        "description": null
+    },
+    {
+        "typeID": 231,
+        "type": "Wetland",
+        "description": "Mixture of swamps and marshes"
+    },
+    {
+        "typeID": 232,
+        "type": "Municipality",
+        "description": null
+    },
+    {
+        "typeID": 233,
+        "type": "Mangrove",
+        "description": null
+    },
+    {
+        "typeID": 234,
+        "type": "Volcano",
+        "description": null
+    },
+    {
+        "typeID": 235,
+        "type": "Spring",
+        "description": null
+    },
+    {
+        "typeID": 236,
+        "type": "Watsonian vice-county",
+        "description": "Watsonian vice-counties are subdivisions of Great Britain and Ireland used largely for the purposes of biological recording and other scientific data-gathering."
+    },
+    {
+        "typeID": 237,
+        "type": "Wharf",
+        "description": null
+    },
+    {
+        "typeID": 238,
+        "type": "Park",
+        "description": null
+    },
+    {
+        "typeID": 239,
+        "type": "Floristic Region",
+        "description": "A Floristic Region or Phytochorion, in phytogeography, is a geographic area with a relatively uniform composition of plant species. Adjacent phtyochoria do not usually have a sharp boundary, but rather a soft one, a transitional area in which many species from both regions overlap."
+    },
+    {
+        "typeID": 240,
+        "type": "Museum",
+        "description": null
+    },
+    {
+        "typeID": 241,
+        "type": "Longhurst Province",
+        "description": null
+    },
+    {
+        "typeID": 242,
+        "type": "Hydro-electric power station",
+        "description": null
+    },
+    {
+        "typeID": 243,
+        "type": "Realm",
+        "description": "Spalding, et al. 2007. Marine ecoregions of the world: a bioregionalization of coastal and shelf areas. Bioscience 57(7):573-582."
+    },
+    {
+        "typeID": 244,
+        "type": "Marine Province",
+        "description": "Spalding, et al. 2007. Marine ecoregions of the world: a bioregionalization of coastal and shelf areas. Bioscience 57(7):573-582."
+    },
+    {
+        "typeID": 245,
+        "type": "Marine Ecoregion of the World (MEOW)",
+        "description": "Spalding, et al. 2007. Marine ecoregions of the world: a bioregionalization of coastal and shelf areas. Bioscience 57(7):573-582."
+    },
+    {
+        "typeID": 246,
+        "type": "ICES Ecoregion",
+        "description": "ICES EcoRegions are largescale management units that are used in ICES advisory reports and were first referenced in the ACFM/ACME report of 2004 (now ACOM) [http://www.ices.dk/datacentre/updates/DC_update.htm?WT.mc_id=DCeNews_March_2009]."
+    },
+    {
+        "typeID": 247,
+        "type": "Land",
+        "description": "The three traditional parts, essentially three collectives of provinces, in Sweden"
+    },
+    {
+        "typeID": 249,
+        "type": "Republic",
+        "description": "Politic division in the Russian federation, Bosnia Herzegovina (Republika), Serbia and Montenegro"
+    },
+    {
+        "typeID": 250,
+        "type": "Aquifer",
+        "description": "An aquifer is an underground layer of water-bearing permeable rock or unconsolidated materials (gravel, sand, silt, or clay) from which groundwater can be usefully extracted using a water well. "
+    },
+    {
+        "typeID": 252,
+        "type": "NAFO Area",
+        "description": "http://www.nafo.int/about/frames/area.html"
+    },
+    {
+        "typeID": 253,
+        "type": "IOS region",
+        "description": "Pacific and Arctic Regions"
+    },
+    {
+        "typeID": 254,
+        "type": "Marine Protected Area (MPA)",
+        "description": null
+    },
+    {
+        "typeID": 255,
+        "type": "SeaVoX SeaArea - region",
+        "description": null
+    },
+    {
+        "typeID": 256,
+        "type": "SeaVoX SeaArea - level 1",
+        "description": null
+    },
+    {
+        "typeID": 257,
+        "type": "SeaVoX SeaArea - level 2",
+        "description": null
+    },
+    {
+        "typeID": 258,
+        "type": "SeaVoX SeaArea - level 3",
+        "description": null
+    },
+    {
+        "typeID": 259,
+        "type": "SeaVoX SeaArea - sub-region",
+        "description": null
+    },
+    {
+        "typeID": 260,
+        "type": "SeaVoX SeaArea - level 4",
+        "description": null
+    },
+    {
+        "typeID": 261,
+        "type": "Historical fishing areas",
+        "description": "Map of the (historical) fishing areas of Belgian sea fisheries: http://www.vliz.be/cijfers_beleid/zeevisserij/map.php"
+    },
+    {
+        "typeID": 262,
+        "type": "Bridge",
+        "description": null
+    },
+    {
+        "typeID": 263,
+        "type": "Discordance",
+        "description": null
+    },
+    {
+        "typeID": 264,
+        "type": "Rift",
+        "description": null
+    },
+    {
+        "typeID": 265,
+        "type": "Mud Volcano",
+        "description": null
+    },
+    {
+        "typeID": 266,
+        "type": "Marine Region",
+        "description": null
+    },
+    {
+        "typeID": 271,
+        "type": "Governorate",
+        "description": "administrative division in several countries"
+    },
+    {
+        "typeID": 272,
+        "type": "IHO Sea Area",
+        "description": null
+    },
+    {
+        "typeID": 273,
+        "type": "Head",
+        "description": null
+    },
+    {
+        "typeID": 274,
+        "type": "OSPAR Boundary",
+        "description": "http://www.ospar.org/"
+    },
+    {
+        "typeID": 275,
+        "type": "World Marine Heritage Site",
+        "description": "http://whc.unesco.org/en/marine-programme/"
+    },
+    {
+        "typeID": 278,
+        "type": "Natura 2000 Special Protection Area (SPA, EU Birds Directive)",
+        "description": "administrative"
+    },
+    {
+        "typeID": 280,
+        "type": "Natura 2000 Site of Community Importance (SCI, EU Habitats Directive)",
+        "description": "administrative"
+    },
+    {
+        "typeID": 281,
+        "type": "Natura 2000 Special Protection Area and Site of Community Importance (SPA and SCI, EU Birds and Habitats Directive)",
+        "description": "administrative"
+    },
+    {
+        "typeID": 286,
+        "type": "Contourite Depositional System",
+        "description": "Clustered drifts in a local area"
+    },
+    {
+        "typeID": 287,
+        "type": "Drift",
+        "description": "Contourites are sedimentary units which are deposited or substantially reworked by alongslope bottom currents. They refer to the lithological unit and the terminology reflects the grainsize of the sediment.\r\nWhile drifts refer to the same sedimentary unit as a contourite, drifts are the morphological appearance of the sedimentary unit."
+    },
+    {
+        "typeID": 288,
+        "type": "Landkreis",
+        "description": null
+    },
+    {
+        "typeID": 289,
+        "type": "Maar",
+        "description": null
+    },
+    {
+        "typeID": 290,
+        "type": "Federate state",
+        "description": "A federated state (which may be referred to as a state, a province, a canton, a Land, etc.) is a territorial and constitutional community forming part of a federal union.[1] Such states differ from sovereign states, in that they have transferred a portion of their sovereign powers to a federal government.[2] Importantly, when states choose to federate, they lose their standing as persons of international law. Instead, the federal union as a single entity becomes the sovereign state, the person of international law.[3] A federated state holds administrative jurisdiction over a defined geographic territory and is a form of regional government."
+    },
+    {
+        "typeID": 292,
+        "type": "Lock",
+        "description": null
+    },
+    {
+        "typeID": 293,
+        "type": "Forest",
+        "description": null
+    },
+    {
+        "typeID": 294,
+        "type": "Boat lift",
+        "description": "A boat lift, ship lift, or lift lock is a machine for transporting boats between water at two different elevations, and is an alternative to the canal lock and the canal inclined plane.\r\n\r\nIt may be either vertically moving, like the ship lifts in Germany, Belgium, the lift at \"Les Fontinettes\" in France or the Anderton boat lift in England, or rotational, like the Falkirk Wheel in Scotland."
+    },
+    {
+        "typeID": 296,
+        "type": "Landscape Protection Area",
+        "description": null
+    },
+    {
+        "typeID": 297,
+        "type": "Area",
+        "description": null
+    },
+    {
+        "typeID": 299,
+        "type": "Wetland of International Importance (Ramsar Convention)",
+        "description": null
+    },
+    {
+        "typeID": 301,
+        "type": "UNESCO-MAB Biosphere Reserve",
+        "description": null
+    },
+    {
+        "typeID": 302,
+        "type": "Pond",
+        "description": null
+    },
+    {
+        "typeID": 303,
+        "type": "Watermill",
+        "description": null
+    },
+    {
+        "typeID": 304,
+        "type": "Military Domain",
+        "description": null
+    },
+    {
+        "typeID": 307,
+        "type": "Waterfall",
+        "description": null
+    },
+    {
+        "typeID": 308,
+        "type": "Building, ranch",
+        "description": null
+    },
+    {
+        "typeID": 309,
+        "type": "OSPAR Region",
+        "description": null
+    },
+    {
+        "typeID": 311,
+        "type": "Cordillera",
+        "description": "An entire mountain system including the subordinate ranges, interior plateaus and basins. "
+    },
+    {
+        "typeID": 313,
+        "type": "Furrow",
+        "description": "A closed, linear, narrow, shallow depression."
+    },
+    {
+        "typeID": 315,
+        "type": "Mesa",
+        "description": "An isolated, extensive, flat-topped elevation on the shelf, with relative steep sides. "
+    },
+    {
+        "typeID": 317,
+        "type": "Mound",
+        "description": "A low, isolated, rounded hill."
+    },
+    {
+        "typeID": 318,
+        "type": "Mountain(s)",
+        "description": "Well-delineated subdivision(s) of a large and complex positive feature. "
+    },
+    {
+        "typeID": 320,
+        "type": "Province (physical)",
+        "description": "A region identifiable by a group of similar physiographic features whose characteristics are markedly in contrast with surrounding areas. "
+    },
+    {
+        "typeID": 325,
+        "type": "Undersea arch",
+        "description": "A low bulge around the southeastern end of the island of Hawaii"
+    },
+    {
+        "typeID": 328,
+        "type": "Undersea arrugado",
+        "description": "An area of subdued corrugations off Baja California"
+    },
+    {
+        "typeID": 332,
+        "type": "Man-made structure",
+        "description": null
+    },
+    {
+        "typeID": 333,
+        "type": "Lower Bathyal Provinces",
+        "description": "The lower bathyal includes both the slopes of continents as well as\r\nridges, island slopes, and several thousand seamounts, about half\r\nof which extend upward into the bathyal zone (Clark et al., 2011)."
+    },
+    {
+        "typeID": 334,
+        "type": "Abyssal Provinces",
+        "description": "The abyssal provinces are separated by mid-ocean ridges and other bathyal topography creating deep basins and/or are distinguished by varying levels of POC flux to the seafloor."
+    },
+    {
+        "typeID": 335,
+        "type": "FAO Major Marine Fishing Areas",
+        "description": null
+    },
+    {
+        "typeID": 336,
+        "type": "Bar",
+        "description": "Intertidal flats in an estuary that have no connection with the mainland.\r\nA bar in a river is an elevated region of sediment (such as sand or gravel) that has been deposited by the flow. "
+    },
+    {
+        "typeID": 337,
+        "type": "Breakwater",
+        "description": "Breakwaters are structures constructed on coasts as part of coastal defense or to protect an anchorage from the effects of both weather and longshore drift."
+    },
+    {
+        "typeID": 338,
+        "type": "Dam",
+        "description": "A dam is a barrier that impounds water or underground streams. Dams generally serve the primary purpose of retaining water."
+    },
+    {
+        "typeID": 339,
+        "type": "Hamlet",
+        "description": " hamlet is a type of settlement. The definition of hamlet varies by country. It usually refers to a small settlement in a rural area, or a component of a larger settlement or municipality."
+    },
+    {
+        "typeID": 340,
+        "type": "Division",
+        "description": "major administrative regions (o.a. Bangladesh & New Zealand)"
+    },
+    {
+        "typeID": 344,
+        "type": "Submarine valley(s)",
+        "description": "A sea valley is a linear depression on the seafloor with a broader cross-section and gentler slopes than a submarine canyon. It crosses the continental shelf as an extension of an estuary or as the seaward portion of a drowned valley, and may be kept open by submarine currents or a tidal scour.\r\nAn elongated depression that generally widens and deepens down-slope. Also called SEA VALLEY. "
+    },
+    {
+        "typeID": 346,
+        "type": "Oil field",
+        "description": "A geographic region (land or sea) with an abundance of oil wells extracting petroleum (crude oil) from below ground."
+    },
+    {
+        "typeID": 347,
+        "type": "TDWG",
+        "description": null
+    },
+    {
+        "typeID": 348,
+        "type": "TDWG - level 1",
+        "description": null
+    },
+    {
+        "typeID": 349,
+        "type": "TDWG - level 2",
+        "description": null
+    },
+    {
+        "typeID": 350,
+        "type": "TDWG - level 3",
+        "description": null
+    },
+    {
+        "typeID": 351,
+        "type": "TDWG - level 4",
+        "description": null
+    },
+    {
+        "typeID": 352,
+        "type": "ICES Areas",
+        "description": "The ICES Statistical Areas delineates the divisions and subdivisions of FAO Major Fishing area 27.\r\nThe ICES Statistical Areas are used as bounding areas for calculation of fish statistics, e.g. catch per unit effort (CPUE) and stock estimates. "
+    },
+    {
+        "typeID": 353,
+        "type": "ICES Statistical Rectangles",
+        "description": null
+    },
+    {
+        "typeID": 354,
+        "type": "FADA Faunistic Regions",
+        "description": "http://data.freshwaterbiodiversity.eu/data/shapefiles/\r\n\r\nAT : AfroTropical\r\nANT : ANTarctic\r\nAU : AUstralasian\r\nNA : NeArctic\r\nNT : NeoTropical\r\nOL : OrientaL(Indomalaya)\r\nPAC : PACific(Oceania)\r\nPA : PalaeArctic\r\n"
+    },
+    {
+        "typeID": 355,
+        "type": "Northwest Atlantic Hydrographic Regions",
+        "description": null
+    },
+    {
+        "typeID": 356,
+        "type": "FAO Subareas",
+        "description": null
+    },
+    {
+        "typeID": 357,
+        "type": "FAO Divisions",
+        "description": null
+    },
+    {
+        "typeID": 358,
+        "type": "FAO Subdivisions",
+        "description": null
+    },
+    {
+        "typeID": 360,
+        "type": "Arctic Marine Area",
+        "description": "There are many ways to divide the Arctic marine region—by ecosystem/ecological characteristics, by administrative criteria, or by some combination of the two. However, effective monitoring of biodiversity requires that an ecosystem-based approach be used for choosing areas.\r\nhttp://geo.abds.is/geonetwork/srv/eng/catalog.search#/metadata/dcd5c12f-3acb-4101-8e1a-bba0aec50582"
+    },
+    {
+        "typeID": 362,
+        "type": "Marine Subregion",
+        "description": "Part of the Marine Regions (union EEZ/IHO)"
+    },
+    {
+        "typeID": 363,
+        "type": "Hydrothermal vent",
+        "description": "Hydrothermal Field"
+    },
+    {
+        "typeID": 364,
+        "type": "Joint regime (EEZ)",
+        "description": "A geographical area delimited by agreement between two or more countries where with specific arrangements in relation to the exploration and exploitation of natural marine resources. "
+    },
+    {
+        "typeID": 365,
+        "type": "Territorial Sea",
+        "description": "A belt of coastal waters extending at most 12 nautical miles (22.2 km; 13.8 mi) from the baseline (usually the mean low-water mark) of a coastal state. The territorial sea is regarded as the sovereign territory of the state, although foreign ships (both military and civilian) are allowed innocent passage through it; this sovereignty also extends to the airspace over and seabed below."
+    },
+    {
+        "typeID": 366,
+        "type": "Contiguous zone",
+        "description": "A band of water extending from the outer edge of the territorial sea to up to 24 nautical miles (44.4 km; 27.6 mi) from the baseline"
+    },
+    {
+        "typeID": 367,
+        "type": "Internal waters",
+        "description": "Waters on the landward side of the baseline of a nation's territorial waters, except in archipelagic states. It includes waterways such as rivers and canals, and sometimes the water within small bays."
+    },
+    {
+        "typeID": 368,
+        "type": "Archipelagic waters",
+        "description": "Waters falling within archipelagic baselines"
+    },
+    {
+        "typeID": 369,
+        "type": "Tributary",
+        "description": "A tributary is a stream or river that flows into a larger stream or river. A tributary does not flow directly into a sea or ocean. "
+    },
+    {
+        "typeID": 371,
+        "type": "Pingo(s)",
+        "description": "A more or less conical mound of fine unconsolidated material generally containing an ice core"
+    },
+    {
+        "typeID": 372,
+        "type": "Lobe",
+        "description": "A protuberance of bathymetric contours having a broad tonguelike or lobate plan."
+    },
+    {
+        "typeID": 373,
+        "type": "Ledge(s)",
+        "description": "A relatively flat projection of rock usually extending from a shoreline."
+    },
+    {
+        "typeID": 374,
+        "type": "Historical undersea feature",
+        "description": "An undersea feature whose existence has been subsequently disproved."
+    },
+    {
+        "typeID": 375,
+        "type": "MSFD Marine subregions",
+        "description": "https://www.eea.europa.eu/data-and-maps/data/msfd-regions-and-subregions-1"
+    },
+    {
+        "typeID": 376,
+        "type": "MSFD Marine regions",
+        "description": "https://www.eea.europa.eu/data-and-maps/data/msfd-regions-and-subregions-1"
+    },
+    {
+        "typeID": 377,
+        "type": "Marine Bioregion",
+        "description": "Canada’s marine protected areas network is being advanced in five priority marine bioregions: the Gulf of St. Lawrence, the Scotian Shelf, the Newfoundland-Labrador Shelves, the Western Arctic, and the Northern Shelf."
+    },
+    {
+        "typeID": 378,
+        "type": "Overlapping claim",
+        "description": "An area where the EEZ claims of two or more coastal states overlaps"
+    },
+    {
+        "typeID": 379,
+        "type": "Mesopelagic ecoregions",
+        "description": null
+    },
+    {
+        "typeID": 381,
+        "type": "Mineral Rights Areas",
+        "description": null
+    },
+    {
+        "typeID": 383,
+        "type": "HAB monitoring grid",
+        "description": null
+    },
+    {
+        "typeID": 384,
+        "type": "Antarctic Conservation Biogeographic Region",
+        "description": null
+    },
+    {
+        "typeID": 385,
+        "type": "Extended Continental Shelf (CLCS Submission)",
+        "description": "Continental Shelf beyond 200 nautical miles as submitted to the Commission on the Limits of the Continental Shelf (CLCS)"
+    },
+    {
+        "typeID": 386,
+        "type": "Extended Continental Shelf (CLCS Recommendation)",
+        "description": "Continental Shelf beyond 200 nautical miles as recommended by the Commission on the Limits of the Continental Shelf (CLCS)"
+    },
+    {
+        "typeID": 388,
+        "type": "High Seas",
+        "description": "In International Law, all parts of the sea that are not included in the exclusive economic zone, in the territorial sea or in the internal waters of a State, or in the archipelagic waters of an archipelagic State."
+    },
+    {
+        "typeID": 420,
+        "type": "Storm surge barrier",
+        "description": "A specific type of floodgate, designed to prevent a storm surge or spring tide from flooding the protected area behind the barrier."
+    },
+    {
+        "typeID": 421,
+        "type": "Sunker",
+        "description": "A submerged rock over which the sea breaks."
+    },
+    {
+        "typeID": 422,
+        "type": "EMODnet Biology Reporting Areas",
+        "description": "Sea regions used internally by EMODnet Biology for reporting purposes on the seven areas defined by EMODnet: Artic Sea, Baltic Sea, Black Sea, Mediterranean Sea, North Sea, North Atlantic Ocean, and Other Seas. They are a modified version of the European Union Marine Strategy Framework Directive (MSFD) regions and subregions available at: https://www.eea.europa.eu/ds_resolveuid/0a93718db6f541eaa565ba86d6f9ac85"
+    },
+    {
+        "typeID": 423,
+        "type": "Prodelta",
+        "description": "Newest, most aquatic-facing portion of a delta, featuring the finest sediment."
+    },
+    {
+        "typeID": 424,
+        "type": "Italian marine biogeographic sector",
+        "description": "Subdivision of Italian seas in 9 biogeographic sectors as proposed in Bianchi, C.N. (2004). Proposta di suddivisione dei mari italiani in settori biogeografici. Notiziario S.i.B.M. 46: 57-59."
+    },
+    {
+        "typeID": 425,
+        "type": "Freshwater Ecoregion of the World (FEOW)",
+        "description": "The freshwater ecoregion map encompasses 426 units, whose boundaries generally - though not always - correspond with those of watersheds (also known as drainage basins or catchments). Within individual ecoregions there will be turnover of species, such as when moving up or down a river system, but taken as a whole an ecoregion will typically have a distinct evolutionary history and/or ecological processes. Ecoregions are delineated based on the best available information, but data describing freshwater species and ecological processes are characterized by marked gaps and variation in quality, and improved information in the future may warrant map revisions."
+    },
+    {
+        "typeID": 428,
+        "type": "Extended Continental Shelf (DOALOS Deposit)",
+        "description": "Continental Shelf beyond 200 nautical miles as deposited to the Division for Ocean Affairs and the Law of the Sea (DOALOS)"
+    },
+    {
+        "typeID": 430,
+        "type": "Overlapping claim (Extended Continental Shelf)",
+        "description": "An area where the Extended Continental Shelf claims of two or more countries overlap"
+    },
+    {
+        "typeID": 432,
+        "type": "Extended Continental Shelf (Joint CLCS Submission)",
+        "description": "Continental Shelf beyond 200 nautical miles as submitted to the Commission on the Limits of the Continental Shelf (CLCS) by two or more countries"
+    },
+    {
+        "typeID": 434,
+        "type": "Extended Continental Shelf (Joint CLCS Recommendation)",
+        "description": "Continental Shelf beyond 200 nautical miles as recommended by the Commission on the Limits of the Continental Shelf (CLCS) for two or more countries"
+    },
+    {
+        "typeID": 435,
+        "type": "Extended Continental Shelf (Joint DOALOS Deposit)",
+        "description": "Continental Shelf beyond 200 nautical miles as deposited to the Division for Ocean Affairs and the Law of the Sea (DOALOS) by two or more countries"
+    }
+]

@@ -1,0 +1,16 @@
+{
+    "MRGID": 22550,
+    "gazetteerSource": "Mangroves",
+    "placeType": "Mangrove",
+    "latitude": 10.960556,
+    "longitude": -74.493888999999996,
+    "minLatitude": null,
+    "minLongitude": null,
+    "maxLatitude": null,
+    "maxLongitude": null,
+    "precision": null,
+    "preferredGazetteerName": "La Rinconada",
+    "preferredGazetteerNameLang": "Spanish",
+    "status": "standard",
+    "accepted": 22550
+}

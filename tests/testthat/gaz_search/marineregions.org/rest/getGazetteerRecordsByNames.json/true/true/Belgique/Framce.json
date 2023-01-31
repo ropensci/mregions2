@@ -1,0 +1,86 @@
+[
+    [
+        {
+            "MRGID": 14,
+            "gazetteerSource": "(2001). The Times comprehensive atlas of the world. 10th ed. Times Books: London. ISBN 0-7230-0792-6. 67, 220, 124 plates pp.",
+            "placeType": "Nation",
+            "latitude": 50.500749588012695,
+            "longitude": 4.4770499467849731,
+            "minLatitude": 49.497299194335938,
+            "minLongitude": 2.5466001033782959,
+            "maxLatitude": 51.504199981689453,
+            "maxLongitude": 6.4074997901916504,
+            "precision": 176337.31954732546,
+            "preferredGazetteerName": "Belgique",
+            "preferredGazetteerNameLang": "French",
+            "status": "standard",
+            "accepted": 14
+        }
+    ],
+    [
+        {
+            "MRGID": 17,
+            "gazetteerSource": "(2001). The Times comprehensive atlas of the world. 10th ed. Times Books: London. ISBN 0-7230-0792-6. 67, 220, 124 plates pp.",
+            "placeType": "Nation",
+            "latitude": 46.210749999999997,
+            "longitude": 2.1889500000000002,
+            "minLatitude": 41.332799999999999,
+            "minLongitude": -5.1818999999999997,
+            "maxLatitude": 51.088700000000003,
+            "maxLongitude": 9.5597999999999992,
+            "precision": 782293.30000000005,
+            "preferredGazetteerName": "France",
+            "preferredGazetteerNameLang": "French",
+            "status": "standard",
+            "accepted": 17
+        },
+        {
+            "MRGID": 17,
+            "gazetteerSource": "(2001). The Times comprehensive atlas of the world. 10th ed. Times Books: London. ISBN 0-7230-0792-6. 67, 220, 124 plates pp.",
+            "placeType": "Nation",
+            "latitude": 46.210749999999997,
+            "longitude": 2.1889500000000002,
+            "minLatitude": 41.332799999999999,
+            "minLongitude": -5.1818999999999997,
+            "maxLatitude": 51.088700000000003,
+            "maxLongitude": 9.5597999999999992,
+            "precision": 782293.30000000005,
+            "preferredGazetteerName": "France",
+            "preferredGazetteerNameLang": "English",
+            "status": "standard",
+            "accepted": 17
+        },
+        {
+            "MRGID": 47630,
+            "gazetteerSource": "TDWG - World Geographical Scheme for Recording Plant Distributions",
+            "placeType": "TDWG - level 3",
+            "latitude": 46.584881990643545,
+            "longitude": 2.4582966165746432,
+            "minLatitude": 42.33249664340542,
+            "minLongitude": -5.1347227095853327,
+            "maxLatitude": 51.091110229053868,
+            "maxLongitude": 8.2260780333745629,
+            "precision": null,
+            "preferredGazetteerName": "France",
+            "preferredGazetteerNameLang": "English",
+            "status": "standard",
+            "accepted": 47630
+        },
+        {
+            "MRGID": 48144,
+            "gazetteerSource": "TDWG - World Geographical Scheme for Recording Plant Distributions",
+            "placeType": "TDWG - level 4",
+            "latitude": 46.583898639006598,
+            "longitude": 2.4598493566130601,
+            "minLatitude": 42.332496643066399,
+            "minLongitude": -5.1347227096557297,
+            "maxLatitude": 51.091110229492202,
+            "maxLongitude": 8.2260780334472692,
+            "precision": null,
+            "preferredGazetteerName": "France",
+            "preferredGazetteerNameLang": "English",
+            "status": "standard",
+            "accepted": 48144
+        }
+    ]
+]

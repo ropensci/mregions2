@@ -1,0 +1,502 @@
+[
+    {
+        "sourceID": 1,
+        "source": "SAIL",
+        "sourceURL": "http://www.vliz.be/projects/sail"
+    },
+    {
+        "sourceID": 2,
+        "source": "ASFA thesaurus",
+        "sourceURL": "http://www.fao.org/3/CA2741EN/ca2741en.pdf"
+    },
+    {
+        "sourceID": 4,
+        "source": "Nationaal Instituut voor de Statistiek (NIS) / National Statistical Service",
+        "sourceURL": "http://statbel.fgov.be/"
+    },
+    {
+        "sourceID": 5,
+        "source": "Oosthoek Times Wereldatlas",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 6,
+        "source": "Lausch, E. (2000). Atlas van de oceanen: met de dieptekaarten van de wereldzeeën, die de Canadese Hydrografische Dienst heeft gepubliceerd (General Bathymetric Chart of the Oceans, GEBCO). Tirion Uitgevers B.V.: Baarn. ISBN 90-7303-598-8. 264 pp.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 7,
+        "source": "(2001). The Times comprehensive atlas of the world. 10th ed. Times Books: London. ISBN 0-7230-0792-6. 67, 220, 124 plates pp.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 8,
+        "source": "IHO-IOC GEBCO Gazetteer of Undersea Feature Names (2002-10-01)",
+        "sourceURL": "http://www.gebco.net/data_and_products/undersea_feature_names/"
+    },
+    {
+        "sourceID": 9,
+        "source": "BIOMARE",
+        "sourceURL": "http://www.biomareweb.org"
+    },
+    {
+        "sourceID": 10,
+        "source": "(1953). Limits of oceans and seas. 3rd edition. IHO Special Publication, 23. International Hydrographic Organization (IHO): Monaco. 38 pp.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 11,
+        "source": "Nomenclature des espaces maritimes/List of maritime areas",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 12,
+        "source": "Getty thesaurus of geographic names",
+        "sourceURL": "http://www.getty.edu/research/tools/vocabularies/tgn"
+    },
+    {
+        "sourceID": 13,
+        "source": "Standardization of undersea feature names, International Hydrographic Bureau.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 14,
+        "source": "Map of the Danish water",
+        "sourceURL": "http://www2.dmu.dk/1_Viden/2_Miljoe-tilstand/3_vand/4_eutrophication/map.htm#46"
+    },
+    {
+        "sourceID": 15,
+        "source": "Aphia",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 16,
+        "source": "Hydrografische Dienst Oostende, Afdeling Waterwegen Kust (1996). Noordzee Vlaamse Banken van Gravelines tot Oostkapelle 1996 [KAART]. Hernieuwde uitgave oktober 1996. Ministerie van de Vlaamse Gemeenschap: Brussel. 1 kaart pp.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 17,
+        "source": "Westerschelde: Vlissingen - Antwerpen",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 18,
+        "source": "Plaatsnamen Nederland / Localities of The Netherlands",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 19,
+        "source": "Westerschelde: Baalhoek - Antwerpen",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 20,
+        "source": "Eurode",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 21,
+        "source": "Invitation to Oceanography Paul R. Pinet, 1998",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 22,
+        "source": "Sverdrup, H.U.; Johnson, M.W.; Fleming, R.H. (1964). The oceans: their physics, chemistry and general biology. 13th ed. Prentice-Hall: Englewood Cliffs. http://esapubs.org/esapubs/journals/applications.htm. X, 1087 pp.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 23,
+        "source": "Rapport Schelde-Estuarium 2000 / Report Scheldt Estuary 2000",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 24,
+        "source": "IHO-IOC GEBCO Gazetteer of Undersea Feature Names (2004-05-01)",
+        "sourceURL": "http://www.gebco.net/data_and_products/undersea_feature_names/"
+    },
+    {
+        "sourceID": 25,
+        "source": "Amphipods",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 26,
+        "source": "Large Marine Ecosystems of the World",
+        "sourceURL": "https://www.lmehub.net/"
+    },
+    {
+        "sourceID": 27,
+        "source": "FAO Major Fishing Areas, UN Atlas of the Oceans",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 28,
+        "source": "Van Eck, B.T.M. (Ed.) (1999). De Scheldeatlas: een beeld van een estuarium. Rijksinstituut voor Kust en Zee/Schelde InformatieCentrum: Middelburg. ISBN 90-369-3434-6. 120 pp.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 29,
+        "source": "Les Watling",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 30,
+        "source": "Masdea",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 31,
+        "source": "SCAR Composite Gazetteer",
+        "sourceURL": "https://data.aad.gov.au/aadc/gaz/scar/"
+    },
+    {
+        "sourceID": 32,
+        "source": "European Register of Marine Species (ERMS)",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 33,
+        "source": "Koninklijke Marine / Dienst der Hydrografie 1800 Serie: Officiële zeekaart voor kust- en binnnenwateren. Chef der Hydrografie",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 34,
+        "source": "Bulgarian Antarctic Gazetteer",
+        "sourceURL": "https://apcbg.org/"
+    },
+    {
+        "sourceID": 35,
+        "source": "Mangroves",
+        "sourceURL": "http://www.vliz.be/vmdcdata/mangroves/"
+    },
+    {
+        "sourceID": 36,
+        "source": "Wikipedia",
+        "sourceURL": "https://www.wikipedia.org/"
+    },
+    {
+        "sourceID": 37,
+        "source": "GeoNames",
+        "sourceURL": "http://www.geonames.org"
+    },
+    {
+        "sourceID": 38,
+        "source": "GIS meteorology of Azov and Black Seas author Vladimir Belokopytov MhI NAS Ukraine email:belo(at)vip.sevsky.net",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 39,
+        "source": "Beeckman, N. (1988). Belgica: de eerste overwintering in Antarctica 1897-1899 = Belgica: le premier hivernage premier hivernage dans l'Antarctique 1897-1899. North Sea Society: Antwerpen. 77 pp.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 40,
+        "source": "U.S. Board on Geographic Names",
+        "sourceURL": "http://geonames.usgs.gov"
+    },
+    {
+        "sourceID": 42,
+        "source": "Australian Antarctic Gazetteer",
+        "sourceURL": "https://data.aad.gov.au/aadc/gaz/"
+    },
+    {
+        "sourceID": 43,
+        "source": "SCAR Feature Catalogue",
+        "sourceURL": "https://data.aad.gov.au/aadc/ftc/"
+    },
+    {
+        "sourceID": 44,
+        "source": "Mapplanet",
+        "sourceURL": "http://www.mapplanet.com"
+    },
+    {
+        "sourceID": 45,
+        "source": "Hristo Stanchev",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 46,
+        "source": "Farid Dahdouh-Guebas",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 47,
+        "source": "IMIS",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 48,
+        "source": "Falling rain",
+        "sourceURL": "http://www.fallingrain.com/world"
+    },
+    {
+        "sourceID": 49,
+        "source": "Earth Reference Data and Models",
+        "sourceURL": "http://earthref.org"
+    },
+    {
+        "sourceID": 50,
+        "source": "Algologie (Ugent)",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 51,
+        "source": "Mosdiertjes / Bryozoa, Hans De Blauwe",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 52,
+        "source": "AlgaeBase",
+        "sourceURL": "http://www.algaebase.org"
+    },
+    {
+        "sourceID": 53,
+        "source": "Victor Scarabino",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 54,
+        "source": "NWARMS",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 55,
+        "source": "Ecological geography of the Sea (Longhurst, 1998)",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 56,
+        "source": "Monitoring Zeeschelde",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 57,
+        "source": "Spalding, M. D. Fox, H. E. Allen, G. R. Davidson, N. Ferdana, Z. A. Finlayson, M. Halpern, B. S. Jorge, M. A. Lombana, A. Lourie, S. A., (2007). Marine Ecoregions of the World: A Bioregionalization of Coastal and Shelf Areas. Bioscience 2007, VOL 57; numb 7, pages 573-584. doi: 10.1641/B570707",
+        "sourceURL": "https://www.worldwildlife.org/publications/marine-ecoregions-of-the-world-a-bioregionalization-of-coastal-and-shelf-areas"
+    },
+    {
+        "sourceID": 59,
+        "source": "Catalog and bibliography of the fossil and recent Stomatopoda",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 60,
+        "source": "ICES Ecoregions",
+        "sourceURL": "http://gis.ices.dk/geonetwork/srv/eng/catalog.search#/metadata/4745e824-a612-4a1f-bc56-b540772166eb"
+    },
+    {
+        "sourceID": 61,
+        "source": "The SeaVoX Salt and Fresh Water Body Gazetteer",
+        "sourceURL": "https://www.bodc.ac.uk/resources/vocabularies/seavox/"
+    },
+    {
+        "sourceID": 62,
+        "source": "IHO-IOC GEBCO Gazetteer of Undersea Feature Names (2010-01-01)",
+        "sourceURL": "http://www.gebco.net/data_and_products/undersea_feature_names/"
+    },
+    {
+        "sourceID": 63,
+        "source": "Pesi Areas",
+        "sourceURL": "http://www.eu-nomen.eu/portal/about.php"
+    },
+    {
+        "sourceID": 64,
+        "source": "Conserve online",
+        "sourceURL": "http://conserveonline.org/workspaces/ecoregional.shapefile"
+    },
+    {
+        "sourceID": 65,
+        "source": "Federaal wetenschapsbeleid (2008). Four maps representing Belgian toponyms in Antarctica. [S.n.]: [s.l.].",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 66,
+        "source": "La Revanche de la Banquise / Revenge of the Ice",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 67,
+        "source": "Menezes M., Branco S., Proença L.A. & Schramm M.A. 2007. Bloom of Alexandrium minutum Halim on Rio de Janeiro coast: occurrence and toxicity. Harmful Algal News, 34: 7-9.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 69,
+        "source": "NAFO Divisions",
+        "sourceURL": "https://www.nafo.int/Data/GIS"
+    },
+    {
+        "sourceID": 70,
+        "source": "Van Guelpen, L. and M.K. Kennedy. 2011. The history of Canadian registers of marine species 2001-2009. Can. Tech. Rep. Fish. Aquat. Sci. 2906: iv + 20 pp.",
+        "sourceURL": "http://www.dfo-mpo.gc.ca/Library/343523.pdf"
+    },
+    {
+        "sourceID": 71,
+        "source": "Fisheries and Oceans Canada (Pacific); Marine Environmental Assessment Database.  MDE Version 5.0.1 ",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 72,
+        "source": "Canadian Geographical Names Database (CGND)",
+        "sourceURL": "https://www.nrcan.gc.ca/earth-sciences/geography/querying-canadian-geographical-names-database/9170"
+    },
+    {
+        "sourceID": 73,
+        "source": "Fisheries and Oceans Canada",
+        "sourceURL": "http://www.dfo-mpo.gc.ca/index-eng.htm"
+    },
+    {
+        "sourceID": 74,
+        "source": "El-Sabh, MI, N Silverberg (eds) (1990). Oceanography of a large-scale estuarine system, the St. Lawrence. Coastal and Estuarine Studies 39, Springer-Verlag NY",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 75,
+        "source": "Mysida/Aphia",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 76,
+        "source": "The Lighthouse Directory",
+        "sourceURL": "http://www.unc.edu/~rowlett/lighthouse/"
+    },
+    {
+        "sourceID": 77,
+        "source": "Belgian Sea Fisheries",
+        "sourceURL": "http://www.vliz.be/EN/Figures_Policy/Belgian_Sea_Fisheries"
+    },
+    {
+        "sourceID": 78,
+        "source": "IHO-IOC GEBCO Gazetteer of Undersea Feature Names (2011-08-01)",
+        "sourceURL": "http://www.gebco.net/data_and_products/undersea_feature_names/"
+    },
+    {
+        "sourceID": 79,
+        "source": "Environmental Systems Research Institute (ESRI)",
+        "sourceURL": "http://www.esri.com/"
+    },
+    {
+        "sourceID": 80,
+        "source": "Flanders Marine Institute. Maritime Boundaries Geodatabase. Available online at http://www.marineregions.org/. Consulted on YYYY-MM-DD",
+        "sourceURL": "http://www.marineregions.org/eez.php"
+    },
+    {
+        "sourceID": 81,
+        "source": "IHO-IOC GEBCO Gazetteer of Undersea Feature Names (2012-12-01)",
+        "sourceURL": "http://www.gebco.net/data_and_products/undersea_feature_names/"
+    },
+    {
+        "sourceID": 82,
+        "source": "OSPAR Convention",
+        "sourceURL": "http://www.ospar.org/"
+    },
+    {
+        "sourceID": 83,
+        "source": "World Heritage Marine Programme",
+        "sourceURL": "http://whc.unesco.org/en/marine-programme"
+    },
+    {
+        "sourceID": 84,
+        "source": "Natura 2000 Sites, European Environment Agency (EEA) (Updates 2011)",
+        "sourceURL": "http://www.eea.europa.eu/data-and-maps/data/natura-2"
+    },
+    {
+        "sourceID": 85,
+        "source": "Google Earth",
+        "sourceURL": "https://www.google.com/earth/"
+    },
+    {
+        "sourceID": 86,
+        "source": "Sivkov, V, et al. (2002). Muddy contourites in the Baltic Sea: an example of a shallow-water contourite system. in: Stow, D.A.V. et al. (Ed.) (2002). Deep-water contourite systems: Modern drifts and ancient series, seismic and sedimentary characteristics. Geological Society Memoir, 22: pp. 121-136",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 87,
+        "source": "Armishaw, J. E., et al. (2000). The Barra Fan: A bottom-current reworked, glacially-fed submarine fans system. Marine and Petroleum Geology 17: 219-238.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 88,
+        "source": "Arthur, M. A., et al. (1989). Seismic stratigraphy and history of deep circulation and sediment drift development in Baffin Bay and the Labrador Sea Proceedings of the Ocean Drilling Program, Scientific Results, Vol. 105",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 89,
+        "source": "Bianchi, G. G. and I. N. McCave (2000).  Hydrography and sedimentation under the deep western boundary current on Björn and Gardar Drifts, Iceland Basin. Marine Geology 165: 137-169.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 90,
+        "source": "Bozzano, G., et al. (2011).  Middle slope contourite deposits and associated sedimentary facies off NE Argentina. Geo-Marine Letters: 1-13.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 91,
+        "source": "Bryn, P., et al. (2005). Contourites and their relevance for mass wasting along the Mid-Norwegian Margin. Marine and Petroleum Geology 22(1-2): 85-96.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 93,
+        "source": "Carter, L. and I. N. McCave (2002). Eastern New Zealand Drifts, Miocene-Recent. Deep-Water Contourite Systems: Modern Drifts and Ancient Series, Seismic and Sedimentary Characteristics. D. A. V. Stow, C. J. Pudsey, J. A. Howe, J.-C. Faugères and A. R. Viana. London, Geological Society. 22: 385-407.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 94,
+        "source": "Carter, R. M., et al. (2004). Canterbury Drifts at Ocean Drilling Program Site 1119, New Zealand: Climatic modulation of southwest Pacific intermediate water flows since 3.9 Ma. Geology 32(11): 1005-1100.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 95,
+        "source": "Ceramicola, S., et al. (2001). Seismic evidence of small-scaled lacustrine drifts in Lake Baikal (Russia). Marine Geophysical Researches 22: 445-464.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 96,
+        "source": "Cunningham, A. P., et al. (2002). Contourite sedimentation in the Falkland Trough, western South Atlantic. Deep-Water Contourite Systems: Modern Drifts and Ancient Series, Seismic and Sedimentary Characteristics. M. S. Stoker, C. J. Pudsey, J. A. Howe, J. C. Faugeres and A. R. Viana. London, Geological Society. 22: 337-352.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 97,
+        "source": "Damuth, J. E. and H. C. Olson (2001). Neogene-Quaternary contourite and related deposition on the West Shetland Slope and Faeroe-Shetland Channel revealed by high-resolution seismic studies. Marine Geophysical Researches 22: 369-399.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 98,
+        "source": "Duarte, C. S. L. and A. R. Viana (2007). Santos Drift System: stratigraphic organization and implications for late Cenozoic palaeocirculation in the Santos Basin, SW Atlantic Ocean. Economic and Palaeoceanographic Importance of Contourite Deposits. A. R. Viana and M. Rebesco. London, Geological Society. 276: 171-198.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 99,
+        "source": "Eiken, O. and K. Hinz (1993). Contourites in the Fram Strait. Sedimentary Geology 82: 15-32.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 100,
+        "source": "Ellwood, B. B. and M. T. Ledbetter (1979). Paleocurrent Indicators in Deep-Sea Sediment. Science 203: 1335-1337.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 101,
+        "source": "Embley, R. E. and M. G. Langseth (1977). Sedimentation processes on the continental rise of northeastern South America. Marine Geology 25: 279-297.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 102,
+        "source": "Ercilla, G., et al. (2002). The Ceuta Drift, Alboran Sea, southwestern Mediterranean. Deep-Water Contourite Systems: Modern Drifts and Ancient Series, Seismic and Sedimentary Characteristics. D. A. V. Stow, C. J. Pudsey, J. A. Howe, J.-C. Faugères and A. R. Viana. London, Geological Society. 22: 155-170.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 103,
+        "source": "Ercilla, G., et al. (2008). High-resolution seismic stratigraphy of the Galicia Bank Region and neighbouring abyssal plains (NW Iberian continental margin). Marine Geology 249(1-2): 108-127.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 104,
+        "source": "Faugères, J.-C., et al. (1993). Contourite drift types and their distribution in the North and South Atlantic Ocean basins. Sedimentary Geology 82: 189-203.",
+        "sourceURL": null
+    },
+    {
+        "sourceID": 105,
+        "source": "Faugères, J.-C., et al. (1998). Seismic patterns of a muddy contourite fan (Vema Channel, South Brazilian Basin) and a sandy distal turbidite deep-sea fan (Cap Ferret system, Bay of Biscay): a comparison. Sedimentary Geology 115: 81-110.",
+        "sourceURL": null
+    }
+]
