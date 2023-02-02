@@ -1,0 +1,16 @@
+{
+  "MRGID": 30666,
+  "gazetteerSource": "Ramsar Wetlands International",
+  "placeType": "Wetland of International Importance (Ramsar Convention)",
+  "latitude": 51.166667,
+  "longitude": 2.733333,
+  "minLatitude": null,
+  "minLongitude": null,
+  "maxLatitude": null,
+  "maxLongitude": null,
+  "precision": null,
+  "preferredGazetteerName": "Vlaamse Banken ",
+  "preferredGazetteerNameLang": "Dutch",
+  "status": "standard",
+  "accepted": 30666
+}

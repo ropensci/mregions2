@@ -1,0 +1,18 @@
+[
+    {
+        "MRGID": 3293,
+        "gazetteerSource": "Flanders Marine Institute (2019). Maritime Boundaries Geodatabase: Maritime Boundaries and Exclusive Economic Zones (200NM), version 11. Available online at http://www.marineregions.org/. https://doi.org/10.14284/386",
+        "placeType": "EEZ",
+        "latitude": 51.465449999999997,
+        "longitude": 2.7050399999999999,
+        "minLatitude": 51.089309999999998,
+        "minLongitude": 2.2383299999999999,
+        "maxLatitude": 51.876109999999997,
+        "maxLongitude": 3.3704000000000001,
+        "precision": 58302.489999999998,
+        "preferredGazetteerName": "Belgian Exclusive Economic Zone",
+        "preferredGazetteerNameLang": "English",
+        "status": "standard",
+        "accepted": 3293
+    }
+]

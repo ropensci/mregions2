@@ -133,7 +133,7 @@ gaz_rest_sources <- function(){
 
   # Reusable http request that overrides automatic error check
   get_source <- function(offset){
-    url = glue::glue("https://www.marineregions.org/rest/getGazetteerSources.json/?offset={offset}")
+    url = glue::glue("https://marineregions.org/rest/getGazetteerSources.json/?offset={offset}")
 
     resp <- httr2::request(url) %>%
       httr2::req_user_agent(mr_user_agent) %>%
@@ -204,7 +204,7 @@ gaz_rest_source_by_sourceid <- function(sourceid){
 
   sourceid <- checkmate::assert_int(sourceid, lower = 1, coerce = TRUE)
 
-  url = glue::glue("https://www.marineregions.org/rest/getGazetteerSourceBySourceID.json/{sourceid}/")
+  url = glue::glue("https://marineregions.org/rest/getGazetteerSourceBySourceID.json/{sourceid}/")
 
   resp <- httr2::request(url) %>%
     httr2::req_user_agent("mregions2") %>%

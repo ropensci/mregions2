@@ -1,0 +1,16 @@
+{
+    "MRGID": 49243,
+    "gazetteerSource": "Flanders Marine Institute (2019). Maritime Boundaries Geodatabase: Contiguous Zones (24NM), version 3. Available online at http://www.marineregions.org/. https://doi.org/10.14284/384",
+    "placeType": "Contiguous zone",
+    "latitude": 51.485619999999997,
+    "longitude": 2.6587700000000001,
+    "minLatitude": 51.264850000000003,
+    "minLongitude": 2.2905700000000002,
+    "maxLatitude": 51.69773,
+    "maxLongitude": 3.0830899999999999,
+    "precision": null,
+    "preferredGazetteerName": "Belgian 24 NM",
+    "preferredGazetteerNameLang": "English",
+    "status": "standard",
+    "accepted": 49243
+}

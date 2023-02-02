@@ -296,7 +296,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
         )
       }
       if(fuzzy & like & is.null(language)){
-        msg <- c(msg, "i" = "Did you check for misspelling mistakes?")
+        msg <- c(msg, "i" = "Did you check for typos?")
       }
 
       httr2::resp_check_status(resp, info = msg)

@@ -45,12 +45,14 @@ URL: https://github.com/lifewatch/mregions2,
     https://lifewatch.github.io/mregions2/
 BugReports: https://github.com/lifewatch/mregions2/issues
 Suggests: 
+    httptest,
+    httptest2,
+    jsonlite,
     knitr,
     mapview,
-    rmarkdown,
-    wk,
     mregions,
+    rmarkdown,
     testthat,
-    jsonlite
+    wk
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)

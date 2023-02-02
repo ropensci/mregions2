@@ -11,3 +11,4 @@
 ^README_cache
 ^vignettes/articles$
 ^CODE_OF_CONDUCT\.md$
+^test/testthat/*$
