@@ -1,0 +1,167 @@
+use_httptest()
+
+skip_everywhere <- function(){
+  skip_if_offline()
+  skip_on_cran()
+  skip_on_ci()
+  skip_on_covr()
+}
+
+context("WFS Client")
+
+test_that("Client creation fails without internet", {
+  skip_everywhere()
+
+  wfs <- mrp_init_wfs_client()
+    expect_type(wfs, "environment")
+    expect_s3_class(wfs, "R6")
+    expect_s3_class(wfs, "WFSClient")
+})
+
+with_fake_http({
+  test_that("Client is created via GET", {
+    expect_GET(.mrp_init_wfs_client())
+  })
+})
+
+test_that("Client fails with no internet", {
+  # we use curl here, httptest cannot record
+  expect_error(mrp_init_wfs_client_check_internet(test = TRUE),
+               regexp = 'Did you check your internet connection?')
+})
+
+with_mock_api({
+  test_that("Server status 500 handled", {
+    .f <- function() mrp_init_wfs_client_exceptions_handler("https://geo.vliz.be/geoserver/wfs")
+    expect_error(.f(), regexp = "500")
+  })
+})
+
+
+context("mrp_list")
+
+test_that("File with info exists", {
+  system.file("mrp_list.csv", package = "mregions2", mustWork = TRUE) %>%
+    file.exists() %>%
+    expect_true()
+})
+
+test_that("list funtion works", {
+  skip_everywhere()
+
+  x <- mrp_list()
+    expect_type(x, "list")
+    expect_s3_class(x, c("tbl_df", "data.frame"))
+    expect_gt(nrow(x), 1)
+})
+
+
+context("mrp_view")
+
+test_that("mrp_view() works", {
+  # Note this is hard to check as the WMS service may not be working and we still get an output
+  skip_everywhere()
+
+  # Test assertions
+  .test <- function(layer){
+    x <- mrp_view(layer)
+    expect_type(x, "list")
+    expect_s3_class(x, c("leaflet", "htmlwidget"))
+  }
+
+  invisible(lapply(mrp_list()$data_product, .test))
+
+  .f <- function() mrp_view("foo")
+  expect_error(.f())
+
+  .f <- function() mrp_view(c("eez", "eez_boundaries"))
+  expect_error(.f())
+
+})
+
+test_that("mrp_colnames() works", {
+
+  # Returns a data frame
+  x <- mrp_colnames("ecs_boundaries")
+  expect_s3_class(x, c("data.frame"))
+  expect_gte(nrow(x), 1)
+  expect_gt(ncol(x), 1)
+
+  # Check all columns are of type character
+  invisible(apply(x, 2, expect_vector, ptype = character()))
+
+  # Expect errors
+  .f <- function() mrp_colnames("this is not a data product")
+  expect_error(.f())
+
+  .f <- function() mrp_colnames(c("ecs", "eez"))
+  expect_error(.f())
+
+  .f <- function() mrp_colnames(1)
+  expect_error(.f())
+})
+
+
+test_that("mrp_col_unique() works", {
+
+  # two names for the same function
+  expect_true(all.equal(mrp_col_unique, mrp_col_distinct))
+
+  # Returns a vector of type character
+  x <- mrp_col_unique("ecs_boundaries", "line_type")
+  expect_vector(x, ptype = character())
+  expect_gte(length(x), 1)
+
+  # Returns a vector of type numeric
+  x <- mrp_col_unique("ecs", "mrgid")
+  expect_vector(x, ptype = numeric())
+  expect_gte(length(x), 1)
+
+  # Returns a vector of type date
+  x <- mrp_col_unique("eez_boundaries", "doc_date")
+  expect_vector(x)
+  expect_s3_class(x, "Date")
+  expect_gte(length(x), 1)
+
+  # Expect errors
+  .f <- function() mrp_col_unique("this is not a data product", "mrgid")
+  expect_error(.f())
+
+  .f <- function() mrp_col_unique(1, "mrgid")
+  expect_error(.f())
+
+  .f <- function() mrp_col_unique("ecs", 1)
+  expect_error(.f())
+
+  .f <- function() mrp_col_unique("high_seas", "the_geom")
+  expect_error(.f())
+})
+
+test_that("mrp_get() works", {
+
+  # Returns a sf object
+  x <- mrp_get("eez", cql_filter = "mrgid = 5688")
+  expect_type(x, "list")
+  expect_s3_class(x, c("sf"))
+  expect_s3_class(x, c("data.frame", "tbl_df"))
+  expect_gte(nrow(x), 1)
+
+
+  # Transformation in multipolygon or multilinestring works
+  expect_s3_class(sf::st_geometry(x), "sfc_MULTIPOLYGON")
+
+  x <- mrp_get("eez_boundaries", cql_filter = "line_id = 3690")
+  expect_type(x, "list")
+  expect_s3_class(x, c("sf"))
+  expect_s3_class(x, c("data.frame", "tbl_df"))
+  expect_gte(nrow(x), 1)
+  expect_s3_class(sf::st_geometry(x), "sfc_MULTILINESTRING")
+
+  # Expect errors
+  .f <- function() mrp_get("this product does not exists")
+  expect_error(.f())
+
+  .f <- function() mrp_get("eez_boundaries", cql_filter = "this is not a good filter")
+  expect_error(.f())
+
+})

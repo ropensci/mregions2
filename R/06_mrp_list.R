@@ -91,38 +91,44 @@ mrp_list <- memoise::memoise(.mrp_list)
     return(wfs)
   }
 
-  # Handle exceptions
-  msg <- c("x" = "WFS client creation failed")
+  # Fail
+  mrp_init_wfs_client_check_internet()
+  mrp_init_wfs_client_exceptions_handler(url)
+}
 
-
-  if(!curl::has_internet()){
+mrp_init_wfs_client_check_internet <- function(test = FALSE){
+  if(!curl::has_internet() | test){
     cli::cli_abort(c(
-      msg,
+      "x" = "WFS client creation failed",
       "!" = "{.code curl::has_internet()} is {.val FALSE}",
       "i" = "Did you check your internet connection?"
     ))
   }
+}
 
-  resp <- httr2::request(paste0(url, "?request=GetCapabilities")) %>%
-    httr2::req_method("HEAD") %>%
-    httr2::req_error(is_error = function(resp) FALSE) %>%
-    httr2::req_perform()
+mrp_init_wfs_client_exceptions_handler <- function(url){
+  msg <- c("x" = "WFS client creation failed")
 
-  if(httr2::resp_is_error(resp)){
+  resp <- httr::GET(paste0(url, "?request=GetCapabilities"))
+  resp <- httr::headers(resp)
+
+  if(httr::status_code(resp) >= 400){
     cli::cli_abort(c(
       msg,
-      "!" = "HTTP {paste0(httr2::resp_status(resp), ' ', httr2::resp_status_desc(resp))}",
-      "i" = "Service: {.val {url}}"
+      "!" = "HTTP Status: {httr::http_status(resp)$message}",
+      "i" = "Service: {.url {url}}"
     ))
   }
-
 
   cli::cli_abort(c(
     msg,
     "!" = "An exception has occurred. Please raise an issue in {.val {packageDescription('mregions2')$BugReports}}"
   ))
-
 }
+
+
+
+
 #' Creates WFS client in Marine Regions
 #'
 #' @param version (character) The WFS version. Supported: `c("1.0.0", "1.1.1", "2.0.0")`

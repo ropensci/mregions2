@@ -23,4 +23,5 @@ use_httptest2 <- function(version){
 }
 
 options(httptest2.verbose =TRUE)
+options(httptest.verbose=TRUE)
 # options(httptest.mock.paths = "tests")

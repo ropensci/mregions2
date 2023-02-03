@@ -86,12 +86,10 @@ mrp_view <- function(data_product, cql_filter = NULL, filter = NULL){
   wms <- glue::glue("https://geo.vliz.be/geoserver/{namespace}/wms?")
 
   # Server check
-  httr2::request(wms) %>%
-    httr2::req_url_path_append("request=GetCapabilities") %>%
-    httr2::req_method("HEAD") %>%
-    httr2::req_user_agent(mr_user_agent) %>%
-    httr2::req_perform() %>%
-    httr2::resp_check_status()
+  httr::HEAD(
+    paste0(wms, "request=GetCapabilities"),
+    httr::add_headers(`User-Agent` = mr_user_agent)
+  ) %>% httr::stop_for_status()
 
 
   # Add filters
@@ -132,11 +130,7 @@ base_map <- function(){
   # Assertions
   z=1;x=1;y=1
   url_test <- glue::glue(emodnet_tiles)
-  url_not_up <- httr2::request(url_test) %>%
-    httr2::req_method("HEAD") %>%
-    httr2::req_user_agent(mr_user_agent) %>%
-    httr2::req_perform() %>%
-    httr2::resp_is_error()
+  url_not_up <- httr::HEAD(url_test, add_headers(`User-Agent` = mr_user_agent))$status != 200
 
   if(url_not_up){
     cli::cli_abort(c(
