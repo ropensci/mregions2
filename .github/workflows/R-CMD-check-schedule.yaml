@@ -9,6 +9,9 @@ on:
 
 name: R-CMD-check
 
+permissions:
+  contents: write
+
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
@@ -43,9 +46,11 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
-      - name: Remove sub directories with mock up tests
+      - name: Get mock-up HTTP requests out of path by renaming
+        env: 
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
-          sudo sh -c "for item in tests/testthat/*; do [ -d \"$item\" ] && mv \"$item\" \"$item.bak\"; done"
+          for item in tests/testthat/*; do [ -d "$item" ] && mv "$item" "$item.bak"; done
 
       - uses: r-lib/actions/check-r-package@v2
         with:
