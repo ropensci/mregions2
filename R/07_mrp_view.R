@@ -172,22 +172,28 @@ add_labels <- function(map){
 }
 
 
-.assert_emodnet_bathy <- function(url){
+assert_emodnet_bathy <- function(url){
   z=1;x=1;y=1
   url_test <- glue::glue(url)
 
-  resp <- httr::GET(url_test, httr::add_headers(`User-Agent` = mr_user_agent))
+  resp <- httr::HEAD(url_test, httr::add_headers(`User-Agent` = mr_user_agent))
 
   if(httr::http_error(resp)){
-    cli::cli_abort(c(
-      "x" = "Connection to {.url {url_test}} failed",
-      "i" = "HTTP Status: {.val {httr::http_status(resp)$message}}",
-      "i" = "Check status of {.url https://portal.emodnet-bathymetry.eu/}"
-    ))
+    msg <- c(
+        "x" = "Connection to {.url {url_test}} failed",
+        "i" = "Reason: {.val {httr::http_status(resp)$message}}"
+      )
+
+    if(httr::status_code(resp) >= 500){
+      msg <- c(msg,
+               "i" = "Check Status of {.url https://portal.emodnet-bathymetry.eu/}"
+      )
+    }
+
+    cli::cli_abort(msg)
   }
 }
 
-assert_emodnet_bathy <- memoise::memoise(.assert_emodnet_bathy)
 
 #' @rdname mrp_view
 #' @export
