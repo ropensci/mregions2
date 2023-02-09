@@ -68,6 +68,7 @@
 mrp_view <- function(data_product, cql_filter = NULL, filter = NULL){
 
   # Assertions
+  assert_deps(c("leaflet", "leaflet.extras2"))
   checkmate::assert_character(data_product, len = 1)
   checkmate::assert_choice(data_product, mrp_list()$data_product)
 
@@ -122,22 +123,26 @@ mrp_view <- function(data_product, cql_filter = NULL, filter = NULL){
   return(mrp_map)
 }
 
+.assert_deps <- function(deps){
+  deps <- data.frame(pkgname = deps)
+  deps$installed <- lapply(deps$pkgname, `%in%`, table = installed.packages()) %>% unlist()
+
+  if(!all(deps$installed)){
+    missing_pkgs <- subset(deps$pkgname, deps$installed == FALSE)
+    cli::cli_warn(c(
+      "!" = "{.fun mrp_view} requires the {.pkg {missing_pkgs}} package{?s} but {?is/are} not installed"
+    ))
+
+    return(invisible(NULL))
+  }
+}
+
+assert_deps <- memoise::memoise(.assert_deps)
 
 
 base_map <- function(){
   emodnet_tiles <-"https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/{z}/{x}/{y}.png"
-
-  # Assertions
-  z=1;x=1;y=1
-  url_test <- glue::glue(emodnet_tiles)
-  url_not_up <- httr::HEAD(url_test, add_headers(`User-Agent` = mr_user_agent))$status != 200
-
-  if(url_not_up){
-    cli::cli_abort(c(
-      "x" = "Connection to {.url {url_test}} failed",
-      "i" = "Check status of {.url https://portal.emodnet-bathymetry.eu/}"
-    ))
-  }
+  assert_emodnet_bathy(emodnet_tiles)
 
   # Add HTML class to citation
   cite_emodnet <- "<a href='https://emodnet.ec.europa.eu'>EMODnet</a>"
@@ -158,12 +163,31 @@ base_map <- function(){
 
 add_labels <- function(map){
   emodnet_labels <- "https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/{z}/{x}/{y}.png"
+  assert_emodnet_bathy(emodnet_labels)
+
   map %>%
     leaflet::addTiles(urlTemplate = emodnet_labels,
                       options = leaflet::tileOptions(tms = FALSE)
     )
 }
 
+
+.assert_emodnet_bathy <- function(url){
+  z=1;x=1;y=1
+  url_test <- glue::glue(url)
+
+  resp <- httr::GET(url_test, httr::add_headers(`User-Agent` = mr_user_agent))
+
+  if(httr::http_error(resp)){
+    cli::cli_abort(c(
+      "x" = "Connection to {.url {url_test}} failed",
+      "i" = "HTTP Status: {.val {httr::http_status(resp)$message}}",
+      "i" = "Check status of {.url https://portal.emodnet-bathymetry.eu/}"
+    ))
+  }
+}
+
+assert_emodnet_bathy <- memoise::memoise(.assert_emodnet_bathy)
 
 #' @rdname mrp_view
 #' @export
