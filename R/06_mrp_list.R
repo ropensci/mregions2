@@ -110,7 +110,6 @@ mrp_init_wfs_client_exceptions_handler <- function(url){
   msg <- c("x" = "WFS client creation failed")
 
   resp <- httr::GET(paste0(url, "?request=GetCapabilities"))
-  resp <- httr::headers(resp)
 
   if(httr::status_code(resp) >= 400){
     cli::cli_abort(c(
