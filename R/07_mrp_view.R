@@ -123,22 +123,21 @@ mrp_view <- function(data_product, cql_filter = NULL, filter = NULL){
   return(mrp_map)
 }
 
-.assert_deps <- function(deps){
-  deps <- data.frame(pkgname = deps)
-  deps$installed <- lapply(deps$pkgname, `%in%`, table = installed.packages()) %>% unlist()
+assert_deps <- function(deps){
+  check_if_missing <- function(pkg){
+    !requireNamespace(pkg, quietly = TRUE)
+  }
 
-  if(!all(deps$installed)){
-    missing_pkgs <- subset(deps$pkgname, deps$installed == FALSE)
-    cli::cli_warn(c(
+  deps <- data.frame(pkgname = deps)
+  deps$missing <- lapply(deps$pkgname, check_if_missing) %>% unlist()
+
+  if(any(deps$missing)){
+    missing_pkgs <- subset(deps$pkgname, deps$missing == TRUE)
+    cli::cli_abort(c(
       "!" = "{.fun mrp_view} requires the {.pkg {missing_pkgs}} package{?s} but {?is/are} not installed"
     ))
-
-    return(invisible(NULL))
   }
 }
-
-assert_deps <- memoise::memoise(.assert_deps)
-
 
 base_map <- function(){
   emodnet_tiles <-"https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/{z}/{x}/{y}.png"
