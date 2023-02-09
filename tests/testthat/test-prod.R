@@ -22,13 +22,6 @@ test_that("Client fails with no internet", {
                regexp = 'Did you check your internet connection?')
 })
 
-with_mock_api({
-  test_that("Server status 500 handled", {
-    .f <- function() mrp_init_wfs_client_exceptions_handler("https://geo.vliz.be/geoserver/wfs")
-    expect_error(.f(), regexp = "500")
-  })
-})
-
 
 test_that("File with info exists", {
   system.file("mrp_list.csv", package = "mregions2", mustWork = TRUE) %>%
@@ -40,33 +33,43 @@ test_that("list funtion works", {
   skip_everywhere()
 
   x <- mrp_list()
-    expect_type(x, "list")
-    expect_s3_class(x, c("tbl_df", "data.frame"))
-    expect_gt(nrow(x), 1)
+  expect_type(x, "list")
+  expect_s3_class(x, c("tbl_df", "data.frame"))
+  expect_gt(nrow(x), 1)
 })
 
 test_that("mrp_view() works", {
   # Note this is hard to check as the WMS service may not be working and we still get an output
-  skip_everywhere()
+  skip("Check mrp_view interactively")
 
-  # Test assertions
-  .test <- function(layer){
-    x <- mrp_view(layer)
+  x <- mrp_view("eez")
     expect_type(x, "list")
     expect_s3_class(x, c("leaflet", "htmlwidget"))
-  }
 
-  invisible(lapply(mrp_list()$data_product, .test))
+  # Test error
+  .f <- function() assert_emodnet_bathy("https://httpbin.org/status/400")
+  expect_error(.f(), "Client error")
+
+  .f <- function() assert_emodnet_bathy("https://httpbin.org/status/500")
+  expect_error(.f(), "Server error")
 
   .f <- function() mrp_view("foo")
   expect_error(.f())
 
   .f <- function() mrp_view(c("eez", "eez_boundaries"))
   expect_error(.f())
-
 })
 
-with_mock_api({
+
+# Mocked requests
+httptest::with_mock_dir("prod/fail/", {
+  test_that("Server status 500 handled", {
+    .f <- function() mrp_init_wfs_client_exceptions_handler("https://geo.vliz.be/geoserver/wfs")
+    expect_error(.f(), regexp = "500")
+  })
+})
+
+httptest::with_mock_dir("prod/ok/", {
   test_that("mrp_colnames() works", {
 
     # Returns a data frame
@@ -88,9 +91,7 @@ with_mock_api({
     .f <- function() .mrp_colnames(1)
     expect_error(.f())
   })
-})
 
-with_mock_api({
   test_that("mrp_col_unique() works", {
 
     # two names for the same function
@@ -132,9 +133,8 @@ with_mock_api({
     .f <- function() .mrp_col_unique("ecs_boundaries", "the_geom")
     expect_error(.f())
   })
-})
 
-with_mock_api({
+
   test_that("mrp_get() works", {
     expect_sf <- function(x){
       expect_type(x, "list")
@@ -161,4 +161,4 @@ with_mock_api({
     expect_error(.f())
 
   })
-})
+}, simplify = FALSE)
