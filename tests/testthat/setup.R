@@ -4,24 +4,26 @@
 # To avoid conflicts by masked functions, better to load the libraries in the tests
 
 # clean up httptest2 or httptest to not mask functions
-use_httptest <- function(version){
+load_httptest <- function(version){
   suppressWarnings({
     if("httptest2" %in% (.packages())){
-      detach("package:httptest2", unload=TRUE)
+      httptest2::set_redactor(NULL)
+      detach("package:httptest2", unload=TRUE, force=TRUE)
     }
     library(httptest, warn.conflicts = FALSE)
+    options(httptest2.verbose =TRUE)
   })
+
 }
 
-use_httptest2 <- function(version){
+load_httptest2 <- function(version){
   suppressWarnings({
     if("httptest" %in% (.packages())){
-      detach("package:httptest", unload=TRUE)
+      httptest::set_redactor(NULL)
+      httptest::set_requester(NULL)
+      detach("package:httptest", unload=TRUE, force=TRUE)
     }
     library(httptest2, warn.conflicts = FALSE)
+    options(httptest.verbose=TRUE)
   })
 }
-
-options(httptest2.verbose =TRUE)
-options(httptest.verbose=TRUE)
-# options(httptest.mock.paths = "tests")

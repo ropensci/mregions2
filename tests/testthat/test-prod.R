@@ -1,4 +1,14 @@
-use_httptest()
+# Config
+load_httptest()
+
+httptest::set_redactor(function (x) {
+  require(magrittr, quietly=TRUE)
+  httptest::gsub_response(x, "https://geo.vliz.be/geoserver/", "geo/")
+})
+
+httptest::set_requester(function (request) {
+  httptest::gsub_request(request, "https://geo.vliz.be/geoserver/", "geo/")
+})
 
 skip_everywhere <- function(){
   skip_if_offline()
@@ -7,6 +17,7 @@ skip_everywhere <- function(){
   skip_on_covr()
 }
 
+# Perform
 test_that("Client can be created", {
   skip_everywhere()
 
