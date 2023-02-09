@@ -12,3 +12,4 @@
 ^vignettes/articles$
 ^CODE_OF_CONDUCT\.md$
 ^test/testthat/*$
+^*_cache$

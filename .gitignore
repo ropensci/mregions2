@@ -7,4 +7,4 @@ docs
 inst/doc
 README_cache
 vignettes/articles/mregions2-rdf_cache/*
-vignettes/articles/mregions2_cache/*
+vignettes/mregions2_cache/*
