@@ -134,3 +134,15 @@ aggregate_sf <- function (x, by, FUN, ..., do_union = TRUE, simplify = TRUE,
   }
 }
 
+# clon of curl::has_internet() but using httr so it can be easily saved
+mr_has_internet <- function() {
+  test_url <- "http://captive.apple.com/hotspot-detect.html"
+
+  tryCatch({
+    res <- httr::HEAD(test_url, httr::timeout(5))
+    return(httr::status_code(res) == 200)
+  }, error = function(e) {
+    return(FALSE)
+  })
+}
+

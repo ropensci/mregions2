@@ -96,11 +96,10 @@ mrp_list <- memoise::memoise(.mrp_list)
   mrp_init_wfs_client_exceptions_handler(url)
 }
 
-mrp_init_wfs_client_check_internet <- function(test = FALSE){
-  if(!curl::has_internet() | test){
+mrp_init_wfs_client_check_internet <- function(){
+  if(!mr_has_internet()){
     cli::cli_abort(c(
       "x" = "WFS client creation failed",
-      "!" = "{.code curl::has_internet()} is {.val FALSE}",
       "i" = "Did you check your internet connection?"
     ))
   }

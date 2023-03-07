@@ -27,13 +27,6 @@ test_that("Client can be created", {
     expect_s3_class(wfs, "WFSClient")
 })
 
-test_that("Client fails with no internet", {
-  # we use curl here, httptest cannot record
-  expect_error(mrp_init_wfs_client_check_internet(test = TRUE),
-               regexp = 'Did you check your internet connection?')
-})
-
-
 test_that("File with info exists", {
   system.file("mrp_list.csv", package = "mregions2", mustWork = TRUE) %>%
     file.exists() %>%
@@ -71,6 +64,13 @@ test_that("mrp_view() works", {
   expect_error(.f())
 })
 
+# No internet test
+httptest::without_internet({
+  test_that("No internet message works", {
+    .f <- function() mrp_init_wfs_client_check_internet()
+    expect_error(.f(), regexp = 'Did you check your internet connection?')
+  })
+})
 
 # Mocked requests
 httptest::with_mock_dir("prod/fail/", {
