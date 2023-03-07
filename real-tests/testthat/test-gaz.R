@@ -1,3 +1,24 @@
+expect_mr <- function(x){
+  expect_type(x, "list")
+  expect_s3_class(x, "mr_df")
+  expect_s3_class(x, c("tbl_df", "data.frame"))
+  expect_true("MRGID" %in% names(x))
+}
+
+expect_mr_sf <- function(x){
+  expect_mr(x)
+  expect_s3_class(x, "sf")
+}
+
+belgium = 14
+france = 17
+b24nm = 49243
+med_east = 4280 # several polygons, same source PROBLEM
+kuurne = 58 # several polygons, two sources
+bouvet_eez = 8399 # deleted
+mvb = 30666 # only centroid
+
+# Perform
 test_that("gaz_search.numeric", {
   gaz_search(17) %>% expect_mr()
   gaz_search(14, rdf = TRUE) %>% expect_s3_class("rdf")
