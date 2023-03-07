@@ -1,5 +1,5 @@
-# Workflow derived from
-# https://github.com/ropensci-books/exemplighratia/blob/otherhttptestapproach/.github/workflows/R-CMD-check-schedule.yaml
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
     branches:
@@ -7,10 +7,7 @@ on:
   schedule:
     - cron: "15 0 * * *"
 
-name: R-CMD-check
-
-permissions:
-  contents: write
+name: R-CMD-check-schedule
 
 jobs:
   R-CMD-check:
@@ -46,11 +43,9 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
-      - name: Get mock-up HTTP requests out of path by renaming
-        env: 
-          GITHUB_TOKEN: ${{ github.token }}
+      - name: Folder with real tests
         run: |
-          for item in tests/testthat/*; do [ -d "$item" ] && mv "$item" "$item.bak"; done
+          rm -rf tests/testthat && cp -r real-tests tests/testthat
 
       - uses: r-lib/actions/check-r-package@v2
         with:
