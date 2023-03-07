@@ -69,15 +69,13 @@
 
 
 
-<script src="mregions2_files/htmlwidgets-1.6.1/htmlwidgets.js"></script><link href="mregions2_files/leaflet-1.3.1/leaflet.css" rel="stylesheet">
-<script src="mregions2_files/leaflet-1.3.1/leaflet.js"></script><link href="mregions2_files/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
-<script src="mregions2_files/proj4-2.6.2/proj4.min.js"></script><script src="mregions2_files/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="mregions2_files/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
-<script src="mregions2_files/leaflet-binding-2.1.1/leaflet.js"></script><script src="mregions2_files/lfx-wms-1.0.0/leaflet.wms.js"></script><script src="mregions2_files/lfx-wms-1.0.0/leaflet.wms-bindings.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Introduction to mregions2</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/lifewatch/mregions2/blob/HEAD/vignettes/articles/mregions2.Rmd" class="external-link"><code>vignettes/articles/mregions2.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/lifewatch/mregions2/blob/HEAD/vignettes/mregions2.Rmd" class="external-link"><code>vignettes/mregions2.Rmd</code></a></small>
       <div class="d-none name"><code>mregions2.Rmd</code></div>
     </div>
 
@@ -113,8 +111,6 @@ Regions Gazetteer Unique Identifier)</p>
 creates and hosts geographical Data Products, being the most popular one
 the <a href="https://marineregions.org/eez.php" class="external-link">Marine Regions Maritime
 Boundaries</a>.</p>
-<p><img src="https://user-images.githubusercontent.com/54405067/156809171-1487bb9f-35af-4418-8e2f-93c24a59aad0.gif"></p>
-<p><sup>(Source: <a href="https://www.vliz.be/en/news?p=show&amp;id=8160" class="external-link uri">https://www.vliz.be/en/news?p=show&amp;id=8160</a>)</sup></p>
 <p>The mregions2 package aims to difference these two domains as clearly
 as possible, starting with the naming of its functions:</p>
 <ul>
@@ -269,13 +265,13 @@ coast</p>
 <span><span class="co">#&gt;    MRGID gazett…¹ place…² minLa…³ minLo…⁴ maxLa…⁵ maxLo…⁶ prefe…⁷ prefe…⁸ status</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Belgiq… French  stand…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Belgium English stand…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Bélgica Spanish stand…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Belgien German  stand…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 België  Dutch   stand…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Belgio  Italian stand…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>    20 SAIL     Provin…    50.7    2.55    51.4    3.52 West F… English stand…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    20 SAIL     Provin…    50.7    2.55    51.4    3.52 West-V… Dutch   stand…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Bélgica Spanish stand…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Belgien German  stand…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 België  Dutch   stand…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Belgio  Italian stand…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Belgium English stand…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>    20 SAIL     Provin…    50.7    2.55    51.4    3.52 West-V… Dutch   stand…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    20 SAIL     Provin…    50.7    2.55    51.4    3.52 West F… English stand…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    20 SAIL     Provin…    50.7    2.55    51.4    3.52 West-V… Dutch   stand…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    20 SAIL     Provin…    50.7    2.55    51.4    3.52 West F… English stand…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 44 more rows, 4 more variables: accepted &lt;int&gt;, latitude &lt;dbl&gt;,</span></span></span>
@@ -293,14 +289,14 @@ coast</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 54 × 14</span></span></span>
 <span><span class="co">#&gt;    MRGID gazett…¹ place…² minLa…³ minLo…⁴ maxLa…⁵ maxLo…⁶ prefe…⁷ prefe…⁸ status</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Bélgica Spanish stand…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Belgien German  stand…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Belgio  Italian stand…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Belgiq… French  stand…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 België  Dutch   stand…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Belgium English stand…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>    20 SAIL     Provin…    50.7    2.55    51.4    3.52 West F… English stand…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    20 SAIL     Provin…    50.7    2.55    51.4    3.52 West-V… Dutch   stand…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Belgiq… French  stand…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Bélgica Spanish stand…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 België  Dutch   stand…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Belgien German  stand…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Belgium English stand…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>    14 (2001).… Nation     49.5    2.55    51.5    6.41 Belgio  Italian stand…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>    20 SAIL     Provin…    50.7    2.55    51.4    3.52 West-V… Dutch   stand…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    20 SAIL     Provin…    50.7    2.55    51.4    3.52 West F… English stand…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    20 SAIL     Provin…    50.7    2.55    51.4    3.52 West-V… Dutch   stand…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    20 SAIL     Provin…    50.7    2.55    51.4    3.52 West F… English stand…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 44 more rows, 4 more variables: accepted &lt;int&gt;, latitude &lt;dbl&gt;,</span></span></span>
@@ -808,11 +804,13 @@ time</strong> to complete. It is a better approach to first have a quick
 look instead of downloading the full product. <code><a href="../reference/mrp_view.html">mrp_view()</a></code>
 renders an in <strong>interactive visualization</strong>:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Click on a feature to see some information</span></span>
-<span><span class="fu"><a href="../reference/mrp_view.html">mrp_view</a></span><span class="op">(</span><span class="st">"ecs"</span><span class="op">)</span></span></code></pre></div>
-<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-1400840855e5c6d460d0" style="width:100%;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-1400840855e5c6d460d0">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG4326","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"<a href='https://emodnet.ec.europa.eu'>EMODnet<\/a>"}]},{"method":"addWMS","args":["https://geo.vliz.be/geoserver/MarineRegions/wms?",null,null,{"styles":"","format":"image/png","transparent":true,"version":"1.1.1","info_format":"text/html","attribution":"<a href='https://marineregions.org/'>Marine Regions<\/a>","layers":"ecs","checkempty":false},null]},{"method":"addTiles","args":["https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false}]}]},"evals":[],"jsHooks":[]}</script><p>It returns a <code><a href="https://rdrr.io/pkg/leaflet/man/leaflet.html" class="external-link">leaflet::leaflet</a></code> interactive map with the
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/mrp_view.html">mrp_view</a></span><span class="op">(</span><span class="st">"ecs"</span><span class="op">)</span></span></code></pre></div>
+<p>It returns a <code><a href="https://rdrr.io/pkg/leaflet/man/leaflet.html" class="external-link">leaflet::leaflet</a></code> interactive map with the
 data product requested added via Web Map Services.</p>
+<p>Note <code><a href="https://rdrr.io/pkg/leaflet/man/leaflet.html" class="external-link">leaflet::leaflet</a></code> and
+<code><a href="https://trafficonese.github.io/leaflet.extras2/reference/leaflet.extras2.html" class="external-link">leaflet.extras2::leaflet.extras2</a></code> are required by
+<code><a href="../reference/mrp_view.html">mrp_view()</a></code> but listed only as “Suggests”. Install these
+packages to use <code><a href="../reference/mrp_view.html">mrp_view()</a></code></p>
 <div class="section level3">
 <h3 id="filtering">Filtering<a class="anchor" aria-label="anchor" href="#filtering"></a>
 </h3>
@@ -827,7 +825,7 @@ product is slow</strong>:</p>
 <span>  <span class="va">ecs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"ecs"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sovereign1</span> <span class="op">==</span> <span class="st">"Portugal"</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   1.446   0.045   2.899</span></span></code></pre></div>
+<span><span class="co">#&gt;   2.063   0.076   4.169</span></span></code></pre></div>
 <p>Instead, you can write a <strong>filter</strong> that is applied on
 the <strong>server side</strong>:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
@@ -835,7 +833,7 @@ the <strong>server side</strong>:</p>
 <span>  <span class="va">ecs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"ecs"</span>, cql_filter <span class="op">=</span> <span class="st">"sovereign1 = 'Portugal'"</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.171   0.000   1.210</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.226   0.008   1.706</span></span></code></pre></div>
 <p>This filter is written in <a href="https://portal.ogc.org/files/96288" class="external-link">Contextual Query Language
 (CQL)</a>. This is a relatively simple syntax close to SQL.</p>
 <div class="section level4">
@@ -989,14 +987,29 @@ passing the filters together with the base URL</a> in the argument
 <code>baseURL</code>.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># View all Joint submissions, recommendations of deposit to DOALOS with an area larger than 1M square kilometers</span></span>
-<span><span class="fu"><a href="../reference/mrp_view.html">mrp_view</a></span><span class="op">(</span><span class="st">"ecs"</span>, cql_filter <span class="op">=</span> <span class="st">"pol_type IN ('ECS Joint CLCS Recommendation', 'ECS Joint CLCS Submission', 'ECS Joint DOALOS Deposit') AND area_km2 &gt; 1000000"</span><span class="op">)</span></span></code></pre></div>
-<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8add3d19f0851111aa57" style="width:100%;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-8add3d19f0851111aa57">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG4326","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"<a href='https://emodnet.ec.europa.eu'>EMODnet<\/a>"}]},{"method":"addWMS","args":["https://geo.vliz.be/geoserver/MarineRegions/wms?cql_filter=pol_type%20IN%20('ECS%20Joint%20CLCS%20Recommendation',%20'ECS%20Joint%20CLCS%20Submission',%20'ECS%20Joint%20DOALOS%20Deposit')%20AND%20area_km2%20%3E%201000000",null,null,{"styles":"","format":"image/png","transparent":true,"version":"1.1.1","info_format":"text/html","attribution":"<a href='https://marineregions.org/'>Marine Regions<\/a>","layers":"ecs","checkempty":false},null]},{"method":"addTiles","args":["https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false}]}]},"evals":[],"jsHooks":[]}</script><p>You can also apply a <a href="https://www.ogc.org/standards/filter" class="external-link">standard OGC filter
+<span><span class="va">verbose</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
+<span><span class="st">  pol_type IN (</span></span>
+<span><span class="st">    'ECS Joint CLCS Recommendation', </span></span>
+<span><span class="st">    'ECS Joint CLCS Submission', </span></span>
+<span><span class="st">    'ECS Joint DOALOS Deposit'</span></span>
+<span><span class="st">  ) </span></span>
+<span><span class="st">  AND area_km2 &gt; 1000000</span></span>
+<span><span class="st">"</span></span>
+<span><span class="fu"><a href="../reference/mrp_view.html">mrp_view</a></span><span class="op">(</span><span class="st">"ecs"</span>, cql_filter <span class="op">=</span> <span class="va">verbose</span><span class="op">)</span></span></code></pre></div>
+<p>You can also apply a <a href="https://www.ogc.org/standards/filter" class="external-link">standard OGC filter
 specification</a>. These are however more verbose:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/mrp_view.html">mrp_view</a></span><span class="op">(</span><span class="st">"ecs"</span>, filter <span class="op">=</span> <span class="st">"&lt;Filter&gt;&lt;PropertyIsEqualTo&gt;&lt;PropertyName&gt;sovereign1&lt;/PropertyName&gt;&lt;Literal&gt;Portugal&lt;/Literal&gt;&lt;/PropertyIsEqualTo&gt;&lt;/Filter&gt;"</span><span class="op">)</span></span></code></pre></div>
-<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d77b921ba609f98e10ca" style="width:100%;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-d77b921ba609f98e10ca">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG4326","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"<a href='https://emodnet.ec.europa.eu'>EMODnet<\/a>"}]},{"method":"addWMS","args":["https://geo.vliz.be/geoserver/MarineRegions/wms?filter=%3CFilter%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3Esovereign1%3C/PropertyName%3E%3CLiteral%3EPortugal%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Filter%3E",null,null,{"styles":"","format":"image/png","transparent":true,"version":"1.1.1","info_format":"text/html","attribution":"<a href='https://marineregions.org/'>Marine Regions<\/a>","layers":"ecs","checkempty":false},null]},{"method":"addTiles","args":["https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false}]}]},"evals":[],"jsHooks":[]}</script><p>Note that all the data products of Marine Regions are served via the
+<code class="sourceCode R"><span><span class="co"># View the Extended Continental Shelf of Portugal</span></span>
+<span><span class="va">verbose</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
+<span><span class="st">  &lt;Filter&gt;</span></span>
+<span><span class="st">    &lt;PropertyIsEqualTo&gt;</span></span>
+<span><span class="st">        &lt;PropertyName&gt;sovereign1&lt;/PropertyName&gt;</span></span>
+<span><span class="st">        &lt;Literal&gt;Portugal&lt;/Literal&gt;</span></span>
+<span><span class="st">    &lt;/PropertyIsEqualTo&gt;</span></span>
+<span><span class="st">  &lt;/Filter&gt;</span></span>
+<span><span class="st">"</span></span>
+<span><span class="fu"><a href="../reference/mrp_view.html">mrp_view</a></span><span class="op">(</span><span class="st">"ecs"</span>, filter <span class="op">=</span> <span class="va">verbose</span><span class="op">)</span></span></code></pre></div>
+<p>Note that all the data products of Marine Regions are served via the
 <a href="http://geo.vliz.be" class="external-link">VLIZ geoserver</a>. Geoserver implements a
 more powerful extension of CQL called ECQL (Extended CQL). which allows
 expressing the full range of filters that OGC Filter 1.1 can encode.
