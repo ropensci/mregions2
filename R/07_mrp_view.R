@@ -77,6 +77,7 @@ mrp_view <- function(data_product, cql_filter = NULL, filter = NULL){
 
   checkmate::assert_character(cql_filter, null.ok = TRUE, len = 1)
   checkmate::assert_character(filter, null.ok = TRUE, len = 1)
+  assert_internet()
 
 
   # Config
@@ -87,11 +88,7 @@ mrp_view <- function(data_product, cql_filter = NULL, filter = NULL){
   wms <- glue::glue("https://geo.vliz.be/geoserver/{namespace}/wms?")
 
   # Server check
-  httr::HEAD(
-    paste0(wms, "request=GetCapabilities"),
-    httr::add_headers(`User-Agent` = mr_user_agent)
-  ) %>% httr::stop_for_status()
-
+  assert_service(wms)
 
   # Add filters
   if(methods::hasArg(cql_filter)){
@@ -141,7 +138,11 @@ assert_deps <- function(deps){
 
 base_map <- function(){
   emodnet_tiles <-"https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/{z}/{x}/{y}.png"
-  assert_emodnet_bathy(emodnet_tiles)
+
+  # Assert
+  z=1;x=1;y=1
+  url_test <- glue::glue(emodnet_tiles)
+  assert_service(url_test)
 
   # Add HTML class to citation
   cite_emodnet <- "<a href='https://emodnet.ec.europa.eu'>EMODnet</a>"
@@ -162,35 +163,17 @@ base_map <- function(){
 
 add_labels <- function(map){
   emodnet_labels <- "https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/{z}/{x}/{y}.png"
-  assert_emodnet_bathy(emodnet_labels)
 
+  # Assert
+  z=1;x=1;y=1
+  url_test <- glue::glue(emodnet_labels)
+  assert_service(url_test)
+
+  # Perform
   map %>%
     leaflet::addTiles(urlTemplate = emodnet_labels,
                       options = leaflet::tileOptions(tms = FALSE)
     )
-}
-
-
-assert_emodnet_bathy <- function(url){
-  z=1;x=1;y=1
-  url_test <- glue::glue(url)
-
-  resp <- httr::HEAD(url_test, httr::add_headers(`User-Agent` = mr_user_agent))
-
-  if(httr::http_error(resp)){
-    msg <- c(
-        "x" = "Connection to {.url {url_test}} failed",
-        "i" = "Reason: {.val {httr::http_status(resp)$message}}"
-      )
-
-    if(httr::status_code(resp) >= 500){
-      msg <- c(msg,
-               "i" = "Check Status of {.url https://portal.emodnet-bathymetry.eu/}"
-      )
-    }
-
-    cli::cli_abort(msg)
-  }
 }
 
 
@@ -269,7 +252,6 @@ mrp_view_worldheritagemarineprogramme <- function(...) mrp_view('worldheritagema
 #' @rdname mrp_view
 #' @export
 mrp_view_lme <- function(...) mrp_view('lme', ...)
-
 
 #' @rdname mrp_view
 #' @export

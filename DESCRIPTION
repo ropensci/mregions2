@@ -30,7 +30,6 @@ Imports:
     ISOcodes,
     memoise,
     cli,
-    curl,
     dplyr,
     lubridate,
     ows4R (>= 0.3),

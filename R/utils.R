@@ -146,3 +146,24 @@ mr_has_internet <- function() {
   })
 }
 
+assert_internet <- function(){
+  if(!mr_has_internet()){
+    stop("No internet connection. Please check your network settings and try again.")
+  }
+}
+
+.assert_service <- function(url_test){
+  resp <- httr::GET(url_test, httr::add_headers(`User-Agent` = mr_user_agent))
+  resp$content <- NULL
+
+  if(httr::http_error(resp)){
+    cli::cli_abort(c(
+      "x" = "Connection to {.url {url_test}} failed",
+      "i" = "Reason: {.val {httr::http_status(resp)$message}}"
+    ), call = NULL)
+  }
+
+  invisible(NULL)
+}
+assert_service <- memoise::memoise(.assert_service)
+

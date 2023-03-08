@@ -3,11 +3,16 @@ load_httptest()
 
 httptest::set_redactor(function (x) {
   require(magrittr, quietly=TRUE)
-  httptest::gsub_response(x, "https://geo.vliz.be/geoserver/", "geo/")
+  httptest::gsub_response(x, "https://geo.vliz.be/geoserver/", "geo/") %>%
+    httptest::gsub_response("https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/1/1/", "tiles/") %>%
+    httptest::gsub_response("https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/1/1/", "labels/")
+
 })
 
 httptest::set_requester(function (request) {
-  httptest::gsub_request(request, "https://geo.vliz.be/geoserver/", "geo/")
+  httptest::gsub_request(request, "https://geo.vliz.be/geoserver/", "geo/") %>%
+    httptest::gsub_request("https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/1/1/", "tiles/") %>%
+    httptest::gsub_request("https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/1/1/", "labels/")
 })
 
 skip_everywhere <- function(){
@@ -19,7 +24,7 @@ skip_everywhere <- function(){
 
 # Perform
 test_that("Client can be created", {
-  skip_everywhere()
+  skip_everywhere() # client is waaay too heavy
 
   wfs <- .mrp_init_wfs_client()
     expect_type(wfs, "environment")
@@ -33,7 +38,7 @@ test_that("File with info exists", {
     expect_true()
 })
 
-test_that("list funtion works", {
+test_that("list function works", {
   skip_everywhere()
 
   x <- mrp_list()
@@ -50,13 +55,7 @@ test_that("mrp_view() works", {
     expect_type(x, "list")
     expect_s3_class(x, c("leaflet", "htmlwidget"))
 
-  # Test error
-  .f <- function() assert_emodnet_bathy("https://httpbin.org/status/400")
-  expect_error(.f(), "Client error")
-
-  .f <- function() assert_emodnet_bathy("https://httpbin.org/status/500")
-  expect_error(.f(), "Server error")
-
+  # Test errors
   .f <- function() mrp_view("foo")
   expect_error(.f())
 
@@ -64,21 +63,38 @@ test_that("mrp_view() works", {
   expect_error(.f())
 })
 
+test_that("deps not installed", {
+  .f <- function() assert_deps(c("thisisa", "fakepackagename"))
+  expect_error(.f(), "not installed")
+})
+
 # No internet test
 httptest::without_internet({
-  test_that("No internet message works", {
-    .f <- function() mrp_init_wfs_client_check_internet()
-    expect_error(.f(), regexp = 'Did you check your internet connection?')
+  test_that("No internet messages works", {
+    .f <- function() mrp_init_wfs_client()
+    expect_error(.f(), regexp = 'No internet')
+
+    .f <- function() mrp_view("ecs")
+    expect_error(.f(), regexp = 'No internet')
   })
 })
 
 # Mocked requests
 httptest::with_mock_dir("prod/fail/", {
   test_that("Server status 500 handled", {
-    .f <- function() mrp_init_wfs_client_exceptions_handler("https://geo.vliz.be/geoserver/wfs")
+    .f <- function() .assert_service("https://geo.vliz.be/geoserver/wfs?request=GetCapabilities")
+    expect_error(.f(), regexp = "500")
+
+    .f <- function() .assert_service("https://geo.vliz.be/geoserver/MarineRegions/wms?")
+    expect_error(.f(), regexp = "500")
+
+    .f <- function() .assert_service("https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/1/1/1.png")
+    expect_error(.f(), regexp = "500")
+
+    .f <- function() .assert_service("https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/1/1/1.png")
     expect_error(.f(), regexp = "500")
   })
-})
+}, simplify = FALSE)
 
 httptest::with_mock_dir("prod/ok/", {
   test_that("mrp_colnames() works", {

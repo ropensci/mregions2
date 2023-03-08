@@ -1,0 +1,27 @@
+structure(list(url = "tiles/1.png", status_code = 500L, headers = structure(list(
+    server = "nginx/1.22.1", date = "Wed, 08 Mar 2023 13:53:18 GMT",
+    `content-type` = "image/png", `content-length` = "121005",
+    connection = "keep-alive", `last-modified` = "Mon, 24 Feb 2020 10:00:36 GMT",
+    etag = "\"5e539ec4-1d8ad\"", expires = "Thu, 31 Dec 2037 23:55:55 GMT",
+    `cache-control` = "max-age=315360000", `cache-control` = "public",
+    `x-cache-status` = "HIT", `access-control-allow-origin` = "*",
+    `access-control-allow-methods` = "POST, GET, OPTIONS", `access-control-allow-headers` = "x-requested-with, content-type, *",
+    `accept-ranges` = "bytes"), class = c("insensitive", "list"
+)), all_headers = list(list(status = 200L, version = "HTTP/1.1",
+    headers = structure(list(server = "nginx/1.22.1", date = "Wed, 08 Mar 2023 13:53:18 GMT",
+        `content-type` = "image/png", `content-length` = "121005",
+        connection = "keep-alive", `last-modified` = "Mon, 24 Feb 2020 10:00:36 GMT",
+        etag = "\"5e539ec4-1d8ad\"", expires = "Thu, 31 Dec 2037 23:55:55 GMT",
+        `cache-control` = "max-age=315360000", `cache-control` = "public",
+        `x-cache-status` = "HIT", `access-control-allow-origin` = "*",
+        `access-control-allow-methods` = "POST, GET, OPTIONS",
+        `access-control-allow-headers` = "x-requested-with, content-type, *",
+        `accept-ranges` = "bytes"), class = c("insensitive",
+    "list")))), cookies = structure(list(domain = logical(0),
+    flag = logical(0), path = logical(0), secure = logical(0),
+    expiration = structure(numeric(0), class = c("POSIXct", "POSIXt"
+    )), name = logical(0), value = logical(0)), row.names = integer(0), class = "data.frame"),
+    content = as.raw(c(0x4e, 0x41)), date = structure(1678283598, class = c("POSIXct",
+    "POSIXt"), tzone = "GMT"), times = c(redirect = 0, namelookup = 0.000145,
+    connect = 0.000149, pretransfer = 0.000304, starttransfer = 0.0181,
+    total = 0.035247)), class = "response")

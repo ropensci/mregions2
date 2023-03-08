@@ -92,38 +92,14 @@ mrp_list <- memoise::memoise(.mrp_list)
   }
 
   # Fail
-  mrp_init_wfs_client_check_internet()
-  mrp_init_wfs_client_exceptions_handler(url)
-}
-
-mrp_init_wfs_client_check_internet <- function(){
-  if(!mr_has_internet()){
-    cli::cli_abort(c(
-      "x" = "WFS client creation failed",
-      "i" = "Did you check your internet connection?"
-    ))
-  }
-}
-
-mrp_init_wfs_client_exceptions_handler <- function(url){
-  msg <- c("x" = "WFS client creation failed")
-
-  resp <- httr::GET(paste0(url, "?request=GetCapabilities"))
-
-  if(httr::status_code(resp) >= 400){
-    cli::cli_abort(c(
-      msg,
-      "!" = "HTTP Status: {httr::http_status(resp)$message}",
-      "i" = "Service: {.url {url}}"
-    ))
-  }
+  assert_internet()
+  assert_service(paste0(url, "?request=GetCapabilities"))
 
   cli::cli_abort(c(
-    msg,
+    "x" = "WFS client creation failed",
     "!" = "An exception has occurred. Please raise an issue in {.val {packageDescription('mregions2')$BugReports}}"
   ))
 }
-
 
 
 
