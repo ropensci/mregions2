@@ -178,7 +178,7 @@ mrp_colnames <- memoise::memoise(.mrp_colnames)
   info <- mrp_list() %>%
     dplyr::filter(data_product == product_name)
 
-  url = glue::glue(
+  url <- glue::glue(
     "https://geo.vliz.be/geoserver/wfs?service=wfs&version=2.0.0&request=GetPropertyValue&typeNames={info$id}&valueReference={colname}"
   )
 

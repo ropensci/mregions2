@@ -119,7 +119,7 @@ gaz_rest_records_by_type <- function(type, with_geometry = FALSE){
 
   # Reusable http request that overrides automatic error check
   get_source <- function(offset){
-    url = glue::glue("https://marineregions.org/rest/getGazetteerRecordsByType.json/{placetype}/?offset={offset}")
+    url <- glue::glue("https://marineregions.org/rest/getGazetteerRecordsByType.json/{placetype}/?offset={offset}")
 
     resp <- httr2::request(url) %>%
       httr2::req_user_agent(mr_user_agent) %>%

@@ -2,7 +2,6 @@ Package: mregions2
 Type: Package
 Title: Access data from marineregions.org: the Marine Regions Gazetteer and the Marine Regions Data Products
 Version: 1.0.0
-Date: 2022-12-21
 Year: 2022
 Authors@R: c(
   person(given = "Salvador", family = "Fernandez", role = c("aut", "cre"),

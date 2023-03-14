@@ -16,7 +16,7 @@ gaz_rest_names_by_mrgid <- function(mrgid){
                                        null.ok = TRUE, coerce = TRUE, len = 1)
 
   # Config
-  url = glue::glue("https://marineregions.org/rest/getGazetteerNamesByMRGID.json/{mrgid}/")
+  url <- glue::glue("https://marineregions.org/rest/getGazetteerNamesByMRGID.json/{mrgid}/")
 
   # perform
   resp <- httr2::request(url) %>%

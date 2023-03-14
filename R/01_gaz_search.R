@@ -230,10 +230,10 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
 
   # Assert logicals
   checkmate::assert_logical(like, len = 1)
-  like_url = like %>% as.character() %>% tolower()
+  like_url <- like %>% as.character() %>% tolower()
 
   checkmate::assert_logical(fuzzy, len = 1)
-  fuzzy_url = fuzzy %>% as.character() %>% tolower()
+  fuzzy_url <- fuzzy %>% as.character() %>% tolower()
 
   # Config
   name <- gsub(" ", "+", name, fixed = TRUE)
@@ -376,8 +376,8 @@ gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE,
   names_url <- trimws(names_url, "both")
   names_url <- paste0(names_url, collapse = "/")
   names_url <- utils::URLencode(names_url)
-  fuzzy_url = fuzzy %>% as.character() %>% tolower()
-  like_url = like %>% as.character() %>% tolower()
+  fuzzy_url <- fuzzy %>% as.character() %>% tolower()
+  like_url <- like %>% as.character() %>% tolower()
   url <- glue::glue("https://marineregions.org/rest/getGazetteerRecordsByNames.json/{like_url}/{fuzzy_url}/{names_url}/")
 
   # Perform
