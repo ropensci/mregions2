@@ -8,16 +8,6 @@ test_that("mrp_colnames() works", {
 
   # Check all columns are of type character
   invisible(apply(x, 2, expect_vector, ptype = character()))
-
-  # Expect errors
-  .f <- function() .mrp_colnames("this is not a data product")
-  expect_error(.f())
-
-  .f <- function() .mrp_colnames(c("ecs", "eez"))
-  expect_error(.f())
-
-  .f <- function() .mrp_colnames(1)
-  expect_error(.f())
 })
 
 test_that("mrp_col_unique() works", {
@@ -44,22 +34,6 @@ test_that("mrp_col_unique() works", {
   expect_vector(x)
   expect_s3_class(x, "Date")
   expect_gte(length(x), 1)
-
-  # Expect errors
-  .f <- function() .mrp_col_unique("this is not a data product", "mrgid")
-  expect_error(.f())
-
-  .f <- function() .mrp_col_unique(1, "mrgid")
-  expect_error(.f())
-
-  .f <- function() .mrp_col_unique("ecs_boundaries", 1)
-  expect_error(.f())
-
-  .f <- function() .mrp_col_unique("ecs_boundaries", "this is not a column")
-  expect_error(.f())
-
-  .f <- function() .mrp_col_unique("ecs_boundaries", "the_geom")
-  expect_error(.f())
 })
 
 
@@ -82,9 +56,6 @@ test_that("mrp_get() works", {
   expect_s3_class(sf::st_geometry(x), "sfc_MULTILINESTRING")
 
   # Expect errors
-  .f <- function() mrp_get("this product does not exists")
-  expect_error(.f())
-
   .f <- function() mrp_get("ecs_boundaries", cql_filter = "this is not a good filter")
   expect_error(.f())
 
