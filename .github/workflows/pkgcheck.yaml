@@ -18,4 +18,6 @@ jobs:
   pkgcheck:
     runs-on: ubuntu-latest
     steps:
+      - name: Update apt-get cache
+        run: sudo apt-get update
       - uses: ropensci-review-tools/pkgcheck-action@main
