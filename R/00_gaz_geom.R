@@ -41,7 +41,11 @@ gaz_geometry.numeric <- function(x, ...){
   format <- substitute(list(...))$format
   if(is.null(format)) format <- "sfc"
 
-  if(format == "sfc") return( sf::st_sfc(sapply(x, c), crs = 4326) )
+  if(format == "sfc"){
+    out <- vapply(x, c, FUN.VALUE = list(list(NULL)))
+    out <- sf::st_sfc(out, crs = 4326)
+    return(out)
+  }
   if(format == "sf") return( x %>% dplyr::bind_rows() )
   if(format == "wkt") return( unlist(x) )
   if(format == "rdf"){
@@ -97,7 +101,7 @@ gaz_rest_geometries <- function(mrgid, format = "sfc", multipart = TRUE, ...){
   checkmate::assert_int(mrgid, lower = 1)
 
   # Config
-  url = glue::glue("https://marineregions.org/rest/getGazetteerGeometries.ttl/{mrgid}/")
+  url <- glue::glue("https://marineregions.org/rest/getGazetteerGeometries.ttl/{mrgid}/")
 
   # Perform
   geom_perform(url, format, multipart, mrgid = mrgid, ...)
@@ -121,7 +125,7 @@ gaz_rest_geometry <- function(mrgid, sourceid, attribute_value, format = "sfc", 
   checkmate::assert_int(sourceid, lower = 1)
 
   # Config
-  url = glue::glue("https://marineregions.org/rest/getGazetteerGeometry.ttl/{mrgid}/?source={sourceid}&attributeValue={attribute_value}")
+  url <- glue::glue("https://marineregions.org/rest/getGazetteerGeometry.ttl/{mrgid}/?source={sourceid}&attributeValue={attribute_value}")
 
   # perform
   geom_perform(url, format, multipart = FALSE, mrgid = mrgid, ...)
