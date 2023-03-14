@@ -42,8 +42,8 @@ gaz_geometry.numeric <- function(x, ...){
   if(is.null(format)) format <- "sfc"
 
   if(format == "sfc"){
-    out <- vapply(x, c, FUN.VALUE = list(list(NULL)))
-    out <- sf::st_sfc(out, crs = 4326)
+    out <- unlist(x, recursive = FALSE, use.names = FALSE) %>%
+      sf::st_sfc(crs = 4326)
     return(out)
   }
   if(format == "sf") return( x %>% dplyr::bind_rows() )
