@@ -140,7 +140,7 @@ mr_has_internet <- function() {
 
   tryCatch({
     res <- httr::HEAD(test_url, httr::timeout(5))
-    return(httr::status_code(res) == 200)
+    return(TRUE)
   }, error = function(e) {
     return(FALSE)
   })
