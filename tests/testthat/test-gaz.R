@@ -32,13 +32,13 @@ expect_mr_sf <- function(x){
   expect_s3_class(x, "sf")
 }
 
-belgium = 14
-france = 17
-b24nm = 49243
-med_east = 4280 # several polygons, same source PROBLEM
-kuurne = 58 # several polygons, two sources
-bouvet_eez = 8399 # deleted
-mvb = 30666 # only centroid
+belgium <- 14
+france <- 17
+b24nm <- 49243
+med_east <- 4280 # several polygons, same source PROBLEM
+kuurne <- 58 # several polygons, two sources
+bouvet_eez <- 8399 # deleted
+mvb <- 30666 # only centroid
 
 # Perform
 
@@ -63,8 +63,8 @@ httptest2::with_mock_dir("gaz", {
 
   test_that("gaz_search.sfg", {
     # Config
-    lon = 2.927
-    lat = 51.21551
+    lon <- 2.927
+    lat <- 51.21551
     sfg <- sf::st_point(c(lon, lat))
     sfc <- sf::st_sfc(sfg, crs = 4326)
     sf <-  sf::st_as_sf(data.frame(sfc))

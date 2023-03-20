@@ -18,13 +18,15 @@
 #'
 #' @return A data frame with Gazetteer entries
 #'
-#' @examples
+#' @examples \dontrun{
 #' # Get the relations of the Belgian Exclusive Economic Zone
 #' require(magrittr)
 #' gaz_search("Belgian Exclusive Economic Zone") %>% gaz_relations()
 #'
 #' # Or using its mrgid
 #' gaz_relations(3293)
+#' }
+
 gaz_relations <- function(x, ...){
   UseMethod("gaz_relations")
 }
@@ -40,7 +42,7 @@ gaz_relations.numeric <- function(x, ...){
 #' @export
 #' @rdname gaz_relations
 gaz_relations.mr_df <- function(x, ...){
-  mrgid = unique(x$MRGID)
+  mrgid <- unique(x$MRGID)
   gaz_relations.numeric(mrgid, ...)
 }
 
@@ -69,10 +71,10 @@ gaz_rest_relations_by_mrgid <- function(mrgid, with_geometry = FALSE, direction 
   # Assertions
   types <- c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")
   checkmate::assert_character(c("type", "direction"))
-  type = tolower(type)
-  direction = tolower(direction)
+  type <- tolower(type)
+  direction <- tolower(direction)
 
-  mrgid = checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
+  mrgid <- checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
                                        null.ok = TRUE, coerce = TRUE, len = 1)
   checkmate::assert_choice(type, types)
   checkmate::assert_choice(direction, c("upper", "lower", "both"))

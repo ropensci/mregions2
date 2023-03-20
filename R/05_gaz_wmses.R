@@ -17,7 +17,7 @@
 #' gaz_rest_wmses(3293)
 gaz_rest_wmses <- function(mrgid){
   # Assertions
-  mrgid = checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
+  mrgid <- checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
                                        null.ok = TRUE, coerce = TRUE, len = 1)
 
   # Config

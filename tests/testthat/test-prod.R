@@ -98,6 +98,7 @@ httptest::with_mock_dir("prod/fail/", {
 
 httptest::with_mock_dir("prod/ok/", {
   test_that("mrp_colnames() works", {
+    skip_if_offline()
 
     # Returns a data frame
     x <- .mrp_colnames("ecs_boundaries")
@@ -107,7 +108,9 @@ httptest::with_mock_dir("prod/ok/", {
 
     # Check all columns are of type character
     invisible(apply(x, 2, expect_vector, ptype = character()))
+  })
 
+  test_that("mrp_colnames() fails nicely",{
     # Expect errors
     .f <- function() .mrp_colnames("this is not a data product")
     expect_error(.f())
@@ -119,7 +122,9 @@ httptest::with_mock_dir("prod/ok/", {
     expect_error(.f())
   })
 
+
   test_that("mrp_col_unique() works", {
+    skip_if_offline()
 
     # two names for the same function
     expect_true(all.equal(mrp_col_unique, mrp_col_distinct))
@@ -143,7 +148,9 @@ httptest::with_mock_dir("prod/ok/", {
     expect_vector(x)
     expect_s3_class(x, "Date")
     expect_gte(length(x), 1)
+  })
 
+  test_that("mrp_col_unique() fails nicely",{
     # Expect errors
     .f <- function() .mrp_col_unique("this is not a data product", "mrgid")
     expect_error(.f())
@@ -161,8 +168,9 @@ httptest::with_mock_dir("prod/ok/", {
     expect_error(.f())
   })
 
-
   test_that("mrp_get() works", {
+    skip_if_offline()
+
     expect_sf <- function(x){
       expect_type(x, "list")
       expect_s3_class(x, c("sf"))

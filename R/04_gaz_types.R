@@ -58,7 +58,7 @@ gaz_search_by_type <- function(x, ...){
 #' @rdname gaz_search_by_type
 #' @export
 gaz_search_by_type.character <- function(x, ...){
-  x = sort(unique(x))
+  x <- sort(unique(x))
 
   lapply(x, gaz_rest_records_by_type, ...) %>%
     dplyr::bind_rows() %>%
@@ -70,7 +70,7 @@ gaz_search_by_type.character <- function(x, ...){
 gaz_search_by_type.numeric <- function(x, ...){
   typeID <- NULL
 
-  x = checkmate::assert_integerish(x, lower = 1, upper = 999999999, min.len = 1,
+  x <- checkmate::assert_integerish(x, lower = 1, upper = 999999999, min.len = 1,
                                    any.missing = FALSE, all.missing = FALSE,
                                    coerce = TRUE)
   x <- sort(unique(x))
@@ -106,7 +106,7 @@ gaz_search_by_type.numeric <- function(x, ...){
 #' gaz_rest_records_by_type("FAO Subdivisions")
 #' gaz_rest_records_by_type("EEZ")
 gaz_rest_records_by_type <- function(type, with_geometry = FALSE){
-  placetype = type; rm(type)
+  placetype <- type; rm(type)
   MRGID <- NULL
 
   # Assertions
@@ -129,7 +129,7 @@ gaz_rest_records_by_type <- function(type, with_geometry = FALSE){
   }
 
   # First request - will work as placeholder
-  offset = 0
+  offset <- 0
   resp <- get_source(offset)
 
   # Check status: first offset should be 200
@@ -161,7 +161,7 @@ gaz_rest_records_by_type <- function(type, with_geometry = FALSE){
 
     # Enter infinite loop
     while(TRUE){
-      offset = offset + 100
+      offset <- offset + 100
       resp_n <- get_source(offset)
       http_status <- httr2::resp_status(resp_n)
 

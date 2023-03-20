@@ -140,7 +140,7 @@ base_map <- function(){
   emodnet_tiles <-"https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/{z}/{x}/{y}.png"
 
   # Assert
-  z=1;x=1;y=1
+  z<-1;x<-1;y<-1
   url_test <- glue::glue(emodnet_tiles)
   assert_service(url_test)
 
@@ -165,7 +165,7 @@ add_labels <- function(map){
   emodnet_labels <- "https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/{z}/{x}/{y}.png"
 
   # Assert
-  z=1;x=1;y=1
+  z<-1;x<-1;y<-1
   url_test <- glue::glue(emodnet_labels)
   assert_service(url_test)
 

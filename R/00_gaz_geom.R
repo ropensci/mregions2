@@ -17,7 +17,7 @@
 #'
 #' @return A sfc object (default), a sf data frame, a WKT string or an RDF object
 #'
-#' @examples
+#' @examples \dontrun{
 #' require(magrittr)
 #'
 #' gaz_geometry(3293)
@@ -25,6 +25,8 @@
 #' gaz_geometry(3293, format = "rdf")
 #'
 #' gaz_search(3293) %>% gaz_geometry()
+#' }
+
 gaz_geometry <- function(x, ...){
   UseMethod("gaz_geometry")
 }
@@ -87,7 +89,8 @@ gaz_geometry.mr_df <- function(x, ...){
 #'
 #' @seealso [gaz_rest]
 #'
-#' @return A sfc object (default), a sf data frame, a WKT string or an RDF object
+#' @return A sfc object (default), a sf data frame, a WKT string
+#' or an RDF object
 #'
 #' @examples
 #' gaz_rest_geometries(3293)
@@ -101,7 +104,11 @@ gaz_rest_geometries <- function(mrgid, format = "sfc", multipart = TRUE, ...){
   checkmate::assert_int(mrgid, lower = 1)
 
   # Config
-  url <- glue::glue("https://marineregions.org/rest/getGazetteerGeometries.ttl/{mrgid}/")
+  url <- paste0(
+    "https://marineregions.org/rest/getGazetteerGeometries.ttl/",
+    mrgid,
+    "/"
+  )
 
   # Perform
   geom_perform(url, format, multipart, mrgid = mrgid, ...)
@@ -118,14 +125,23 @@ gaz_rest_geometries <- function(mrgid, format = "sfc", multipart = TRUE, ...){
 #' @param attribute_value The attribute value that identifies the Geo-Object
 #'
 #' @noRd
-gaz_rest_geometry <- function(mrgid, sourceid, attribute_value, format = "sfc", ...){
+gaz_rest_geometry <- function(mrgid, sourceid, attribute_value,
+                              format = "sfc", ...){
 
   # Assertions
   checkmate::assert_int(mrgid, lower = 1)
   checkmate::assert_int(sourceid, lower = 1)
 
   # Config
-  url <- glue::glue("https://marineregions.org/rest/getGazetteerGeometry.ttl/{mrgid}/?source={sourceid}&attributeValue={attribute_value}")
+
+  url <- paste0(
+    "https://marineregions.org/rest/getGazetteerGeometry.ttl/",
+    mrgid,
+    "/?source=",
+    sourceid,
+    "&attributeValue=",
+    attribute_value
+  )
 
   # perform
   geom_perform(url, format, multipart = FALSE, mrgid = mrgid, ...)
@@ -136,12 +152,13 @@ gaz_rest_geometry <- function(mrgid, sourceid, attribute_value, format = "sfc", 
 #' Performs the aquisition of geometry
 #'
 #' @inheritParams gaz_rest_geometry
-#' @param resp_return_error the response should raise an error if HTTP Status 3xx, 4xx or 5xxx.
-#'   Reserved for internal use
+#' @param resp_return_error the response should raise an error
+#' if HTTP Status 3xx, 4xx or 5xxx. Reserved for internal use
 #' @param multipart return multipart?
 #'
 #' @noRd
-geom_perform <- function(url, format, multipart = TRUE, mrgid, resp_return_error = FALSE){
+geom_perform <- function(url, format, multipart = TRUE, mrgid,
+                         resp_return_error = FALSE){
   s <- the_geom <- NULL
 
   # Assert format
@@ -160,8 +177,9 @@ geom_perform <- function(url, format, multipart = TRUE, mrgid, resp_return_error
 
     if(resp_return_error) return(geom)
     # else
+    msg <- "The mrgid <{mrgid}> does not exists or has no geometry."
     httr2::resp_check_status(geom, info = c(
-      "i" = glue::glue("The mrgid <{mrgid}> does not exists or has no geometry.")
+      "i" = glue::glue(msg)
     ))
 
   }
@@ -206,10 +224,16 @@ geom_perform <- function(url, format, multipart = TRUE, mrgid, resp_return_error
   # Raise warning if there are several sources
   n_sources <- length(unique(geom$s))
   if(n_sources > 1 & multipart){
-    # TODO: add more info about sources. Currently not possible - need further web services
-    # sources <- geom$s %>% lapply(mr_gaz_source_by_sourceid) %>% unlist() %>% paste0(collapse = ", ")
-    # msg <- glue::glue("Argument 'multipart = TRUE' ignored because there are {n_sources} sources for the geoobject {mr_gaz_name_by_mrgid(mrgid)} with MRGID = {mrgid}.")
-    msg = "Argument 'multipart = TRUE' ignored because there is more than one source"
+    # TODO: add more info about sources.
+    # Currently not possible - need further web services
+    # sources <- geom$s %>% lapply(mr_gaz_source_by_sourceid) %>%
+    # unlist() %>% paste0(collapse = ", ")
+    # msg <- glue::glue("Argument 'multipart = TRUE' ignored because there
+    # are {n_sources} sources for the geoobject {mr_gaz_name_by_mrgid(mrgid)}
+    # with MRGID = {mrgid}.")
+    msg <- paste0("Argument 'multipart = TRUE' ignored because",
+                  "there is more than one source"
+    )
     warning(msg, call. = FALSE)
   }else if(n_sources == 1 & multipart){
     geom <- geom %>%
@@ -248,19 +272,28 @@ gaz_add_geometry <- function(x){
 
   # Assertions
   checkmate::assert_data_frame(x, min.rows = 1)
-  comes_from_gaz <- all(c("MRGID", "preferredGazetteerName", "status", "accepted") %in% names(x))
+  comes_from_gaz <- all(c("MRGID", "preferredGazetteerName",
+                          "status", "accepted") %in% names(x))
   if(!comes_from_gaz){
     cli::cli_abort(c("Essential fields not present in this data frame:",
-                     "i" = "Required fields: {.field MRGID}, {.field preferredGazetteerName}, {.field status}, {.field accepted}",
-                     "i" = "Try retrieving a data frame with {.fn gaz_search} first."))
+                     "i" = "Required fields:
+                          {.field MRGID},
+                          {.field preferredGazetteerName},
+                          {.field status},
+                          {.field accepted}",
+                     "i" = "Try retrieving a data frame with
+                          {.fn gaz_search}
+                          first."))
   }
 
   # Config - get geometries
-  the_geom <- lapply(x$MRGID, gaz_rest_geometries, format = "sf", resp_return_error = TRUE) %>%
+  the_geom <- lapply(x$MRGID, gaz_rest_geometries,
+                     format = "sf", resp_return_error = TRUE) %>%
     suppressWarnings()
 
-  # Logic to add either bounding box or centroid if there is no geometry available
-  for(i in 1:length(the_geom)){
+  # Logic to add either bounding box or centroid if there is no
+  # geometry available
+  for(i in seq_along(the_geom)){
     if("httr2_response" %in% class(the_geom[[i]])){
       if(httr2::resp_status(the_geom[[i]]) == 404){
 
@@ -331,16 +364,23 @@ gaz_add_geometry <- function(x){
         no_geometry <- "httr2_response" %in% class(the_geom[[i]])
         if(no_geometry){
 
-          msg = c(
-            "x" = "The geometry of {.val {x[i, ]$preferredGazetteerName}} with MRGID {.url {x[i, ]$MRGID}} is not available."
+          msg <- c(
+            "x" = "The geometry of
+                  {.val {x[i, ]$preferredGazetteerName}}
+                  with MRGID
+                  {.url {x[i, ]$MRGID}}
+                  is not available."
           )
 
           if(x[i, ]$status == "deleted"){
-            msg = c(msg,
-                    "i" = "Reason: The Geo-Object was {crayon::red('deleted')}.",
-                    "i" = "The preferred alternative is {.val {gaz_rest_names_by_mrgid(x[i, ]$accepted)[1]}} with MRGID {.url {x[i, ]$accepted}}"
+            msg <- c(msg,
+                    "i" = "Reason: The Geo-Object was
+                          {crayon::red('deleted')}.",
+                    "i" = "The preferred alternative is
+                          {.val {gaz_rest_names_by_mrgid(x[i, ]$accepted)[1]}}
+                          with MRGID {.url {x[i, ]$accepted}}"
             )}else{
-              msg = c(msg,
+              msg <- c(msg,
                       "i" = "Please contact {.email info@marineregions.org}."
               )
             }
@@ -349,7 +389,9 @@ gaz_add_geometry <- function(x){
         }
       }else{
         # If other http status, raise error
-        httr2::resp_check_status(the_geom[[i]], info = glue::glue("At method: {the_geom[[1]]$method} {the_geom[[i]]$url}"))
+        httr2::resp_check_status(the_geom[[i]], info = glue::glue(
+          "At method: {the_geom[[1]]$method} {the_geom[[i]]$url}"
+        ))
         return(invisible(NULL))
       }
     }

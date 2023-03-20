@@ -32,7 +32,7 @@ gaz_search_by_source.character <- function(x, ...){
 #' @rdname gaz_search_by_source
 #' @export
 gaz_search_by_source.numeric <- function(x, ...){
-  source = purrr::map_df(unique(x), ~gaz_rest_source_by_sourceid(.x))
+  source <- purrr::map_df(unique(x), ~gaz_rest_source_by_sourceid(.x))
 
   lapply(source["source"], gaz_search_by_source.character, ...) %>%
     dplyr::bind_rows() %>%
@@ -143,7 +143,7 @@ gaz_rest_sources <- function(){
   }
 
   # First request - will work as placeholder
-  offset = 0
+  offset <- 0
   resp <- get_source(offset)
 
   # Check status: first offset should be 200
@@ -158,7 +158,7 @@ gaz_rest_sources <- function(){
 
     # Enter infinite loop
     while(TRUE){
-      offset = offset + 100
+      offset <- offset + 100
       resp_n <- get_source(offset)
       http_status <- httr2::resp_status(resp_n)
 

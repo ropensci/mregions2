@@ -113,8 +113,8 @@ gaz_search.sfc <- function(x, ...){
   checkmate::assert_class(x, "sfc_POINT")
 
   coords <- sf::st_coordinates(x)
-  longitude = coords[, 1]
-  latitude = coords[, 2]
+  longitude <- coords[, 1]
+  latitude <- coords[, 2]
 
   out <- gaz_rest_records_by_lat_long(latitude, longitude, ...)
 
@@ -141,7 +141,7 @@ gaz_search.sfc <- function(x, ...){
 gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
 
   # Assertions
-  mrgid = checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
+  mrgid <- checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
                                         null.ok = TRUE, coerce = TRUE, len = 1)
 
   # Config
@@ -212,7 +212,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
   checkmate::assert_character(name, len = 1)
 
   # Assert typeid
-  typeid = checkmate::assert_integerish(typeid, lower = 1, any.missing = FALSE,
+  typeid <- checkmate::assert_integerish(typeid, lower = 1, any.missing = FALSE,
                                         null.ok = TRUE, coerce = TRUE)
 
   # Assert language
@@ -253,7 +253,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
   }
 
   # First request - will work as placeholder
-  offset = 0
+  offset <- 0
   resp <- get_source(offset)
 
   # Check status: first offset should be 200
@@ -314,7 +314,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
 
     # Enter infinite loop
     while(TRUE){
-      offset = offset + 100
+      offset <- offset + 100
       resp_n <- get_source(offset)
       http_status <- httr2::resp_status(resp_n)
 
@@ -359,10 +359,12 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
 #'
 #' @export
 #'
-#' @examples
+#' @examples \dontrun{
 #' gaz_rest_records_by_names(
 #'   c("Belgian Exclusive Economic Zone", "Dutch Exclusive Economic Zone")
 #' )
+#' }
+
 gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE, fuzzy = TRUE){
 
   # Assertions
@@ -419,7 +421,7 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FA
   # Assertions
   checkmate::assert_double(latitude, lower = -90, upper = 90, len = 1)
   checkmate::assert_double(longitude, lower = -180, upper = 180, len = 1)
-  typeid = checkmate::assert_integerish(typeid, lower = 1, any.missing = FALSE,
+  typeid <- checkmate::assert_integerish(typeid, lower = 1, any.missing = FALSE,
                                         null.ok = TRUE, coerce = TRUE)
 
   # Config
@@ -438,7 +440,7 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FA
   }
 
   # First request - will work as placeholder
-  offset = 0
+  offset <- 0
   resp <- get_source(offset)
 
   # Check status: first offset should be 200
@@ -492,7 +494,7 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FA
     # If 100 rows or more, enter infinite loop
     while(TRUE){
 
-      offset = offset + 100
+      offset <- offset + 100
       resp_n <- get_source(offset)
       http_status <- httr2::resp_status(resp_n)
 
