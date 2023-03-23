@@ -54,6 +54,7 @@ this package to ensure the data frame passed to gaz_geometry has a variable with
 }
 }
 \examples{
+\dontrun{
 require(magrittr)
 
 gaz_geometry(3293)
@@ -61,4 +62,5 @@ gaz_geometry(3293, format = "wkt")
 gaz_geometry(3293, format = "rdf")
 
 gaz_search(3293) \%>\% gaz_geometry()
+}
 }

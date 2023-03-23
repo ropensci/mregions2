@@ -25,7 +25,7 @@
 \alias{mrp_view_seavox_v18}
 \title{Visualize a Marine Regions data product without downloading}
 \usage{
-mrp_view(data_product, cql_filter = NULL, filter = NULL)
+mrp_view(layer, cql_filter = NULL, filter = NULL)
 
 mrp_view_eez(...)
 
@@ -70,7 +70,7 @@ mrp_view_ecoregions(...)
 mrp_view_seavox_v18(...)
 }
 \arguments{
-\item{data_product}{(character) Identifier of the data product. See \code{\link[=mrp_list]{mrp_list()}}}
+\item{layer}{(character) Identifier of the data product. See \link{mrp_list}}
 
 \item{cql_filter}{(character) Contextual Query Language (CQL) filter. See details.}
 

@@ -1,6 +1,6 @@
 #' Visualize a Marine Regions data product without downloading
 #'
-#' @param data_product (character) Identifier of the data product. See [mrp_list()]
+#' @param layer (character) Identifier of the data product. See [mrp_list]
 #' @param cql_filter (character) Contextual Query Language (CQL) filter. See details.
 #' @param filter (character) Standard OGC filter specification. See details.
 #' @param ... pass the `cql_filter` and `filter` parameters to [mrp_view()] when using one of the helpers
@@ -65,26 +65,20 @@
 #'   cql_filter = "doc_date AFTER 2000-01-01T00:00:00Z AND doc_date BEFORE 2009-12-31T00:00:00Z"
 #' )
 #'}
-mrp_view <- function(data_product, cql_filter = NULL, filter = NULL){
+mrp_view <- function(layer, cql_filter = NULL, filter = NULL){
 
   # Assertions
   assert_deps(c("leaflet", "leaflet.extras2"))
-  checkmate::assert_character(data_product, len = 1)
-  checkmate::assert_choice(data_product, mrp_list()$data_product)
-
-  both_filters_given <- methods::hasArg(cql_filter) & methods::hasArg(filter)
-  if(both_filters_given) stop("You must provide one of `cql_filter` or `filter`, not both.", call. = FALSE)
-
+  checkmate::assert_character(layer, len = 1)
+  checkmate::assert_choice(layer, mrp_list$layer)
+  assert_only_one_filter(cql_filter, filter)
   checkmate::assert_character(cql_filter, null.ok = TRUE, len = 1)
   checkmate::assert_character(filter, null.ok = TRUE, len = 1)
   assert_internet()
 
 
   # Config
-  layer <- subset(mrp_list()$id, mrp_list()$data_product == data_product)
-  layer <- strsplit(layer[[1]], ":", TRUE)[[1]]
-  namespace <- layer[1]
-  layer <- layer[2]
+  namespace <- subset(mrp_list$namespace, mrp_list$layer == layer)
   wms <- glue::glue("https://geo.vliz.be/geoserver/{namespace}/wms?")
 
   # Server check

@@ -155,3 +155,7 @@ assert_internet <- function(){
 }
 assert_service <- memoise::memoise(.assert_service)
 
+assert_only_one_filter <- function(cql_filter, filter){
+  both_filters_given <- !is.null(cql_filter) & !is.null(filter)
+  if(both_filters_given) stop("You must provide one of `cql_filter` or `filter`, not both.", call. = FALSE)
+}

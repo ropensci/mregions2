@@ -4,7 +4,7 @@
 \alias{mrp_get}
 \title{Get a data product}
 \usage{
-mrp_get(product_name, ...)
+mrp_get(layer, cql_filter = NULL, filter = NULL, count = NULL)
 }
 \arguments{
 \item{product_name}{(character) Identifier of the data product. See \code{\link[=mrp_list]{mrp_list()}}}

@@ -27,9 +27,11 @@ A data frame with Gazetteer entries
 Get Gazetteer Records for all given names
 }
 \examples{
+\dontrun{
 gaz_rest_records_by_names(
   c("Belgian Exclusive Economic Zone", "Dutch Exclusive Economic Zone")
 )
+}
 }
 \seealso{
 \link{gaz_rest}, \link{gaz_rest_records_by_name}

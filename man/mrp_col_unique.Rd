@@ -5,14 +5,14 @@
 \alias{mrp_col_distinct}
 \title{Get all the possible values of a column of a Marine Regions data product}
 \usage{
-mrp_col_unique(product_name, colname)
+mrp_col_unique(layer, colname)
 
-mrp_col_distinct(product_name, colname)
+mrp_col_distinct(layer, colname)
 }
 \arguments{
-\item{product_name}{(character) Identifier of the data product. See \code{\link[=mrp_list]{mrp_list()}}}
-
 \item{colname}{(character) Column name in the data product. See \code{\link[=mrp_colnames]{mrp_colnames()}}}
+
+\item{product_name}{(character) Identifier of the data product. See \code{\link[=mrp_list]{mrp_list()}}}
 }
 \value{
 A numeric or character vector with the unique values of a column of a Marine Regions data product.

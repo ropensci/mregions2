@@ -60,54 +60,43 @@
 #' # You can also limit the number of features to be requested
 #' mrp_get("eez", count = 5)
 #' }
-mrp_get <- function(product_name, ...){
-  data_product <- . <- id <- Group.1 <- NULL
+mrp_get <- function(layer, cql_filter = NULL, filter = NULL, count = NULL){
 
-  checkmate::assert_character(product_name, len = 1)
-  checkmate::assert_choice(product_name, mrp_list()$data_product)
+  # Assertions
+  checkmate::assert_character(layer, len = 1)
+  checkmate::assert_choice(layer, mrp_list$layer)
+  checkmate::assert_character(cql_filter, null.ok = TRUE, len = 1)
+  checkmate::assert_character(filter, null.ok = TRUE, len = 1)
+  assert_only_one_filter(cql_filter, filter)
+  count <- checkmate::assert_integerish(count, lower = 1, len = 1, coerce = TRUE)
 
   # Config
-  info <- mrp_list() %>%
-    dplyr::filter(data_product == product_name)
+  namespace <- subset(mrp_list$namespace, mrp_list$layer == layer)
+  url <- httr2::url_parse("https://geo.vliz.be/geoserver/ows")
+  url$query <- list(service = "wfs",
+                    version = "2.0.0",
+                    request = "GetFeature",
+                    typeName = glue::glue("{namespace}:{layer}"),
+                    cql_filter = cql_filter,
+                    filter = filter,
+                    count = count,
+                    outputFormat = "text/csv")
 
-  # Perform request
-  ft <- mrp_init_wfs_client(silent = TRUE)$
-    getCapabilities()$
-    findFeatureTypeByName(info$id)
+  # Perform
+  request <- httr2::url_build(url) %>%
+    httr2::request() %>%
+    httr2::req_user_agent(mr_user_agent) %>%
+    httr2::req_perform(path = NULL)
 
-  out <- ft$getFeatures(...)
+  resp <- request %>%
+    httr2::resp_body_string(encoding = "UTF-8") %>%
+    textConnection() %>%
+    read.csv(stringsAsFactors = FALSE, fileEncoding = "UTF-8")
 
-  # Fix Geometry type
-  # Geoserver often returns exotic geometries
-  # It is better to turn into MULTILINESTRING / MULTIPOLYGON
-  geometry_class <- class(sf::st_geometry(out))
+  attr(resp, "class") <- c("tbl_df", "tbl", "data.frame")
 
-  if("sfc_MULTICURVE" %in% geometry_class){
-    try({
-      out <- out %>% sf::st_cast("MULTILINESTRING")
-    })
-  }
-
-  if("sfc_MULTISURFACE" %in% geometry_class){
-    try({
-      out <- out %>%
-        sf::st_cast("GEOMETRYCOLLECTION") %>%
-        dplyr::mutate(id = seq_len(nrow(.))) %>%
-        sf::st_collection_extract("POLYGON") %>%
-        aggregate_sf(list(.$id), dplyr::first, do_union = FALSE) %>%
-        dplyr::select(-id, -Group.1)
-    })
-  }
-
-  attr(out, "class") <- c("tbl_df", "tbl", "data.frame")
-
-  out <- sf::st_as_sf(out)
-
-  out$gml_id <- NULL
-
-  if (is.na(sf::st_crs(out))) {
-    sf::st_crs(out) <- ft$getDefaultCRS()
-  }
+  out <- sf::st_as_sf(resp, wkt = "the_geom", crs = 4326)
+  out$FID <- NULL
 
   out
 }
@@ -115,22 +104,44 @@ mrp_get <- function(product_name, ...){
 
 
 
-.mrp_colnames <- function(product_name){
-  data_product <- name <- type <- NULL
+.mrp_colnames <- function(layer){
+  layer <- name <- type <- NULL
 
-  checkmate::assert_character(product_name, len = 1)
-  checkmate::assert_choice(product_name, mrp_list()$data_product)
+  checkmate::assert_character(layer, len = 1)
+  checkmate::assert_choice(layer, mrp_list$layer)
 
   # Config
-  info <- mrp_list() %>%
-    dplyr::filter(data_product == product_name)
+  namespace <- subset(mrp_list$namespace, mrp_list$layer == layer)
+  url <- httr2::url_parse("https://geo.vliz.be/geoserver/ows")
+  url$query <- list(service = "wfs",
+                    version = "2.0.0",
+                    request = "DescribeFeatureType",
+                    typeName = glue::glue("{namespace}:{layer}")
+                    )
 
   # Perform
-  mrp_init_wfs_client(silent = TRUE)$
-    getCapabilities()$
-    findFeatureTypeByName(info$id)$
-    getDescription(pretty = TRUE) %>%
-    dplyr::transmute(data_product = product_name, column_name = name, type)
+  request <- httr2::url_build(url) %>%
+    httr2::request() %>%
+    httr2::req_user_agent(mr_user_agent) %>%
+    httr2::req_perform()
+
+  resp <- request %>%
+    httr2::resp_body_xml() %>%
+    xml2::xml_find_all("//xsd:element")
+
+  out <- data.frame(
+    layer = layer,
+    colname = xml2::xml_attr(resp, "name"),
+    type = gsub("xsd:", "", xml2::xml_attr(resp, "type")),
+    stringsAsFactors = FALSE
+  )
+
+  out <- subset(out, out$colname != "the_geom")
+  out <- subset(out, out$colname != layer)
+
+  attr(out, "class") <- c("tbl_df", "tbl", "data.frame")
+
+  out
 
 }
 #' Get the names of the columns and data type of the data product
@@ -159,31 +170,29 @@ mrp_colnames <- memoise::memoise(.mrp_colnames)
 
 
 
+.mrp_col_unique <- function(layer, colname){
 
-.mrp_col_unique <- function(product_name, colname){
-  data_product <- NULL
-
-  checkmate::assert_character(product_name, len = 1)
-  checkmate::assert_choice(product_name, mrp_list()$data_product)
+  checkmate::assert_character(layer, len = 1)
+  checkmate::assert_choice(layer, mrp_list$layer)
 
   checkmate::assert_character(colname, len = 1)
-  colnames <- mrp_colnames(product_name)
+  colnames <- mrp_colnames(layer)
   checkmate::assert_choice(colname, colnames[, 2])
 
-  # Geometry column not allowed
-  datatype <- tolower(subset(colnames[, 3], colnames[, 2] == colname))
-  if(datatype == "geometry"){ stop("`colname` of type geometry are not accepted. See ?mrp_col_unique", call. = FALSE) }
 
   # Config
-  info <- mrp_list() %>%
-    dplyr::filter(data_product == product_name)
-
-  url <- glue::glue(
-    "https://geo.vliz.be/geoserver/wfs?service=wfs&version=2.0.0&request=GetPropertyValue&typeNames={info$id}&valueReference={colname}"
+  namespace <- subset(mrp_list$namespace, mrp_list$layer == layer)
+  url <- httr2::url_parse("https://geo.vliz.be/geoserver/ows")
+  url$query <- list(service = "wfs",
+                    version = "2.0.0",
+                    request = "GetPropertyValue",
+                    typeNames = glue::glue("{namespace}:{layer}"),
+                    valueReference = colname
   )
 
   # Perform
-  resp <- httr2::request(url) %>%
+  resp <- httr2::url_build(url) %>%
+    httr2::request() %>%
     httr2::req_user_agent(mr_user_agent) %>%
     httr2::req_perform() %>%
     httr2::resp_body_xml() %>%
@@ -191,12 +200,12 @@ mrp_colnames <- memoise::memoise(.mrp_colnames)
     xml2::xml_text() %>%
     unique()
 
-
-  if(datatype %in% c("numeric", "integer", "double")) resp <- resp %>% as.numeric()
+  datatype <- tolower(subset(colnames[, 3], colnames[, 2] == colname))
+  if(datatype %in% c("numeric", "int", "double")) resp <- resp %>% as.numeric()
   if(datatype %in% c("date")) resp <- resp %>% lubridate::as_date()
   if(datatype %in% c("timestamp")) resp <- resp %>% lubridate::as_datetime()
 
-  resp
+  sort(resp)
 }
 #' Get all the possible values of a column of a Marine Regions data product
 #'

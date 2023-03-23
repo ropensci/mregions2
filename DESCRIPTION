@@ -31,7 +31,6 @@ Imports:
     cli,
     dplyr,
     lubridate,
-    ows4R (>= 0.3),
     purrr,
     xml2,
     wrapr,
@@ -42,6 +41,7 @@ URL: https://github.com/lifewatch/mregions2,
     https://lifewatch.github.io/mregions2/
 BugReports: https://github.com/lifewatch/mregions2/issues
 Suggests: 
+    ows4R (>= 0.3),
     httptest,
     httptest2,
     jsonlite,
@@ -55,3 +55,5 @@ Suggests:
     wk
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
+Depends: 
+    R (>= 2.10)

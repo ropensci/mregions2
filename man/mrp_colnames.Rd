@@ -4,7 +4,7 @@
 \alias{mrp_colnames}
 \title{Get the names of the columns and data type of the data product}
 \usage{
-mrp_colnames(product_name)
+mrp_colnames(layer)
 }
 \arguments{
 \item{product_name}{(character) Identifier of the data product. See \code{\link[=mrp_list]{mrp_list()}}}

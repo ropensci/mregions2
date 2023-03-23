@@ -14,3 +14,4 @@
 ^test/testthat/*$
 ^vignettes/mregions2_cache$
 ^real-tests$
+^data-raw$
