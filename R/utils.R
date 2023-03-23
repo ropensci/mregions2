@@ -134,20 +134,8 @@ aggregate_sf <- function (x, by, FUN, ..., do_union = TRUE, simplify = TRUE,
   }
 }
 
-# clon of curl::has_internet() but using httr so it can be easily saved
-mr_has_internet <- function() {
-  test_url <- "r-project.org"
-
-  tryCatch({
-    res <- httr::HEAD(test_url, httr::timeout(5))
-    return(TRUE)
-  }, error = function(e) {
-    return(FALSE)
-  })
-}
-
 assert_internet <- function(){
-  if(!mr_has_internet()){
+  if(!curl::has_internet()){
     stop("No internet connection. Please check your network settings and try again.", call. = FALSE)
   }
 }
