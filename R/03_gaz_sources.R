@@ -32,9 +32,11 @@ gaz_search_by_source.character <- function(x, ...){
 #' @rdname gaz_search_by_source
 #' @export
 gaz_search_by_source.numeric <- function(x, ...){
-  source <- purrr::map_df(unique(x), ~gaz_rest_source_by_sourceid(.x))
+  source <- lapply(unique(x), gaz_rest_source_by_sourceid) %>%
+    lapply(`[[`, "source") %>%
+    unlist()
 
-  lapply(source["source"], gaz_search_by_source.character, ...) %>%
+  lapply(source, gaz_search_by_source.character, ...) %>%
     dplyr::bind_rows() %>%
     new_mr_df()
 
@@ -207,7 +209,7 @@ gaz_rest_source_by_sourceid <- function(sourceid){
   url <- glue::glue("https://marineregions.org/rest/getGazetteerSourceBySourceID.json/{sourceid}/")
 
   resp <- httr2::request(url) %>%
-    httr2::req_user_agent("mregions2") %>%
+    httr2::req_user_agent(mr_user_agent) %>%
     httr2::req_headers(accept = "application/json") %>%
     httr2::req_perform() %>%
     httr2::resp_body_json() %>%

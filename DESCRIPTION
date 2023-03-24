@@ -31,11 +31,9 @@ Imports:
     cli,
     dplyr,
     lubridate,
-    purrr,
     xml2,
     wrapr,
-    methods,
-    httr
+    methods
 RoxygenNote: 7.2.0
 URL: https://github.com/lifewatch/mregions2,
     https://lifewatch.github.io/mregions2/
@@ -52,7 +50,8 @@ Suggests:
     mregions,
     rmarkdown,
     testthat,
-    wk
+    wk,
+    purrr
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 Depends: 

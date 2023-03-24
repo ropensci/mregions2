@@ -140,20 +140,16 @@ assert_internet <- function(){
   }
 }
 
-.assert_service <- function(url_test){
-  resp <- httr::GET(url_test, httr::add_headers(`User-Agent` = mr_user_agent))
-  resp$content <- NULL
-
-  if(httr::http_error(resp)){
-    cli::cli_abort(c(
-      "x" = "Connection to {.url {url_test}} failed",
-      "i" = "Reason: {.val {httr::http_status(resp)$message}}"
-    ), call = NULL)
-  }
-
+assert_service <- function(url_test){
+  resp <- httr2::request(url_test) %>%
+    httr2::req_user_agent(mr_user_agent) %>%
+    httr2::req_error(is_error = function(resp) FALSE) %>%
+    httr2::req_perform() %>%
+    httr2::resp_check_status(c(
+      "x" = glue::glue("Connection to <{url_test}> failed")
+    ))
   invisible(NULL)
 }
-assert_service <- memoise::memoise(.assert_service)
 
 assert_only_one_filter <- function(cql_filter, filter){
   both_filters_given <- !is.null(cql_filter) & !is.null(filter)

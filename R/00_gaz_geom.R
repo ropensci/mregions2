@@ -169,7 +169,7 @@ geom_perform <- function(url, format, multipart = TRUE, mrgid,
   # Request
   geom <- httr2::request(url) %>%
     httr2::req_error(is_error = function(resp) FALSE) %>%
-    httr2::req_user_agent("mregions2") %>%
+    httr2::req_user_agent(mr_user_agent) %>%
     httr2::req_headers(accept = "text/turtle") %>%
     httr2::req_perform()
 

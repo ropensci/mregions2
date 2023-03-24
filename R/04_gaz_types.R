@@ -18,7 +18,7 @@ gaz_rest_types <- function(){
   url <- "https://marineregions.org/rest/getGazetteerTypes.json/"
 
   resp <- httr2::request(url) %>%
-    httr2::req_user_agent("mregions2") %>%
+    httr2::req_user_agent(mr_user_agent) %>%
     httr2::req_headers(accept = "application/json") %>%
     httr2::req_perform() %>%
     httr2::resp_body_json() %>%
