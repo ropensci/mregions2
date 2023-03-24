@@ -10,9 +10,9 @@ mrp_col_unique(layer, colname)
 mrp_col_distinct(layer, colname)
 }
 \arguments{
-\item{colname}{(character) Column name in the data product. See \code{\link[=mrp_colnames]{mrp_colnames()}}}
+\item{layer}{(character) Identifier of the data product. See \code{\link[=mrp_list]{mrp_list()}}}
 
-\item{product_name}{(character) Identifier of the data product. See \code{\link[=mrp_list]{mrp_list()}}}
+\item{colname}{(character) Column name in the data product. See \code{\link[=mrp_colnames]{mrp_colnames()}}}
 }
 \value{
 A numeric or character vector with the unique values of a column of a Marine Regions data product.

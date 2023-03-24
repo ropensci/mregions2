@@ -7,7 +7,7 @@
 mrp_colnames(layer)
 }
 \arguments{
-\item{product_name}{(character) Identifier of the data product. See \code{\link[=mrp_list]{mrp_list()}}}
+\item{layer}{(character) Identifier of the data product. See \code{\link[=mrp_list]{mrp_list()}}}
 }
 \value{
 A data frame with the column names and data type in the Marine Regions data product

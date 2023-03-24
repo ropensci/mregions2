@@ -1,24 +1,24 @@
 #' Get a data product
 #'
-#' @param product_name (character) Identifier of the data product. See [mrp_list()]
-#' @param ... Any [vendor params](https://docs.geoserver.org/latest/en/user/services/wfs/vendor.html) to be passed to the [GetFeature](https://docs.geoserver.org/latest/en/user/services/wfs/reference.html?highlight=getfeatures#getfeature) request. See details.
+#' @param layer (character) Identifier of the data product. See [mrp_list()]
+#' @param cql_filter (character) Contextual Query Language (CQL) filter. See details.
+#' @param filter (character) Standard OGC filter specification. See details.
+#' @param count (numeric) Maximum number of features to be retrieved.
 #'
 #' @details
-#'    This function uses [WFS services](https://en.wikipedia.org/wiki/Web_Feature_Service) to load retrieve the Marine Regions Data products. The data products
-#'    are stored in a [geoserver instance](https://geo.vliz.be) hosted and maintained by the [Flanders Marine Institute (VLIZ)](https://www.vliz.be)
+#'   This function uses [WMS services](https://en.wikipedia.org/wiki/Web_Map_Service) to load quickly
+#'   a Leaflet viewer of a Marine Regions data product. It uses [EMODnet Bathymetry](https://emodnet.ec.europa.eu) as background layer.
 #'
-#'   # Vendor Params
-#'   [Vendor params](https://docs.geoserver.org/latest/en/user/services/wfs/vendor.html) can be passed to a [WFS GetFeature](https://docs.geoserver.org/latest/en/user/services/wfs/reference.html?highlight=getfeatures#getfeature) request.
-#'   `mregions2` uses the [ows4R](https://github.com/eblondel/ows4R) package as the [interface to query the WFS service with R.](https://github.com/eblondel/ows4R/wiki#wfs) You can pass any vendor parameters via `...`.
-#'   For instance, you can pass CQL or OGC filters with `cql_filter="<the filter>"` or `filter="<the filter>"`. You can change the projection with `srsName="<CRS>"`, only the features in a certain bounding box with `bbox="a1,b1,a2,b2,<CRS>"`
-#'   where `a1`, `b1`, `a2` and `b2` are the coordinates and the `CRS` selects the coordinate reference system of this bounding box, or [any other vendor parameters accepted by geoserver](https://docs.geoserver.org/latest/en/user/services/wfs/vendor.html).
 #'
-#'   # Filtering
+#'   ## Filters
+#'
 #'   Both the [Contextual Query Language (CQL) filter](https://portal.ogc.org/files/96288) and the [standard OGC filter specification](https://www.ogc.org/standards/filter) allow to
 #'   query the server before performing a request. This will boost performance as you will only retrieve the area of your interest. It is possible to query on attributes, but also perform
 #'   geospatial queries. For instance, you can query a bounding box of interest.
 #'
+#'   CQL filters are possible only in geoserver. Marine Regions uses a geoserver instance to serve its data products.
 #'   A tutorial on CQL filters is available in the [geoserver web site](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html).
+#'
 #'
 #' @return An sf object with the Marine Regions data product
 #' @export
@@ -68,7 +68,8 @@ mrp_get <- function(layer, cql_filter = NULL, filter = NULL, count = NULL){
   checkmate::assert_character(cql_filter, null.ok = TRUE, len = 1)
   checkmate::assert_character(filter, null.ok = TRUE, len = 1)
   assert_only_one_filter(cql_filter, filter)
-  count <- checkmate::assert_integerish(count, lower = 1, len = 1, coerce = TRUE)
+  count <- checkmate::assert_integerish(count, lower = 1, len = 1,
+                                        coerce = TRUE, null.ok = TRUE)
 
   # Config
   namespace <- subset(mrp_list$namespace, mrp_list$layer == layer)
@@ -83,12 +84,43 @@ mrp_get <- function(layer, cql_filter = NULL, filter = NULL, count = NULL){
                     outputFormat = "text/csv")
 
   # Perform
-  request <- httr2::url_build(url) %>%
+  resp <- httr2::url_build(url) %>%
     httr2::request() %>%
     httr2::req_user_agent(mr_user_agent) %>%
-    httr2::req_perform(path = NULL)
+    httr2::req_error(is_error = function(resp) FALSE) %>%
+    httr2::req_perform()
 
-  resp <- request %>%
+  # If something wrong, e.g. wrong filter, raise
+  if(httr2::resp_is_error(resp)){
+
+    status <- httr2::resp_status(resp)
+    desc <- httr2::resp_status_desc(resp)
+
+    msg <- c("!" = "HTTP {status} {desc}",
+             "i" = "Layer: {.val {layer}}")
+
+    try({
+      exception <- httr2::resp_body_xml(resp) %>%
+        xml2::xml_find_all(glue::glue("//ows:Exception"))
+
+      exception_code <- exception %>%
+        xml2::xml_attr("exceptionCode")
+
+      exception_text <- exception %>%
+        xml2::xml_find_all(glue::glue("//ows:ExceptionText")) %>%
+        xml2::xml_text()
+
+      msg <- c(msg,
+               "i" = "Exception Code: {.emph {exception_code}}",
+               "i" = "Exception text: {.emph {exception_text}}"
+               )
+
+    })
+    cli::cli_abort(msg)
+  }
+
+  # Continue if all ok
+  resp <- resp %>%
     httr2::resp_body_string(encoding = "UTF-8") %>%
     textConnection() %>%
     read.csv(stringsAsFactors = FALSE, fileEncoding = "UTF-8")
@@ -146,7 +178,7 @@ mrp_get <- function(layer, cql_filter = NULL, filter = NULL, count = NULL){
 }
 #' Get the names of the columns and data type of the data product
 #'
-#' @param product_name (character) Identifier of the data product. See [mrp_list()]
+#' @param layer (character) Identifier of the data product. See [mrp_list()]
 #'
 #' @details
 #'   This function becomes useful to write CQL or OGC filters that you can pass to [mrp_get()] or [mrp_view()] as
@@ -209,7 +241,7 @@ mrp_colnames <- memoise::memoise(.mrp_colnames)
 }
 #' Get all the possible values of a column of a Marine Regions data product
 #'
-#' @param product_name (character) Identifier of the data product. See [mrp_list()]
+#' @param layer (character) Identifier of the data product. See [mrp_list()]
 #' @param colname (character) Column name in the data product. See [mrp_colnames()]
 #'
 #' @details
