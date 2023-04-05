@@ -113,10 +113,10 @@ gaz_relations(3293)
 
 In addition to the Marine Regions Gazetteer, the Marine Regions Team creates and hosts geographical Data Products, being the most popular one the [Marine Regions Maritime Boundaries](https://marineregions.org/eez.php).
 
-An overview of all available products can be consulted with `mrp_list()`
+An overview of all available products can be consulted with `mrp_list`
 
 ```{r prod_list}
-mrp_list()
+mrp_list
 ```
 
 You can visualize the Marine Regions Data Products with `mrp_view()`. It opens an interactive `leaflet::leaflet` viewer.
@@ -132,7 +132,7 @@ Or you can load the data products into R with `mrp_get()`
 mrp_get("eez")
 ```
 
-Get to know more in the [Get Started article](https://lifewatch.github.io/mregions2/articles/mregions2.html).
+Get to know more in the [Get Started vignette](https://lifewatch.github.io/mregions2/articles/mregions2.html).
 
 ## Citation
 ```{r citation, cache=FALSE}

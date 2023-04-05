@@ -239,26 +239,51 @@ creates and hosts geographical Data Products, being the most popular one
 the [Marine Regions Maritime
 Boundaries](https://marineregions.org/eez.php).
 
-An overview of all available products can be consulted with `mrp_list()`
+An overview of all available products can be consulted with `mrp_list`
 
 ``` r
-mrp_list()
-#> Loading ISO 19139 XML schemas...
-#> Loading ISO 19115 codelists...
-#> # A tibble: 21 × 8
-#>    title                data_product license citation doi   imis  abstract id   
-#>    <chr>                <chr>        <chr>   <chr>    <chr> <chr> <chr>    <glu>
-#>  1 Exclusive Economic … eez          Creati… "Flande… http… http… "Versio… Mari…
-#>  2 Maritime Boundaries… eez_boundar… Creati… "Flande… http… http… "Versio… Mari…
-#>  3 Territorial Seas (1… eez_12nm     Creati… "Flande… http… http… "Versio… Mari…
-#>  4 Contiguous Zones (2… eez_24nm     Creati… "Flande… http… http… "Versio… Mari…
-#>  5 Internal Waters (v3… eez_interna… Creati… "Flande… http… http… "Versio… Mari…
-#>  6 Archipelagic Waters… eez_archipe… Creati… "Flande… http… http… "Versio… Mari…
-#>  7 High Seas (v1, worl… high_seas    Creati… "Flande… http… http… "High S… Mari…
-#>  8 Extended Continenta… ecs          Creati… "Flande… http… http… "This d… Mari…
-#>  9 Extended Continenta… ecs_boundar… Creati… "Flande… http… http… "This d… Mari…
-#> 10 IHO Sea Areas (v3)   iho          Creati… "Flande… http… http… "World … Mari…
-#> # … with 11 more rows
+mrp_list
+#> Memoised Function:
+#> function() {
+#>   # Avoid "no visible binding for global variable" R CMD Check NOTE
+#>   title <- abstract <- data_product <- product_layer <- geoserverID <- NULL
+#>   license <- citation <- doi <- imis <- abstract <- id <- NULL
+#> 
+#>   mrp_list <- utils::read.delim2(
+#>     system.file("mrp_list.csv", package = "mregions2"),
+#>     header = TRUE,
+#>     sep = ";",
+#>     dec = ".",
+#>     fileEncoding = "UTF-8"
+#>   ) %>% dplyr::mutate(
+#>     geoserverID = glue::glue("{product_namespace}:{product_layer}")
+#>   )
+#> 
+#>   # Get Info from WFS
+#>   wfs <- mrp_init_wfs_client(silent = TRUE)
+#>   capabilities <- wfs$getCapabilities()
+#>   caps_ft <- purrr::map(mrp_list$geoserverID, ~ capabilities$findFeatureTypeByName(.x))
+#> 
+#>   mrp_list <- mrp_list %>% dplyr::mutate(
+#>     title = purrr::map_chr(caps_ft, ~ .x$getTitle()),
+#>     abstract = purrr::map_chr(caps_ft, ~ .x$getAbstract())
+#>   ) %>% dplyr::select(
+#>     title,
+#>     data_product = product_layer,
+#>     license,
+#>     citation,
+#>     doi,
+#>     imis,
+#>     abstract,
+#>     id = geoserverID
+#>   )
+#> 
+#>   # Turn into tibble
+#>   attr(mrp_list, "class") <- c("tbl_df", "tbl", "data.frame")
+#> 
+#>   mrp_list
+#> }
+#> <environment: namespace:mregions2>
 ```
 
 You can visualize the Marine Regions Data Products with `mrp_view()`. It
@@ -302,7 +327,7 @@ mrp_get("eez")
 ```
 
 Get to know more in the [Get Started
-article](https://lifewatch.github.io/mregions2/articles/mregions2.html).
+vignette](https://lifewatch.github.io/mregions2/articles/mregions2.html).
 
 ## Citation
 

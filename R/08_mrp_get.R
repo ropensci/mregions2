@@ -1,6 +1,6 @@
 #' Get a data product
 #'
-#' @param layer (character) Identifier of the data product. See [mrp_list()]
+#' @param layer (character) Identifier of the data product. See [mrp_list]
 #' @param cql_filter (character) Contextual Query Language (CQL) filter. See details.
 #' @param filter (character) Standard OGC filter specification. See details.
 #' @param count (numeric) Maximum number of features to be retrieved.
@@ -23,13 +23,13 @@
 #' @return An sf object with the Marine Regions data product
 #' @export
 #'
-#' @seealso [mrp_list()] to describe the list of products, [mrp_view()] to visualize the data product in advance, [mrp_colnames()] and [mrp_col_unique()] to get the name, data type and unique values of a the columns of a data product, useful to query
+#' @seealso [mrp_list] to describe the list of products, [mrp_view()] to visualize the data product in advance, [mrp_colnames()] and [mrp_col_unique()] to get the name, data type and unique values of a the columns of a data product, useful to query
 #' with the arguments `cql_filter` or `filter`
 #'
 #' @examples
 #' \dontrun{
 #' # See the list of all data products
-#' View(mrp_list())
+#' View(mrp_list)
 #'
 #' # We want the Exclusive Economic Zones of Portugal. Let's first visualize the product:
 #' mrp_view("eez")
@@ -182,7 +182,7 @@ mrp_get <- function(layer, cql_filter = NULL, filter = NULL, count = NULL){
 }
 #' Get the names of the columns and data type of the data product
 #'
-#' @param layer (character) Identifier of the data product. See [mrp_list()]
+#' @param layer (character) Identifier of the data product. See [mrp_list]
 #'
 #' @details
 #'   This function becomes useful to write CQL or OGC filters that you can pass to [mrp_get()] or [mrp_view()] as
@@ -195,7 +195,7 @@ mrp_get <- function(layer, cql_filter = NULL, filter = NULL, count = NULL){
 #' @return A data frame with the column names and data type in the Marine Regions data product
 #' @export
 #'
-#' @seealso [mrp_list()] to describe the list of products, [mrp_col_unique()] to get the unique values of a the
+#' @seealso [mrp_list] to describe the list of products, [mrp_col_unique()] to get the unique values of a the
 #' columns of a data product, useful to write queries that can be passed to [mrp_get()] or [mrp_view()] via the
 #' arguments `cql_filter` or `filter`.
 #'
@@ -247,7 +247,7 @@ mrp_colnames <- memoise::memoise(.mrp_colnames)
 }
 #' Get all the possible values of a column of a Marine Regions data product
 #'
-#' @param layer (character) Identifier of the data product. See [mrp_list()]
+#' @param layer (character) Identifier of the data product. See [mrp_list]
 #' @param colname (character) Column name in the data product. See [mrp_colnames()]
 #'
 #' @details
@@ -262,7 +262,7 @@ mrp_colnames <- memoise::memoise(.mrp_colnames)
 #' @return A numeric or character vector with the unique values of a column of a Marine Regions data product.
 #' @export
 #'
-#' @seealso [mrp_list()] to describe the list of products, [mrp_colnames()] to get the names and data type of
+#' @seealso [mrp_list] to describe the list of products, [mrp_colnames()] to get the names and data type of
 #' the columns of a data product, useful to write queries that can be passed to [mrp_get()] or [mrp_view()] via
 #' the arguments `cql_filter` or `filter`.
 #'

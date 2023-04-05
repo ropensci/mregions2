@@ -7,7 +7,7 @@
 mrp_get(layer, cql_filter = NULL, filter = NULL, count = NULL)
 }
 \arguments{
-\item{layer}{(character) Identifier of the data product. See \code{\link[=mrp_list]{mrp_list()}}}
+\item{layer}{(character) Identifier of the data product. See \link{mrp_list}}
 
 \item{cql_filter}{(character) Contextual Query Language (CQL) filter. See details.}
 
@@ -37,7 +37,7 @@ A tutorial on CQL filters is available in the \href{https://docs.geoserver.org/s
 \examples{
 \dontrun{
 # See the list of all data products
-View(mrp_list())
+View(mrp_list)
 
 # We want the Exclusive Economic Zones of Portugal. Let's first visualize the product:
 mrp_view("eez")
@@ -70,6 +70,6 @@ mrp_get("eez", count = 5)
 }
 }
 \seealso{
-\code{\link[=mrp_list]{mrp_list()}} to describe the list of products, \code{\link[=mrp_view]{mrp_view()}} to visualize the data product in advance, \code{\link[=mrp_colnames]{mrp_colnames()}} and \code{\link[=mrp_col_unique]{mrp_col_unique()}} to get the name, data type and unique values of a the columns of a data product, useful to query
+\link{mrp_list} to describe the list of products, \code{\link[=mrp_view]{mrp_view()}} to visualize the data product in advance, \code{\link[=mrp_colnames]{mrp_colnames()}} and \code{\link[=mrp_col_unique]{mrp_col_unique()}} to get the name, data type and unique values of a the columns of a data product, useful to query
 with the arguments \code{cql_filter} or \code{filter}
 }

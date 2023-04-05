@@ -10,7 +10,7 @@ mrp_col_unique(layer, colname)
 mrp_col_distinct(layer, colname)
 }
 \arguments{
-\item{layer}{(character) Identifier of the data product. See \code{\link[=mrp_list]{mrp_list()}}}
+\item{layer}{(character) Identifier of the data product. See \link{mrp_list}}
 
 \item{colname}{(character) Column name in the data product. See \code{\link[=mrp_colnames]{mrp_colnames()}}}
 }
@@ -35,7 +35,7 @@ mrp_col_unique("ecs", "pol_type")
 mrp_col_unique("ecs_boundaries", "line_type")
 }
 \seealso{
-\code{\link[=mrp_list]{mrp_list()}} to describe the list of products, \code{\link[=mrp_colnames]{mrp_colnames()}} to get the names and data type of
+\link{mrp_list} to describe the list of products, \code{\link[=mrp_colnames]{mrp_colnames()}} to get the names and data type of
 the columns of a data product, useful to write queries that can be passed to \code{\link[=mrp_get]{mrp_get()}} or \code{\link[=mrp_view]{mrp_view()}} via
 the arguments \code{cql_filter} or \code{filter}.
 }

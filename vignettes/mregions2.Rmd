@@ -276,11 +276,11 @@ See the [Marine Regions Gazetteer as RDF article](https://lifewatch.github.io/mr
 
 # Marine Regions Data Products
 
-The main function to load a Marine Regions Data Product into R is `mrp_get()`. To select a data product, you have to pass the `data_product`.
+The main function to load a Marine Regions Data Product into R is `mrp_get()`. To select a data product, you have to pass the `layer` argument.
 
 ```{r}
 # See the full list of data products
-mrp_list()
+mrp_list
 
 # Get the Extended Continental Shelves
 mrp_get("ecs")
@@ -294,7 +294,7 @@ mrp_view("ecs")
 
 It returns a `leaflet::leaflet` interactive map with the data product requested added via Web Map Services.
 
-Note `leaflet::leaflet` and `leaflet.extras2::leaflet.extras2` are required by `mrp_view()` but listed only as "Suggests". Install these packages to use `mrp_view()`
+Note `leaflet::leaflet` and `leaflet.extras2::leaflet.extras2` are required by `mrp_view()` but listed only as "Suggests". Install these packages to use `mrp_view()`.
 
 
 ## Filtering
@@ -339,7 +339,7 @@ mrp_get("ecs", cql_filter = "pol_type = 'ECS Overlapping claim'")
 
 ### OGC, CQL and ECQL Filters
 
-There are many types of filter allowed via standard OGC or CQL filters. `mrp_get()` and `mrp_view()` use OGC [WFS](https://en.wikipedia.org/wiki/Web_Feature_Service) and [WMS](https://en.wikipedia.org/wiki/Web_Map_Service) respectively. On the R side, `mrp_get()` uses the package `ows4R::ows4R`, and any vendor parameters can be passed to the method `getFeatures()` as e.g. `count` (WFS version 2.0.0). 
+There are many types of filter allowed via standard OGC or CQL filters. `mrp_get()` and `mrp_view()` use OGC [WFS](https://en.wikipedia.org/wiki/Web_Feature_Service) and [WMS](https://en.wikipedia.org/wiki/Web_Map_Service) respectively. You can also limit the number of features requested with the `count` parameter.
 
 ```{r prod5}
 # Get only one feature
@@ -381,43 +381,3 @@ Note that all the data products of Marine Regions are served via the [VLIZ geose
 Whenever the documentation refers to CQL, ECQL syntax can be used as well.
 
 I recommend the `vignette("ecql_filtering", package = "EMODnetWFS")` of the `?EMODnetWFS::EMODnetWFS` R package to know more. The principles explained there are useful also for mregions2.
-
-## WFS Client and more
-
-Using directly `ows4R::ows4R` instead of mregions2 is always an option. mregions2 exports `mrp_init_wfs_client()`. This will start a WFS client at:
-
-> `https://geo.vliz.be/geoserver/wfs`
-
-```{r}
-wfs <- mrp_init_wfs_client()
-
-class(wfs)
-```
-
-As a reference, the layers with Marine Regions Data Products are defined together with its namespace in `mrp_list()` in the field `id`:
-
-```{r}
-mrp_list() %>% select(id)
-```
-
-Bypassing `mrp_get()` would look like:
-
-```{r}
-wfs$getFeatures("MarineRegions:ecs", count = 1)
-```
-
-But there is also extra information that is not surfaced in mregions2. For instance, if you would like to know the bounding box of a data product:
-
-```{r}
-# Get Capabilities
-caps <- wfs$getCapabilities()
-
-# Find a data product
-ft <- caps$findFeatureTypeByName("MarineRegions:ecs")
-
-# Get Bounding Box
-ft$getBoundingBox()
-```
-
-More information at the `ows4R::ows4R` wiki page: <https://github.com/eblondel/ows4R/wiki>.
-

@@ -100,12 +100,12 @@ A tutorial on CQL filters is available in the \href{https://docs.geoserver.org/s
 \subsection{Helpers}{
 
 A series of helpers was made available to ease the visualization of the data products, try \verb{mrp_view_*()}
-with the identifier of the data product (see \code{\link[=mrp_list]{mrp_list()}})
+with the identifier of the data product (see \link{mrp_list})
 }
 }
 \examples{
 \dontrun{
-# You can pass a product name from mrp_list()
+# You can pass a product name from mrp_list
 mrp_view('eez')
 
 # Or use the helper
@@ -138,6 +138,6 @@ mrp_view_eez_boundaries(
 }
 }
 \seealso{
-\code{\link[=mrp_list]{mrp_list()}} to describe the list of products, \code{\link[=mrp_colnames]{mrp_colnames()}} and \code{\link[=mrp_col_unique]{mrp_col_unique()}} to get the name, data type and unique values of a the columns of a data product, useful to query
+\link{mrp_list} to describe the list of products, \code{\link[=mrp_colnames]{mrp_colnames()}} and \code{\link[=mrp_col_unique]{mrp_col_unique()}} to get the name, data type and unique values of a the columns of a data product, useful to query
 with the arguments \code{cql_filter} or \code{filter}, \code{\link[=mrp_get]{mrp_get()}} to get the data products as a \link[=sf]{simple feature} object.
 }
