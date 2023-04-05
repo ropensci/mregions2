@@ -70,6 +70,7 @@ mrp_get <- function(layer, cql_filter = NULL, filter = NULL, count = NULL){
   assert_only_one_filter(cql_filter, filter)
   count <- checkmate::assert_integerish(count, lower = 1, len = 1,
                                         coerce = TRUE, null.ok = TRUE)
+  assert_internet()
 
   # Config
   namespace <- subset(mrp_list$namespace, mrp_list$layer == layer)
@@ -123,12 +124,14 @@ mrp_get <- function(layer, cql_filter = NULL, filter = NULL, count = NULL){
   resp <- resp %>%
     httr2::resp_body_string(encoding = "UTF-8") %>%
     textConnection() %>%
-    read.csv(stringsAsFactors = FALSE, fileEncoding = "UTF-8")
+    utils::read.csv(stringsAsFactors = FALSE, fileEncoding = "UTF-8")
 
   attr(resp, "class") <- c("tbl_df", "tbl", "data.frame")
 
   out <- sf::st_as_sf(resp, wkt = "the_geom", crs = 4326)
   out$FID <- NULL
+
+  mrp_list <- NULL
 
   out
 }
@@ -137,7 +140,6 @@ mrp_get <- function(layer, cql_filter = NULL, filter = NULL, count = NULL){
 
 
 .mrp_colnames <- function(layer){
-  layer <- name <- type <- NULL
 
   checkmate::assert_character(layer, len = 1)
   checkmate::assert_choice(layer, mrp_list$layer)
@@ -172,6 +174,8 @@ mrp_get <- function(layer, cql_filter = NULL, filter = NULL, count = NULL){
   out <- subset(out, out$colname != layer)
 
   attr(out, "class") <- c("tbl_df", "tbl", "data.frame")
+
+  mrp_list <- NULL
 
   out
 
@@ -208,8 +212,8 @@ mrp_colnames <- memoise::memoise(.mrp_colnames)
   checkmate::assert_choice(layer, mrp_list$layer)
 
   checkmate::assert_character(colname, len = 1)
-  colnames <- mrp_colnames(layer)
-  checkmate::assert_choice(colname, colnames[, 2])
+  column_names <- mrp_colnames(layer)
+  checkmate::assert_choice(colname, column_names$colname)
 
 
   # Config
@@ -232,10 +236,12 @@ mrp_colnames <- memoise::memoise(.mrp_colnames)
     xml2::xml_text() %>%
     unique()
 
-  datatype <- tolower(subset(colnames[, 3], colnames[, 2] == colname))
+  datatype <- tolower(subset(column_names$type, column_names$colname == colname))
   if(datatype %in% c("numeric", "int", "double")) resp <- resp %>% as.numeric()
-  if(datatype %in% c("date")) resp <- resp %>% lubridate::as_date()
-  if(datatype %in% c("timestamp")) resp <- resp %>% lubridate::as_datetime()
+  if(datatype %in% c("date")) resp <- resp %>% as.Date()
+  if(datatype %in% c("timestamp")) resp <- resp %>% as.POSIXct(tz = "UTC")
+
+  mrp_list <- NULL
 
   sort(resp)
 }

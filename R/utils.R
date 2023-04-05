@@ -86,54 +86,6 @@ c_rdf <- function(...){
   rdf
 }
 
-# sf:::aggregate.sf
-# v1.0.7
-aggregate_sf <- function (x, by, FUN, ..., do_union = TRUE, simplify = TRUE,
-          join = sf::st_intersects)
-{
-  if (inherits(by, "sf") || inherits(by, "sfc")) {
-    if (inherits(by, "sfc"))
-      by <- sf::st_sf(by)
-    i <- join(sf::st_geometry(by), sf::st_geometry(x))
-    sf::st_geometry(x) <- NULL
-    a <- stats::aggregate(x[unlist(i), , drop = FALSE], list(rep(seq_len(nrow(by)),
-                                                         lengths(i))), FUN, ...)
-    nrow_diff <- nrow(by) - nrow(a)
-    if (nrow_diff > 0) {
-      a_na <- a[rep(NA, nrow(by)), ]
-      a_na[a$Group.1, ] <- a
-      a <- a_na
-    }
-    a$Group.1 <- NULL
-    row.names(a) <- row.names(by)
-    sf::st_set_geometry(a, sf::st_geometry(by))
-  }
-  else {
-    crs <- sf::st_crs(x)
-    lst <- lapply(split(sf::st_geometry(x), by), function(y) do.call(c,
-                                                                    y))
-    geom <- do.call(sf::st_sfc, lst[!sapply(lst, is.null)])
-    if (do_union)
-      geom <- sf::st_union(sf::st_set_precision(geom, sf::st_precision(x)),
-                      by_feature = TRUE)
-    sf::st_geometry(x) <- NULL
-    x <- stats::aggregate(x, by, FUN, ..., simplify = simplify)
-    sf::st_geometry(x) <- geom
-    sf::st_crs(x) <- crs
-    geoms <- which(vapply(x, function(vr) inherits(vr, "sfc"),
-                         TRUE))
-    agr_names <- names(x)[-geoms]
-    agr <- rep("aggregate", length(agr_names))
-    names(agr) <- agr_names
-    n <- if (!is.null(names(by)))
-      names(by)
-    else paste0("Group.", seq_along(by))
-    agr[n] <- "identity"
-    sf::st_agr(x) <- agr
-    x
-  }
-}
-
 assert_internet <- function(){
   if(!curl::has_internet()){
     stop("No internet connection. Please check your network settings and try again.", call. = FALSE)

@@ -111,6 +111,8 @@ mrp_view <- function(layer, cql_filter = NULL, filter = NULL){
       attribution = cite_mr
     ) %>% add_labels()
 
+  mrp_list <- NULL
+
   return(mrp_map)
 }
 

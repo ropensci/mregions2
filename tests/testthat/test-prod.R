@@ -1,20 +1,4 @@
 # Config
-load_httptest()
-
-httptest::set_redactor(function (x) {
-  require(magrittr, quietly=TRUE)
-  httptest::gsub_response(x, "https://geo.vliz.be/geoserver/", "geo/") %>%
-    httptest::gsub_response("https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/1/1/", "tiles/") %>%
-    httptest::gsub_response("https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/1/1/", "labels/")
-
-})
-
-httptest::set_requester(function (request) {
-  httptest::gsub_request(request, "https://geo.vliz.be/geoserver/", "geo/") %>%
-    httptest::gsub_request("https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/1/1/", "tiles/") %>%
-    httptest::gsub_request("https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/1/1/", "labels/")
-})
-
 skip_everywhere <- function(){
   skip_if_offline()
   skip_on_cran()
@@ -23,25 +7,13 @@ skip_everywhere <- function(){
 }
 
 # Perform
-test_that("Client can be created", {
-  skip_everywhere() # client is waaay too heavy
 
-  wfs <- .mrp_init_wfs_client()
-    expect_type(wfs, "environment")
-    expect_s3_class(wfs, "R6")
-    expect_s3_class(wfs, "WFSClient")
-})
-
-test_that("File with info exists", {
+test_that("Product list exists", {
   system.file("mrp_list.csv", package = "mregions2", mustWork = TRUE) %>%
     file.exists() %>%
     expect_true()
-})
 
-test_that("list function works", {
-  skip_everywhere()
-
-  x <- mrp_list()
+  x <- mrp_list
   expect_type(x, "list")
   expect_s3_class(x, c("tbl_df", "data.frame"))
   expect_gt(nrow(x), 1)
@@ -54,51 +26,128 @@ test_that("mrp_view() works", {
   x <- mrp_view("eez")
     expect_type(x, "list")
     expect_s3_class(x, c("leaflet", "htmlwidget"))
+})
 
-  # Test errors
+test_that("mrp_view() assertions work", {
+  .f <- function() assert_deps(c("thisisa", "fakepackagename"))
+  expect_error(.f(), "not installed")
+
+  .f <- function() mrp_view(1)
+  expect_error(.f())
+
   .f <- function() mrp_view("foo")
   expect_error(.f())
 
   .f <- function() mrp_view(c("eez", "eez_boundaries"))
   expect_error(.f())
+
+  .f <- function() mrp_view("eez",
+                            filter = "<Filter>
+                                        <PropertyIsEqualTo>
+                                          <PropertyName>mrgid</PropertyName>
+                                          <Literal>3293</Literal>
+                                        </PropertyIsEqualTo>
+                                      </Filter>",
+                            cql_filter = "mrgid=3293")
+  expect_error(.f())
+
+  .f <- function() mrp_view("eez", filter = 1)
+  expect_error(.f())
+
+  .f <- function() mrp_view("eez", cql_filter = 1)
+  expect_error(.f())
 })
 
-test_that("deps not installed", {
-  .f <- function() assert_deps(c("thisisa", "fakepackagename"))
-  expect_error(.f(), "not installed")
+test_that("mrp_get() assertions work", {
+  .f <- function() mrp_get(1)
+  expect_error(.f())
+
+  .f <- function() mrp_get("foo")
+  expect_error(.f())
+
+  .f <- function() mrp_get(c("eez", "eez_boundaries"))
+  expect_error(.f())
+
+  .f <- function() mrp_get("eez",
+                            filter = "<Filter>
+                                        <PropertyIsEqualTo>
+                                          <PropertyName>mrgid</PropertyName>
+                                          <Literal>3293</Literal>
+                                        </PropertyIsEqualTo>
+                                      </Filter>",
+                            cql_filter = "mrgid=3293")
+  expect_error(.f())
+
+  .f <- function() mrp_get("eez", filter = 1)
+  expect_error(.f())
+
+  .f <- function() mrp_get("eez", cql_filter = 1)
+  expect_error(.f())
+
+  .f <- function() mrp_get("eez", count = "1")
+  expect_error(.f())
 })
 
-# No internet test
-httptest::without_internet({
-  test_that("No internet messages works", {
-    .f <- function() mrp_init_wfs_client()
-    expect_error(.f(), regexp = 'No internet')
+test_that("Server status 500 handled", {
 
-    .f <- function() mrp_view("ecs")
-    expect_error(.f(), regexp = 'No internet')
+  mock_500 <- function(req) {
+    httr2::response(status_code = 500)
+  }
+
+  .f <- function(s){
+    httr2::with_mock(
+      mock_500,
+      assert_service(s)
+    )}
+
+  s <- "https://geo.vliz.be/geoserver/wfs?request=GetCapabilities"
+  expect_error(.f(s), regexp = "500")
+
+
+  s <- "https://geo.vliz.be/geoserver/MarineRegions/wms?"
+  expect_error(.f(s), regexp = "500")
+
+
+  s <- "https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/1/1/1.png"
+  expect_error(.f(s), regexp = "500")
+
+
+  s <- "https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/1/1/1.png"
+  expect_error(.f(s), regexp = "500")
+
+})
+
+httptest2::with_mock_dir("prod/fail/", {
+  test_that("Bad filters errors surfaced", {
+
+    .f <- function() mrp_get("eez", filter="<Filter>")
+    expect_error(.f(), "XML getFeature request SAX parsing error")
+
+    .f <- function() mrp_get("eez", filter="<Filter>")
+    expect_error(.f(), "XML getFeature request SAX parsing error")
+
+    .f <- function(){
+      mrp_get("eez", filter="
+        <Filter>
+          <PropertyIsEqualTo>
+            <PropertyName>notvalidparameter</PropertyName>
+            <Literal>3293</Literal>
+          </PropertyIsEqualTo>
+        </Filter>")
+    }
+    expect_error(.f(), "InvalidParameterValue")
+
+    .f <- function() mrp_get("eez", cql_filter ="notvalidparameter=3293")
+    expect_error(.f(), "InvalidParameterValue")
+
+    .f <- function() mrp_get("eez", cql_filter="mrgid='cannotcast'")
+    expect_error(.f(), "NoApplicableCode")
+
   })
 })
-
-# Mocked requests
-httptest::with_mock_dir("prod/fail/", {
-  test_that("Server status 500 handled", {
-    .f <- function() .assert_service("https://geo.vliz.be/geoserver/wfs?request=GetCapabilities")
-    expect_error(.f(), regexp = "500")
-
-    .f <- function() .assert_service("https://geo.vliz.be/geoserver/MarineRegions/wms?")
-    expect_error(.f(), regexp = "500")
-
-    .f <- function() .assert_service("https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/1/1/1.png")
-    expect_error(.f(), regexp = "500")
-
-    .f <- function() .assert_service("https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/1/1/1.png")
-    expect_error(.f(), regexp = "500")
-  })
-}, simplify = FALSE)
 
 httptest::with_mock_dir("prod/ok/", {
   test_that("mrp_colnames() works", {
-    skip_if_offline()
 
     # Returns a data frame
     x <- .mrp_colnames("ecs_boundaries")
@@ -124,7 +173,6 @@ httptest::with_mock_dir("prod/ok/", {
 
 
   test_that("mrp_col_unique() works", {
-    skip_if_offline()
 
     # two names for the same function
     expect_true(all.equal(mrp_col_unique, mrp_col_distinct))
@@ -169,7 +217,6 @@ httptest::with_mock_dir("prod/ok/", {
   })
 
   test_that("mrp_get() works", {
-    skip_if_offline()
 
     expect_sf <- function(x){
       expect_type(x, "list")

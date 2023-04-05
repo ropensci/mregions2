@@ -1,29 +1,25 @@
-# This package needs both httr and httr2:
-# uses httr2 for the gazetteer
-# uses httr for the data products via a dependency on ows4r
-# To avoid conflicts by masked functions, better to load the libraries in the tests
+library(httptest2)
 
-# clean up httptest2 or httptest to not mask functions
-load_httptest <- function(version){
-  suppressWarnings({
-    if("httptest2" %in% (.packages())){
-      httptest2::set_redactor(NULL)
-      detach("package:httptest2", unload=TRUE, force=TRUE)
-    }
-    library(httptest, warn.conflicts = FALSE)
-    options(httptest2.verbose =TRUE)
-  })
+httptest2::set_redactor(function (x) {
+  require(magrittr, quietly=TRUE)
+  # Gazetteer
+  httptest2::gsub_response(x, "https://marineregions.org/", "api/") %>%
+    httptest2::gsub_response("getGazetteerRecordsByName.json", "byname/") %>%
+    httptest2::gsub_response("getGazetteerRecordsByNames.json", "bynames/") %>%
+    httptest2::gsub_response("getGazetteerRecordByMRGID.json", "bymrgid/") %>%
+    httptest2::gsub_response("getGazetteerRecordsByLatLong.json", "bylatlong/") %>%
+    httptest2::gsub_response("getGazetteerGeometries.ttl", "geom/") %>%
+    httptest2::gsub_response("getGazetteerRecordsByType.json", "bytype/") %>%
+    httptest2::gsub_response("getGazetteerTypes.json", "types/") %>%
+    httptest2::gsub_response("getGazetteerRecordsBySource.json", "bysource/") %>%
+    httptest2::gsub_response("getGazetteerSources.json", "sources/") %>%
+    httptest2::gsub_response("getGazetteerSourceBySourceID.json", "sourceid/") %>%
+    httptest2::gsub_response("getGazetteerRelationsByMRGID.json", "relations/") %>%
+    httptest2::gsub_response("getGazetteerWMSes.json", "wms/") %>%
+    httptest2::gsub_response("getGazetteerNamesByMRGID.json", "toname/") %>%
 
-}
+    # Products
+    httptest2::gsub_response("https://geo.vliz.be/geoserver/", "geo/")
+})
 
-load_httptest2 <- function(version){
-  suppressWarnings({
-    if("httptest" %in% (.packages())){
-      httptest::set_redactor(NULL)
-      httptest::set_requester(NULL)
-      detach("package:httptest", unload=TRUE, force=TRUE)
-    }
-    library(httptest2, warn.conflicts = FALSE)
-    options(httptest.verbose=TRUE)
-  })
-}
+
