@@ -29,7 +29,7 @@ gaz_rest_names_by_mrgid <- function(mrgid){
   if(httr2::resp_status(resp) == 404){
     httr2::resp_check_status(resp, c(
       "x" = glue::glue("The MRGID <{mrgid}> does not exists.")
-    ), call = FALSE)
+    ))
   }
 
   # Sanity check

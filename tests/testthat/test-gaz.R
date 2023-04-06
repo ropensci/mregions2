@@ -167,7 +167,7 @@ httptest2::with_mock_dir("gaz", {
     expect_error(.f())
 
     .f <- function() gaz_rest_names_by_mrgid(999999999)
-    expect_error(.f(), regexp = "does not exists.")
+    expect_error(.f(), regexp = "does not exists", fixed = TRUE)
   })
 
 }, simplify = TRUE)
