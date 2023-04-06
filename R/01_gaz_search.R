@@ -158,7 +158,7 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
   # Add more info to error message if 404 not found
   if(httr2::resp_status(resp) == 404){
     httr2::resp_check_status(resp, c(
-      "i" = glue::glue("The MRGID <{mrgid}> does not exist.")
+      "i" = glue::glue("The MRGID <{mrgid}> does not exists.")
     ))
   }
 
