@@ -164,4 +164,7 @@ test_that("gaz_rest_names_by_mrgid", {
   .f <- function() gaz_rest_names_by_mrgid(1:2)
   expect_error(.f())
 
+  .f <- function() gaz_rest_names_by_mrgid(999999999)
+  expect_error(.f(), regexp = "does not exists.")
+
 })

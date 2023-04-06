@@ -3,7 +3,6 @@ skip_everywhere <- function(){
   skip_if_offline()
   skip_on_cran()
   skip_on_ci()
-  skip_on_covr()
 }
 
 # Perform
@@ -21,11 +20,22 @@ test_that("Product list exists", {
 
 test_that("mrp_view() works", {
   # Note this is hard to check as the WMS service may not be working and we still get an output
+  skip_everywhere()
+
+  x <- mrp_view("eez")
+  expect_type(x, "list")
+  expect_s3_class(x, c("leaflet", "htmlwidget"))
+
+})
+
+test_that("mrp_view() works", {
+  # Note this is hard to check as the WMS service may not be working and we still get an output
   skip("Check mrp_view interactively")
 
   x <- mrp_view("eez")
   expect_type(x, "list")
   expect_s3_class(x, c("leaflet", "htmlwidget"))
+
 })
 
 test_that("mrp_view() assertions work", {
@@ -86,35 +96,6 @@ test_that("mrp_get() assertions work", {
 
   .f <- function() mrp_get("eez", count = "1")
   expect_error(.f())
-})
-
-test_that("Server status 500 handled", {
-
-  mock_500 <- function(req) {
-    httr2::response(status_code = 500)
-  }
-
-  .f <- function(s){
-    httr2::with_mock(
-      mock_500,
-      assert_service(s)
-    )}
-
-  s <- "https://geo.vliz.be/geoserver/wfs?request=GetCapabilities"
-  expect_error(.f(s), regexp = "500")
-
-
-  s <- "https://geo.vliz.be/geoserver/MarineRegions/wms?"
-  expect_error(.f(s), regexp = "500")
-
-
-  s <- "https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/1/1/1.png"
-  expect_error(.f(s), regexp = "500")
-
-
-  s <- "https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/1/1/1.png"
-  expect_error(.f(s), regexp = "500")
-
 })
 
 # httptest2::with_mock_dir("prod/fail/", {

@@ -236,7 +236,10 @@ mrp_colnames <- memoise::memoise(.mrp_colnames)
     xml2::xml_text() %>%
     unique()
 
-  datatype <- tolower(subset(column_names$type, column_names$colname == colname))
+  datatype <- tolower(subset(
+    column_names$type,
+    column_names$colname == colname
+  ))
   if(datatype %in% c("numeric", "int", "double")) resp <- resp %>% as.numeric()
   if(datatype %in% c("date")) resp <- resp %>% as.Date()
   if(datatype %in% c("timestamp")) resp <- resp %>% as.POSIXct(tz = "UTC")
