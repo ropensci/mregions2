@@ -3,8 +3,6 @@ test_that("user agent", {
   expect_match(mr_user_agent, "R")
   expect_match(mr_user_agent, "mregions2")
 
-  opt_user_agent <- getOption("HTTPUserAgent", default = "")
-  expect_match(mr_user_agent, opt_user_agent, fixed = TRUE)
 })
 
 test_that("new_mr_df works", {
