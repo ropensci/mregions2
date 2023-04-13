@@ -50,8 +50,3 @@ reference:
   - gaz_rest_geometries
   - gaz_rest_names_by_mrgid
   - gaz_rest_wmses
-- title: "Initialize a Web Feature Service Client"
-  desc: >
-    Override mregions2 and make your own WFS calls
-  contents:
-  - mrp_init_wfs_client
