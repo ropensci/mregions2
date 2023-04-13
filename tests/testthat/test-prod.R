@@ -7,7 +7,6 @@ skip_everywhere <- function(){
 }
 
 # Perform
-
 test_that("Product list exists", {
   system.file("mrp_list.csv", package = "mregions2", mustWork = TRUE) %>%
     file.exists() %>%
@@ -19,14 +18,104 @@ test_that("Product list exists", {
   expect_gt(nrow(x), 1)
 })
 
-test_that("mrp_view() works", {
-  # Note this is hard to check as the WMS service may not be working and we still get an output
-  skip("Check mrp_view interactively")
 
-  x <- mrp_view("eez")
-    expect_type(x, "list")
-    expect_s3_class(x, c("leaflet", "htmlwidget"))
+test_that("mrp_view() leaflet output works", {
+  map <- mrp_view("eez")
+
+  expect_s3_class(map, "leaflet")
+  expect_s3_class(map, "htmlwidget")
+
+  map <- unclass(map)
+
+  map_crs <- map[["x"]][["options"]][["crs"]][["crsClass"]]
+  expect_equal(map_crs, "L.CRS.EPSG4326")
+
+  map_calls <- map[["x"]][["calls"]]
+
+  # Step 1: Test EMODnet Bathymetry Tiles
+  map_call_bath <- map_calls[[1]]
+
+  method <- map_call_bath[["method"]]
+  expect_equal(method, "addTiles")
+
+  checkmate_url <- "https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/{z}/{x}/{y}.png"
+  test_url <- map_call_bath[["args"]][[1]]
+  expect_equal(test_url, checkmate_url)
+
+  tms <- map_call_bath[["args"]][[4]]$tms
+  expect_false(tms)
+
+  attribution <- map_call_bath[["args"]][[4]]$attribution
+  expect_match(attribution, "EMODnet", fixed = TRUE)
+
+  # Step 2: Test WMS
+  map_call_wms <- map_calls[[2]]
+
+  method <- map_call_wms[["method"]]
+  expect_equal(method, "addWMS")
+
+  checkmate_url <- "https://geo.vliz.be/geoserver/MarineRegions/wms?"
+  test_url <- map_call_wms[["args"]][[1]]
+  expect_equal(test_url, checkmate_url)
+
+  format <- map_call_wms[["args"]][[4]]$format
+  expect_equal(format, "image/png")
+
+  transparent <- map_call_wms[["args"]][[4]]$transparent
+  expect_true(transparent)
+
+  info_format <- map_call_wms[["args"]][[4]]$info_format
+  expect_equal(info_format, "text/html")
+
+  attribution <- map_call_wms[["args"]][[4]]$attribution
+  expect_match(attribution, "Marine Regions", fixed = TRUE)
+
+  # Step 3: Test EMODnet Bathymetry labels
+  map_call_labs <- map_calls[[3]]
+
+  method <- map_call_labs[["method"]]
+  expect_equal(method, "addTiles")
+
+  checkmate_url <- "https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/{z}/{x}/{y}.png"
+  test_url <- map_call_labs[["args"]][[1]]
+  expect_equal(test_url, checkmate_url)
+
+  tms <- map_call_labs[["args"]][[4]]$tms
+  expect_false(tms)
+
 })
+
+test_that("mrp_view() filters can be passed", {
+  # OGC filter
+  filter <- "<Filter>
+              <PropertyIsEqualTo>
+                <PropertyName>mrgid</PropertyName>
+                <Literal>3293</Literal>
+              </PropertyIsEqualTo>
+             </Filter>"
+
+  map <- mrp_view("eez", filter = filter)
+  expect_s3_class(map, "leaflet")
+  expect_s3_class(map, "htmlwidget")
+
+  map_url <- map[["x"]][["calls"]][[2]][["args"]][[1]]
+  parsed_url <- httr2::url_parse(map_url)
+  parsed_filter <- parsed_url$query$filter
+  expect_equal(parsed_filter, filter)
+
+  # CQL filter
+  cql_filter = "mrgid=3293"
+
+  map <- mrp_view("eez", cql_filter = cql_filter)
+  expect_s3_class(map, "leaflet")
+  expect_s3_class(map, "htmlwidget")
+
+  map_url <- map[["x"]][["calls"]][[2]][["args"]][[1]]
+  parsed_url <- httr2::url_parse(map_url)
+  parsed_cql_filter <- parsed_url$query$cql_filter
+  expect_equal(parsed_cql_filter, cql_filter)
+})
+
 
 test_that("mrp_view() assertions work", {
   .f <- function() assert_deps(c("thisisa", "fakepackagename"))
@@ -56,7 +145,22 @@ test_that("mrp_view() assertions work", {
 
   .f <- function() mrp_view("eez", cql_filter = 1)
   expect_error(.f())
+
+
+  mock_500 <- function(req) {
+    httr2::response(status_code = 500)
+  }
+  .f <- function(){
+    httr2::with_mock(
+      mock_500,
+      mrp_view("eez")
+    )}
+  expect_error(.f(), regexp = "500")
+
+  withr::local_envvar("TESTPKG.NOINTERNET" = "blop")
+  expect_error(mrp_view("eez"), "No internet connection")
 })
+
 
 test_that("mrp_get() assertions work", {
   .f <- function() mrp_get(1)
@@ -90,7 +194,7 @@ test_that("mrp_get() assertions work", {
 
 
 httptest2::with_mock_dir("prod/fail/", {
-  test_that("Bad filters errors surfaced", {
+  test_that("mrp_get: Bad filters errors surfaced", {
 
     .f <- function() mrp_get("eez", filter="<Filter>")
     expect_error(.f(), "XML getFeature request SAX parsing error")

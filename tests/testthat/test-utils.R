@@ -27,48 +27,41 @@ test_that("mr_memoise works", {
 })
 
 test_that("not internet msg works", {
-  skip("test interactively by disconnecting from network")
-  # by using httptest2, we cannot mock the response of things that come from curl::
-  # unfortunately there is not an alternative from curl::has_internet at the moment
-  #
-  # workarrounds are:
-  #   -making a function that checks the HEAD of a known service, same that curl::has_internet
-  #     But already did this and it gave issues in the CI/CD
-  #   -Or change to webmocksr or other http test service, but too much work for only one function
-  #
-  # For the time being, better to leave it like this.
+  withr::local_envvar("TESTPKG.NOINTERNET" = "blop")
   expect_error(assert_internet(), "No internet connection")
-
 })
 
 test_that("Server status 500 handled", {
-
   mock_500 <- function(req) {
     httr2::response(status_code = 500)
   }
 
-  .f <- function(s){
+  .f <- function(){
     httr2::with_mock(
       mock_500,
-      assert_service(s)
+      assert_service("")
     )}
 
-  s <- "https://geo.vliz.be/geoserver/wfs?request=GetCapabilities"
-  expect_error(.f(s), regexp = "500")
-
-
-  s <- "https://geo.vliz.be/geoserver/MarineRegions/wms?"
-  expect_error(.f(s), regexp = "500")
-
-
-  s <- "https://tiles.emodnet-bathymetry.eu/osm/labels/inspire_quad/1/1/1.png"
-  expect_error(.f(s), regexp = "500")
-
-
-  s <- "https://tiles.emodnet-bathymetry.eu/2020/baselayer/inspire_quad/1/1/1.png"
-  expect_error(.f(s), regexp = "500")
-
+  expect_error(.f(), regexp = "500")
 })
+
+
+test_that("assert_service returns NULL",{
+  mock_200 <- function(req) {
+    httr2::response(status_code = 200)
+  }
+
+  .f <- function(){
+    httr2::with_mock(
+      mock_200,
+      assert_service("")
+    )
+  }
+
+  expect_invisible(.f())
+  expect_null(.f())
+})
+
 
 test_that("Only one filter assertion works",{
 
@@ -83,4 +76,17 @@ test_that("Only one filter assertion works",{
 
   .f <- function() assert_only_one_filter("", "")
   expect_error(.f())
+})
+
+test_that("Imported method rdflib:::c.rdf as c_rdf works", {
+  pepe <- rdflib::rdf() %>%
+    rdflib::rdf_add("person", "hasName", "pepe")
+  juan <- rdflib::rdf() %>%
+    rdflib::rdf_add("person", "hasName", "juan")
+
+  people <- rdflib::rdf()
+  people <- c_rdf(people, pepe, juan)
+
+  expect_s3_class(people, "rdf")
+  expect_length(people, 2)
 })

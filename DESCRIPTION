@@ -51,7 +51,8 @@ Suggests:
     rmarkdown,
     testthat,
     wk,
-    purrr
+    purrr,
+    withr
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 Depends: 

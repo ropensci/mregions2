@@ -86,9 +86,17 @@ c_rdf <- function(...){
   rdf
 }
 
+is_internet_down <- function(){
+  if(nzchar(Sys.getenv("TESTPKG.NOINTERNET"))){
+    return(TRUE)
+  }
+
+  !curl::has_internet()
+}
+
 assert_internet <- function(){
-  if(!curl::has_internet()){
-    stop("No internet connection. Please check your network settings and try again.", call. = FALSE)
+  if(is_internet_down()){
+    stop("No internet connection. Please check your network and try again.", call. = FALSE)
   }
 }
 
