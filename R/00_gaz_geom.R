@@ -174,17 +174,12 @@ geom_perform <- function(url, format, multipart = TRUE, mrgid,
     httr2::req_perform()
 
   if(httr2::resp_status(geom) == 404){
+    df <- gaz_rest_record_by_mrgid(mrgid)
+    stop_if_deleted(df)
 
+    # Pass to gaz_add_geometry
     if(resp_return_error) return(geom)
-    # else
-    msg <- "The mrgid <{mrgid}> does not exists or has no geometry."
-    httr2::resp_check_status(geom, info = c(
-      "i" = glue::glue(msg)
-    ))
-
   }
-
-  # TODO check status and raise different error messages when is deleted
 
   geom <- geom %>%
     httr2::resp_check_status() %>%
@@ -263,28 +258,15 @@ geom_perform <- function(url, format, multipart = TRUE, mrgid,
 }
 
 
-#' Add geometry to a data frame containing a column named MRGID
+#' Add geometry to a mr_df
 #'
-#' @param x a data frame with the column "MRGID"
+#' @param x an object of class mr_df
 #'
 #' @noRd
 gaz_add_geometry <- function(x){
 
   # Assertions
   checkmate::assert_data_frame(x, min.rows = 1)
-  comes_from_gaz <- all(c("MRGID", "preferredGazetteerName",
-                          "status", "accepted") %in% names(x))
-  if(!comes_from_gaz){
-    cli::cli_abort(c("Essential fields not present in this data frame:",
-                     "i" = "Required fields:
-                          {.field MRGID},
-                          {.field preferredGazetteerName},
-                          {.field status},
-                          {.field accepted}",
-                     "i" = "Try retrieving a data frame with
-                          {.fn gaz_search}
-                          first."))
-  }
 
   # Config - get geometries
   the_geom <- lapply(x$MRGID, gaz_rest_geometries,
@@ -363,29 +345,10 @@ gaz_add_geometry <- function(x){
         # No geometry: raise error
         no_geometry <- "httr2_response" %in% class(the_geom[[i]])
         if(no_geometry){
-
-          msg <- c(
-            "x" = "The geometry of
-                  {.val {x[i, ]$preferredGazetteerName}}
-                  with MRGID
-                  {.url {x[i, ]$MRGID}}
-                  is not available."
+          msg <- glue::glue(
+            'The geometry of "{.val {x[i, ]$preferredGazetteerName}}" <{x[i, ]$MRGID}> is not available.'
           )
-
-          if(x[i, ]$status == "deleted"){
-            msg <- c(msg,
-                    "i" = "Reason: The Geo-Object was
-                          {crayon::red('deleted')}.",
-                    "i" = "The preferred alternative is
-                          {.val {gaz_rest_names_by_mrgid(x[i, ]$accepted)[1]}}
-                          with MRGID {.url {x[i, ]$accepted}}"
-            )}else{
-              msg <- c(msg,
-                      "i" = "Please contact {.email info@marineregions.org}."
-              )
-            }
-
-          cli::cli_abort(msg)
+          stop(msg)
         }
       }else{
         # If other http status, raise error

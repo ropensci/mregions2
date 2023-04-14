@@ -115,3 +115,46 @@ assert_only_one_filter <- function(cql_filter, filter){
   both_filters_given <- !is.null(cql_filter) & !is.null(filter)
   if(both_filters_given) stop("You must provide one of `cql_filter` or `filter`, not both.", call. = FALSE)
 }
+
+stop_if_deleted <- function(mr_df){
+  for(i in seq_along(nrow(mr_df))){
+    is_deleted <- mr_df[i, ]$status == "deleted"
+    if(is_deleted){
+      msg <- glue::glue(
+        'The Geo-Object "{mr_df[i, ]$preferredGazetteerName}" <{mr_df[i, ]$MRGID}> has status DELETED. Use <{mr_df[i, ]$accepted}> instead.'
+      )
+      stop(msg, call. = FALSE)
+    }
+  }
+  invisible(NULL)
+}
+
+warn_if_altclass <- function(mr_df){
+  for(i in seq_along(nrow(mr_df))){
+    is_altclass <- mr_df[i, ]$status == "altclass"
+    if(is_altclass){
+      msg <- glue::glue(
+        'The Geo-Object "{mr_df[i, ]$preferredGazetteerName}" <{mr_df[i, ]$MRGID}> has status ALTERNATIVE CLASSIFICATION. Consider using <{mr_df[i, ]$accepted}> instead.'
+      )
+      warning(msg, call. = FALSE)
+    }
+  }
+  invisible(NULL)
+}
+
+
+# Got the status already
+# gaz_search.numeric
+# gaz_search.character()
+# warn_if_deleted()
+# "Some Geo-Objects are of status deleted"c
+
+
+# gaz_geometry.mr_df
+# trigger error if deleted
+
+# Don't have the status
+# gaz_geometry.numeric
+# if 404 - trigger gaz_search and check if deleted
+# trigger error if deleted
+

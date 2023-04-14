@@ -90,3 +90,24 @@ test_that("Imported method rdflib:::c.rdf as c_rdf works", {
   expect_s3_class(people, "rdf")
   expect_length(people, 2)
 })
+
+test_that("check status methods work", {
+  df <- tibble::tibble(
+    MRGID = 1,
+    preferredGazetteerName = "Name",
+    preferredGazetteerNameLang = "Language",
+    status = "deleted",
+    accepted = 2
+  ) %>% new_mr_df()
+
+
+  stop_if_deleted(df) %>%
+    expect_error("DELETED", fixed = TRUE)
+
+  df$status <- "altclass"
+  warn_if_altclass(df) %>%
+    expect_warning("ALTERNATIVE CLASSIFICATION", fixed = TRUE)
+
+})
+
+

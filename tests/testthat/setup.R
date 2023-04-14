@@ -9,6 +9,7 @@ httptest2::set_redactor(function (x) {
     httptest2::gsub_response("getGazetteerRecordByMRGID.json", "bymrgid/") %>%
     httptest2::gsub_response("getGazetteerRecordsByLatLong.json", "bylatlong/") %>%
     httptest2::gsub_response("getGazetteerGeometries.ttl", "geom/") %>%
+    httptest2::gsub_response("getGazetteerGeometry.ttl", "1geom/") %>%
     httptest2::gsub_response("getGazetteerRecordsByType.json", "bytype/") %>%
     httptest2::gsub_response("getGazetteerTypes.json", "types/") %>%
     httptest2::gsub_response("getGazetteerRecordsBySource.json", "bysource/") %>%
