@@ -58,17 +58,25 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mrp_get</span><span class="op">(</span><span class="va">product_name</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mrp_get</span><span class="op">(</span><span class="va">layer</span>, cql_filter <span class="op">=</span> <span class="cn">NULL</span>, filter <span class="op">=</span> <span class="cn">NULL</span>, count <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>product_name</dt>
-<dd><p>(character) Identifier of the data product. See <code><a href="mrp_list.html">mrp_list()</a></code></p></dd>
+    <dl><dt>layer</dt>
+<dd><p>(character) Identifier of the data product. See <a href="mrp_list.html">mrp_list</a></p></dd>
 
 
-<dt>...</dt>
-<dd><p>Any <a href="https://docs.geoserver.org/latest/en/user/services/wfs/vendor.html" class="external-link">vendor params</a> to be passed to the <a href="https://docs.geoserver.org/latest/en/user/services/wfs/reference.html?highlight=getfeatures#getfeature" class="external-link">GetFeature</a> request. See details.</p></dd>
+<dt>cql_filter</dt>
+<dd><p>(character) Contextual Query Language (CQL) filter. See details.</p></dd>
+
+
+<dt>filter</dt>
+<dd><p>(character) Standard OGC filter specification. See details.</p></dd>
+
+
+<dt>count</dt>
+<dd><p>(numeric) Maximum number of features to be retrieved.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -79,26 +87,22 @@
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>This function uses <a href="https://en.wikipedia.org/wiki/Web_Feature_Service" class="external-link">WFS services</a> to load retrieve the Marine Regions Data products. The data products
-are stored in a <a href="https://geo.vliz.be" class="external-link">geoserver instance</a> hosted and maintained by the <a href="https://www.vliz.be" class="external-link">Flanders Marine Institute (VLIZ)</a></p>
-    </div>
-    <div class="section level2">
-    <h2 id="vendor-params">Vendor Params<a class="anchor" aria-label="anchor" href="#vendor-params"></a></h2>
-    <p><a href="https://docs.geoserver.org/latest/en/user/services/wfs/vendor.html" class="external-link">Vendor params</a> can be passed to a <a href="https://docs.geoserver.org/latest/en/user/services/wfs/reference.html?highlight=getfeatures#getfeature" class="external-link">WFS GetFeature</a> request.
-<code>mregions2</code> uses the <a href="https://github.com/eblondel/ows4R" class="external-link">ows4R</a> package as the <a href="https://github.com/eblondel/ows4R/wiki#wfs" class="external-link">interface to query the WFS service with R.</a> You can pass any vendor parameters via <code>...</code>.
-For instance, you can pass CQL or OGC filters with <code>cql_filter="&lt;the filter&gt;"</code> or <code>filter="&lt;the filter&gt;"</code>. You can change the projection with <code>srsName="&lt;CRS&gt;"</code>, only the features in a certain bounding box with <code>bbox="a1,b1,a2,b2,&lt;CRS&gt;"</code>
-where <code>a1</code>, <code>b1</code>, <code>a2</code> and <code>b2</code> are the coordinates and the <code>CRS</code> selects the coordinate reference system of this bounding box, or <a href="https://docs.geoserver.org/latest/en/user/services/wfs/vendor.html" class="external-link">any other vendor parameters accepted by geoserver</a>.</p>
-    </div>
-    <div class="section level2">
-    <h2 id="filtering">Filtering<a class="anchor" aria-label="anchor" href="#filtering"></a></h2>
-    <p>Both the <a href="https://portal.ogc.org/files/96288" class="external-link">Contextual Query Language (CQL) filter</a> and the <a href="https://www.ogc.org/standards/filter" class="external-link">standard OGC filter specification</a> allow to
+    <p>This function uses <a href="https://en.wikipedia.org/wiki/Web_Map_Service" class="external-link">WMS services</a> to load quickly
+a Leaflet viewer of a Marine Regions data product. It uses <a href="https://emodnet.ec.europa.eu" class="external-link">EMODnet Bathymetry</a> as background layer.</p><div class="section">
+<h3 id="filters">Filters<a class="anchor" aria-label="anchor" href="#filters"></a></h3>
+
+
+<p>Both the <a href="https://portal.ogc.org/files/96288" class="external-link">Contextual Query Language (CQL) filter</a> and the <a href="https://www.ogc.org/standards/filter" class="external-link">standard OGC filter specification</a> allow to
 query the server before performing a request. This will boost performance as you will only retrieve the area of your interest. It is possible to query on attributes, but also perform
 geospatial queries. For instance, you can query a bounding box of interest.</p>
-<p>A tutorial on CQL filters is available in the <a href="https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html" class="external-link">geoserver web site</a>.</p>
+<p>CQL filters are possible only in geoserver. Marine Regions uses a geoserver instance to serve its data products.
+A tutorial on CQL filters is available in the <a href="https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html" class="external-link">geoserver web site</a>.</p>
+</div>
+
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="mrp_list.html">mrp_list()</a></code> to describe the list of products, <code><a href="mrp_view.html">mrp_view()</a></code> to visualize the data product in advance, <code><a href="mrp_colnames.html">mrp_colnames()</a></code> and <code><a href="mrp_col_unique.html">mrp_col_unique()</a></code> to get the name, data type and unique values of a the columns of a data product, useful to query
+    <div class="dont-index"><p><a href="mrp_list.html">mrp_list</a> to describe the list of products, <code><a href="mrp_view.html">mrp_view()</a></code> to visualize the data product in advance, <code><a href="mrp_colnames.html">mrp_colnames()</a></code> and <code><a href="mrp_col_unique.html">mrp_col_unique()</a></code> to get the name, data type and unique values of a the columns of a data product, useful to query
 with the arguments <code>cql_filter</code> or <code>filter</code></p></div>
     </div>
 
@@ -106,7 +110,7 @@ with the arguments <code>cql_filter</code> or <code>filter</code></p></div>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># See the list of all data products</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="fu"><a href="mrp_list.html">mrp_list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/View.html" class="external-link">View</a></span><span class="op">(</span><span class="va">mrp_list</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># We want the Exclusive Economic Zones of Portugal. Let's first visualize the product:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="mrp_view.html">mrp_view</a></span><span class="op">(</span><span class="st">"eez"</span><span class="op">)</span></span></span>

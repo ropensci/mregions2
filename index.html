@@ -258,25 +258,50 @@
 <h2 id="marine-regions-data-products">Marine Regions Data Products<a class="anchor" aria-label="anchor" href="#marine-regions-data-products"></a>
 </h2>
 <p>In addition to the Marine Regions Gazetteer, the Marine Regions Team creates and hosts geographical Data Products, being the most popular one the <a href="https://marineregions.org/eez.php" class="external-link">Marine Regions Maritime Boundaries</a>.</p>
-<p>An overview of all available products can be consulted with <code><a href="reference/mrp_list.html">mrp_list()</a></code></p>
+<p>An overview of all available products can be consulted with <code>mrp_list</code></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/mrp_list.html">mrp_list</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Loading ISO 19139 XML schemas...</span></span>
-<span><span class="co">#&gt; Loading ISO 19115 codelists...</span></span>
-<span><span class="co">#&gt; # A tibble: 21 × 8</span></span>
-<span><span class="co">#&gt;    title                data_product license citation doi   imis  abstract id   </span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;                &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;glu&gt;</span></span>
-<span><span class="co">#&gt;  1 Exclusive Economic … eez          Creati… "Flande… http… http… "Versio… Mari…</span></span>
-<span><span class="co">#&gt;  2 Maritime Boundaries… eez_boundar… Creati… "Flande… http… http… "Versio… Mari…</span></span>
-<span><span class="co">#&gt;  3 Territorial Seas (1… eez_12nm     Creati… "Flande… http… http… "Versio… Mari…</span></span>
-<span><span class="co">#&gt;  4 Contiguous Zones (2… eez_24nm     Creati… "Flande… http… http… "Versio… Mari…</span></span>
-<span><span class="co">#&gt;  5 Internal Waters (v3… eez_interna… Creati… "Flande… http… http… "Versio… Mari…</span></span>
-<span><span class="co">#&gt;  6 Archipelagic Waters… eez_archipe… Creati… "Flande… http… http… "Versio… Mari…</span></span>
-<span><span class="co">#&gt;  7 High Seas (v1, worl… high_seas    Creati… "Flande… http… http… "High S… Mari…</span></span>
-<span><span class="co">#&gt;  8 Extended Continenta… ecs          Creati… "Flande… http… http… "This d… Mari…</span></span>
-<span><span class="co">#&gt;  9 Extended Continenta… ecs_boundar… Creati… "Flande… http… http… "This d… Mari…</span></span>
-<span><span class="co">#&gt; 10 IHO Sea Areas (v3)   iho          Creati… "Flande… http… http… "World … Mari…</span></span>
-<span><span class="co">#&gt; # … with 11 more rows</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mrp_list</span></span>
+<span><span class="co">#&gt; Memoised Function:</span></span>
+<span><span class="co">#&gt; function() {</span></span>
+<span><span class="co">#&gt;   # Avoid "no visible binding for global variable" R CMD Check NOTE</span></span>
+<span><span class="co">#&gt;   title &lt;- abstract &lt;- data_product &lt;- product_layer &lt;- geoserverID &lt;- NULL</span></span>
+<span><span class="co">#&gt;   license &lt;- citation &lt;- doi &lt;- imis &lt;- abstract &lt;- id &lt;- NULL</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   mrp_list &lt;- utils::read.delim2(</span></span>
+<span><span class="co">#&gt;     system.file("mrp_list.csv", package = "mregions2"),</span></span>
+<span><span class="co">#&gt;     header = TRUE,</span></span>
+<span><span class="co">#&gt;     sep = ";",</span></span>
+<span><span class="co">#&gt;     dec = ".",</span></span>
+<span><span class="co">#&gt;     fileEncoding = "UTF-8"</span></span>
+<span><span class="co">#&gt;   ) %&gt;% dplyr::mutate(</span></span>
+<span><span class="co">#&gt;     geoserverID = glue::glue("{product_namespace}:{product_layer}")</span></span>
+<span><span class="co">#&gt;   )</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   # Get Info from WFS</span></span>
+<span><span class="co">#&gt;   wfs &lt;- mrp_init_wfs_client(silent = TRUE)</span></span>
+<span><span class="co">#&gt;   capabilities &lt;- wfs$getCapabilities()</span></span>
+<span><span class="co">#&gt;   caps_ft &lt;- purrr::map(mrp_list$geoserverID, ~ capabilities$findFeatureTypeByName(.x))</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   mrp_list &lt;- mrp_list %&gt;% dplyr::mutate(</span></span>
+<span><span class="co">#&gt;     title = purrr::map_chr(caps_ft, ~ .x$getTitle()),</span></span>
+<span><span class="co">#&gt;     abstract = purrr::map_chr(caps_ft, ~ .x$getAbstract())</span></span>
+<span><span class="co">#&gt;   ) %&gt;% dplyr::select(</span></span>
+<span><span class="co">#&gt;     title,</span></span>
+<span><span class="co">#&gt;     data_product = product_layer,</span></span>
+<span><span class="co">#&gt;     license,</span></span>
+<span><span class="co">#&gt;     citation,</span></span>
+<span><span class="co">#&gt;     doi,</span></span>
+<span><span class="co">#&gt;     imis,</span></span>
+<span><span class="co">#&gt;     abstract,</span></span>
+<span><span class="co">#&gt;     id = geoserverID</span></span>
+<span><span class="co">#&gt;   )</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   # Turn into tibble</span></span>
+<span><span class="co">#&gt;   attr(mrp_list, "class") &lt;- c("tbl_df", "tbl", "data.frame")</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   mrp_list</span></span>
+<span><span class="co">#&gt; }</span></span>
+<span><span class="co">#&gt; &lt;environment: namespace:mregions2&gt;</span></span></code></pre></div>
 <p>You can visualize the Marine Regions Data Products with <code><a href="reference/mrp_view.html">mrp_view()</a></code>. It opens an interactive <code><a href="https://rdrr.io/pkg/leaflet/man/leaflet.html" class="external-link">leaflet::leaflet</a></code> viewer.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/mrp_view.html">mrp_view</a></span><span class="op">(</span><span class="st">"eez"</span><span class="op">)</span></span></code></pre></div>
@@ -309,7 +334,7 @@
 <span><span class="co">#&gt; #   iso_sov1 &lt;chr&gt;, iso_sov2 &lt;chr&gt;, iso_sov3 &lt;chr&gt;, un_sov1 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   un_sov2 &lt;dbl&gt;, un_sov3 &lt;dbl&gt;, un_ter1 &lt;dbl&gt;, un_ter2 &lt;dbl&gt;, un_ter3 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   geometry &lt;MULTIPOLYGON [°]&gt;</span></span></code></pre></div>
-<p>Get to know more in the <a href="https://lifewatch.github.io/mregions2/articles/mregions2.html">Get Started article</a>.</p>
+<p>Get to know more in the <a href="https://lifewatch.github.io/mregions2/articles/mregions2.html">Get Started vignette</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
