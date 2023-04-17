@@ -69,23 +69,10 @@ gaz_search_by_type.character <- function(x, ...){
 #' @export
 gaz_search_by_type.numeric <- function(x, ...){
   typeID <- NULL
-
-  x <- checkmate::assert_integerish(x, lower = 1, upper = 999999999, min.len = 1,
-                                   any.missing = FALSE, all.missing = FALSE,
-                                   coerce = TRUE)
-  x <- sort(unique(x))
+  x <- assert_typeid(x, coerce = TRUE)
 
   # There is no REST method to return records by typeid
   # Instead, filter gaz_types() to look up the type as a place name
-
-  # Assert choice
-  are_not_choice <- !all(x %in% gaz_types()$typeID)
-  if(are_not_choice){
-    typeid_not_part_of <- subset(x, !(x %in% gaz_types()$typeID))
-    stop(glue::glue("`typeid` must be element of set `gaz_types()`, but is/are '{paste0(typeid_not_part_of, collapse = ', ')}'"), call. = FALSE)
-  }
-
-  # Perform
   x <- gaz_types() %>%
     dplyr::filter(typeID %in% x)
 
@@ -110,7 +97,7 @@ gaz_rest_records_by_type <- function(type, with_geometry = FALSE){
   MRGID <- NULL
 
   # Assertions
-  checkmate::assert_character(placetype)
+  checkmate::assert_character(placetype, len = 1)
 
   # Config
   placetype <- tolower(placetype)
@@ -135,19 +122,8 @@ gaz_rest_records_by_type <- function(type, with_geometry = FALSE){
   # Check status: first offset should be 200
   if(httr2::resp_is_error(resp)){
 
-    # If first is 404, the placetype must not be correct. Assert.
-    if(httr2::resp_status(resp) == 404){
+    if(httr2::resp_status(resp) == 404) assert_placetype(placetype)
 
-      list_placetypes <- tolower(gaz_types()$type)
-
-      is_not_choice <- !(placetype %in% list_placetypes)
-
-      if(is_not_choice){
-        stop(glue::glue("`placetype` must be element of set `gaz_rest_types()`, but is '{placetype}'"), call. = FALSE)
-      }
-    }
-
-    # In any other case of error, abort and return the HTTP error
     httr2::resp_check_status(resp)
 
   }else{

@@ -208,16 +208,13 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
 gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL, language = NULL, like = TRUE, fuzzy = TRUE){
   MRGID <- NULL
 
-  # Assert name
+  checkmate::assert_logical(with_geometry, len = 1)
   checkmate::assert_character(name, len = 1)
-
-  # Assert typeid
   typeid <- checkmate::assert_integerish(typeid, lower = 1, any.missing = FALSE,
                                         null.ok = TRUE, coerce = TRUE)
+  checkmate::assert_character(language, len = 1, null.ok = TRUE, n.chars = 2)
 
-  # Assert language
-  checkmate::assert_character(language, len = 1, null.ok = TRUE)
-
+  # Assert language choice
   if(!is.null(language)){
     not_iso_639_2 <- !(language %in% unique(ISOcodes::ISO_639_2$Alpha_2))
     if(not_iso_639_2){
@@ -228,7 +225,6 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
     }
   }
 
-  # Assert logicals
   checkmate::assert_logical(like, len = 1)
   like_url <- like %>% as.character() %>% tolower()
 
@@ -268,10 +264,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
       )
 
       if(!is.null(typeid)){
-        is_not_typeid <- !(all(typeid %in% gaz_rest_types()$typeID))
-        if(is_not_typeid){
-          stop(glue::glue("`typeid` must be element of set `gaz_rest_types()`, but is '{typeid}'"), call. = FALSE)
-        }
+        assert_typeid(typeid)
 
         msg <- c(msg,
                  "i" = glue::glue("The term '{name}' may not be available for the selected type."),
@@ -282,14 +275,13 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
 
 
       # name is not correct
-      if(!fuzzy){
-        msg <- c(msg, "i" = "Did you set `fuzzy` = TRUE?")
-      }
-      if(!like){
-        msg <- c(msg, "i" = "Did you set `like` = TRUE?")
-      }
+      if(!fuzzy) msg <- c(msg, "i" = "Did you set `fuzzy` = TRUE?")
+      if(!like) msg <- c(msg, "i" = "Did you set `like` = TRUE?")
+
       if(!is.null(language)){
-        lan <- strsplit(subset(ISOcodes::ISO_639_2$Name, ISOcodes::ISO_639_2$Alpha_2 == language)[1], split = ";")[[1]][1]
+        lan <- subset(ISOcodes::ISO_639_2$Name,
+                      ISOcodes::ISO_639_2$Alpha_2 == language)[1]
+        lan <- strsplit(lan, split = ";")[[1]][1]
         msg <- c(msg,
                  "i" = glue::glue("The {lan} term '{name}' may not be available."),
                  "*" = "Try with `language = NULL`."
@@ -327,9 +319,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
         # End of the loop
         resp <- resp %>% dplyr::arrange(MRGID)
 
-        if(with_geometry){
-          resp <- resp %>% gaz_add_geometry()
-        }
+        if(with_geometry) resp <- resp %>% gaz_add_geometry()
 
         return(resp)
       }
@@ -364,10 +354,10 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
 #'   c("Belgian Exclusive Economic Zone", "Dutch Exclusive Economic Zone")
 #' )
 #' }
-
 gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE, fuzzy = TRUE){
 
   # Assertions
+  checkmate::assert_logical(with_geometry, len = 1)
   checkmate::assert_character(names, min.len = 1, unique = TRUE, any.missing = FALSE, all.missing = FALSE)
   checkmate::assert_logical(like, len = 1)
   checkmate::assert_logical(fuzzy, len = 1)
@@ -390,12 +380,9 @@ gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE,
     httr2::resp_body_json() %>%
     dplyr::bind_rows()
 
-  if(with_geometry){
-    out <- out %>% gaz_add_geometry()
-  }
+  if(with_geometry) out <- out %>% gaz_add_geometry()
 
   out
-
 }
 
 
@@ -419,6 +406,7 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FA
   MRGID <- NULL
 
   # Assertions
+  checkmate::assert_logical(with_geometry, len = 1)
   checkmate::assert_double(latitude, lower = -90, upper = 90, len = 1)
   checkmate::assert_double(longitude, lower = -180, upper = 180, len = 1)
   typeid <- checkmate::assert_integerish(typeid, lower = 1, any.missing = FALSE,
@@ -426,7 +414,6 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FA
 
   # Config
   url <- glue::glue("https://marineregions.org/rest/getGazetteerRecordsByLatLong.json/{latitude}/{longitude}/")
-
 
   # Reusable http request that overrides automatic error check
   get_source <- function(offset){
@@ -455,10 +442,7 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FA
       )
 
       if(!is.null(typeid)){
-        is_not_typeid <- !(all(typeid %in% gaz_rest_types()$typeID))
-        if(is_not_typeid){
-          stop(glue::glue("`typeid` must be element of set `gaz_rest_types()`, but is '{typeid}'"), call. = FALSE)
-        }
+        assert_typeid(typeid)
 
         msg <- c(msg,
                  "i" = "There might not be matches for the selected type.",

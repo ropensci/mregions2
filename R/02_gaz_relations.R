@@ -69,15 +69,18 @@ gaz_relations.mr_df <- function(x, ...){
 gaz_rest_relations_by_mrgid <- function(mrgid, with_geometry = FALSE, direction = "both", type = "all"){
 
   # Assertions
-  types <- c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby", "all")
-  checkmate::assert_character(c("type", "direction"))
-  type <- tolower(type)
-  direction <- tolower(direction)
+  checkmate::assert_logical(with_geometry, len = 1)
+  types <- c("partof", "partlypartof", "adjacentto", "similarto",
+             "administrativepartof", "influencedby", "all")
+  checkmate::assert_character(type, len = 1)
+  checkmate::assert_character(direction, len = )
+
+  type <- tolower(type); direction <- tolower(direction)
+  checkmate::assert_choice(type, types)
+  checkmate::assert_choice(direction, c("upper", "lower", "both"))
 
   mrgid <- checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
                                        null.ok = TRUE, coerce = TRUE, len = 1)
-  checkmate::assert_choice(type, types)
-  checkmate::assert_choice(direction, c("upper", "lower", "both"))
 
   # Config
   url <- glue::glue("https://marineregions.org/rest/getGazetteerRelationsByMRGID.json/{mrgid}/?direction={direction}&type={type}")

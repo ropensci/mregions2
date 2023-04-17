@@ -142,19 +142,42 @@ warn_if_altclass <- function(mr_df){
   invisible(NULL)
 }
 
+assert_typeid <- function(typeid = NULL, coerce = FALSE){
+  if(!is.null(typeid)){
+    typeid <- checkmate::assert_integerish(typeid, lower = 1, upper = 999999999, min.len = 1,
+                                            any.missing = FALSE, all.missing = FALSE,
+                                            coerce = TRUE)
+    typeid <- sort(unique(typeid))
 
-# Got the status already
-# gaz_search.numeric
-# gaz_search.character()
-# warn_if_deleted()
-# "Some Geo-Objects are of status deleted"c
+    is_not_typeid <- !(all(typeid %in% gaz_types()$typeID))
+    if(is_not_typeid){
+      typeid_not_part_of <- as.character(
+        subset(typeid, !(typeid %in% gaz_types()$typeID))
+      )
+      cli::cli_abort("{.field typeid} must be element of set {.fun gaz_types}, but {?is/are} {.val {typeid_not_part_of}}", call. = FALSE)
+    }
+  }
 
+  if(coerce){
+    return(typeid)
+  }
+}
 
-# gaz_geometry.mr_df
-# trigger error if deleted
+assert_placetype <- function(type = NULL){
+  if(!is.null(type)){
+    is_not_type <- !(all(type %in% gaz_types()$type))
+    if(is_not_type){
+      type_not_part_of <- sort(subset(type, !(type %in% gaz_types()$type)))
 
-# Don't have the status
-# gaz_geometry.numeric
-# if 404 - trigger gaz_search and check if deleted
-# trigger error if deleted
+      msg <- c("{.field type} must be element of set {.fun gaz_types}, but {?is/are} {.val {type_not_part_of}}")
 
+      issue_is_capital_letters <- all(tolower(type) %in% tolower(gaz_types()$type))
+      if(issue_is_capital_letters){
+        msg <- c(msg, "i" = "Note match is sensitive to capital letters.")
+      }
+
+      cli::cli_abort(msg, call. = FALSE)
+    }
+  }
+  invisible(NULL)
+}
