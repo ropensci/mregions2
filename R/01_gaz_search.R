@@ -145,11 +145,12 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
                                         null.ok = TRUE, coerce = TRUE, len = 1)
 
   # Config
-  url <- glue::glue("https://marineregions.org/mrgid/{mrgid}")
   content_type <- ifelse(rdf, "text/turtle", "application/json")
 
   # perform
-  resp <- httr2::request(url) %>%
+  resp <- marineregions.org() %>%
+    httr2::request() %>%
+    httr2::req_url_path_append(glue::glue("/mrgid/{mrgid}")) %>%
     httr2::req_user_agent(mr_user_agent) %>%
     httr2::req_headers(accept = content_type) %>%
     httr2::req_error(is_error = function(resp) FALSE) %>%
@@ -238,12 +239,16 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
 
   # Reusable http request that overrides automatic error check
   get_source <- function(offset){
-    req <- httr2::request(url) %>%
-      httr2::req_user_agent(mr_user_agent) %>%
-      httr2::req_headers(accept = "application/json") %>%
+    req <- marineregions.org() %>%
+      httr2::request() %>%
+      httr2::req_url_path_append(
+        glue::glue("/rest/getGazetteerRecordsByName.json/{name}/")
+      ) %>%
       httr2::req_url_query(like = like_url, fuzzy = fuzzy_url, language = language,
                            typeID = paste0(as.character(typeid), collapse = ","),
                            offset = offset, count = 100) %>%
+      httr2::req_user_agent(mr_user_agent) %>%
+      httr2::req_headers(accept = "application/json") %>%
       httr2::req_error(is_error = function(resp) FALSE) %>%
       httr2::req_perform()
   }
@@ -368,12 +373,19 @@ gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE,
   names_url <- trimws(names_url, "both")
   names_url <- paste0(names_url, collapse = "/")
   names_url <- utils::URLencode(names_url)
+
   fuzzy_url <- fuzzy %>% as.character() %>% tolower()
   like_url <- like %>% as.character() %>% tolower()
-  url <- glue::glue("https://marineregions.org/rest/getGazetteerRecordsByNames.json/{like_url}/{fuzzy_url}/{names_url}/")
+
+
+  url <- glue::glue("https://marineregions.org")
 
   # Perform
-  out <- httr2::request(url) %>%
+  out <- marineregions.org() %>%
+    httr2::request() %>%
+    httr2::req_url_path_append(
+      glue::glue("/rest/getGazetteerRecordsByNames.json/{like_url}/{fuzzy_url}/{names_url}/")
+    ) %>%
     httr2::req_user_agent(mr_user_agent) %>%
     httr2::req_headers(accept = "application/json") %>%
     httr2::req_perform() %>%
@@ -413,11 +425,15 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FA
                                         null.ok = TRUE, coerce = TRUE)
 
   # Config
-  url <- glue::glue("https://marineregions.org/rest/getGazetteerRecordsByLatLong.json/{latitude}/{longitude}/")
+  url <- glue::glue("https://marineregions.org")
 
   # Reusable http request that overrides automatic error check
   get_source <- function(offset){
-    req <- httr2::request(url) %>%
+    req <- marineregions.org() %>%
+      httr2::request() %>%
+      httr2::req_url_path_append(
+        glue::glue("/rest/getGazetteerRecordsByLatLong.json/{latitude}/{longitude}/")
+      ) %>%
       httr2::req_user_agent(mr_user_agent) %>%
       httr2::req_headers(accept = "application/json") %>%
       httr2::req_url_query(typeID = paste0(as.character(typeid), collapse = ","),

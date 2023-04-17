@@ -63,11 +63,14 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
   # Config
   source_parsed <- gsub(" ", "+", source, fixed = TRUE)
   source_parsed <- trimws(source_parsed, "both")
-  url <- glue::glue("https://marineregions.org/rest/getGazetteerRecordsBySource.json/{source_parsed}/")
-  url <- utils::URLencode(url)
+  source_parsed <- utils::URLencode(source_parsed)
 
   # Perform
-  resp <- httr2::request(url) %>%
+  resp <- marineregions.org() %>%
+    httr2::request() %>%
+    httr2::req_url_path_append(
+      glue::glue("/rest/getGazetteerRecordsBySource.json/{source_parsed}/")
+    ) %>%
     httr2::req_user_agent(mr_user_agent) %>%
     httr2::req_headers(accept = "application/json") %>%
     httr2::req_error(is_error = function(resp) FALSE) %>%
@@ -81,9 +84,8 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
       is_not_choice <- !(tolower(source) %in% list_source)
 
       if(is_not_choice){
-        stop(glue::glue("`source` must be element of set `gaz_sources()`, but is '{source}'"), call. = FALSE)
+        cli::cli_abort("{.field source} must be element of set {.fun gaz_sources}, but is {.val {source}}", call. = FALSE)
       }
-
     }
 
     # Else, something else occurred, abort
@@ -98,7 +100,7 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
 
   if(nrow(resp) == 0){
     cli::cli_abort(c(
-      "!" = "There are no Geo-Objects for this source.",
+      "!" = "There are no MRGIDs for this source.",
       "i" = "Source: {.val {source}}"
     ))
   }
@@ -137,7 +139,10 @@ gaz_rest_sources <- function(){
   get_source <- function(offset){
     url <- glue::glue("https://marineregions.org/rest/getGazetteerSources.json/?offset={offset}")
 
-    resp <- httr2::request(url) %>%
+    resp <- marineregions.org() %>%
+      httr2::request() %>%
+      httr2::req_url_path_append("/rest/getGazetteerSources.json/") %>%
+      httr2::req_url_query(offset = offset) %>%
       httr2::req_user_agent(mr_user_agent) %>%
       httr2::req_headers(accept = "application/json") %>%
       httr2::req_error(is_error = function(resp) FALSE) %>%
@@ -208,7 +213,11 @@ gaz_rest_source_by_sourceid <- function(sourceid){
 
   url <- glue::glue("https://marineregions.org/rest/getGazetteerSourceBySourceID.json/{sourceid}/")
 
-  resp <- httr2::request(url) %>%
+  resp <- marineregions.org() %>%
+    httr2::request() %>%
+    httr2::req_url_path_append(glue::glue(
+      "/rest/getGazetteerSourceBySourceID.json/{sourceid}/"
+    )) %>%
     httr2::req_user_agent(mr_user_agent) %>%
     httr2::req_headers(accept = "application/json") %>%
     httr2::req_perform() %>%

@@ -104,11 +104,7 @@ gaz_rest_geometries <- function(mrgid, format = "sfc", multipart = TRUE, ...){
   checkmate::assert_int(mrgid, lower = 1)
 
   # Config
-  url <- paste0(
-    "https://marineregions.org/rest/getGazetteerGeometries.ttl/",
-    mrgid,
-    "/"
-  )
+  url <- glue::glue('{marineregions.org()}/rest/getGazetteerGeometries.ttl/{mrgid}/')
 
   # Perform
   geom_perform(url, format, multipart, mrgid = mrgid, ...)
@@ -133,14 +129,9 @@ gaz_rest_geometry <- function(mrgid, sourceid, attribute_value,
   checkmate::assert_int(sourceid, lower = 1)
 
   # Config
-
-  url <- paste0(
-    "https://marineregions.org/rest/getGazetteerGeometry.ttl/",
-    mrgid,
-    "/?source=",
-    sourceid,
-    "&attributeValue=",
-    attribute_value
+  url <- paste0(marineregions.org(), "/rest/getGazetteerGeometry.ttl/", mrgid,
+    "/?source=", sourceid,
+    "&attributeValue=", attribute_value
   )
 
   # perform

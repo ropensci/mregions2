@@ -181,3 +181,16 @@ assert_placetype <- function(type = NULL){
   }
   invisible(NULL)
 }
+
+#' URL marine regions website
+#'
+#' @details
+#'
+#' Reads marine regions url from options: marineregions.url
+#' Use for debugging with dev site
+#'
+#' @noRd
+marineregions.org <- function(){
+  getOption("marineregions.url", "https://marineregions.org/")
+}
+

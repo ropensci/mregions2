@@ -15,16 +15,14 @@
 #' # is the same as
 #' gaz_types()
 gaz_rest_types <- function(){
-  url <- "https://marineregions.org/rest/getGazetteerTypes.json/"
-
-  resp <- httr2::request(url) %>%
+  marineregions.org() %>%
+    httr2::request() %>%
+    httr2::req_url_path_append("/rest/getGazetteerTypes.json/") %>%
     httr2::req_user_agent(mr_user_agent) %>%
     httr2::req_headers(accept = "application/json") %>%
     httr2::req_perform() %>%
     httr2::resp_body_json() %>%
     dplyr::bind_rows()
-
-  resp
 }
 
 #' @name gaz_types
@@ -106,9 +104,12 @@ gaz_rest_records_by_type <- function(type, with_geometry = FALSE){
 
   # Reusable http request that overrides automatic error check
   get_source <- function(offset){
-    url <- glue::glue("https://marineregions.org/rest/getGazetteerRecordsByType.json/{placetype}/?offset={offset}")
-
-    resp <- httr2::request(url) %>%
+    marineregions.org() %>%
+      httr2::request() %>%
+      httr2::req_url_path_append(glue::glue(
+        "/rest/getGazetteerRecordsByType.json/{placetype}/"
+      )) %>%
+      httr2::req_url_query(offset = offset) %>%
       httr2::req_user_agent(mr_user_agent) %>%
       httr2::req_headers(accept = "application/json") %>%
       httr2::req_error(is_error = function(resp) FALSE) %>%

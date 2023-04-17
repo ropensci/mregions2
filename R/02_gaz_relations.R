@@ -82,9 +82,6 @@ gaz_rest_relations_by_mrgid <- function(mrgid, with_geometry = FALSE, direction 
   mrgid <- checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
                                        null.ok = TRUE, coerce = TRUE, len = 1)
 
-  # Config
-  url <- glue::glue("https://marineregions.org/rest/getGazetteerRelationsByMRGID.json/{mrgid}/?direction={direction}&type={type}")
-
   # Extra info for status 404 not found
   .is_error <- function(resp){
     if(httr2::resp_status(resp) == 404){
@@ -103,7 +100,12 @@ gaz_rest_relations_by_mrgid <- function(mrgid, with_geometry = FALSE, direction 
   }
 
   # Perform
-  resp <- httr2::request(url) %>%
+  resp <- marineregions.org() %>%
+    httr2::request() %>%
+    httr2::req_url_path_append(
+      glue::glue("/rest/getGazetteerRelationsByMRGID.json/{mrgid}/")
+    ) %>%
+    httr2::req_url_query(direction = direction, type = type) %>%
     httr2::req_user_agent(mr_user_agent) %>%
     httr2::req_headers(accept = "application/json") %>%
     httr2::req_error(is_error = .is_error) %>%
