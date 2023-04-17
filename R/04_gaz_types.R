@@ -103,7 +103,7 @@ gaz_rest_records_by_type <- function(type, with_geometry = FALSE){
   placetype <- utils::URLencode(placetype)
 
   # Reusable http request that overrides automatic error check
-  get_source <- function(offset){
+  get_records_by_type_at <- function(offset){
     marineregions.org() %>%
       httr2::request() %>%
       httr2::req_url_path_append(glue::glue(
@@ -118,7 +118,7 @@ gaz_rest_records_by_type <- function(type, with_geometry = FALSE){
 
   # First request - will work as placeholder
   offset <- 0
-  resp <- get_source(offset)
+  resp <- get_records_by_type_at(offset)
 
   # Check status: first offset should be 200
   if(httr2::resp_is_error(resp)){
@@ -130,16 +130,16 @@ gaz_rest_records_by_type <- function(type, with_geometry = FALSE){
   }else{
 
   # If all ok, continue with first offset
-
     http_status <- httr2::resp_status(resp)
-    resp <- get_source(offset) %>%
+
+    resp <- get_records_by_type_at(offset) %>%
       httr2::resp_body_json() %>%
       dplyr::bind_rows()
 
     # Enter infinite loop
     while(TRUE){
       offset <- offset + 100
-      resp_n <- get_source(offset)
+      resp_n <- get_records_by_type_at(offset)
       http_status <- httr2::resp_status(resp_n)
 
       if(httr2::resp_is_error(resp_n) & http_status != 404){

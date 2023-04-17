@@ -238,7 +238,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
   url <- utils::URLencode(url)
 
   # Reusable http request that overrides automatic error check
-  get_source <- function(offset){
+  gaz_records_by_name_at <- function(offset){
     req <- marineregions.org() %>%
       httr2::request() %>%
       httr2::req_url_path_append(
@@ -255,7 +255,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
 
   # First request - will work as placeholder
   offset <- 0
-  resp <- get_source(offset)
+  resp <- gaz_records_by_name_at(offset)
 
   # Check status: first offset should be 200
   if(httr2::resp_is_error(resp)){
@@ -305,14 +305,14 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
   }else{
 
     # If all ok, continue with first offset
-    resp <- get_source(offset) %>%
+    resp <- resp %>%
       httr2::resp_body_json() %>%
       dplyr::bind_rows()
 
     # Enter infinite loop
     while(TRUE){
       offset <- offset + 100
-      resp_n <- get_source(offset)
+      resp_n <- gaz_records_by_name_at(offset)
       http_status <- httr2::resp_status(resp_n)
 
       if(httr2::resp_is_error(resp_n) & http_status != 404){
@@ -428,7 +428,7 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FA
   url <- glue::glue("https://marineregions.org")
 
   # Reusable http request that overrides automatic error check
-  get_source <- function(offset){
+  get_records_by_lat_long_at <- function(offset){
     req <- marineregions.org() %>%
       httr2::request() %>%
       httr2::req_url_path_append(
@@ -444,7 +444,7 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FA
 
   # First request - will work as placeholder
   offset <- 0
-  resp <- get_source(offset)
+  resp <- get_records_by_lat_long_at(offset)
 
   # Check status: first offset should be 200
   if(httr2::resp_is_error(resp)){
@@ -476,7 +476,7 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FA
   }else{
 
     # If all ok, continue with first offset
-    resp <- get_source(offset) %>%
+    resp <- resp %>%
       httr2::resp_body_json() %>%
       dplyr::bind_rows()
 
@@ -495,7 +495,7 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FA
     while(TRUE){
 
       offset <- offset + 100
-      resp_n <- get_source(offset)
+      resp_n <- get_records_by_lat_long_at(offset)
       http_status <- httr2::resp_status(resp_n)
 
       if(httr2::resp_is_error(resp_n) & http_status != 404){

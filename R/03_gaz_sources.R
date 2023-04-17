@@ -136,10 +136,8 @@ gaz_rest_sources <- function(){
   sourceID <- NULL
 
   # Reusable http request that overrides automatic error check
-  get_source <- function(offset){
-    url <- glue::glue("https://marineregions.org/rest/getGazetteerSources.json/?offset={offset}")
-
-    resp <- marineregions.org() %>%
+  get_source_at <- function(offset){
+    marineregions.org() %>%
       httr2::request() %>%
       httr2::req_url_path_append("/rest/getGazetteerSources.json/") %>%
       httr2::req_url_query(offset = offset) %>%
@@ -151,7 +149,7 @@ gaz_rest_sources <- function(){
 
   # First request - will work as placeholder
   offset <- 0
-  resp <- get_source(offset)
+  resp <- get_source_at(offset)
 
   # Check status: first offset should be 200
   if(httr2::resp_is_error(resp)){
@@ -159,14 +157,14 @@ gaz_rest_sources <- function(){
 
   }else{
 
-    resp <- get_source(offset) %>%
+    resp <- resp %>%
       httr2::resp_body_json() %>%
       dplyr::bind_rows()
 
     # Enter infinite loop
     while(TRUE){
       offset <- offset + 100
-      resp_n <- get_source(offset)
+      resp_n <- get_source_at(offset)
       http_status <- httr2::resp_status(resp_n)
 
       if(httr2::resp_is_error(resp_n) & http_status != 404){
@@ -211,9 +209,7 @@ gaz_rest_source_by_sourceid <- function(sourceid){
 
   sourceid <- checkmate::assert_int(sourceid, lower = 1, coerce = TRUE)
 
-  url <- glue::glue("https://marineregions.org/rest/getGazetteerSourceBySourceID.json/{sourceid}/")
-
-  resp <- marineregions.org() %>%
+  marineregions.org() %>%
     httr2::request() %>%
     httr2::req_url_path_append(glue::glue(
       "/rest/getGazetteerSourceBySourceID.json/{sourceid}/"
@@ -223,8 +219,6 @@ gaz_rest_source_by_sourceid <- function(sourceid){
     httr2::req_perform() %>%
     httr2::resp_body_json() %>%
     unlist()
-
-  resp
 
 }
 
