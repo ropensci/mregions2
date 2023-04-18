@@ -8,7 +8,7 @@
 #' @return A data frame with Gazetteer entries
 #' @export
 #'
-#' @examples
+#' @examples \dontrun{
 #' # Check out all sources
 #' gaz_sources()
 #'
@@ -17,6 +17,7 @@
 #'
 #' # Or query by SourceID
 #' gaz_search_by_source(386)
+#' }
 gaz_search_by_source <- function(x, ...){
   UseMethod("gaz_search_by_source")
 }
@@ -52,8 +53,9 @@ gaz_search_by_source.numeric <- function(x, ...){
 #'
 #' @seealso [gaz_rest]
 #'
-#' @examples
+#' @examples \dontrun{
 #' gaz_rest_records_by_source("ICES Ecoregions")
+#' }
 gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
 
   # Assertions
@@ -126,12 +128,13 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
 #'
 #' @seealso [gaz_rest], [gaz_search_by_source()], [gaz_rest_records_by_source()], [gaz_rest_source_by_sourceid()]
 #'
-#' @examples
+#' @examples \dontrun{
 #' # This
 #' gaz_rest_sources()
 #'
 #' # is the same as
 #' gaz_sources()
+#' }
 gaz_rest_sources <- function(){
   sourceID <- NULL
 
@@ -202,9 +205,10 @@ gaz_sources <- memoise::memoise(gaz_rest_sources)
 #'
 #' @seealso [gaz_rest], [gaz_sources()]
 #'
-#' @examples
+#' @examples \dontrun{
 #' gaz_rest_source_by_sourceid(390)
 #' gaz_rest_source_by_sourceid(657)
+#' }
 gaz_rest_source_by_sourceid <- function(sourceid){
 
   sourceid <- checkmate::assert_int(sourceid, lower = 1, coerce = TRUE)

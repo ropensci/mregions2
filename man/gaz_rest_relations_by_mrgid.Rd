@@ -32,7 +32,9 @@ A data frame with Gazetteer entries
 Retrieve Gazetter Relations by MRGID
 }
 \examples{
+\dontrun{
 gaz_rest_relations_by_mrgid(7378)
+}
 }
 \seealso{
 \href{https://marineregions.org/ontology/documentation.html}{List of types (Object Properties)}, \link{gaz_rest}, \link{MRGID}

@@ -8,12 +8,13 @@
 #'
 #' @seealso [gaz_rest]
 #'
-#' @examples
+#' @examples \dontrun{
 #' # This
 #' gaz_rest_types()
 #'
 #' # is the same as
 #' gaz_types()
+#' }
 gaz_rest_types <- function(){
   marineregions.org() %>%
     httr2::request() %>%
@@ -43,12 +44,13 @@ gaz_types <- memoise::memoise(gaz_rest_types)
 #' @return A data frame with Gazetteer entries
 #' @export
 #'
-#' @examples
+#' @examples \dontrun{
 #' # This
 #' gaz_search_by_type("EEZ")
 #'
 #' # is the same as
 #' gaz_search_by_type(70)
+#' }
 gaz_search_by_type <- function(x, ...){
   UseMethod("gaz_search_by_type")
 }
@@ -87,9 +89,11 @@ gaz_search_by_type.numeric <- function(x, ...){
 #' @seealso [gaz_rest], [gaz_rest_types()]
 #' @export
 #'
-#' @examples
+#' @examples \dontrun(
 #' gaz_rest_records_by_type("FAO Subdivisions")
 #' gaz_rest_records_by_type("EEZ")
+#' )
+
 gaz_rest_records_by_type <- function(type, with_geometry = FALSE){
   placetype <- type; rm(type)
   MRGID <- NULL

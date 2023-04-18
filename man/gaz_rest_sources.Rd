@@ -18,11 +18,13 @@ a data frame with three columns:
 Get all the Marine Regions sources
 }
 \examples{
+\dontrun{
 # This
 gaz_rest_sources()
 
 # is the same as
 gaz_sources()
+}
 }
 \seealso{
 \link{gaz_rest}, \code{\link[=gaz_search_by_source]{gaz_search_by_source()}}, \code{\link[=gaz_rest_records_by_source]{gaz_rest_records_by_source()}}, \code{\link[=gaz_rest_source_by_sourceid]{gaz_rest_source_by_sourceid()}}

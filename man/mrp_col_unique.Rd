@@ -31,8 +31,10 @@ crash your R session.
 }
 }
 \examples{
+\dontrun{
 mrp_col_unique("ecs", "pol_type")
 mrp_col_unique("ecs_boundaries", "line_type")
+}
 }
 \seealso{
 \link{mrp_list} to describe the list of products, \code{\link[=mrp_colnames]{mrp_colnames()}} to get the names and data type of

@@ -6,9 +6,10 @@
 #' @export
 #' @seealso [gaz_rest], [MRGID]
 #'
-#' @examples
+#' @examples \dontrun{
 #' gaz_rest_names_by_mrgid(3293)
 #' gaz_rest_names_by_mrgid(14)
+#' }
 gaz_rest_names_by_mrgid <- function(mrgid){
 
   # Assertions

@@ -16,7 +16,7 @@
 #' @return A data frame with Gazetteer entries
 #' @export
 #'
-#' @examples
+#' @examples \dontrun{
 #' # Look-up a name in the Gazetteer
 #' gaz_search("Belgian Part of the North Sea")
 #'
@@ -31,6 +31,8 @@
 #' # Get all the records intersecting with the longitude 51.21551 and latitude 2.927
 #' # restricting to some placetypes
 #' gaz_search(x = 2.927, y = 51.21551, typeid = c(255, 259))
+#' }
+
 gaz_search <- function(x, ...){
   UseMethod("gaz_search")
 }
@@ -134,10 +136,11 @@ gaz_search.sfc <- function(x, ...){
 #'
 #' @return A data frame with the Gazetteer entry
 #'
-#' @examples
+#' @examples \dontrun{
 #' gaz_rest_record_by_mrgid(3293)
 #' gaz_rest_record_by_mrgid(3293, with_geometry = TRUE)
 #' gaz_rest_record_by_mrgid(3293, rdf = TRUE)
+#' }
 gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
 
   # Assertions
@@ -210,10 +213,11 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
 #' @seealso [gaz_rest], [gaz_rest_records_by_name]
 #' @return A data frame with Gazetteer entries
 #'
-#' @examples
+#' @examples \dontrun{
 #' gaz_rest_records_by_name("Belgian Exclusive Economic Zone", with_geometry = TRUE)
 #' gaz_rest_records_by_name("Bélgica", language = "es")
 #' gaz_rest_records_by_name("Belgium", typeid = c(350, 351))
+#' }
 gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL, language = NULL, like = TRUE, fuzzy = TRUE){
   MRGID <- NULL
 

@@ -76,7 +76,7 @@ gaz_geometry.mr_df <- function(x, ...){
 #' @param mrgid (integer) A valid Marine Regions Gazetteer Identifier ([MRGID])
 #' @param format (character) The preferred output format. One of:
 #' - "sfc": Simple Feature geometry object. See 'sf'
-#' - "wkt": Geometry representation as [Well-Known Text](https://wikipedia.org/wiki/Well-known_text)
+#' - "wkt": Geometry representation as [Well-Known Text](https://en.wikipedia.org/wiki/Well-known_text)
 #' - "rdf": Geometry as an object of class 'rdf". See 'rdflib'
 #'
 #' Default is "sfc"
@@ -91,11 +91,11 @@ gaz_geometry.mr_df <- function(x, ...){
 #' @return A sfc object (default), a sf data frame, a WKT string
 #' or an RDF object
 #'
-#' @examples
+#' @examples \dontrun{
 #' gaz_rest_geometries(3293)
 #' gaz_rest_geometries(3293, format = "wkt")
 #' gaz_rest_geometries(3293, format = "rdf")
-#'
+#' }
 #' @export
 gaz_rest_geometries <- function(mrgid, format = "sfc", multipart = TRUE, ...){
 
@@ -112,7 +112,7 @@ gaz_rest_geometries <- function(mrgid, format = "sfc", multipart = TRUE, ...){
 
 #' Get one single geometry associated with a gazetteer record
 #'
-#' This function method is mainly for internal use. Please use
+#' This function is mainly for internal use. Please use
 #' [gaz_rest_geometries()] instead.
 #'
 #' @inheritParams gaz_rest_geometries

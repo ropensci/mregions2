@@ -15,13 +15,13 @@ knitr::opts_chunk$set(
 # mregions2
 
 <!-- badges: start -->
-[![Funding](https://img.shields.io/static/v1?label=powered+by&message=lifewatch.be&labelColor=1a4e8a&color=f15922)](http://lifewatch.be)
+[![Funding](https://img.shields.io/static/v1?label=powered+by&message=lifewatch.be&labelColor=1a4e8a&color=f15922)](https://lifewatch.be)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml)
 [![pkgcheck](https://github.com/lifewatch/mregions2/workflows/pkgcheck/badge.svg)](https://github.com/lifewatch/mregions2/actions?query=workflow%3Apkgcheck)
 [![Codecov test
-coverage](https://codecov.io/gh/lifewatch/mregions2/branch/main/graph/badge.svg)](https://codecov.io/gh/lifewatch/mregions2?branch=main)
+coverage](https://codecov.io/gh/lifewatch/mregions2/branch/main/graph/badge.svg)](https://app.codecov.io/gh/lifewatch/mregions2?branch=main)
 <!-- badges: end -->
 
 mregions2 allows to access the [Marine Regions Gazetteer](https://marineregions.org/gazetteer.php) and the [Marine Regions Data Products](https://marineregions.org/sources.php) in R.

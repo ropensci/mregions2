@@ -18,7 +18,9 @@ A data frame with Gazetteer entries
 Retrieve Gazetteer Records by Source
 }
 \examples{
+\dontrun{
 gaz_rest_records_by_source("ICES Ecoregions")
+}
 }
 \seealso{
 \link{gaz_rest}

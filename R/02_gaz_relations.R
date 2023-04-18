@@ -64,8 +64,9 @@ gaz_relations.mr_df <- function(x, ...){
 #'
 #' @seealso [List of types (Object Properties)](https://marineregions.org/ontology/documentation.html), [gaz_rest], [MRGID]
 #'
-#' @examples
+#' @examples \dontrun{
 #' gaz_rest_relations_by_mrgid(7378)
+#' }
 gaz_rest_relations_by_mrgid <- function(mrgid, with_geometry = FALSE, direction = "both", type = "all"){
 
   # Assertions

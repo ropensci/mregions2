@@ -2,8 +2,8 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "mregions2",
-  "description": "Explore and retrieve marine geospatial data from the Marine Regions Gazetteer and the Marine Regions Data Products, including the Maritime Boundaries.",
-  "name": "mregions2: Access data from marineregions.org: the Marine Regions Gazetteer and the Marine Regions Data Products",
+  "description": "Explore and retrieve marine geo-spatial data from the Marine Regions Gazetteer and the Marine Regions Data Products, including the Maritime Boundaries.",
+  "name": "mregions2: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products",
   "relatedLink": "https://lifewatch.github.io/mregions2/",
   "codeRepository": "https://github.com/lifewatch/mregions2",
   "issueTracker": "https://github.com/lifewatch/mregions2/issues",
@@ -19,7 +19,7 @@
     {
       "@type": "Person",
       "givenName": "Salvador",
-      "familyName": "Fernandez",
+      "familyName": "Fernandez-Bejarano",
       "email": "salvador.fernandez@vliz.be",
       "@id": "https://orcid.org/0000-0003-0535-7677"
     },
@@ -41,7 +41,7 @@
     {
       "@type": "Person",
       "givenName": "Salvador",
-      "familyName": "Fernandez",
+      "familyName": "Fernandez-Bejarano",
       "email": "salvador.fernandez@vliz.be",
       "@id": "https://orcid.org/0000-0003-0535-7677"
     }
@@ -203,6 +203,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=purrr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "withr",
+      "name": "withr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=withr"
     }
   ],
   "softwareRequirements": {
@@ -362,13 +374,25 @@
     },
     "15": {
       "@type": "SoftwareApplication",
+      "identifier": "curl",
+      "name": "curl",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=curl"
+    },
+    "16": {
+      "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
       "version": ">= 2.10"
     },
     "SystemRequirements": null
   },
-  "fileSize": "758.731KB",
+  "fileSize": "775.694KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -385,11 +409,8 @@
           "familyName": "Pohl"
         }
       ],
-      "name": "{mregions2}: Access data from marineregions.org: the Marine Regions Gazetteer and the Marine Regions Data Products",
+      "name": "{mregions2}: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products",
       "url": "https://github.com/lifewatch/mregions2"
     }
-  ],
-  "readme": "https://github.com/lifewatch/mregions2/blob/main/README.md",
-  "contIntegration": ["https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml", "https://github.com/lifewatch/mregions2/actions?query=workflow%3Apkgcheck", "https://codecov.io/gh/lifewatch/mregions2?branch=main"],
-  "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"
+  ]
 }

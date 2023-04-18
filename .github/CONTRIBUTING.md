@@ -1,6 +1,6 @@
 # Contributing to mregions2
 
-If you wish to contribute to mregions2 please get in contact with the team by email: info@marineregions.org
+If you wish to contribute to mregions2 please get in contact with the team by email: <info@marineregions.org>
 
 ## Code of Conduct
 

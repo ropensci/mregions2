@@ -20,9 +20,11 @@ A data frame with the Gazetteer entry
 Get one record for the given MRGID
 }
 \examples{
+\dontrun{
 gaz_rest_record_by_mrgid(3293)
 gaz_rest_record_by_mrgid(3293, with_geometry = TRUE)
 gaz_rest_record_by_mrgid(3293, rdf = TRUE)
+}
 }
 \seealso{
 \link{gaz_rest}, \link{MRGID}

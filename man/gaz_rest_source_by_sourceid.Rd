@@ -16,8 +16,10 @@ a named vector with the source name and, if available, the url to the source.
 Get the name of a source by providing a sourceID
 }
 \examples{
+\dontrun{
 gaz_rest_source_by_sourceid(390)
 gaz_rest_source_by_sourceid(657)
+}
 }
 \seealso{
 \link{gaz_rest}, \code{\link[=gaz_sources]{gaz_sources()}}

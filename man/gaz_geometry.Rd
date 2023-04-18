@@ -26,7 +26,7 @@ gaz_geometry(x, ...)
     \item{\code{format}}{(character) The preferred output format. One of:
 \itemize{
 \item "sfc": Simple Feature geometry object. See 'sf'
-\item "wkt": Geometry representation as \href{https://wikipedia.org/wiki/Well-known_text}{Well-Known Text}
+\item "wkt": Geometry representation as \href{https://en.wikipedia.org/wiki/Well-known_text}{Well-Known Text}
 \item "rdf": Geometry as an object of class 'rdf". See 'rdflib'
 }
 

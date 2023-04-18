@@ -24,7 +24,9 @@ a data frame with information from the WMS services including:
 Get WMS information for a given MRGID
 }
 \examples{
+\dontrun{
 gaz_rest_wmses(3293)
+}
 }
 \seealso{
 \link{gaz_rest}, \link{MRGID}, \code{\link[=mrp_view]{mrp_view()}}

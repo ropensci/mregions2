@@ -1,10 +1,10 @@
 Package: mregions2
 Type: Package
-Title: Access data from marineregions.org: the Marine Regions Gazetteer and the Marine Regions Data Products
+Title: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products
 Version: 1.0.0
-Year: 2022
+Date: 2023-04-18
 Authors@R: c(
-  person(given = "Salvador", family = "Fernandez", role = c("aut", "cre"),
+  person(given = "Salvador", family = "Fernandez-Bejarano", role = c("aut", "cre"),
          email = "salvador.fernandez@vliz.be",
          comment = c(ORCID = "0000-0003-0535-7677", github = "salvafern")),
   person(given = "Lotte",family = "Pohl", role = "aut",
@@ -12,8 +12,8 @@ Authors@R: c(
          comment = c(ORCID = "0000-0002-7607-7018", github = "whaleshark99")),
   person("LifeWatch Belgium", role = "fnd", comment = "https://lifewatch.be")
   )
-Maintainer: The package maintainer <salvador.fernandez@vliz.be>
-Description: Explore and retrieve marine geospatial data from the Marine Regions Gazetteer and the Marine Regions Data Products, including the Maritime Boundaries.
+Maintainer: Salvador Fernandez-Bejarano <salvador.fernandez@vliz.be>
+Description: Explore and retrieve marine geo-spatial data from the Marine Regions Gazetteer and the Marine Regions Data Products, including the Maritime Boundaries.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

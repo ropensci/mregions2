@@ -14,7 +14,7 @@ A data frame with 21 rows and 7 columns:
 \item{layer}{Identifier of the data product. Use in \code{\link[=mrp_get]{mrp_get()}}}
 \item{license}{terms of use of the data products}
 \item{citation}{preferred citation of the data products}
-\item{doi}{ISO 26324 \href{https://doi.org}{Digital Object Identifier}}
+\item{doi}{ISO 26324 \href{https://www.doi.org/}{Digital Object Identifier})}
 \item{imis}{Url of the data products in the \href{https://vliz.be/imis?}{Integrated Marine Information System (IMIS)}}
 \item{abstract}{Description of the data product}
 }

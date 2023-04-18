@@ -33,9 +33,11 @@ A data frame with Gazetteer entries
 Get Gazetteer Records for a given name
 }
 \examples{
+\dontrun{
 gaz_rest_records_by_name("Belgian Exclusive Economic Zone", with_geometry = TRUE)
 gaz_rest_records_by_name("Bélgica", language = "es")
 gaz_rest_records_by_name("Belgium", typeid = c(350, 351))
+}
 }
 \seealso{
 \link{gaz_rest}, \link{gaz_rest_records_by_name}

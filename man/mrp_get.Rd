@@ -23,10 +23,10 @@ Get a data product
 }
 \details{
 This function uses \href{https://en.wikipedia.org/wiki/Web_Map_Service}{WMS services} to load quickly
-a Leaflet viewer of a Marine Regions data product. It uses \href{https://emodnet.ec.europa.eu}{EMODnet Bathymetry} as background layer.
+a Leaflet viewer of a Marine Regions data product. It uses the \href{https://emodnet.ec.europa.eu/en}{EMODnet Bathymetry} Digital Terrain Model as background layer.
 \subsection{Filters}{
 
-Both the \href{https://portal.ogc.org/files/96288}{Contextual Query Language (CQL) filter} and the \href{https://www.ogc.org/standards/filter}{standard OGC filter specification} allow to
+Both the \href{https://portal.ogc.org/files/96288}{Contextual Query Language (CQL) filter} and the \href{https://www.ogc.org/standard/filter/}{standard OGC filter specification} allow to
 query the server before performing a request. This will boost performance as you will only retrieve the area of your interest. It is possible to query on attributes, but also perform
 geospatial queries. For instance, you can query a bounding box of interest.
 

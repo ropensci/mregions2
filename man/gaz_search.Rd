@@ -53,6 +53,7 @@ Search in the Marine Regions Gazetteer by names, MRGID or reverse geocode with a
 WGS84 coordinates x and y
 }
 \examples{
+\dontrun{
 # Look-up a name in the Gazetteer
 gaz_search("Belgian Part of the North Sea")
 
@@ -67,4 +68,5 @@ gaz_search("Bélgica", language = "es")
 # Get all the records intersecting with the longitude 51.21551 and latitude 2.927
 # restricting to some placetypes
 gaz_search(x = 2.927, y = 51.21551, typeid = c(255, 259))
+}
 }

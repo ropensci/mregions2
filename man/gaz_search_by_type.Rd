@@ -33,11 +33,13 @@ A data frame with Gazetteer entries
 Retrieve Gazetteer Records by Placetype
 }
 \examples{
+\dontrun{
 # This
 gaz_search_by_type("EEZ")
 
 # is the same as
 gaz_search_by_type(70)
+}
 }
 \seealso{
 \code{\link[=gaz_types]{gaz_types()}}

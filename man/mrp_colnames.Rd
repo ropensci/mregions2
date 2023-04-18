@@ -24,8 +24,10 @@ The actual description of each column is available only to the Maritime Boundari
 See \url{https://marineregions.org/eezattribute.php}
 }
 \examples{
+\dontrun{
 mrp_colnames("eez")
 mrp_colnames("ecoregions")
+}
 }
 \seealso{
 \link{mrp_list} to describe the list of products, \code{\link[=mrp_col_unique]{mrp_col_unique()}} to get the unique values of a the

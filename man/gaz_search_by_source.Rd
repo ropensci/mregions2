@@ -28,6 +28,7 @@ A data frame with Gazetteer entries
 Retrieve Gazetteer Records by Source
 }
 \examples{
+\dontrun{
 # Check out all sources
 gaz_sources()
 
@@ -36,6 +37,7 @@ gaz_search_by_source("Gazetteer of Greenland")
 
 # Or query by SourceID
 gaz_search_by_source(386)
+}
 }
 \seealso{
 \code{\link[=gaz_sources]{gaz_sources()}}

@@ -18,11 +18,13 @@ a data frame with three columns:
 Get all the place types of the Marine Regions Gazetteer
 }
 \examples{
+\dontrun{
 # This
 gaz_rest_types()
 
 # is the same as
 gaz_types()
+}
 }
 \seealso{
 \link{gaz_rest}

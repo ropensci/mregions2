@@ -12,7 +12,7 @@ gaz_rest_geometries(mrgid, format = "sfc", multipart = TRUE, ...)
 \item{format}{(character) The preferred output format. One of:
 \itemize{
 \item "sfc": Simple Feature geometry object. See 'sf'
-\item "wkt": Geometry representation as \href{https://wikipedia.org/wiki/Well-known_text}{Well-Known Text}
+\item "wkt": Geometry representation as \href{https://en.wikipedia.org/wiki/Well-known_text}{Well-Known Text}
 \item "rdf": Geometry as an object of class 'rdf". See 'rdflib'
 }
 
@@ -34,10 +34,11 @@ or an RDF object
 Get the geometries associated with a gazetteer record
 }
 \examples{
+\dontrun{
 gaz_rest_geometries(3293)
 gaz_rest_geometries(3293, format = "wkt")
 gaz_rest_geometries(3293, format = "rdf")
-
+}
 }
 \seealso{
 \link{gaz_rest}

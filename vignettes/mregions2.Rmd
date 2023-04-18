@@ -116,7 +116,7 @@ Learn more about using the mregions2 to access the [Marine Regions Gazetteer as 
 
 [**Reverse geocoding**](https://en.wikipedia.org/wiki/Reverse_geocoding) is possible with mregions2: pass geographical coordinates in the WGS84 projection will return all records that intersect with the point.
 
-e.g. the coordinates [longitude 2.927 - latitude 51.21551](https://www.openstreetmap.org/search?query=51.21551%252C%202.927) lay on the city of [Ostend](https://wikipedia.org/wiki/Ostend) at the Belgian coast 
+e.g. the coordinates [longitude 2.927 - latitude 51.21551](https://www.openstreetmap.org/search?query=51.21551%252C%202.927) lay on the city of [Ostend](https://en.wikipedia.org/wiki/Ostend) at the Belgian coast 
 
 ```{r}
 gaz_search(x = 2.927, y = 51.21551)
@@ -361,7 +361,7 @@ verbose <- "
 mrp_view("ecs", cql_filter = verbose)
 ```
 
-You can also apply a [standard OGC filter specification](https://www.ogc.org/standards/filter). These are however more verbose:
+You can also apply a [standard OGC filter specification](https://www.ogc.org/standard/filter/). These are however more verbose:
 
 ```{r, eval=FALSE}
 # View the Extended Continental Shelf of Portugal

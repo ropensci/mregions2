@@ -13,8 +13,9 @@
 #' @export
 #' @seealso [gaz_rest], [MRGID], [mrp_view()]
 #'
-#' @examples
+#' @examples \dontrun{
 #' gaz_rest_wmses(3293)
+#' }
 gaz_rest_wmses <- function(mrgid){
   # Assertions
   mrgid <- checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
