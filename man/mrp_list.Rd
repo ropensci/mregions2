@@ -33,4 +33,7 @@ some other relevant about each data product in Marine Regions.
 \details{
 Direct downloads are also available at: \url{https://marineregions.org/downloads.php}
 }
+\examples{
+mrp_list
+}
 \keyword{datasets}

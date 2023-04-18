@@ -32,8 +32,7 @@
 #'
 #' @return A leaflet map with a data product visualized via WMS
 #'
-#' @examples
-#' \dontrun{
+#' @examples \dontrun{
 #' # You can pass a product name from mrp_list
 #' mrp_view('eez')
 #'

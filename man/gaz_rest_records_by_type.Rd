@@ -18,10 +18,10 @@ A data frame with Gazetteer entries
 Retrieve Gazetteer Records by Placetype
 }
 \examples{
-\dontrun{}
+\dontrun{
 gaz_rest_records_by_type("FAO Subdivisions")
 gaz_rest_records_by_type("EEZ")
-)
+}
 }
 \seealso{
 \link{gaz_rest}, \code{\link[=gaz_rest_types]{gaz_rest_types()}}

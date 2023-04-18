@@ -89,11 +89,10 @@ gaz_search_by_type.numeric <- function(x, ...){
 #' @seealso [gaz_rest], [gaz_rest_types()]
 #' @export
 #'
-#' @examples \dontrun{}
+#' @examples \dontrun{
 #' gaz_rest_records_by_type("FAO Subdivisions")
 #' gaz_rest_records_by_type("EEZ")
-#' )
-
+#' }
 gaz_rest_records_by_type <- function(type, with_geometry = FALSE){
   placetype <- type; rm(type)
   MRGID <- NULL

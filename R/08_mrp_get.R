@@ -26,8 +26,7 @@
 #' @seealso [mrp_list] to describe the list of products, [mrp_view()] to visualize the data product in advance, [mrp_colnames()] and [mrp_col_unique()] to get the name, data type and unique values of a the columns of a data product, useful to query
 #' with the arguments `cql_filter` or `filter`
 #'
-#' @examples
-#' \dontrun{
+#' @examples \dontrun{
 #' # See the list of all data products
 #' View(mrp_list)
 #'

@@ -19,4 +19,7 @@
 #' }
 #'
 #' @source <https://marineregions.org/sources.php> <https://marineregions.org/eezmethodology.php>
+#'
+#' @examples
+#' mrp_list
 "mrp_list"

@@ -32,7 +32,6 @@
 #' # restricting to some placetypes
 #' gaz_search(x = 2.927, y = 51.21551, typeid = c(255, 259))
 #' }
-
 gaz_search <- function(x, ...){
   UseMethod("gaz_search")
 }
