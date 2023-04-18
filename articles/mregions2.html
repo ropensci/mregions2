@@ -251,7 +251,7 @@ geocoding</strong></a> is possible with mregions2: pass geographical
 coordinates in the WGS84 projection will return all records that
 intersect with the point.</p>
 <p>e.g. the coordinates <a href="https://www.openstreetmap.org/search?query=51.21551%252C%202.927" class="external-link">longitude
-2.927 - latitude 51.21551</a> lay on the city of <a href="https://wikipedia.org/wiki/Ostend" class="external-link">Ostend</a> at the Belgian
+2.927 - latitude 51.21551</a> lay on the city of <a href="https://en.wikipedia.org/wiki/Ostend" class="external-link">Ostend</a> at the Belgian
 coast</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gaz_search.html">gaz_search</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2.927</span>, y <span class="op">=</span> <span class="fl">51.21551</span><span class="op">)</span></span>
@@ -806,7 +806,7 @@ product is slow</strong>:</p>
 <span>  <span class="va">ecs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"ecs"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sovereign1</span> <span class="op">==</span> <span class="st">"Portugal"</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   1.591   0.025   3.532</span></span></code></pre></div>
+<span><span class="co">#&gt;   1.349   0.048   3.262</span></span></code></pre></div>
 <p>Instead, you can write a <strong>filter</strong> that is applied on
 the <strong>server side</strong>:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
@@ -814,7 +814,7 @@ the <strong>server side</strong>:</p>
 <span>  <span class="va">ecs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"ecs"</span>, cql_filter <span class="op">=</span> <span class="st">"sovereign1 = 'Portugal'"</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;  34.168   0.011  34.862</span></span></code></pre></div>
+<span><span class="co">#&gt;  31.934   0.004  32.465</span></span></code></pre></div>
 <p>This filter is written in <a href="https://portal.ogc.org/files/96288" class="external-link">Contextual Query Language
 (CQL)</a>. This is a relatively simple syntax close to SQL.</p>
 <div class="section level4">
@@ -924,7 +924,7 @@ passing the filters together with the base URL</a> in the argument
 <span><span class="st">  AND area_km2 &gt; 1000000</span></span>
 <span><span class="st">"</span></span>
 <span><span class="fu"><a href="../reference/mrp_view.html">mrp_view</a></span><span class="op">(</span><span class="st">"ecs"</span>, cql_filter <span class="op">=</span> <span class="va">verbose</span><span class="op">)</span></span></code></pre></div>
-<p>You can also apply a <a href="https://www.ogc.org/standards/filter" class="external-link">standard OGC filter
+<p>You can also apply a <a href="https://www.ogc.org/standard/filter/" class="external-link">standard OGC filter
 specification</a>. These are however more verbose:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># View the Extended Continental Shelf of Portugal</span></span>
@@ -959,7 +959,7 @@ principles explained there are useful also for mregions2.</p>
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Salvador Fernandez, Lotte Pohl, <a href="https://lifewatch.be" class="external-link"><img src="https://www.lifewatch.be/sites/lifewatch.be/themes/lifewatchportal/images/header_lw_logo.png" width="72"></a>.</p>
+<p>Developed by Salvador Fernandez-Bejarano, Lotte Pohl, <a href="https://lifewatch.be" class="external-link"><img src="https://www.lifewatch.be/sites/lifewatch.be/themes/lifewatchportal/images/header_lw_logo.png" width="72"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

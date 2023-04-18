@@ -88,42 +88,11 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">gaz_rest_record_by_mrgid</span><span class="op">(</span><span class="fl">3293</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   MRGID gazetteerSource    placeType latitude longitude minLatitude minLongitude</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">3</span>293 Flanders Marine I… EEZ           51.5      2.71        51.1         2.24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: maxLatitude &lt;dbl&gt;, maxLongitude &lt;dbl&gt;, precision &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   preferredGazetteerName &lt;chr&gt;, preferredGazetteerNameLang &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   status &lt;chr&gt;, accepted &lt;int&gt;</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">gaz_rest_record_by_mrgid</span><span class="op">(</span><span class="fl">3293</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">gaz_rest_record_by_mrgid</span><span class="op">(</span><span class="fl">3293</span>, with_geometry <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 1 feature and 14 fields</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: 2.238333 ymin: 51.08931 xmax: 3.370403 ymax: 51.87611</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Geodetic CRS:  WGS 84</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 15</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   MRGID gazetteerSource    placeType latitude longitude minLatitude minLongitude</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">3</span>293 Flanders Marine I… EEZ           51.5      2.71        51.1         2.24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: maxLatitude &lt;dbl&gt;, maxLongitude &lt;dbl&gt;, precision &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   preferredGazetteerName &lt;chr&gt;, preferredGazetteerNameLang &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   status &lt;chr&gt;, accepted &lt;int&gt;, the_geom &lt;MULTIPOLYGON [°]&gt;</span></span>
 <span class="r-in"><span><span class="fu">gaz_rest_record_by_mrgid</span><span class="op">(</span><span class="fl">3293</span>, rdf <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Total of 101 triples, stored in hashes</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;http://marineregions.org/mrgid/3293&gt; &lt;http://marineregions.org/ns/ontology#contains&gt; &lt;http://marineregions.org/mrgid/28318&gt; .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;http://marineregions.org/mrgid/3293&gt; &lt;http://marineregions.org/ns/ontology#contains&gt; &lt;http://marineregions.org/mrgid/27790&gt; .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;http://marineregions.org/mrgid/3293&gt; &lt;http://marineregions.org/ns/ontology#contains&gt; &lt;http://marineregions.org/mrgid/27555&gt; .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;http://marineregions.org/mrgid/3293&gt; &lt;http://marineregions.org/ns/ontology#contains&gt; &lt;http://marineregions.org/mrgid/17865&gt; .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;http://marineregions.org/mrgid/3293&gt; &lt;http://marineregions.org/ns/ontology#contains&gt; &lt;http://marineregions.org/mrgid/17666&gt; .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;http://marineregions.org/mrgid/3293&gt; &lt;http://marineregions.org/ns/ontology#contains&gt; &lt;http://marineregions.org/mrgid/17409&gt; .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;http://marineregions.org/mrgid/3293&gt; &lt;http://marineregions.org/ns/ontology#contains&gt; &lt;http://marineregions.org/mrgid/17401&gt; .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;http://marineregions.org/mrgid/3293&gt; &lt;http://marineregions.org/ns/ontology#contains&gt; &lt;http://marineregions.org/mrgid/4675&gt; .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;http://marineregions.org/mrgid/3293&gt; &lt;http://marineregions.org/ns/ontology#contains&gt; &lt;http://marineregions.org/mrgid/2421&gt; .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;http://marineregions.org/mrgid/3293&gt; &lt;http://marineregions.org/ns/ontology#contains&gt; &lt;http://marineregions.org/mrgid/2420&gt; .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... with 91 more triples</span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -131,7 +100,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Salvador Fernandez, Lotte Pohl, <a href="https://lifewatch.be" class="external-link"><img src="https://www.lifewatch.be/sites/lifewatch.be/themes/lifewatchportal/images/header_lw_logo.png" width="72"></a>.</p>
+  <p></p><p>Developed by Salvador Fernandez-Bejarano, Lotte Pohl, <a href="https://lifewatch.be" class="external-link"><img src="https://www.lifewatch.be/sites/lifewatch.be/themes/lifewatchportal/images/header_lw_logo.png" width="72"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

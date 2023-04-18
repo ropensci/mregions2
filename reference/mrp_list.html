@@ -87,7 +87,7 @@ some other relevant about each data product in Marine Regions.</p>
 <dd><p>preferred citation of the data products</p></dd>
 
 <dt>doi</dt>
-<dd><p>ISO 26324 <a href="https://doi.org" class="external-link">Digital Object Identifier</a></p></dd>
+<dd><p>ISO 26324 <a href="https://www.doi.org/" class="external-link">Digital Object Identifier</a>)</p></dd>
 
 <dt>imis</dt>
 <dd><p>Url of the data products in the <a href="https://vliz.be/imis?" class="external-link">Integrated Marine Information System (IMIS)</a></p></dd>
@@ -108,12 +108,31 @@ some other relevant about each data product in Marine Regions.</p>
     <p>Direct downloads are also available at: <a href="https://marineregions.org/downloads.php" class="external-link">https://marineregions.org/downloads.php</a></p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">mrp_list</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 21 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    title                   namespace layer license citation doi   imis  abstract</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Exclusive Economic Zon… MarineRe… eez   Creati… <span style="color: #949494;">"</span>Flande… http… http… <span style="color: #949494;">"</span>Versio…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Maritime Boundaries (v… MarineRe… eez_… Creati… <span style="color: #949494;">"</span>Flande… http… http… <span style="color: #949494;">"</span>Versio…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Territorial Seas (12 N… MarineRe… eez_… Creati… <span style="color: #949494;">"</span>Flande… http… http… <span style="color: #949494;">"</span>Versio…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Contiguous Zones (24 N… MarineRe… eez_… Creati… <span style="color: #949494;">"</span>Flande… http… http… <span style="color: #949494;">"</span>Versio…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Internal Waters (v3, w… MarineRe… eez_… Creati… <span style="color: #949494;">"</span>Flande… http… http… <span style="color: #949494;">"</span>Versio…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Archipelagic Waters (v… MarineRe… eez_… Creati… <span style="color: #949494;">"</span>Flande… http… http… <span style="color: #949494;">"</span>Versio…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> High Seas (v1, world, … MarineRe… high… Creati… <span style="color: #949494;">"</span>Flande… http… http… <span style="color: #949494;">"</span>High S…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Extended Continental S… MarineRe… ecs   Creati… <span style="color: #949494;">"</span>Flande… http… http… <span style="color: #949494;">"</span>This d…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Extended Continental S… MarineRe… ecs_… Creati… <span style="color: #949494;">"</span>Flande… http… http… <span style="color: #949494;">"</span>This d…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> IHO Sea Areas (v3)      MarineRe… iho   Creati… <span style="color: #949494;">"</span>Flande… http… http… <span style="color: #949494;">"</span>World …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 11 more rows</span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Salvador Fernandez, Lotte Pohl, <a href="https://lifewatch.be" class="external-link"><img src="https://www.lifewatch.be/sites/lifewatch.be/themes/lifewatchportal/images/header_lw_logo.png" width="72"></a>.</p>
+  <p></p><p>Developed by Salvador Fernandez-Bejarano, Lotte Pohl, <a href="https://lifewatch.be" class="external-link"><img src="https://www.lifewatch.be/sites/lifewatch.be/themes/lifewatchportal/images/header_lw_logo.png" width="72"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
