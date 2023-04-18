@@ -15,11 +15,12 @@ gaz_rest_names_by_mrgid <- function(mrgid){
   mrgid <- checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
                                        null.ok = TRUE, coerce = TRUE, len = 1)
 
-  # Config
-  url <- glue::glue("https://marineregions.org/rest/getGazetteerNamesByMRGID.json/{mrgid}/")
-
-  # perform
-  resp <- httr2::request(url) %>%
+  # Perform
+  resp <- marineregions.org() %>%
+    httr2::request() %>%
+    httr2::req_url_path_append(glue::glue(
+      "/rest/getGazetteerNamesByMRGID.json/{mrgid}/"
+    )) %>%
     httr2::req_user_agent(mr_user_agent) %>%
     httr2::req_headers(accept = "application/json") %>%
     httr2::req_error(is_error = function(resp) FALSE) %>%
@@ -154,7 +155,7 @@ assert_typeid <- function(typeid = NULL, coerce = FALSE){
       typeid_not_part_of <- as.character(
         subset(typeid, !(typeid %in% gaz_types()$typeID))
       )
-      cli::cli_abort("{.field typeid} must be element of set {.fun gaz_types}, but {?is/are} {.val {typeid_not_part_of}}", call. = FALSE)
+      cli::cli_abort("{.arg typeid} must be element of set {.fun gaz_types}, but {?is/are} {.val {typeid_not_part_of}}", call. = FALSE)
     }
   }
 
@@ -169,7 +170,7 @@ assert_placetype <- function(type = NULL){
     if(is_not_type){
       type_not_part_of <- sort(subset(type, !(type %in% gaz_types()$type)))
 
-      msg <- c("{.field type} must be element of set {.fun gaz_types}, but {?is/are} {.val {type_not_part_of}}")
+      msg <- c("{.arg type} must be element of set {.fun gaz_types}, but {?is/are} {.val {type_not_part_of}}")
 
       issue_is_capital_letters <- all(tolower(type) %in% tolower(gaz_types()$type))
       if(issue_is_capital_letters){

@@ -104,7 +104,7 @@ test_that("mrp_view() filters can be passed", {
   expect_equal(parsed_filter, filter)
 
   # CQL filter
-  cql_filter = "mrgid=3293"
+  cql_filter <- "mrgid=3293"
 
   map <- mrp_view("eez", cql_filter = cql_filter)
   expect_s3_class(map, "leaflet")

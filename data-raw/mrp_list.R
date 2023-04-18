@@ -36,4 +36,4 @@ require(magrittr)
   # Turn into tibble
   attr(mrp_list, "class") <- c("tbl_df", "tbl", "data.frame")
 
-usethis::use_data(mrp_list, overwrite = TRUE)
+usethis::use_data(mrp_list, overwrite = TRUE, ascii = TRUE)

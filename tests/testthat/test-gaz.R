@@ -31,6 +31,9 @@ httptest2::with_mock_dir("gaz", {
     gaz_search(c(14, 17), rdf = TRUE) %>% expect_s3_class("rdf")
 
     gaz_search(999999999) %>% expect_error()
+
+    .f <- function() gaz_search(17, rdf = TRUE, with_geometry = TRUE)
+    expect_warning(.f(), "ignored", fixed = TRUE)
   })
 
   test_that("gaz_search.character", {

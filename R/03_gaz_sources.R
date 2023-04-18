@@ -84,7 +84,7 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
       is_not_choice <- !(tolower(source) %in% list_source)
 
       if(is_not_choice){
-        cli::cli_abort("{.field source} must be element of set {.fun gaz_sources}, but is {.val {source}}", call. = FALSE)
+        cli::cli_abort("{.arg source} must be element of set {.fun gaz_sources}, but is {.val {source}}", call. = FALSE)
       }
     }
 

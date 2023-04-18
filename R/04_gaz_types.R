@@ -136,6 +136,17 @@ gaz_rest_records_by_type <- function(type, with_geometry = FALSE){
       httr2::resp_body_json() %>%
       dplyr::bind_rows()
 
+    # End if there are no more records
+    if(nrow(resp) < 100){
+      resp <- resp %>% dplyr::arrange(MRGID)
+
+      if(with_geometry){
+        resp <- resp %>% gaz_add_geometry()
+      }
+
+      return(resp)
+    }
+
     # Enter infinite loop
     while(TRUE){
       offset <- offset + 100

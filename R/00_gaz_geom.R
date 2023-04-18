@@ -26,7 +26,6 @@
 #'
 #' gaz_search(3293) %>% gaz_geometry()
 #' }
-
 gaz_geometry <- function(x, ...){
   UseMethod("gaz_geometry")
 }

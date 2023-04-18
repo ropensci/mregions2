@@ -168,6 +168,14 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
 
   # Premature end if rdf
   if(rdf){
+
+    if(with_geometry){
+      cli::cli_warn(
+        c("!" = "Argument {.arg with_geometry = TRUE} ignored when {.arg rdf = TRUE}.",
+          "i" = "Request geometries with {.fun gaz_geometry}")
+      )
+    }
+
     out <- resp %>%
       httr2::resp_body_string() %>%
       rdflib::rdf_parse("turtle")
@@ -220,7 +228,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
     not_iso_639_2 <- !(language %in% unique(ISOcodes::ISO_639_2$Alpha_2))
     if(not_iso_639_2){
       cli::cli_abort(c(
-        "!" = "{.field language} must be a valid ISO-632 language code of two digits.",
+        "!" = "{.arg language} must be a valid ISO-632 language code of two digits.",
         "i" = "Run {.var ISOcodes::ISO_639_2} to see the allowed language ISO codes."
       ))
     }
@@ -233,9 +241,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
   fuzzy_url <- fuzzy %>% as.character() %>% tolower()
 
   # Config
-  name <- gsub(" ", "+", name, fixed = TRUE)
-  url <- glue::glue("https://marineregions.org/rest/getGazetteerRecordsByName.json/{name}/")
-  url <- utils::URLencode(url)
+  name <- gsub(" ", "+", name, fixed = TRUE) %>% utils::URLencode()
 
   # Reusable http request that overrides automatic error check
   gaz_records_by_name_at <- function(offset){
@@ -308,6 +314,17 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
     resp <- resp %>%
       httr2::resp_body_json() %>%
       dplyr::bind_rows()
+
+    # End if there are no more records
+    if(nrow(resp) < 100){
+      resp <- resp %>% dplyr::arrange(MRGID)
+
+      if(with_geometry){
+        resp <- resp %>% gaz_add_geometry()
+      }
+
+      return(resp)
+    }
 
     # Enter infinite loop
     while(TRUE){
@@ -480,7 +497,7 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FA
       httr2::resp_body_json() %>%
       dplyr::bind_rows()
 
-    # If less than 100 rows, means no need to offset, avoid next request as they are expensive
+    # End if there are no more records
     if(nrow(resp) < 100){
       resp <- resp %>% dplyr::arrange(MRGID)
 
