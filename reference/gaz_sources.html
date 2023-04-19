@@ -70,6 +70,10 @@
 <li><p><code>sourceURL</code>: if available, the URL of the source.</p></li>
 </ul></div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>gaz_search() is a memoised function from gaz_rest_search(). See <code><a href="https://memoise.r-lib.org/reference/memoise.html" class="external-link">memoise::memoise()</a></code>.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><a href="gaz_rest.html">gaz_rest</a>, <code><a href="gaz_search_by_source.html">gaz_search_by_source()</a></code>, <code><a href="gaz_rest_records_by_source.html">gaz_rest_records_by_source()</a></code>, <code><a href="gaz_rest_source_by_sourceid.html">gaz_rest_source_by_sourceid()</a></code></p></div>
     </div>
@@ -82,6 +86,9 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># is the same as</span></span></span>
 <span class="r-in"><span><span class="fu">gaz_sources</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">memoise</span><span class="fu">::</span><span class="fu"><a href="https://memoise.r-lib.org/reference/is.memoised.html" class="external-link">is.memoised</a></span><span class="op">(</span><span class="va">gaz_sources</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">#&gt; [1] TRUE</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

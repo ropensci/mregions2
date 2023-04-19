@@ -806,7 +806,7 @@ product is slow</strong>:</p>
 <span>  <span class="va">ecs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"ecs"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sovereign1</span> <span class="op">==</span> <span class="st">"Portugal"</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   1.349   0.048   3.262</span></span></code></pre></div>
+<span><span class="co">#&gt;   1.303   0.025   3.134</span></span></code></pre></div>
 <p>Instead, you can write a <strong>filter</strong> that is applied on
 the <strong>server side</strong>:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
@@ -814,7 +814,7 @@ the <strong>server side</strong>:</p>
 <span>  <span class="va">ecs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"ecs"</span>, cql_filter <span class="op">=</span> <span class="st">"sovereign1 = 'Portugal'"</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;  31.934   0.004  32.465</span></span></code></pre></div>
+<span><span class="co">#&gt;  13.689   0.003  14.207</span></span></code></pre></div>
 <p>This filter is written in <a href="https://portal.ogc.org/files/96288" class="external-link">Contextual Query Language
 (CQL)</a>. This is a relatively simple syntax close to SQL.</p>
 <div class="section level4">
