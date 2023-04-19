@@ -4,9 +4,6 @@
     .f <- function() mrp_get("eez", filter="<Filter>")
     expect_error(.f(), "XML getFeature request SAX parsing error")
 
-    .f <- function() mrp_get("eez", filter="<Filter>")
-    expect_error(.f(), "XML getFeature request SAX parsing error")
-
     .f <- function(){
       mrp_get("eez", filter="
         <Filter>
@@ -117,7 +114,7 @@
     expect_s3_class(sf::st_geometry(x), "sfc_MULTILINESTRING")
 
     # Expect errors
-    .f <- function() mrp_get("this product does not exists")
+    .f <- function() mrp_get("this product does not exist")
     expect_error(.f())
 
     .f <- function() mrp_get("ecs_boundaries", cql_filter = "this is not a good filter")

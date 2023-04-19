@@ -26,7 +26,6 @@
 #' # Or using its mrgid
 #' gaz_relations(3293)
 #' }
-
 gaz_relations <- function(x, ...){
   UseMethod("gaz_relations")
 }
@@ -83,23 +82,6 @@ gaz_rest_relations_by_mrgid <- function(mrgid, with_geometry = FALSE, direction 
   mrgid <- checkmate::assert_integerish(mrgid, lower = 1, any.missing = FALSE,
                                        null.ok = TRUE, coerce = TRUE, len = 1)
 
-  # Extra info for status 404 not found
-  .is_error <- function(resp){
-    if(httr2::resp_status(resp) == 404){
-      httr2::resp_check_status(resp, info = c(
-        "i" = glue::glue("MRGID: <{mrgid}>"),
-        "i" = glue::glue("type: `{type}`"),
-        "i" = glue::glue("direction: `{direction}`")
-      ))
-    }
-
-    if(httr2::resp_is_error(resp)){
-      TRUE
-    }else{
-      FALSE
-    }
-  }
-
   # Perform
   resp <- marineregions.org() %>%
     httr2::request() %>%
@@ -109,9 +91,23 @@ gaz_rest_relations_by_mrgid <- function(mrgid, with_geometry = FALSE, direction 
     httr2::req_url_query(direction = direction, type = type) %>%
     httr2::req_user_agent(mr_user_agent) %>%
     httr2::req_headers(accept = "application/json") %>%
-    httr2::req_error(is_error = .is_error) %>%
-    httr2::req_perform() %>%
-    httr2::resp_body_json() %>%
+    httr2::req_error(is_error = function(resp) FALSE) %>%
+    httr2::req_perform()
+
+  # Sanity check
+  if(httr2::resp_is_error(resp)){
+    if(httr2::resp_status(resp) == 404){
+      assert_mrgid_exists(mrgid)
+
+      httr2::resp_check_status(resp, info = c("x" = glue::glue(
+        'No relations found for MRGID <{mrgid}> with `direction` = "{direction}" and `type` = "{type}".'
+      )))
+    }
+    httr2::resp_check_status(resp)
+  }
+
+  # Continue if ok
+  resp <- httr2::resp_body_json(resp) %>%
     dplyr::bind_rows()
 
   if(with_geometry){
@@ -119,5 +115,5 @@ gaz_rest_relations_by_mrgid <- function(mrgid, with_geometry = FALSE, direction 
   }
 
   resp
-
 }
+

@@ -25,7 +25,7 @@ mvb <- 30666 # only centroid
 rocks_placetype <- 193
 
 # Perform
-
+# httptest2::with_mock_dir("gaz", {
   test_that("gaz_search.numeric", {
     gaz_search(17) %>% expect_mr()
     gaz_search(c(14, 17), rdf = TRUE) %>% expect_s3_class("rdf")
@@ -97,6 +97,15 @@ rocks_placetype <- 193
     gaz_search_by_source("Belgian Sea Fisheries") %>% expect_mr()
 
     gaz_search_by_source("This is not a source") %>% expect_error()
+
+    gaz_search_by_source(53) %>%
+      expect_error(regexp = "No records", fixed = TRUE)
+
+    .f <- function(){
+      httr2::with_mock(mock_500,
+                       gaz_rest_records_by_source("Belgian Sea Fisheries"))
+    }
+    expect_error(.f(), regexp = "500", fixed = TRUE)
   })
 
   test_that("gaz_sources",{
@@ -130,8 +139,29 @@ rocks_placetype <- 193
       gaz_relations(type = "partof", direction = "upper") %>%
       expect_mr()
 
-    .f <- function() httr2::with_mock(mock_404, gaz_search(b24nm))
-    expect_error(.f(), regexp = "does not exists", fixed = TRUE)
+    .f <- function() gaz_relations(b24nm, type = "fake type")
+    expect_error(.f(), regexp = "Assertion", fixed = TRUE)
+
+    .f <- function() gaz_relations(b24nm, type = c("partof", "administrativepartof"))
+    expect_error(.f(), regexp = "Assertion", fixed = TRUE)
+
+    .f <- function() gaz_relations(b24nm, type = 1)
+    expect_error(.f(), regexp = "Assertion", fixed = TRUE)
+
+    .f <- function() gaz_relations(b24nm, direction = "fake direction")
+    expect_error(.f(), regexp = "Assertion", fixed = TRUE)
+
+    .f <- function() gaz_relations(b24nm, direction = c("lower", "upper"))
+    expect_error(.f(), regexp = "Assertion", fixed = TRUE)
+
+    .f <- function() gaz_relations(b24nm, direction = 1)
+    expect_error(.f(), regexp = "Assertion", fixed = TRUE)
+
+    .f <- function() gaz_relations(b24nm, type = "influencedby", direction = "lower")
+    expect_error(.f(), regexp = "No relations found", fixed = TRUE)
+
+    .f <- function() httr2::with_mock(mock_404, gaz_relations(b24nm))
+    expect_error(.f(), regexp = "does not exist", fixed = TRUE)
 
   })
 
@@ -227,5 +257,15 @@ rocks_placetype <- 193
     expect_error(.f())
 
     .f <- function() gaz_rest_names_by_mrgid(999999999)
-    expect_error(.f(), regexp = "does not exists", fixed = TRUE)
+    expect_error(.f(), regexp = "does not exist", fixed = TRUE)
+
+    .f <- function() assert_mrgid_exists(3293)
+    expect_invisible(.f())
+
+    .f <- function() assert_mrgid_exists(999999999)
+    expect_error(.f(), regexp = "does not exist", fixed = TRUE)
   })
+
+# }, simplify = TRUE)
+
+

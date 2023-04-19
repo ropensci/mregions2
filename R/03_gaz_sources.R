@@ -78,7 +78,7 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
     httr2::req_error(is_error = function(resp) FALSE) %>%
     httr2::req_perform()
 
-  # If error 404, either a wrong source was provided or there are no records for that source.
+  # If error 404, a wrong source was provided
   if(httr2::resp_is_error(resp)){
 
     if(httr2::resp_status(resp) == 404){
@@ -100,11 +100,10 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
     httr2::resp_body_json() %>%
     dplyr::bind_rows()
 
+  # Sanity check
+  # This service returns 200 and "[]" when there are no records
   if(nrow(resp) == 0){
-    cli::cli_abort(c(
-      "!" = "There are no MRGIDs for this source.",
-      "i" = "Source: {.val {source}}"
-    ))
+    cli::cli_abort(c("!" = 'No records found for {.arg source} = {.val {source}}'))
   }
 
   if(with_geometry){
@@ -113,9 +112,6 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
 
   resp
 }
-# src <- "Van Eck, B.T.M. (Ed.) (1999). De Scheldeatlas: een beeld van een estuarium. Rijksinstituut voor Kust en Zee/Schelde InformatieCentrum: Middelburg. ISBN 90-369-3434-6. 120 pp."
-# gaz_rest_records_by_source(src)
-# gaz_rest_records_by_source("this is not a source")
 
 
 #' Get all the Marine Regions sources
@@ -126,6 +122,9 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
 #' - `sourceURL`: if available, the URL of the source.
 #' @export
 #'
+#' @details
+#' gaz_search() is a memoised function from gaz_rest_search(). See [memoise::memoise()].
+#'
 #' @seealso [gaz_rest], [gaz_search_by_source()], [gaz_rest_records_by_source()], [gaz_rest_source_by_sourceid()]
 #'
 #' @examples \dontrun{
@@ -134,6 +133,9 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
 #'
 #' # is the same as
 #' gaz_sources()
+#'
+#' memoise::is.memoised(gaz_sources)
+#' #> [1] TRUE
 #' }
 gaz_rest_sources <- function(){
   sourceID <- NULL
@@ -158,36 +160,36 @@ gaz_rest_sources <- function(){
   if(httr2::resp_is_error(resp)){
     httr2::resp_check_status(resp)
 
-  }else{
-
-    resp <- resp %>%
-      httr2::resp_body_json() %>%
-      dplyr::bind_rows()
-
-    # Enter infinite loop
-    while(TRUE){
-      offset <- offset + 100
-      resp_n <- get_source_at(offset)
-      http_status <- httr2::resp_status(resp_n)
-
-      if(httr2::resp_is_error(resp_n) & http_status != 404){
-        # Sanity check
-        httr2::resp_check_status(resp_n)
-      }
-
-      if(http_status == 404){
-        # End of the loop
-        resp <- resp %>% dplyr::arrange(sourceID)
-        return(resp)
-      }
-
-
-      # If no errors and not 404, continue with pagination
-      resp <- resp_n %>%
-        httr2::resp_body_json() %>%
-        dplyr::bind_rows(resp)
-    }
   }
+
+  resp <- resp %>%
+    httr2::resp_body_json() %>%
+    dplyr::bind_rows()
+
+  # Enter infinite loop
+  while(TRUE){
+    offset <- offset + 100
+    resp_n <- get_source_at(offset)
+    http_status <- httr2::resp_status(resp_n)
+
+    if(httr2::resp_is_error(resp_n) & http_status != 404){
+      # Sanity check
+      httr2::resp_check_status(resp_n)
+    }
+
+    if(http_status == 404){
+      # End of the loop
+      resp <- resp %>% dplyr::arrange(sourceID)
+      return(resp)
+    }
+
+
+    # If no errors and not 404, continue with pagination
+    resp <- resp_n %>%
+      httr2::resp_body_json() %>%
+      dplyr::bind_rows(resp)
+  }
+
 }
 
 #' @name gaz_sources
@@ -225,5 +227,4 @@ gaz_rest_source_by_sourceid <- function(sourceid){
     unlist()
 
 }
-
 

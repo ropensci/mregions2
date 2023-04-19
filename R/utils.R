@@ -30,7 +30,7 @@ gaz_rest_names_by_mrgid <- function(mrgid){
   # Add more info to error message if 404 not found
   if(httr2::resp_status(resp) == 404){
     httr2::resp_check_status(resp, c(
-      "x" = glue::glue("The MRGID <{mrgid}> does not exists.")
+      "x" = glue::glue("The MRGID <{mrgid}> does not exist.")
     ))
   }
 
@@ -196,3 +196,7 @@ marineregions.org <- function(){
   getOption("marineregions.url", "https://marineregions.org/")
 }
 
+assert_mrgid_exists <- function(mrgid){
+  gaz_rest_names_by_mrgid(mrgid)
+  invisible(NULL)
+}

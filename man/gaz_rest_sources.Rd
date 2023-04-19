@@ -17,6 +17,9 @@ a data frame with three columns:
 \description{
 Get all the Marine Regions sources
 }
+\details{
+gaz_search() is a memoised function from gaz_rest_search(). See \code{\link[memoise:memoise]{memoise::memoise()}}.
+}
 \examples{
 \dontrun{
 # This
@@ -24,6 +27,9 @@ gaz_rest_sources()
 
 # is the same as
 gaz_sources()
+
+memoise::is.memoised(gaz_sources)
+#> [1] TRUE
 }
 }
 \seealso{

@@ -161,7 +161,7 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
   # Add more info to error message if 404 not found
   if(httr2::resp_status(resp) == 404){
     httr2::resp_check_status(resp, c(
-      "i" = glue::glue("The MRGID <{mrgid}> does not exists.")
+      "i" = glue::glue("The MRGID <{mrgid}> does not exist.")
     ))
   }
 
@@ -269,7 +269,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
   # Check status: first offset should be 200
   if(httr2::resp_is_error(resp)){
 
-    # If first is 404, either the typeID is not correct or the name does not exists
+    # If first is 404, either the typeID is not correct or the name does not exist
     if(httr2::resp_status(resp) == 404){
 
       # base msg
@@ -283,7 +283,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
         msg <- c(msg,
                  "i" = glue::glue("The term '{name}' may not be available for the selected type."),
                  "*" = "Try with `typeid = NULL`."
-                 )
+        )
         httr2::resp_check_status(resp, info = msg)
       }
 
@@ -311,52 +311,51 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
     # In any other case of error, abort and return the HTTP error
     httr2::resp_check_status(resp)
 
-  }else{
+  }
 
-    # If all ok, continue with first offset
-    resp <- resp %>%
-      httr2::resp_body_json() %>%
-      dplyr::bind_rows()
+  # If all ok, continue with first offset
+  resp <- resp %>%
+    httr2::resp_body_json() %>%
+    dplyr::bind_rows()
 
-    # End if there are no more records
-    if(nrow(resp) < 100){
+  # End if there are no more records
+  if(nrow(resp) < 100){
+    resp <- resp %>% dplyr::arrange(MRGID)
+
+    if(with_geometry){
+      resp <- resp %>% gaz_add_geometry()
+    }
+
+    return(resp)
+  }
+
+  # Enter infinite loop
+  while(TRUE){
+    offset <- offset + 100
+    resp_n <- gaz_records_by_name_at(offset)
+    http_status <- httr2::resp_status(resp_n)
+
+    if(httr2::resp_is_error(resp_n) & http_status != 404){
+      # Sanity check
+      httr2::resp_check_status(resp_n)
+    }
+
+    if(http_status == 404){
+      # End of the loop
       resp <- resp %>% dplyr::arrange(MRGID)
 
-      if(with_geometry){
-        resp <- resp %>% gaz_add_geometry()
-      }
+      if(with_geometry) resp <- resp %>% gaz_add_geometry()
 
       return(resp)
     }
 
-    # Enter infinite loop
-    while(TRUE){
-      offset <- offset + 100
-      resp_n <- gaz_records_by_name_at(offset)
-      http_status <- httr2::resp_status(resp_n)
 
-      if(httr2::resp_is_error(resp_n) & http_status != 404){
-        # Sanity check
-        httr2::resp_check_status(resp_n)
-      }
-
-      if(http_status == 404){
-        # End of the loop
-        resp <- resp %>% dplyr::arrange(MRGID)
-
-        if(with_geometry) resp <- resp %>% gaz_add_geometry()
-
-        return(resp)
-      }
-
-
-      # If no errors and not 404, continue with pagination
-      resp <- resp_n %>%
-        httr2::resp_body_json() %>%
-        dplyr::bind_rows(resp)
-
-    }
+    # If no errors and not 404, continue with pagination
+    resp <- resp_n %>%
+      httr2::resp_body_json() %>%
+      dplyr::bind_rows(resp)
   }
+
 }
 
 
@@ -469,7 +468,7 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FA
   # Check status: first offset should be 200
   if(httr2::resp_is_error(resp)){
 
-    # If first is 404, either the typeID is not correct or the name does not exists
+    # If first is 404, either the typeID is not correct or the name does not exist
     if(httr2::resp_status(resp) == 404){
 
       # base msg
@@ -493,15 +492,37 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FA
     # In any other case of error, abort and return the HTTP error
     httr2::resp_check_status(resp)
 
-  }else{
+  }
+  # If all ok, continue with first offset
+  resp <- resp %>%
+    httr2::resp_body_json() %>%
+    dplyr::bind_rows()
 
-    # If all ok, continue with first offset
-    resp <- resp %>%
-      httr2::resp_body_json() %>%
-      dplyr::bind_rows()
+  # End if there are no more records
+  if(nrow(resp) < 100){
+    resp <- resp %>% dplyr::arrange(MRGID)
 
-    # End if there are no more records
-    if(nrow(resp) < 100){
+    if(with_geometry){
+      resp <- resp %>% gaz_add_geometry()
+    }
+
+    return(resp)
+  }
+
+  # If 100 rows or more, enter infinite loop
+  while(TRUE){
+
+    offset <- offset + 100
+    resp_n <- get_records_by_lat_long_at(offset)
+    http_status <- httr2::resp_status(resp_n)
+
+    if(httr2::resp_is_error(resp_n) & http_status != 404){
+      # Sanity check
+      httr2::resp_check_status(resp_n)
+    }
+
+    if(http_status == 404){
+      # End of the loop
       resp <- resp %>% dplyr::arrange(MRGID)
 
       if(with_geometry){
@@ -511,36 +532,16 @@ gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FA
       return(resp)
     }
 
-    # If 100 rows or more, enter infinite loop
-    while(TRUE){
+    # If no errors and not 404, continue with pagination
+    resp <- resp_n %>%
+      httr2::resp_body_json() %>%
+      dplyr::bind_rows(resp)
 
-      offset <- offset + 100
-      resp_n <- get_records_by_lat_long_at(offset)
-      http_status <- httr2::resp_status(resp_n)
-
-      if(httr2::resp_is_error(resp_n) & http_status != 404){
-        # Sanity check
-        httr2::resp_check_status(resp_n)
-      }
-
-      if(http_status == 404){
-        # End of the loop
-        resp <- resp %>% dplyr::arrange(MRGID)
-
-        if(with_geometry){
-          resp <- resp %>% gaz_add_geometry()
-        }
-
-        return(resp)
-      }
-
-      # If no errors and not 404, continue with pagination
-      resp <- resp_n %>%
-        httr2::resp_body_json() %>%
-        dplyr::bind_rows(resp)
-
-    }
   }
 
 }
+
+
+
+
 
