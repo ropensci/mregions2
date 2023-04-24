@@ -128,7 +128,7 @@ mrp_view("eez")
 
 Or you can load the data products into R with `mrp_get()`
 
-```{r prod2}
+```{r prod2, eval=FALSE}
 mrp_get("eez")
 ```
 

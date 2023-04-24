@@ -190,12 +190,17 @@ test_that("mrp_get() assertions work", {
 
   .f <- function() mrp_get("eez", count = "1")
   expect_error(.f())
+
+  .f <- function() mrp_get("eez", path = "this path does not exist")
+  expect_error(.f())
+
+  withr::local_envvar("TESTPKG.NOINTERNET" = "blop")
+  expect_error(mrp_get("eez"), "No internet connection")
 })
 
 
 httptest2::with_mock_dir("prod/fail/", {
   test_that("mrp_get: Bad filters errors surfaced", {
-
     .f <- function() mrp_get("eez", filter="<Filter>")
     expect_error(.f(), "XML getFeature request SAX parsing error")
 
@@ -219,7 +224,7 @@ httptest2::with_mock_dir("prod/fail/", {
   })
 })
 
-httptest::with_mock_dir("prod/ok/", {
+httptest2::with_mock_dir("prod/ok/", {
   test_that("mrp_colnames() works", {
 
     # Returns a data frame
@@ -289,7 +294,9 @@ httptest::with_mock_dir("prod/ok/", {
     expect_error(.f())
   })
 
+
   test_that("mrp_get() works", {
+    withr::local_options("mregions2.download_path" = "./prod/ok/geo")
 
     expect_sf <- function(x){
       expect_type(x, "list")
@@ -298,22 +305,32 @@ httptest::with_mock_dir("prod/ok/", {
       expect_gte(nrow(x), 1)
     }
 
-    # Transformation in multipolygon or multilinestring works
-    # Returns a sf object
-    x <- mrp_get("ecs", cql_filter = "mrgid = 64123") # Mexican ECS Deposit
-    expect_sf(x)
-    expect_s3_class(sf::st_geometry(x), "sfc_MULTIPOLYGON")
 
-    x <- mrp_get("ecs_boundaries", cql_filter = "line_id = 4232") # Mexican ECS Deposit line
-    expect_sf(x)
-    expect_s3_class(sf::st_geometry(x), "sfc_MULTILINESTRING")
+    # Check without caching
+    withr::local_options("TESTPKG.CACHETIME" = 0)
 
-    # Expect errors
-    .f <- function() mrp_get("this product does not exist")
-    expect_error(.f())
+    # Mexican ECS Deposit
+    .f1 <- function() mrp_get("ecs", cql_filter = "mrgid = 64123")
+    expect_sf(.f1())
+    expect_s3_class(sf::st_geometry(.f1()), "sfc_POLYGON")
 
-    .f <- function() mrp_get("ecs_boundaries", cql_filter = "this is not a good filter")
-    expect_error(.f())
+    # Mexican ECS Deposit line
+    .f2 <- function() mrp_get("ecs_boundaries", cql_filter = "line_id = 4232")
+    expect_sf(.f2())
+    expect_s3_class(sf::st_geometry(.f2()), "sfc_LINESTRING")
 
+    # Check with caching
+    withr::local_options("TESTPKG.CACHETIME" = Inf)
+
+    expect_message(.f1(), "Cache", fixed = TRUE)
+    expect_sf(.f1())
+    expect_s3_class(sf::st_geometry(.f1()), "sfc_POLYGON")
+
+    expect_message(.f2(), "Cache", fixed = TRUE)
+    expect_sf(.f2())
+    expect_s3_class(sf::st_geometry(.f2()), "sfc_LINESTRING")
   })
-}, simplify = FALSE)
+
+}, simplify = TRUE)
+
+

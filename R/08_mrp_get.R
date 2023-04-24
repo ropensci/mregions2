@@ -1,14 +1,24 @@
 #' Get a data product
 #'
 #' @param layer (character) Identifier of the data product. See [mrp_list]
+#' @param path (character) Path to save the requests. Default is [base::tempdir()]. See details.
 #' @param cql_filter (character) Contextual Query Language (CQL) filter. See details.
 #' @param filter (character) Standard OGC filter specification. See details.
 #' @param count (numeric) Maximum number of features to be retrieved.
 #'
 #' @details
-#'   This function uses [WMS services](https://en.wikipedia.org/wiki/Web_Map_Service) to load quickly
-#'   a Leaflet viewer of a Marine Regions data product. It uses the [EMODnet Bathymetry](https://emodnet.ec.europa.eu/en) Digital Terrain Model as background layer.
+#'   This function uses [WFS services](https://en.wikipedia.org/wiki/Web_Map_Service) to download the
+#'   Marine Regions layers as ESRI Shapefiles.
 #'
+#'   ## Caching
+#'   By default, the layers are downloaded to a temporal directory ([base::tempdir()]). You can provide
+#'   a path in the `path` argument. But you can also set a path with `# options("mregions2.download_path" = "my/path/")`.
+#'
+#'   Because it is possible to add filters, each request is identified with a crc32 hash, provided with
+#'   [digest::digest()] and attached to the file downloaded.
+#'
+#'   Once a layer is downloaded, it will be read from the cache during the next two weeks. To avoid this, simply
+#'   delete the layers in the cache path.
 #'
 #'   ## Filters
 #'
@@ -27,6 +37,9 @@
 #' with the arguments `cql_filter` or `filter`
 #'
 #' @examples \dontrun{
+#' # Set cache path
+#' options("mregions2.download_path" = "my/path/")
+#'
 #' # See the list of all data products
 #' View(mrp_list)
 #'
@@ -56,10 +69,15 @@
 #' # the EEZs of Portugal, or those where Portugal is a party of a dispute or a joint regime
 #' portugal_eez <- mrp_get("eez", cql_filter = "sovereign1 = 'Portugal'")
 #'
+#' # If you perform this request again, it will be read from the cache instead
+#' portugal_eez <- mrp_get("eez", cql_filter = "sovereign1 = 'Portugal'")
+#' #> Cache is fresh. Reading: my/path/eez-1951c8b7/eez.shp
+#' #> (Last Modified: 2023-04-24 17:45:16)
+#'
 #' # You can also limit the number of features to be requested
 #' mrp_get("eez", count = 5)
 #' }
-mrp_get <- function(layer, cql_filter = NULL, filter = NULL, count = NULL){
+mrp_get <- function(layer, path = getOption("mregions2.download_path", tempdir()), cql_filter = NULL, filter = NULL, count = NULL){
 
   # Assertions
   checkmate::assert_character(layer, len = 1)
@@ -69,7 +87,9 @@ mrp_get <- function(layer, cql_filter = NULL, filter = NULL, count = NULL){
   assert_only_one_filter(cql_filter, filter)
   count <- checkmate::assert_integerish(count, lower = 1, len = 1,
                                         coerce = TRUE, null.ok = TRUE)
+  stopifnot(dir.exists(path))
   assert_internet()
+
 
   # Config
   namespace <- subset(mrp_list$namespace, mrp_list$layer == layer)
@@ -81,26 +101,68 @@ mrp_get <- function(layer, cql_filter = NULL, filter = NULL, count = NULL){
                     cql_filter = cql_filter,
                     filter = filter,
                     count = count,
-                    outputFormat = "text/csv")
+                    outputFormat = "SHAPE-ZIP")
+  url <- httr2::url_build(url)
+
+  # Cache
+  hash <- glue::glue('{layer}-{digest::digest(url, algo = "crc32")}')
+  cached_zip_path <- file.path(path, glue::glue('{hash}.zip'))
+  cached_unzip_path <- file.path(path, hash)
+    dir.create(cached_unzip_path, showWarnings = FALSE)
+  cached_file_path <- file.path(cached_unzip_path, glue::glue('{layer}.shp'))
+
+  do_request <- TRUE
+
+  if(file.exists(cached_file_path)) {
+    cached_file_time <- file.info(cached_file_path)$ctime
+
+    cached_file_is_fresh <- difftime(
+      Sys.time(), cached_file_time, units = "weeks"
+    ) %>% as.numeric() %>% `<`(cache_max_time())
+
+    if(cached_file_is_fresh){
+      do_request <- FALSE
+      cli::cli_text("Cache is fresh. Reading: {.path {cached_file_path}}")
+      cli::cli_text("(Last Modified: {.emph {cached_file_time}})")
+    }
+  }
 
   # Perform
-  resp <- httr2::url_build(url) %>%
-    httr2::request() %>%
-    httr2::req_user_agent(mr_user_agent) %>%
-    httr2::req_error(is_error = function(resp) FALSE) %>%
-    httr2::req_perform()
+  if(do_request){
+    resp <- httr2::request(url) %>%
+      httr2::req_user_agent(mr_user_agent) %>%
+      httr2::req_error(is_error = function(resp) FALSE) %>%
+      httr2::req_perform(path = cached_zip_path) %>%
+      mrp_get_sanity_check()
 
-  # If something wrong, e.g. wrong filter, raise
-  if(httr2::resp_is_error(resp)){
+    utils::unzip(zipfile = cached_zip_path, exdir = cached_unzip_path, overwrite = TRUE)
 
+    # suppressWarnings({
+    #   try({file.remove(cached_zip_path)})
+    # })
+
+  }
+
+  out <- sf::st_read(cached_file_path, quiet = TRUE, stringsAsFactors = FALSE)
+  attr(out, "class") <- c("sf", "tbl_df", "tbl", "data.frame")
+  out
+}
+
+cache_max_time <- function(){
+  weeks <- getOption("TESTPKG.CACHETIME", 4)
+  weeks
+}
+
+mrp_get_sanity_check <- function(resp){
+  is_error <- httr2::resp_is_error(resp)
+  if(is_error){
     status <- httr2::resp_status(resp)
     desc <- httr2::resp_status_desc(resp)
 
-    msg <- c("!" = "HTTP {status} {desc}",
-             "i" = "Layer: {.val {layer}}")
-
+    msg <- c("!" = "HTTP {status} {desc}")
     try({
-      exception <- httr2::resp_body_xml(resp) %>%
+      exception <- httr2::resp_body_string(resp) %>%
+        xml2::read_xml() %>%
         xml2::xml_find_all(glue::glue("//ows:Exception"))
 
       exception_code <- exception %>%
@@ -113,29 +175,15 @@ mrp_get <- function(layer, cql_filter = NULL, filter = NULL, count = NULL){
       msg <- c(msg,
                "i" = "Exception Code: {.emph {exception_code}}",
                "i" = "Exception text: {.emph {exception_text}}"
-               )
+      )
 
+      # try({file.remove(resp$body)})
     })
     cli::cli_abort(msg)
   }
 
-  # Continue if all ok
-  resp <- resp %>%
-    httr2::resp_body_string(encoding = "UTF-8") %>%
-    textConnection() %>%
-    utils::read.csv(stringsAsFactors = FALSE, fileEncoding = "UTF-8")
-
-  attr(resp, "class") <- c("tbl_df", "tbl", "data.frame")
-
-  out <- sf::st_as_sf(resp, wkt = "the_geom", crs = 4326)
-  out$FID <- NULL
-
-  mrp_list <- NULL
-
-  out
+  resp
 }
-
-
 
 
 .mrp_colnames <- function(layer){

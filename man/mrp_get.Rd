@@ -4,10 +4,18 @@
 \alias{mrp_get}
 \title{Get a data product}
 \usage{
-mrp_get(layer, cql_filter = NULL, filter = NULL, count = NULL)
+mrp_get(
+  layer,
+  path = getOption("mregions2.download_path", tempdir()),
+  cql_filter = NULL,
+  filter = NULL,
+  count = NULL
+)
 }
 \arguments{
 \item{layer}{(character) Identifier of the data product. See \link{mrp_list}}
+
+\item{path}{(character) Path to save the requests. Default is \code{\link[base:tempfile]{base::tempdir()}}. See details.}
 
 \item{cql_filter}{(character) Contextual Query Language (CQL) filter. See details.}
 
@@ -22,8 +30,20 @@ An sf object with the Marine Regions data product
 Get a data product
 }
 \details{
-This function uses \href{https://en.wikipedia.org/wiki/Web_Map_Service}{WMS services} to load quickly
-a Leaflet viewer of a Marine Regions data product. It uses the \href{https://emodnet.ec.europa.eu/en}{EMODnet Bathymetry} Digital Terrain Model as background layer.
+This function uses \href{https://en.wikipedia.org/wiki/Web_Map_Service}{WFS services} to download the
+Marine Regions layers as ESRI Shapefiles.
+\subsection{Caching}{
+
+By default, the layers are downloaded to a temporal directory (\code{\link[base:tempfile]{base::tempdir()}}). You can provide
+a path in the \code{path} argument. But you can also set a path with \verb{# options("mregions2.download_path" = "my/path/")}.
+
+Because it is possible to add filters, each request is identified with a crc32 hash, provided with
+\code{\link[digest:digest]{digest::digest()}} and attached to the file downloaded.
+
+Once a layer is downloaded, it will be read from the cache during the next two weeks. To avoid this, simply
+delete the layers in the cache path.
+}
+
 \subsection{Filters}{
 
 Both the \href{https://portal.ogc.org/files/96288}{Contextual Query Language (CQL) filter} and the \href{https://www.ogc.org/standard/filter/}{standard OGC filter specification} allow to
@@ -36,6 +56,9 @@ A tutorial on CQL filters is available in the \href{https://docs.geoserver.org/s
 }
 \examples{
 \dontrun{
+# Set cache path
+options("mregions2.download_path" = "my/path/")
+
 # See the list of all data products
 View(mrp_list)
 
@@ -64,6 +87,11 @@ sov3 = mrp_col_unique("eez", "sovereign3")
 # Portugal is only in sovereign1. Let's write a CQL filter to get only
 # the EEZs of Portugal, or those where Portugal is a party of a dispute or a joint regime
 portugal_eez <- mrp_get("eez", cql_filter = "sovereign1 = 'Portugal'")
+
+# If you perform this request again, it will be read from the cache instead
+portugal_eez <- mrp_get("eez", cql_filter = "sovereign1 = 'Portugal'")
+#> Cache is fresh. Reading: my/path/eez-1951c8b7/eez.shp
+#> (Last Modified: 2023-04-24 17:45:16)
 
 # You can also limit the number of features to be requested
 mrp_get("eez", count = 5)

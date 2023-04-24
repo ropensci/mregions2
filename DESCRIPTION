@@ -2,7 +2,6 @@ Package: mregions2
 Type: Package
 Title: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products
 Version: 1.0.0
-Date: 2023-04-18
 Authors@R: c(
   person(given = "Salvador", family = "Fernandez-Bejarano", role = c("aut", "cre"),
          email = "salvador.fernandez@vliz.be",
@@ -33,14 +32,14 @@ Imports:
     xml2,
     wrapr,
     methods,
-    curl
+    curl,
+    digest
 RoxygenNote: 7.2.0
 URL: https://github.com/lifewatch/mregions2,
     https://lifewatch.github.io/mregions2/
 BugReports: https://github.com/lifewatch/mregions2/issues
 Suggests: 
     ows4R (>= 0.3),
-    httptest,
     httptest2,
     jsonlite,
     knitr,
