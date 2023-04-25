@@ -65,7 +65,7 @@ Search by free text:
 gaz_search("Belgian")
 ```
 
-Search by unique identifier. See `MRGID`:
+Search by unique identifier. See `?MRGID`:
 ```{r}
 gaz_search(3293)
 ```

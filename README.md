@@ -76,7 +76,7 @@ gaz_search("Belgian")
 #> #   maxLongitude <dbl>, precision <dbl>
 ```
 
-Search by unique identifier. See `MRGID`:
+Search by unique identifier. See `?MRGID`:
 
 ``` r
 gaz_search(3293)

@@ -33,9 +33,9 @@ library(jsonlite)
 
 ## Retrieving the Marine Regions Gazetteer as RDF
 
-Known an `MRGID`, you can get the gazetter entry as RDF. 
+Known an `?MRGID`, you can get the gazetter entry as RDF. 
 
-E.g. the Belgian Exclusive Economic Zone or Belgian Part of the North Sea has the `MRGID`: <https://marineregions.org/mrgid/3293> 
+E.g. the Belgian Exclusive Economic Zone or Belgian Part of the North Sea has the `?MRGID`: `<https://marineregions.org/mrgid/3293>` 
 
 ```{r}
 gaz_search(3293) %>% 
@@ -45,7 +45,7 @@ gaz_search(3293) %>%
 
 Using `gaz_search()` or the underlying service `gaz_rest_record_by_mrgid()` with the argument `rdf = TRUE` will:
 
-1. Use content negotiation to get the MRGID in Turtle format. 
+1. Use content negotiation to get the gazetteer record in Turtle format. 
 2. Read this document as RDF using the `rdflib` R package (`?rdflib::rdflib`) 
 
 HTTP requests are handled with `httr2` (`?httr2::httr2`)
@@ -98,7 +98,7 @@ readLines(bpns_as_jsonld) %>% jsonlite::prettify() %>% cat()
 
 ### SPARQL Queries
 
-[SPARQL](https://www.w3.org/TR/sparql11-query/) queries can be applied to the RDF document. Note: The `MRGID` of the Belgian Part of the North Sea is `<http://marineregions.org/mrgid/3293>`
+[SPARQL](https://www.w3.org/TR/sparql11-query/) queries can be applied to the RDF document. Note: The `?MRGID` of the Belgian Part of the North Sea is `<http://marineregions.org/mrgid/3293>`
 
 #### Extract all info from the record
 
