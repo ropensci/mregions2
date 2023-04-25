@@ -126,10 +126,16 @@ mrp_view("eez")
 ```
 ![](https://raw.githubusercontent.com/lifewatch/mregions2/main/man/figures/README-prod1-1.png)
 
-Or you can load the data products into R with `mrp_get()`
+Or you can download and read the data products into R with `mrp_get()`
 
-```{r prod2, eval=FALSE}
+```{r prod2, eval = FALSE}
 mrp_get("eez")
+```
+
+You can specify the download path in the `path` argument:
+
+```{r prod3, eval = FALSE}
+mrp_get("eez", path = "path/to/data")
 ```
 
 Get to know more in the [Get Started vignette](https://lifewatch.github.io/mregions2/articles/mregions2.html).

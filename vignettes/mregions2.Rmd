@@ -44,9 +44,9 @@ In addition to the Marine Regions Gazetteer, the Marine Regions Team creates and
 The mregions2 package aims to difference these two domains as clearly as possible, starting with the naming of its functions:
 
 * Gazetteer functions: `gaz_*()`
-* Data Products functions: `mrp_()*`
+* Data Products functions: `mrp_*()`
 
-These intentions are trivial, as mregions2 uses different methods to access the Marine Regions Gazetteer than the Marine Regions Data Products: the Marine Regions Gazetteer is accessed using [RESTful methods](https://www.marineregions.org/gazetteer.php?p=webservices) with `gaz_search()`. The Marine Regions Data Products can be accessed using [OGC Web Services](https://www.marineregions.org/webservices.php). These are hosted at the [Flanders Marine Institute (VLIZ) geoserver](https://geo.vliz.be): 
+This naming is not trivial, as mregions2 uses different methods to access the Marine Regions Gazetteer than the Marine Regions Data Products: A [RESTful API](https://www.marineregions.org/gazetteer.php?p=webservices) for the Marine Regions Gazetteer, and [OGC Web Services](https://www.marineregions.org/webservices.php) to get the Marine Regions Data Products. These are hosted at the [Flanders Marine Institute (VLIZ) geoserver](https://geo.vliz.be): 
 
 > `http://geo.vliz.be/`
 
@@ -72,10 +72,7 @@ library(sf)
 library(dplyr) 
 ```
 
-
-## Search
-
-### Search by free text
+## Search by free text
 
 You can look up for marine places the Marine Regions Gazetteer with a free text search. Some examples:
 
@@ -95,7 +92,7 @@ gaz_search("Belgium", like = FALSE, fuzzy = FALSE)
 ```
 
 
-### Search by MRGID
+## Search by MRGID
 
 Pass a MRGID to `gaz_search()` to get only that record. E.g. in the previous example, the Belgian Exclusive Economic Zone has the MRGID `3293`:
 
@@ -103,16 +100,8 @@ Pass a MRGID to `gaz_search()` to get only that record. E.g. in the previous exa
 gaz_search(3293)
 ```
 
-You can get the gazetteer entry as **Open Linked Data**, in the form of an object of class `rdflib::rdf`:
 
-```{r}
-gaz_search(3293, rdf = TRUE)
-```
-
-Learn more about using the mregions2 to access the [Marine Regions Gazetteer as RDF article](https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html).
-
-
-### Search by longitude and latitude
+## Search by longitude and latitude
 
 [**Reverse geocoding**](https://en.wikipedia.org/wiki/Reverse_geocoding) is possible with mregions2: pass geographical coordinates in the WGS84 projection will return all records that intersect with the point.
 
@@ -132,7 +121,7 @@ gaz_search(pt)
 ```
 
 
-### Search by place type
+## Search by place type
 
 The records of the Marine Regions Gazetteer have **place types** assigned, either **physical** such as sea mounts or banks, or **administrative** like Territorial Sea or Exclusive Economic Zone.
 
@@ -158,7 +147,7 @@ gaz_search_by_type(1)
 ```
 
 
-### Search by source document
+## Search by source document
 
 The entries in the Marine Regions Gazetteer are always based on a **source**. This is either a document, a web site or any sort of authority. 
 
@@ -208,7 +197,7 @@ As [Well-Known Text](https://en.wikipedia.org/wiki/Well-known_text_representatio
 gaz_geometry(3293, format = "wkt")
 ```
 
-# As a `rdflib::rdf` object:
+As a `rdflib::rdf` object:
 ```{r}
 gaz_geometry(3293, format = "rdf")
 ```
@@ -221,9 +210,9 @@ gaz_geometry(3293, format = "sf")
 Learn more about using the mregions2 to access the [Marine Regions Gazetteer as RDF article](https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html).
 
 
-## Relations
+## Search by relations
 
-The Marine Regions Gazetteer is **hierarchically**: All the records got relations with each other. You can either pass the result of `gaz_search()` to `gaz_relations()` or an `MRGID`:
+The Marine Regions Gazetteer is organized **hierarchically**: All the records got relations with each other. You can either pass the result of `gaz_search()` to `gaz_relations()` or an `MRGID`:
 
 ```{r}
 # With gaz_search()
@@ -235,13 +224,15 @@ gaz_relations(3293)
 
 The relations must be one of `c("partof", "partlypartof", "adjacentto", "similarto", "administrativepartof", "influencedby")` or `"all"` to get all related records (default). You can also decide if you want records that are upper or lower on the hierarchy of the records, or both (default)
 
+For instance, the Belgian Exclusive Economic Zone ([MRGID: 3293](https://marineregions.org/mrgid/3293)) is *part of* the North Sea and *part of* Belgium.
+
 ```{r}
 gaz_relations(3293, direction = "upper", type = "partof")
 ```
 
 ## RESTful services
 
-mregions2 can access the Marine Regions Gazetteer by using [RESTful web services](https://marineregions.org/gazetteer.php?p=webservices&type=rest). There is a set of functions in mregions2 named as `gaz_rest_*()` that read the web services via [HTTP](https://httr2.r-lib.org/). These are closer to the definition of the web services. All the gazetteer functions shown before make use of this set of functions. 
+There is a set of functions in mregions2 named as `gaz_rest_*()` that read the web services via [HTTP](https://httr2.r-lib.org/). These are closer to the definition of the web services. All the gazetteer functions shown above, such as `gaz_search()` or `gaz_relations()`, make use of this set of functions. 
 
 | Main function            | REST function                    | REST web service               |
 |--------------------------|----------------------------------|--------------------------------|
@@ -261,9 +252,9 @@ mregions2 can access the Marine Regions Gazetteer by using [RESTful web services
 | NA                       | NA                               | `getFeed`                      |
 
 
-## Marine Regions Gazetteer as RDF - Open Linked Data 
+## Marine Regions Gazetteer as Linked Open Data in RDF
 
-You can read the Marine Regions Gazetteer as Open Linked Data. 
+You can get a gazetteer item or their geometries as [Linked Open Data](https://www.w3.org/egov/wiki/Linked_Open_Data), in the form of an object of class `rdflib::rdf`:
 
 ```{r}
 gaz_search(3293, rdf = TRUE)
@@ -286,42 +277,69 @@ mrp_list
 mrp_get("ecs")
 ```
 
-However, this is an expensive request that **may take some time** to complete. It is a better approach to first have a quick look instead of downloading the full product. `mrp_view()` renders an in **interactive visualization**:
+However, this is an expensive request that **may take some time** to complete. mregions2 aims to tackle this with three different strategies:
+
+* WMS viewer
+* Caching
+* OGC and CQL filtering
+
+
+## WMS viewer
+
+Instead of downloading the full product directly, it is a better approach to first have a quick look. `mrp_view()` renders an in **interactive visualization**:
 
 ```{r, eval=FALSE}
 mrp_view("ecs")
 ```
 
-It returns a `leaflet::leaflet` interactive map with the data product requested added via Web Map Services.
+It returns a `leaflet::leaflet` interactive map with the data product requested added via [Web Map Services (WMS)](https://wikipedia.org/wiki/Web_Map_Service).
 
 Note `leaflet::leaflet` and `leaflet.extras2::leaflet.extras2` are required by `mrp_view()` but listed only as "Suggests". Install these packages to use `mrp_view()`.
 
 
-## Filtering
+## Caching 
 
-In some cases, you may be interested in retrieving only a certain amount of records. Or **filter out some features**. You could download the product with `mrp_get()` and then apply a filter with R base or with the Tidyverse (`tidyverse::tidyverse`). But **getting the full product is slow**:
+If you request again a layer that you requested before, you will see a message:
 
 ```{r}
-system.time({
-  ecs <- mrp_get("ecs") %>% filter(sovereign1 == "Portugal")
-})
+# One more time! Get the Extended Continental Shelves
+ecs <- mrp_get("ecs")
+```
 
+`mrp_get()` performs a WFS request to get the layer as a zipped Shapefile and writes the response to disk. This saves both bandwith and memory. After downloading, the file is unzipped and read with `sf::st_read()`. 
+
+By default, the caching directory is a temporal directory `base::tempdir()`. To override this behaviour, you can pass a directory to the `path` argument:
+
+```{r, eval = FALSE}
+ecs <- mrp_get("ecs", path = "path/to/data")
+```
+
+Or you can set a default directory with `options("mregions2.download_path")`:
+
+```{r, eval = FALSE}
+options("mregions2.download_path" = "path/to/data")
+ecs <- mrp_get("ecs")
+```
+
+The cache is considered fresh during **one month**. After that, the requests will be performed again. The Marine Regions products are typically updated every 2 years, so it is unlikely you will be looking at an old product. In case of doubt you can just delete the layers downloaded in the cache path.
+
+## OGC and CQL filtering
+
+In some cases, you may be interested in retrieving only a certain amount of records or **filtering out some features**. You could download the product with `mrp_get()` and then apply a filter with R base or with the Tidyverse (`tidyverse::tidyverse`). But **getting the full product is slow**:
+
+```{r, eval = FALSE}
+ecs <- mrp_get("ecs") %>% filter(sovereign1 == "Portugal")
 ```
 
 Instead, you can write a **filter** that is applied on the **server side**:
 
-```{r}
-system.time({
-  ecs <- mrp_get("ecs", cql_filter = "sovereign1 = 'Portugal'")
-})
-
+```{r, eval = FALSE}
+ecs <- mrp_get("ecs", cql_filter = "sovereign1 = 'Portugal'")
 ```
 
 This filter is written in [Contextual Query Language (CQL)](https://portal.ogc.org/files/96288). This is a relatively simple syntax close to SQL. 
 
-### Colnames and unique values
-
-Writing these filters can be challenging without knowing in advance the names of the columns in a data product, or the unique values that these columns have. If you have to retrieve the full product to get to know the columns and their values then, well, the filter misses a bit its point.
+Writing these filters **can be challenging** without knowing in advance the **names of the columns** in a data product, or the unique values that these columns have. If you have to retrieve the full product to get to know the columns and their values then, well, the filter misses a bit its point.
 
 mregions2 has two helpers that help on this mission: `mrp_colnames()` gets a data frame with the **columns and data type** of a data product. `mrp_col_unique()` (or `mrp_col_distinct()`, they are synonyms) returns the **unique values** of a column in a data product.
 
@@ -336,10 +354,7 @@ mrp_col_unique("ecs", "pol_type")
 mrp_get("ecs", cql_filter = "pol_type = 'ECS Overlapping claim'")
 ```
 
-
-### OGC, CQL and ECQL Filters
-
-There are many types of filter allowed via standard OGC or CQL filters. `mrp_get()` and `mrp_view()` use OGC [WFS](https://en.wikipedia.org/wiki/Web_Feature_Service) and [WMS](https://en.wikipedia.org/wiki/Web_Map_Service) respectively. You can also limit the number of features requested with the `count` parameter.
+There are many types of filter allowed via standard OGC or CQL filters. `mrp_get()` and `mrp_view()` use OGC [WFS](https://en.wikipedia.org/wiki/Web_Feature_Service) and [WMS](https://en.wikipedia.org/wiki/Web_Map_Service) respectively. You can pass filter to both of them using the same syntax. You can also limit the number of features requested with the `count` parameter.
 
 ```{r prod5}
 # Get only one feature

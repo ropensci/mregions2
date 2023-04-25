@@ -3,7 +3,7 @@
 
 <!-- badges: start -->
 
-[![Funding](https://img.shields.io/static/v1?label=powered+by&message=lifewatch.be&labelColor=1a4e8a&color=f15922)](https://lifewatch.be/)
+[![Funding](https://img.shields.io/static/v1?label=powered+by&message=lifewatch.be&labelColor=1a4e8a&color=f15922)](https://lifewatch.be)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml)
@@ -93,7 +93,7 @@ Search by location:
 
 ``` r
 gaz_search(x = 2.927, y = 51.21551)
-#> # A tibble: 54 × 14
+#> # A tibble: 50 × 14
 #>    MRGID gazetteerSource          placeType minLatitude minLongitude maxLatitude
 #>    <int> <chr>                    <chr>           <dbl>        <dbl>       <dbl>
 #>  1    14 (2001). The Times compr… Nation           49.5         2.55        51.5
@@ -106,7 +106,7 @@ gaz_search(x = 2.927, y = 51.21551)
 #>  8    20 SAIL                     Province…        50.7         2.55        51.4
 #>  9    20 SAIL                     Province…        50.7         2.55        51.4
 #> 10    20 SAIL                     Province…        50.7         2.55        51.4
-#> # … with 44 more rows, and 8 more variables: maxLongitude <dbl>,
+#> # … with 40 more rows, and 8 more variables: maxLongitude <dbl>,
 #> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
 #> #   status <chr>, accepted <int>, latitude <dbl>, longitude <dbl>,
 #> #   precision <dbl>
@@ -243,47 +243,20 @@ An overview of all available products can be consulted with `mrp_list`
 
 ``` r
 mrp_list
-#> Memoised Function:
-#> function() {
-#>   # Avoid "no visible binding for global variable" R CMD Check NOTE
-#>   title <- abstract <- data_product <- product_layer <- geoserverID <- NULL
-#>   license <- citation <- doi <- imis <- abstract <- id <- NULL
-#> 
-#>   mrp_list <- utils::read.delim2(
-#>     system.file("mrp_list.csv", package = "mregions2"),
-#>     header = TRUE,
-#>     sep = ";",
-#>     dec = ".",
-#>     fileEncoding = "UTF-8"
-#>   ) %>% dplyr::mutate(
-#>     geoserverID = glue::glue("{product_namespace}:{product_layer}")
-#>   )
-#> 
-#>   # Get Info from WFS
-#>   wfs <- mrp_init_wfs_client(silent = TRUE)
-#>   capabilities <- wfs$getCapabilities()
-#>   caps_ft <- purrr::map(mrp_list$geoserverID, ~ capabilities$findFeatureTypeByName(.x))
-#> 
-#>   mrp_list <- mrp_list %>% dplyr::mutate(
-#>     title = purrr::map_chr(caps_ft, ~ .x$getTitle()),
-#>     abstract = purrr::map_chr(caps_ft, ~ .x$getAbstract())
-#>   ) %>% dplyr::select(
-#>     title,
-#>     data_product = product_layer,
-#>     license,
-#>     citation,
-#>     doi,
-#>     imis,
-#>     abstract,
-#>     id = geoserverID
-#>   )
-#> 
-#>   # Turn into tibble
-#>   attr(mrp_list, "class") <- c("tbl_df", "tbl", "data.frame")
-#> 
-#>   mrp_list
-#> }
-#> <environment: namespace:mregions2>
+#> # A tibble: 21 × 8
+#>    title                   namespace layer license citation doi   imis  abstract
+#>    <chr>                   <chr>     <chr> <chr>   <chr>    <chr> <chr> <chr>   
+#>  1 Exclusive Economic Zon… MarineRe… eez   Creati… "Flande… http… http… "Versio…
+#>  2 Maritime Boundaries (v… MarineRe… eez_… Creati… "Flande… http… http… "Versio…
+#>  3 Territorial Seas (12 N… MarineRe… eez_… Creati… "Flande… http… http… "Versio…
+#>  4 Contiguous Zones (24 N… MarineRe… eez_… Creati… "Flande… http… http… "Versio…
+#>  5 Internal Waters (v3, w… MarineRe… eez_… Creati… "Flande… http… http… "Versio…
+#>  6 Archipelagic Waters (v… MarineRe… eez_… Creati… "Flande… http… http… "Versio…
+#>  7 High Seas (v1, world, … MarineRe… high… Creati… "Flande… http… http… "High S…
+#>  8 Extended Continental S… MarineRe… ecs   Creati… "Flande… http… http… "This d…
+#>  9 Extended Continental S… MarineRe… ecs_… Creati… "Flande… http… http… "This d…
+#> 10 IHO Sea Areas (v3)      MarineRe… iho   Creati… "Flande… http… http… "World …
+#> # … with 11 more rows
 ```
 
 You can visualize the Marine Regions Data Products with `mrp_view()`. It
@@ -295,35 +268,16 @@ mrp_view("eez")
 
 ![](https://raw.githubusercontent.com/lifewatch/mregions2/main/man/figures/README-prod1-1.png)
 
-Or you can load the data products into R with `mrp_get()`
+Or you can download and read the data products into R with `mrp_get()`
 
 ``` r
 mrp_get("eez")
-#> Simple feature collection with 281 features and 31 fields
-#> Geometry type: MULTIPOLYGON
-#> Dimension:     XY
-#> Bounding box:  xmin: -180 ymin: -85.5625 xmax: 180 ymax: 86.99401
-#> Geodetic CRS:  WGS 84
-#> # A tibble: 281 × 32
-#>    mrgid geoname   mrgid_ter1 pol_type mrgid_sov1 territory1 iso_ter1 sovereign1
-#>  * <int> <chr>          <int> <chr>         <int> <chr>      <chr>    <chr>     
-#>  1 62589 Chagos A…       8616 200NM          8614 Chagos Ar… <NA>     Mauritius 
-#>  2  5690 Russian …       2240 200NM          2240 Russia     RUS      Russia    
-#>  3 48978 Joint re…       2204 Joint r…       2204 United St… USA      United St…
-#>  4  5688 Portugue…       2243 200NM          2243 Portugal   PRT      Portugal  
-#>  5 48970 Joint re…       8640 Joint r…       8640 Dominican… DOM      Dominican…
-#>  6 48971 Overlapp…       2175 Overlap…       2175 Colombia   COL      Colombia  
-#>  7  5681 Irish Ex…       2114 200NM          2114 Ireland    IRL      Ireland   
-#>  8 21788 Guernsey…       4377 200NM          2208 Guernsey   GGY      United Ki…
-#>  9 48972 Joint re…       2103 Joint r…       2103 Honduras   HND      Honduras  
-#> 10 48973 Joint re…       3297 Joint r…       2157 Faeroe     FRO      Denmark   
-#> # … with 271 more rows, and 24 more variables: mrgid_ter2 <int>,
-#> #   mrgid_sov2 <int>, territory2 <chr>, iso_ter2 <chr>, sovereign2 <chr>,
-#> #   mrgid_ter3 <int>, mrgid_sov3 <int>, territory3 <chr>, iso_ter3 <chr>,
-#> #   sovereign3 <chr>, x_1 <dbl>, y_1 <dbl>, mrgid_eez <int>, area_km2 <int>,
-#> #   iso_sov1 <chr>, iso_sov2 <chr>, iso_sov3 <chr>, un_sov1 <dbl>,
-#> #   un_sov2 <dbl>, un_sov3 <dbl>, un_ter1 <dbl>, un_ter2 <dbl>, un_ter3 <dbl>,
-#> #   geometry <MULTIPOLYGON [°]>
+```
+
+You can specify the download path in the `path` argument:
+
+``` r
+mrp_get("eez", path = "path/to/data")
 ```
 
 Get to know more in the [Get Started
@@ -336,14 +290,14 @@ citation("mregions2")
 #> 
 #> To cite package 'mregions2' in publications use:
 #> 
-#>   Fernandez-Bejarano S, Pohl L (2023). _mregions2: Access data from
-#>   marineregions.org: the Marine Regions Gazetteer and the Marine
+#>   Fernandez-Bejarano S, Pohl L (2023). _mregions2: Access Data from
+#>   Marineregions.org: The Marine Regions Gazetteer and the Marine
 #>   Regions Data Products_. <https://github.com/lifewatch/mregions2>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {{mregions2}: Access data from marineregions.org: the Marine Regions Gazetteer and the Marine Regions Data Products},
+#>     title = {{mregions2}: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products},
 #>     author = {Salvador Fernandez-Bejarano and Lotte Pohl},
 #>     year = {2023},
 #>     url = {https://github.com/lifewatch/mregions2},
