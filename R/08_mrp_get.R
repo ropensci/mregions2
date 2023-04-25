@@ -105,7 +105,8 @@ mrp_get <- function(layer, path = getOption("mregions2.download_path", tempdir()
   url <- httr2::url_build(url)
 
   # Cache
-  hash <- glue::glue('{layer}-{digest::digest(url, algo = "crc32")}')
+  hash <- digest::digest(url, algo = "crc32")
+  hash <- glue::glue('{layer}-{hash}')
   cached_zip_path <- file.path(path, glue::glue('{hash}.zip'))
   cached_unzip_path <- file.path(path, hash)
     dir.create(cached_unzip_path, showWarnings = FALSE)
@@ -142,6 +143,8 @@ mrp_get <- function(layer, path = getOption("mregions2.download_path", tempdir()
     # })
 
   }
+
+  mrp_list <- NULL # Avoid R CMD Check note
 
   out <- sf::st_read(cached_file_path, quiet = TRUE, stringsAsFactors = FALSE)
   attr(out, "class") <- c("sf", "tbl_df", "tbl", "data.frame")

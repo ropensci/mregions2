@@ -374,13 +374,25 @@
     },
     "16": {
       "@type": "SoftwareApplication",
+      "identifier": "digest",
+      "name": "digest",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=digest"
+    },
+    "17": {
+      "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
       "version": ">= 2.10"
     },
     "SystemRequirements": null
   },
-  "fileSize": "810.552KB",
+  "fileSize": "887.164KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -400,8 +412,5 @@
       "name": "{mregions2}: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products",
       "url": "https://github.com/lifewatch/mregions2"
     }
-  ],
-  "readme": "https://github.com/lifewatch/mregions2/blob/main/README.md",
-  "contIntegration": ["https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml", "https://github.com/lifewatch/mregions2/actions?query=workflow%3Apkgcheck", "https://app.codecov.io/gh/lifewatch/mregions2?branch=main"],
-  "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"
+  ]
 }
