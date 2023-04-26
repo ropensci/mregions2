@@ -200,3 +200,7 @@ assert_mrgid_exists <- function(mrgid){
   gaz_rest_names_by_mrgid(mrgid)
   invisible(NULL)
 }
+
+is_test <- function(){
+  nzchar(Sys.getenv("TESTPKG.ISTEST"))
+}

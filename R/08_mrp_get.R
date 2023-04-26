@@ -109,7 +109,6 @@ mrp_get <- function(layer, path = getOption("mregions2.download_path", tempdir()
   hash <- glue::glue('{layer}-{hash}')
   cached_zip_path <- file.path(path, glue::glue('{hash}.zip'))
   cached_unzip_path <- file.path(path, hash)
-    dir.create(cached_unzip_path, showWarnings = FALSE)
   cached_file_path <- file.path(cached_unzip_path, glue::glue('{layer}.shp'))
 
   do_request <- TRUE
@@ -136,13 +135,13 @@ mrp_get <- function(layer, path = getOption("mregions2.download_path", tempdir()
       httr2::req_perform(path = cached_zip_path) %>%
       mrp_get_sanity_check()
 
+    dir.create(cached_unzip_path, showWarnings = FALSE)
     utils::unzip(zipfile = cached_zip_path, exdir = cached_unzip_path, overwrite = TRUE)
 
-    # suppressWarnings({
-    #   try({file.remove(cached_zip_path)})
-    # })
-
+    if(!is_test()) try_clean_up(cached_zip_path)
   }
+
+  check_server_warning(cached_unzip_path)
 
   mrp_list <- NULL # Avoid R CMD Check note
 
@@ -152,7 +151,7 @@ mrp_get <- function(layer, path = getOption("mregions2.download_path", tempdir()
 }
 
 cache_max_time <- function(){
-  weeks <- getOption("TESTPKG.CACHETIME", 4)
+  weeks <- Sys.getenv("TESTPKG.CACHETIME", 4)
   weeks
 }
 
@@ -177,10 +176,10 @@ mrp_get_sanity_check <- function(resp){
 
       msg <- c(msg,
                "i" = "Exception Code: {.emph {exception_code}}",
-               "i" = "Exception text: {.emph {exception_text}}"
+               "i" = "Exception Text: {.emph {exception_text}}"
       )
 
-      # try({file.remove(resp$body)})
+      if(!is_test()) try_clean_up(resp$body)
     })
     cli::cli_abort(msg)
   }
@@ -188,6 +187,19 @@ mrp_get_sanity_check <- function(resp){
   resp
 }
 
+try_clean_up <- function(path) try({file.remove(path)}, silent = TRUE)
+
+check_server_warning <- function(cached_unzip_path){
+  readme <- file.path(cached_unzip_path, "README.txt")
+
+  if(file.exists(readme)){
+    msg <- readLines(readme, warn = FALSE, skipNul = TRUE)
+    msg <- paste0(msg, collapse = "; ")
+    warning(msg, call. = FALSE)
+  }
+
+  invisible(NULL)
+}
 
 .mrp_colnames <- function(layer){
 

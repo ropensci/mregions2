@@ -201,6 +201,10 @@ test_that("mrp_get() assertions work", {
 
 httptest2::with_mock_dir("prod/fail/", {
   test_that("mrp_get: Bad filters errors surfaced", {
+    withr::local_options("mregions2.download_path" = "./prod/fail/geo")
+    withr::local_envvar("TESTPKG.ISTEST" = "true")
+    withr::local_envvar("TESTPKG.CACHETIME" = 0)
+
     .f <- function() mrp_get("eez", filter="<Filter>")
     expect_error(.f(), "XML getFeature request SAX parsing error")
 
@@ -222,6 +226,17 @@ httptest2::with_mock_dir("prod/fail/", {
     expect_error(.f(), "NoApplicableCode")
 
   })
+
+  test_that("mrp_get: Warnings coming from the server are surfaced", {
+    withr::local_options("mregions2.download_path" = "./prod/fail/geo")
+    withr::local_envvar("TESTPKG.ISTEST" = "true")
+    withr::local_envvar("TESTPKG.CACHETIME" = 0)
+
+    .f <- function() mrp_get("eez", cql_filter = "mrgid = -1")
+    expect_warning(.f(), regexp = "empty", fixed = TRUE)
+  })
+
+
 })
 
 httptest2::with_mock_dir("prod/ok/", {
@@ -297,6 +312,7 @@ httptest2::with_mock_dir("prod/ok/", {
 
   test_that("mrp_get() works", {
     withr::local_options("mregions2.download_path" = "./prod/ok/geo")
+    withr::local_envvar("TESTPKG.ISTEST" = "true")
 
     expect_sf <- function(x){
       expect_type(x, "list")
@@ -306,8 +322,8 @@ httptest2::with_mock_dir("prod/ok/", {
     }
 
 
-    # Check without caching
-    withr::local_options("TESTPKG.CACHETIME" = 0)
+    # Mock HTTP request like if there was no cache
+    withr::local_envvar("TESTPKG.CACHETIME" = 0)
 
     # Mexican ECS Deposit
     .f1 <- function() mrp_get("ecs", cql_filter = "mrgid = 64123")
@@ -319,8 +335,8 @@ httptest2::with_mock_dir("prod/ok/", {
     expect_sf(.f2())
     expect_s3_class(sf::st_geometry(.f2()), "sfc_LINESTRING")
 
-    # Check with caching
-    withr::local_options("TESTPKG.CACHETIME" = Inf)
+    # Actually reading from cache without HTTP request
+    withr::local_envvar("TESTPKG.CACHETIME" = Inf)
 
     expect_message(.f1(), "Cache", fixed = TRUE)
     expect_sf(.f1())
