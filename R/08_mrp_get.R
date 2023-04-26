@@ -190,7 +190,7 @@ mrp_get_sanity_check <- function(resp){
 try_clean_up <- function(path) try({file.remove(path)}, silent = TRUE)
 
 check_server_warning <- function(cached_unzip_path){
-  readme <- file.path(cached_unzip_path, "README.txt")
+  readme <- file.path(cached_unzip_path, "README.TXT")
 
   if(file.exists(readme)){
     msg <- readLines(readme, warn = FALSE, skipNul = TRUE)
