@@ -81,7 +81,7 @@ mrp_get <- function(layer, path = getOption("mregions2.download_path", tempdir()
 
   # Assertions
   checkmate::assert_character(layer, len = 1)
-  checkmate::assert_choice(layer, mrp_list$layer)
+  checkmate::assert_choice(layer, mregions2::mrp_list$layer)
   checkmate::assert_character(cql_filter, null.ok = TRUE, len = 1)
   checkmate::assert_character(filter, null.ok = TRUE, len = 1)
   assert_only_one_filter(cql_filter, filter)
@@ -92,7 +92,7 @@ mrp_get <- function(layer, path = getOption("mregions2.download_path", tempdir()
 
 
   # Config
-  namespace <- subset(mrp_list$namespace, mrp_list$layer == layer)
+  namespace <- subset(mregions2::mrp_list$namespace, mregions2::mrp_list$layer == layer)
   url <- httr2::url_parse("https://geo.vliz.be/geoserver/ows")
   url$query <- list(service = "wfs",
                     version = "2.0.0",
@@ -205,10 +205,10 @@ check_server_warning <- function(cached_unzip_path){
 .mrp_colnames <- function(layer){
 
   checkmate::assert_character(layer, len = 1)
-  checkmate::assert_choice(layer, mrp_list$layer)
+  checkmate::assert_choice(layer, mregions2::mrp_list$layer)
 
   # Config
-  namespace <- subset(mrp_list$namespace, mrp_list$layer == layer)
+  namespace <- subset(mregions2::mrp_list$namespace, mregions2::mrp_list$layer == layer)
   url <- httr2::url_parse("https://geo.vliz.be/geoserver/ows")
   url$query <- list(service = "wfs",
                     version = "2.0.0",
@@ -273,7 +273,7 @@ mrp_colnames <- memoise::memoise(.mrp_colnames)
 .mrp_col_unique <- function(layer, colname){
 
   checkmate::assert_character(layer, len = 1)
-  checkmate::assert_choice(layer, mrp_list$layer)
+  checkmate::assert_choice(layer, mregions2::mrp_list$layer)
 
   checkmate::assert_character(colname, len = 1)
   column_names <- mrp_colnames(layer)
@@ -281,7 +281,7 @@ mrp_colnames <- memoise::memoise(.mrp_colnames)
 
 
   # Config
-  namespace <- subset(mrp_list$namespace, mrp_list$layer == layer)
+  namespace <- subset(mregions2::mrp_list$namespace, mregions2::mrp_list$layer == layer)
   url <- httr2::url_parse("https://geo.vliz.be/geoserver/ows")
   url$query <- list(service = "wfs",
                     version = "2.0.0",

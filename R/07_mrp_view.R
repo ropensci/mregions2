@@ -69,7 +69,7 @@ mrp_view <- function(layer, cql_filter = NULL, filter = NULL){
   # Assertions
   assert_deps(c("leaflet", "leaflet.extras2"))
   checkmate::assert_character(layer, len = 1)
-  checkmate::assert_choice(layer, mrp_list$layer)
+  checkmate::assert_choice(layer, mregions2::mrp_list$layer)
   assert_only_one_filter(cql_filter, filter)
   checkmate::assert_character(cql_filter, null.ok = TRUE, len = 1)
   checkmate::assert_character(filter, null.ok = TRUE, len = 1)
@@ -77,7 +77,7 @@ mrp_view <- function(layer, cql_filter = NULL, filter = NULL){
 
 
   # Config
-  namespace <- subset(mrp_list$namespace, mrp_list$layer == layer)
+  namespace <- subset(mregions2::mrp_list$namespace, mregions2::mrp_list$layer == layer)
   wms <- glue::glue("https://geo.vliz.be/geoserver/{namespace}/wms?")
 
   # Server check
