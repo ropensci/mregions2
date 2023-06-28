@@ -97,6 +97,7 @@ mrp_get <- function(layer, path = getOption("mregions2.download_path", tempdir()
   url$query <- list(service = "wfs",
                     version = "2.0.0",
                     request = "GetFeature",
+                    srsName = "EPSG:4326",
                     typeName = glue::glue("{namespace}:{layer}"),
                     cql_filter = cql_filter,
                     filter = filter,
