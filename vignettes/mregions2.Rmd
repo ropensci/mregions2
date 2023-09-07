@@ -76,19 +76,19 @@ library(dplyr)
 
 You can look up for marine places the Marine Regions Gazetteer with a free text search. Some examples:
 
-Find any term with the word 'Belgian'
+Find any term with the words 'North Sea'
 ```{r}
-gaz_search("Belgian")
+gaz_search("North Sea")
 ```
 
 Search names in different languages (provide ISO 2c code)
 ```{r}
-gaz_search("Belgie", language = "nl")
+gaz_search("Noordzee", language = "nl")
 ```
 
 Restrict your search to only exact matches
 ```{r}
-gaz_search("Belgium", like = FALSE, fuzzy = FALSE)
+gaz_search("Noordzee", language = "nl", like = FALSE, fuzzy = FALSE)
 ```
 
 

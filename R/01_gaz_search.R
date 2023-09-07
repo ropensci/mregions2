@@ -18,15 +18,13 @@
 #'
 #' @examples \dontrun{
 #' # Look-up a name in the Gazetteer
-#' gaz_search("Belgian Part of the North Sea")
+#' gaz_search("North Sea")
 #'
 #' # Get the entries of two known MRGID including their geometry
 #' gaz_search(c(14, 17), with_geometry = TRUE)
 #'
 #' # Maybe the name is in another language...
-#' gaz_search("Belgie", language = "nl")
-#'
-#' gaz_search("Bélgica", language = "es")
+#' gaz_search("Noordzee", language = "nl")
 #'
 #' # Get all the records intersecting with the longitude 51.21551 and latitude 2.927
 #' # restricting to some placetypes

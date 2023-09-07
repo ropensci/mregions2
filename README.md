@@ -10,6 +10,7 @@ Review](https://badges.ropensci.org/590_status.svg)](https://github.com/ropensci
 [![pkgcheck](https://github.com/lifewatch/mregions2/workflows/pkgcheck/badge.svg)](https://github.com/lifewatch/mregions2/actions?query=workflow%3Apkgcheck)
 [![Codecov test
 coverage](https://codecov.io/gh/lifewatch/mregions2/branch/main/graph/badge.svg)](https://app.codecov.io/gh/lifewatch/mregions2?branch=main)
+
 <!-- badges: end -->
 
 mregions2 allows to access the [Marine Regions
@@ -58,22 +59,13 @@ You can search the Gazetteer in many ways:
 Search by free text:
 
 ``` r
-gaz_search("Belgian")
-#> # A tibble: 9 × 14
-#>   MRGID gazetteerSource       placeType preferredGazett… preferredGazett… status
-#>   <int> <chr>                 <chr>     <chr>            <chr>            <chr> 
-#> 1    14 "(2001). The Times c… Nation    Belgien          German           stand…
-#> 2  2550 "ASFA thesaurus"      Coast     Belgian Coast    English          stand…
-#> 3  2554 "ASFA thesaurus"      Coast     Belgian West Co… English          stand…
-#> 4  3293 "Flanders Marine Ins… EEZ       Belgian Contine… English          stand…
-#> 5  3293 "Flanders Marine Ins… EEZ       Belgian Exclusi… English          stand…
-#> 6 24493 "Belgian Sea Fisheri… Historic… (Historical) fi… English          stand…
-#> 7 26567 "VLIZ (2020). Inters… Marine R… Belgian part of… English          synon…
-#> 8 49010 "Flanders Marine Ins… Territor… Belgian 12 NM    English          stand…
-#> 9 49243 "Flanders Marine Ins… Contiguo… Belgian 24 NM    English          stand…
-#> # … with 8 more variables: accepted <int>, latitude <dbl>, longitude <dbl>,
-#> #   minLatitude <dbl>, minLongitude <dbl>, maxLatitude <dbl>,
-#> #   maxLongitude <dbl>, precision <dbl>
+gaz_search("Belgian Part of the North Sea")
+#> # A tibble: 1 × 9
+#>   MRGID gazetteerSource      placeType latitude longitude preferredGazetteerName
+#>   <int> <chr>                <chr>        <dbl>     <dbl> <chr>                 
+#> 1 26567 "VLIZ (2020). Inter… Marine R…     51.5      2.70 Belgian part of the N…
+#> # ℹ 3 more variables: preferredGazetteerNameLang <chr>, status <chr>,
+#> #   accepted <int>
 ```
 
 Search by unique identifier. See `?MRGID`:
