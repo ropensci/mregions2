@@ -4,8 +4,8 @@
 <!-- badges: start -->
 
 [![Funding](https://img.shields.io/static/v1?label=powered+by&message=lifewatch.be&labelColor=1a4e8a&color=f15922)](https://lifewatch.be)
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Status at rOpenSci Software Peer
+Review](https://badges.ropensci.org/590_status.svg)](https://github.com/ropensci/software-review/issues/590)
 [![R-CMD-check](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml)
 [![pkgcheck](https://github.com/lifewatch/mregions2/workflows/pkgcheck/badge.svg)](https://github.com/lifewatch/mregions2/actions?query=workflow%3Apkgcheck)
 [![Codecov test
@@ -18,12 +18,12 @@ Regions Data Products](https://marineregions.org/sources.php) in R.
 
 You can find detailed information in the articles online:
 
--   [Introduction to
-    mregions2](https://lifewatch.github.io/mregions2/articles/mregions2.html)
--   [Why mregions and
-    mregions2?](https://lifewatch.github.io/mregions2/articles/why_mregions2.html)
--   [mregions2 as
-    RDF](https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html)
+- [Introduction to
+  mregions2](https://lifewatch.github.io/mregions2/articles/mregions2.html)
+- [Why mregions and
+  mregions2?](https://lifewatch.github.io/mregions2/articles/why_mregions2.html)
+- [mregions2 as
+  RDF](https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html)
 
 ![](https://user-images.githubusercontent.com/54405067/156809171-1487bb9f-35af-4418-8e2f-93c24a59aad0.gif)
 
@@ -287,7 +287,6 @@ vignette](https://lifewatch.github.io/mregions2/articles/mregions2.html).
 
 ``` r
 citation("mregions2")
-#> 
 #> To cite package 'mregions2' in publications use:
 #> 
 #>   Fernandez-Bejarano S, Pohl L (2023). _mregions2: Access Data from
