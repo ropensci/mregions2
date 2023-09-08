@@ -13,9 +13,18 @@ coverage](https://codecov.io/gh/lifewatch/mregions2/branch/main/graph/badge.svg)
 
 <!-- badges: end -->
 
-mregions2 allows to access the [Marine Regions
-Gazetteer](https://marineregions.org/gazetteer.php) and the [Marine
-Regions Data Products](https://marineregions.org/sources.php) in R.
+![](https://user-images.githubusercontent.com/54405067/156809171-1487bb9f-35af-4418-8e2f-93c24a59aad0.gif)
+
+`mregions2` offers a streamlined interface to access data from [Marine
+Regions](https://marineregions.org) in R for researchers, marine
+scientists, and geospatial analysts seeking marine geographical
+information
+
+Marine Regions offers two key resources: the [Marine Regions
+Gazetteer](https://marineregions.org/gazetteer.php), a list of
+standardized marine place names with unique identifiers, and the [Marine
+Regions Data Products](https://marineregions.org/sources.php), including
+popular features like the world maritime boundaries.
 
 You can find detailed information in the articles online:
 
@@ -26,10 +35,6 @@ You can find detailed information in the articles online:
 - [mregions2 as
   RDF](https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html)
 
-![](https://user-images.githubusercontent.com/54405067/156809171-1487bb9f-35af-4418-8e2f-93c24a59aad0.gif)
-
-<sup>(Source: <https://www.vliz.be/en/news?p=show&id=8160>)</sup>
-
 ## Installation
 
 You can install the development version of mregions2 from GitHub with:
@@ -39,10 +44,19 @@ You can install the development version of mregions2 from GitHub with:
 devtools::install_github("lifewatch/mregions2")
 ```
 
-Load the library with
+Load the library with:
 
 ``` r
 library(mregions2)
+```
+
+The function `mrp_view()` requires two extra packages that are not
+listed as Imports, hence they are not installed along with `mregions2`
+but you must install yourself:
+
+``` r
+install.packages("leaflet")
+install.packages("leaflet.extras2")
 ```
 
 ## Query the Marine Regions Gazetteer
@@ -298,6 +312,12 @@ citation("mregions2")
 ## License
 
 MIT. See `LICENSE.md`
+
+This software is developed for scientific, educational and research
+purposes. It is not meant to be used for legal, economical (in the sense
+of exploration of natural resources) or navigational purposes. See the
+[Marine Regions disclaimer](https://marineregions.org/disclaimer.php)
+for more information.
 
 ## Code of Conduct
 
