@@ -23,7 +23,7 @@
 \alias{mrp_view_lme}
 \alias{mrp_view_ecoregions}
 \alias{mrp_view_seavox_v18}
-\title{Visualize a Marine Regions data product without downloading}
+\title{Visualize a Marine Regions data product without downloading.}
 \usage{
 mrp_view(layer, cql_filter = NULL, filter = NULL)
 
@@ -82,7 +82,17 @@ mrp_view_seavox_v18(...)
 A leaflet map with a data product visualized via WMS
 }
 \description{
-Visualize a Marine Regions data product without downloading
+Visualize a Marine Regions data product without downloading.
+
+A series of helpers are available to ease the selection of the data products. Example: instead of running
+
+\code{mrp_view("eez")}
+
+You can use
+
+\code{mrp_view_eez()}
+
+Try \verb{mrp_view_*()}with the identifier of the data product (see \link{mrp_list})
 }
 \details{
 This function uses \href{https://en.wikipedia.org/wiki/Web_Map_Service}{WMS services} to load quickly
@@ -95,12 +105,6 @@ geospatial queries. For instance, you can query a bounding box of interest.
 
 CQL filters are possible only in geoserver. Marine Regions uses a geoserver instance to serve its data products.
 A tutorial on CQL filters is available in the \href{https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html}{geoserver web site}.
-}
-
-\subsection{Helpers}{
-
-A series of helpers was made available to ease the visualization of the data products, try \verb{mrp_view_*()}
-with the identifier of the data product (see \link{mrp_list})
 }
 }
 \examples{

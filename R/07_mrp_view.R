@@ -1,4 +1,17 @@
-#' Visualize a Marine Regions data product without downloading
+#' Visualize a Marine Regions data product without downloading.
+#'
+#' @description
+#'   Visualize a Marine Regions data product without downloading.
+#'
+#'   A series of helpers are available to ease the selection of the data products. Example: instead of running
+#'
+#'   `mrp_view("eez")`
+#'
+#'   You can use
+#'
+#'   `mrp_view_eez()`
+#'
+#'   Try `mrp_view_*()`with the identifier of the data product (see [mrp_list])
 #'
 #' @param layer (character) Identifier of the data product. See [mrp_list]
 #' @param cql_filter (character) Contextual Query Language (CQL) filter. See details.
@@ -9,7 +22,6 @@
 #'   This function uses [WMS services](https://en.wikipedia.org/wiki/Web_Map_Service) to load quickly
 #'   a Leaflet viewer of a Marine Regions data product. It uses the [EMODnet Bathymetry](https://emodnet.ec.europa.eu/en) Digital Terrain Model as background layer.
 #'
-#'
 #'   ## Filters
 #'
 #'   Both the [Contextual Query Language (CQL) filter](https://portal.ogc.org/files/96288) and the [standard OGC filter specification](https://www.ogc.org/standard/filter/) allow to
@@ -18,12 +30,6 @@
 #'
 #'   CQL filters are possible only in geoserver. Marine Regions uses a geoserver instance to serve its data products.
 #'   A tutorial on CQL filters is available in the [geoserver web site](https://docs.geoserver.org/stable/en/user/tutorials/cql/cql_tutorial.html).
-#'
-#'
-#'   ## Helpers
-#'
-#'   A series of helpers was made available to ease the visualization of the data products, try `mrp_view_*()`
-#'   with the identifier of the data product (see [mrp_list])
 #'
 #' @export
 #'
