@@ -289,6 +289,39 @@ mrp_get("eez", path = "path/to/data")
 Get to know more in the [Get Started
 vignette](https://lifewatch.github.io/mregions2/articles/mregions2.html).
 
+## Related packages
+
+### Marine biodiversity data
+
+The main purpose of Marine Regions is to serve as the geographical
+backbone for the World Register of Marine Species (WoRMS), an
+authoritative classification and catalogue of marine names. Here is a
+list of R packages to access Marine taxonomical and biogeographic data
+that can be combined with data from `mregions2`:
+
+- [worrms](https://docs.ropensci.org/worrms): *World Register of Marine
+  Species (WoRMS) Client*.
+- [eurobis](https://lifewatch.github.io/eurobis/): *Download data from
+  EurOBIS using the LifeWatch/EMODnet-Biology Web Feature Services*.
+- [robis](https://cran.r-project.org/package=robis): *Ocean Biodiversity
+  Information System (OBIS) Client*.
+- [rgbif](https://docs.ropensci.org/rgbif): *Interface to the Global
+  Biodiversity Information Facility API*.
+
+### More geographical data
+
+There are other R packages that allow to access other gazetteers and
+boundaries data. Here is a non-exhaustive list:
+
+- [geonames](https://docs.ropensci.org/geonames): *Interface to the
+  “Geonames” Spatial Query Web Service*.
+- [osmdata](https://docs.ropensci.org/osmdata): *Import ‘OpenStreetMap’
+  Data as Simple Features or Spatial Objects*.
+- [osmextract](https://docs.ropensci.org/osmextract): *Download and
+  Import Open Street Map Data Extracts*.
+- [rnaturalearth](https://docs.ropensci.org/rnaturalearth): *World Map
+  Data from Natural Earth*.
+
 ## Citation
 
 ``` r
