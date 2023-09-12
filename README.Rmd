@@ -38,7 +38,7 @@ You can install the development version of mregions2 from GitHub with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("lifewatch/mregions2")
+devtools::install_github("lifewatch/mregions2", build_vignettes = TRUE)
 ```
 
 Load the library with:
@@ -52,6 +52,12 @@ The function `mrp_view()` requires two extra packages that are not listed as Imp
 ``` r
 install.packages("leaflet")
 install.packages("leaflet.extras2")
+```
+Some of the examples below use the pipe operator `%>%`. Install and load `magrittr`:
+
+```{r}
+# install.packages("magrittr")
+library(magrittr)
 ```
 
 ## Query the Marine Regions Gazetteer

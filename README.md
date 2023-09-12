@@ -41,7 +41,7 @@ You can install the development version of mregions2 from GitHub with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("lifewatch/mregions2")
+devtools::install_github("lifewatch/mregions2", build_vignettes = TRUE)
 ```
 
 Load the library with:
@@ -57,6 +57,14 @@ but you must install yourself:
 ``` r
 install.packages("leaflet")
 install.packages("leaflet.extras2")
+```
+
+Some of the examples below use the pipe operator `%>%`. Install and load
+`magrittr`:
+
+``` r
+# install.packages("magrittr")
+library(magrittr)
 ```
 
 ## Query the Marine Regions Gazetteer
@@ -90,16 +98,16 @@ gaz_search(3293)
 #>   MRGID gazetteerSource    placeType latitude longitude minLatitude minLongitude
 #>   <int> <chr>              <chr>        <dbl>     <dbl>       <dbl>        <dbl>
 #> 1  3293 Flanders Marine I… EEZ           51.5      2.71        51.1         2.24
-#> # … with 7 more variables: maxLatitude <dbl>, maxLongitude <dbl>,
-#> #   precision <dbl>, preferredGazetteerName <chr>,
-#> #   preferredGazetteerNameLang <chr>, status <chr>, accepted <int>
+#> # ℹ 7 more variables: maxLatitude <dbl>, maxLongitude <dbl>, precision <dbl>,
+#> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
+#> #   status <chr>, accepted <int>
 ```
 
 Search by location:
 
 ``` r
 gaz_search(x = 2.927, y = 51.21551)
-#> # A tibble: 50 × 14
+#> # A tibble: 49 × 14
 #>    MRGID gazetteerSource          placeType minLatitude minLongitude maxLatitude
 #>    <int> <chr>                    <chr>           <dbl>        <dbl>       <dbl>
 #>  1    14 (2001). The Times compr… Nation           49.5         2.55        51.5
@@ -112,10 +120,10 @@ gaz_search(x = 2.927, y = 51.21551)
 #>  8    20 SAIL                     Province…        50.7         2.55        51.4
 #>  9    20 SAIL                     Province…        50.7         2.55        51.4
 #> 10    20 SAIL                     Province…        50.7         2.55        51.4
-#> # … with 40 more rows, and 8 more variables: maxLongitude <dbl>,
-#> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
-#> #   status <chr>, accepted <int>, latitude <dbl>, longitude <dbl>,
-#> #   precision <dbl>
+#> # ℹ 39 more rows
+#> # ℹ 8 more variables: maxLongitude <dbl>, preferredGazetteerName <chr>,
+#> #   preferredGazetteerNameLang <chr>, status <chr>, accepted <int>,
+#> #   latitude <dbl>, longitude <dbl>, precision <dbl>
 ```
 
 Search by place type:
@@ -135,9 +143,10 @@ gaz_search_by_type("EEZ")
 #>  8  5675 Flanders Marine … EEZ           58.8     23.0         57.6        20.4 
 #>  9  5676 Flanders Marine … EEZ           61.8     21.9         58.8        19.1 
 #> 10  5677 Flanders Marine … EEZ           46.0     -1.97        41.2        -9.88
-#> # … with 244 more rows, and 7 more variables: maxLatitude <dbl>,
-#> #   maxLongitude <dbl>, precision <dbl>, preferredGazetteerName <chr>,
-#> #   preferredGazetteerNameLang <chr>, status <chr>, accepted <int>
+#> # ℹ 244 more rows
+#> # ℹ 7 more variables: maxLatitude <dbl>, maxLongitude <dbl>, precision <dbl>,
+#> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
+#> #   status <chr>, accepted <int>
 ```
 
 Search by authortative source:
@@ -145,21 +154,22 @@ Search by authortative source:
 ``` r
 gaz_search_by_source("Flanders Marine Institute (VLIZ)")
 #> # A tibble: 23 × 13
-#>    MRGID gazetteerSource           placeType latitude longitude preferredGazett…
-#>    <int> <chr>                     <chr>        <dbl>     <dbl> <chr>           
-#>  1 62642 Seys, J.; Pint, S.; Verv… Sampling…     51.3      3.16 SW-Blankenberge…
-#>  2 62643 Seys, J.; Pint, S.; Verv… Sampling…     51.2      2.96 SW-Bredene-01   
-#>  3 62644 Seys, J.; Pint, S.; Verv… Sampling…     51.3      3.26 SW-Duinbergen-01
-#>  4 62645 Seys, J.; Pint, S.; Verv… Sampling…     51.3      3.00 SW-De Haan-Voss…
-#>  5 62646 Seys, J.; Pint, S.; Verv… Sampling…     51.3      3.24 SW-Heist-01     
-#>  6 62647 Seys, J.; Pint, S.; Verv… Sampling…     51.1      2.62 SW-Koksijde-01  
-#>  7 62648 Seys, J.; Pint, S.; Verv… Sampling…     51.2      2.81 SW-Middelkerke-…
-#>  8 62649 Seys, J.; Pint, S.; Verv… Sampling…     51.2      2.71 SW-Nieuwpoort-01
-#>  9 62650 Seys, J.; Pint, S.; Verv… Sampling…     51.1      2.69 SW-Oostduinkerk…
-#> 10 62651 Seys, J.; Pint, S.; Verv… Sampling…     51.2      2.94 SW-Oostende_Oos…
-#> # … with 13 more rows, and 7 more variables: preferredGazetteerNameLang <chr>,
-#> #   status <chr>, accepted <int>, minLatitude <dbl>, minLongitude <dbl>,
-#> #   maxLatitude <dbl>, maxLongitude <dbl>
+#>    MRGID gazetteerSource     placeType latitude longitude preferredGazetteerName
+#>    <int> <chr>               <chr>        <dbl>     <dbl> <chr>                 
+#>  1 62642 Seys, J.; Pint, S.… Sampling…     51.3      3.16 SW-Blankenberge-01    
+#>  2 62643 Seys, J.; Pint, S.… Sampling…     51.2      2.96 SW-Bredene-01         
+#>  3 62644 Seys, J.; Pint, S.… Sampling…     51.3      3.26 SW-Duinbergen-01      
+#>  4 62645 Seys, J.; Pint, S.… Sampling…     51.3      3.00 SW-De Haan-Vosseslag-…
+#>  5 62646 Seys, J.; Pint, S.… Sampling…     51.3      3.24 SW-Heist-01           
+#>  6 62647 Seys, J.; Pint, S.… Sampling…     51.1      2.62 SW-Koksijde-01        
+#>  7 62648 Seys, J.; Pint, S.… Sampling…     51.2      2.81 SW-Middelkerke-01     
+#>  8 62649 Seys, J.; Pint, S.… Sampling…     51.2      2.71 SW-Nieuwpoort-01      
+#>  9 62650 Seys, J.; Pint, S.… Sampling…     51.1      2.69 SW-Oostduinkerke-01   
+#> 10 62651 Seys, J.; Pint, S.… Sampling…     51.2      2.94 SW-Oostende_Oosteroev…
+#> # ℹ 13 more rows
+#> # ℹ 7 more variables: preferredGazetteerNameLang <chr>, status <chr>,
+#> #   accepted <int>, minLatitude <dbl>, minLongitude <dbl>, maxLatitude <dbl>,
+#> #   maxLongitude <dbl>
 ```
 
 The list of place types and sources are available with `gaz_types()` and
