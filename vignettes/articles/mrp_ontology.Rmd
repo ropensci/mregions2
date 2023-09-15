@@ -1,0 +1,54 @@
+---
+title: "Marine Regions Data Products Ontology"
+author: Salvador Fernández
+output: 
+  html_document:
+    df_print: tibble
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+ warning = FALSE,
+ message = FALSE
+)
+```
+
+> An ontology is a categorization of all of the concepts in some field of knowledge.
+
+<small>[GNU Collaborative International Dictionary of English](https://gcide.gnu.org.ua)</small>
+
+The data products hosted at marineregions.org are of vector type, which they come together with attribute tables. These attribute tables are named, but such names are not yet standardized.
+
+To ease the understanding of the data products, the Marine Regions Team has described the attributes.
+
+The Flanders Marine Institute (VLIZ), hosting institution behind Marine Regions, is currently working towards Open Linked Data standards ([Lonneville et al., 2021](http://ceur-ws.org/Vol-2969/paper8-s4biodiv.pdf)). The naming of these attributes will likely turn into standardized terms reusing or expanding on-going RDF-available ontologies.
+
+This work was triggered during the [rOpenSci review](https://github.com/ropensci/software-review/issues/590#issuecomment-1606138219). Thanks to [\@sheilasaia](https://github.com/sheilasaia) for raising this issue.
+
+You can consult the list in your R session via the `mrp_ontology` object that is loaded with `mregions2`
+
+```{r}
+library(mregions2)
+mrp_ontology
+```
+
+---
+
+```{r results='asis', echo = FALSE}
+library(dplyr)
+
+for(i in 1:nrow(mrp_list)){
+  cat(glue::glue("### {mrp_list$title[i]}"))
+  cat("\n")
+  cat(glue::glue("{mrp_list$abstract[i]}"))
+  cat("\n")
+  df <- mrp_ontology %>% filter(layer == mrp_list$layer[i])
+  print(knitr::kable(df))
+  cat("\n")
+}
+
+
+```
+

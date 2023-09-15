@@ -1,5 +1,6 @@
 ---
 output: github_document
+df_print: tibble
 ---
 
 ```{r, include = FALSE}
@@ -30,6 +31,7 @@ You can find detailed information in the articles online:
 
 -   [Introduction to mregions2](https://lifewatch.github.io/mregions2/articles/mregions2.html)
 -   [Why mregions and mregions2?](https://lifewatch.github.io/mregions2/articles/why_mregions2.html)
+- [Marine Regions Data Products Ontology](https://lifewatch.github.io/mregions2/articles/mrp_ontology.html)
 -   [mregions2 as RDF](https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html)
 
 ## Installation
@@ -130,6 +132,12 @@ An overview of all available products can be consulted with `mrp_list`
 
 ```{r prod_list}
 mrp_list
+```
+
+Their attributes are explained in the [Marine Regions Data Products Ontology article](https://lifewatch.github.io/mregions2/articles/mrp_ontology.html), or simply run `mrp_ontology`
+
+```{r prod_ontology}
+mrp_ontology
 ```
 
 You can visualize the Marine Regions Data Products with `mrp_view()`. It opens an interactive `leaflet::leaflet` viewer.

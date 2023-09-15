@@ -1,0 +1,375 @@
+n;layer;colname;type;definition
+1;eez;mrgid;int;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+2;eez;geoname;string;Name of the feature.
+3;eez;mrgid_ter1;int;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+4;eez;pol_type;string;Basis of creation or legal status of feature. One of: 200NM, Joint regime, Overlapping claim.
+5;eez;mrgid_sov1;int;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+6;eez;territory1;string;Specific land area which directly relates to the feature.
+7;eez;iso_ter1;string;ISO 3 code of the territory feature.
+8;eez;sovereign1;string;State that claims jurisdiction over the territory.
+9;eez;mrgid_ter2;int;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+10;eez;mrgid_sov2;int;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+11;eez;territory2;string;Specific land area which directly relates to the feature.
+12;eez;iso_ter2;string;ISO 3 code of the territory feature.
+13;eez;sovereign2;string;State that claims jurisdiction over the territory.
+14;eez;mrgid_ter3;int;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+15;eez;mrgid_sov3;int;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+16;eez;territory3;string;Specific land area which directly relates to the feature.
+17;eez;iso_ter3;string;ISO 3 code of the territory feature.
+18;eez;sovereign3;string;State that claims jurisdiction over the territory.
+19;eez;x_1;decimal;Centroid longitude of feature in EPGS:4326
+20;eez;y_1;decimal;Centroid latitude of feature in EPGS:4326
+21;eez;mrgid_eez;int;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+22;eez;area_km2;int;Area of feature in square kilometers.
+23;eez;iso_sov1;string;ISO 3 code of the sovereign nation feature.
+24;eez;iso_sov2;string;ISO 3 code of the sovereign nation feature.
+25;eez;iso_sov3;string;ISO 3 code of the sovereign nation feature.
+26;eez;un_sov1;double;United Nations M49 Country Code of the sovereign nation feature.
+27;eez;un_sov2;double;United Nations M49 Country Code of the sovereign nation feature.
+28;eez;un_sov3;double;United Nations M49 Country Code of the sovereign nation feature.
+29;eez;un_ter1;double;United Nations M49 Country Code of the territory feature.
+30;eez;un_ter2;double;United Nations M49 Country Code of the territory feature.
+31;eez;un_ter3;double;United Nations M49 Country Code of the territory feature.
+32;eez_boundaries;line_id;decimal;Unique identifier of feature.
+33;eez_boundaries;line_name;string;Name of the feature.
+34;eez_boundaries;line_type;string;Basis of creation or legal status of feature. One of: 200 NM, Archipelagic Baseline, Connection line, Joint regime, Median line, Straight Baseline, Treaty, Unilateral claim (undisputed), Unsettled, Unsettled median line
+35;eez_boundaries;mrgid_sov1;decimal;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+36;eez_boundaries;mrgid_ter1;decimal;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+37;eez_boundaries;territory1;string;Specific land area which directly relates to the feature.
+38;eez_boundaries;sovereign1;string;State that claims jurisdiction over the territory.
+39;eez_boundaries;mrgid_ter2;decimal;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+40;eez_boundaries;territory2;string;Specific land area which directly relates to the feature.
+41;eez_boundaries;mrgid_sov2;decimal;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+42;eez_boundaries;sovereign2;string;State that claims jurisdiction over the territory.
+43;eez_boundaries;mrgid_eez1;decimal;Marine Regions Geographic Identifier of the Exclusive Economic Zone feature that origins this feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+44;eez_boundaries;eez1;string;Name of the Exclusive Economic Zone feature that origins from this feature
+45;eez_boundaries;mrgid_eez2;decimal;Marine Regions Geographic Identifier of the Exclusive Economic Zone feature that origins this feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+46;eez_boundaries;eez2;string;Name of the Exclusive Economic Zone feature that origins from this feature
+47;eez_boundaries;source1;string;Name of the authoritative source that defines the feature.
+48;eez_boundaries;url1;string;Uniform Resource Locator to the authoritative source that defines the feature.
+49;eez_boundaries;source2;string;Name of the authoritative source that defines the feature.
+50;eez_boundaries;url2;string;Uniform Resource Locator to the authoritative source that defines the feature.
+51;eez_boundaries;source3;string;Name of the authoritative source that defines the feature.
+52;eez_boundaries;url3;string;Uniform Resource Locator to the authoritative source that defines the feature.
+53;eez_boundaries;origin;string;Type of source of feature. One of: Buffer, Database, External, Link, Median
+54;eez_boundaries;doc_date;date;Date of publication of the authoritative source.
+55;eez_boundaries;mrgid_jreg;decimal;Marine Regions Geographic Identifier of the Joint Regime polygon feature related to this feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+56;eez_boundaries;joint_reg;string;Name of the Joint Regime polygon feature related to this feature.
+57;eez_boundaries;length_km;decimal;Length of feature in kilometers.
+58;eez_12nm;mrgid;int;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+59;eez_12nm;geoname;string;Name of the feature.
+60;eez_12nm;pol_type;string;Basis of creation or legal status of feature.
+61;eez_12nm;mrgid_ter1;int;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+62;eez_12nm;territory1;string;Specific land area which directly relates to the feature.
+63;eez_12nm;mrgid_sov1;int;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+64;eez_12nm;sovereign1;string;State that claims jurisdiction over the territory.
+65;eez_12nm;iso_ter1;string;ISO 3 code of the territory feature.
+66;eez_12nm;x_1;decimal;Centroid longitude of feature in EPGS:4326
+67;eez_12nm;y_1;decimal;Centroid latitude of feature in EPGS:4326
+68;eez_12nm;mrgid_eez;int;Marine Regions Geographic Identifier of the Exclusive Economic Zone feature related to this feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+69;eez_12nm;area_km2;int;Area of feature in square kilometers.
+70;eez_12nm;iso_sov1;string;ISO 3 code of the sovereign nation feature.
+71;eez_12nm;un_sov1;double;United Nations M49 Country Code of the sovereign nation feature.
+72;eez_12nm;un_ter1;double;United Nations M49 Country Code of the territory feature.
+73;eez_24nm;mrgid;int;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+74;eez_24nm;geoname;string;Name of the feature.
+75;eez_24nm;pol_type;string;Basis of creation or legal status of feature.
+76;eez_24nm;mrgid_ter1;int;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+77;eez_24nm;territory1;string;Specific land area which directly relates to the feature.
+78;eez_24nm;mrgid_sov1;int;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+79;eez_24nm;sovereign1;string;State that claims jurisdiction over the territory.
+80;eez_24nm;iso_ter1;string;ISO 3 code of the territory feature.
+81;eez_24nm;x_1;decimal;Centroid longitude of feature in EPGS:4326
+82;eez_24nm;y_1;decimal;Centroid latitude of feature in EPGS:4326
+83;eez_24nm;mrgid_eez;int;Marine Regions Geographic Identifier of the Exclusive Economic Zone feature related to this feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+84;eez_24nm;area_km2;int;Area of feature in square kilometers.
+85;eez_24nm;iso_sov1;string;ISO 3 code of the sovereign nation feature.
+86;eez_24nm;un_sov1;double;United Nations M49 Country Code of the sovereign nation feature.
+87;eez_24nm;un_ter1;double;United Nations M49 Country Code of the territory feature.
+88;eez_internal_waters;mrgid;int;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+89;eez_internal_waters;geoname;string;Name of the feature.
+90;eez_internal_waters;pol_type;string;Basis of creation or legal status of feature.
+91;eez_internal_waters;mrgid_ter1;int;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+92;eez_internal_waters;territory1;string;Specific land area which directly relates to the feature.
+93;eez_internal_waters;mrgid_sov1;int;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+94;eez_internal_waters;sovereign1;string;State that claims jurisdiction over the territory.
+95;eez_internal_waters;iso_ter1;string;ISO 3 code of the territory feature.
+96;eez_internal_waters;x_1;decimal;Centroid longitude of feature in EPGS:4326
+97;eez_internal_waters;y_1;decimal;Centroid latitude of feature in EPGS:4326
+98;eez_internal_waters;mrgid_eez;int;Marine Regions Geographic Identifier of the Exclusive Economic Zone feature related to this feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+99;eez_internal_waters;area_km2;int;Area of feature in square kilometers.
+100;eez_internal_waters;iso_sov1;string;ISO 3 code of the sovereign nation feature.
+101;eez_internal_waters;un_sov1;double;United Nations M49 Country Code of the sovereign nation feature.
+102;eez_internal_waters;un_ter1;double;United Nations M49 Country Code of the territory feature.
+103;eez_archipelagic_waters;mrgid;int;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+104;eez_archipelagic_waters;geoname;string;Name of the feature.
+105;eez_archipelagic_waters;pol_type;string;Basis of creation or legal status of feature.
+106;eez_archipelagic_waters;mrgid_ter1;int;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+107;eez_archipelagic_waters;territory1;string;Specific land area which directly relates to the feature.
+108;eez_archipelagic_waters;mrgid_sov1;int;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+109;eez_archipelagic_waters;sovereign1;string;State that claims jurisdiction over the territory.
+110;eez_archipelagic_waters;iso_ter1;string;ISO 3 code of the territory feature.
+111;eez_archipelagic_waters;x_1;decimal;Centroid longitude of feature in EPGS:4326
+112;eez_archipelagic_waters;y_1;decimal;Centroid latitude of feature in EPGS:4326
+113;eez_archipelagic_waters;mrgid_eez;int;Marine Regions Geographic Identifier of the Exclusive Economic Zone feature related to this feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+114;eez_archipelagic_waters;area_km2;int;Area of feature in square kilometers.
+115;eez_archipelagic_waters;iso_sov1;string;ISO 3 code of the sovereign nation feature.
+116;eez_archipelagic_waters;un_sov1;double;United Nations M49 Country Code of the sovereign nation feature.
+117;eez_archipelagic_waters;un_ter1;double;United Nations M49 Country Code of the territory feature.
+118;high_seas;__gid;long;Unique identifier of feature.
+119;high_seas;mrgid;decimal;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+120;high_seas;source;string;Name of the authoritative source that defines the feature.
+121;high_seas;area_km2;decimal;Area of feature in square kilometers.
+122;ecs;geoname;string;Name of the feature.
+123;ecs;pol_type;string;Basis of creation or legal status of feature.
+124;ecs;territory1;string;Specific land area which directly relates to the feature.
+125;ecs;mrgid_ter1;string;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+126;ecs;iso_ter1;string;ISO 3 code of the territory feature.
+127;ecs;un_ter1;string;United Nations M49 Country Code of the territory feature.
+128;ecs;sovereign1;string;State that claims jurisdiction over the territory.
+129;ecs;mrgid_sov1;int;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+130;ecs;iso_sov1;string;ISO 3 code of the sovereign nation feature.
+131;ecs;un_sov1;string;United Nations M49 Country Code of the sovereign nation feature.
+132;ecs;territory2;string;Specific land area which directly relates to the feature.
+133;ecs;mrgid_ter2;string;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+134;ecs;iso_ter2;string;ISO 3 code of the territory feature.
+135;ecs;un_ter2;string;United Nations M49 Country Code of the territory feature.
+136;ecs;sovereign2;string;State that claims jurisdiction over the territory.
+137;ecs;mrgid_sov2;int;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+138;ecs;iso_sov2;string;ISO 3 code of the sovereign nation feature.
+139;ecs;un_sov2;string;United Nations M49 Country Code of the sovereign nation feature.
+140;ecs;territory3;string;Specific land area which directly relates to the feature.
+141;ecs;mrgid_ter3;string;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+142;ecs;iso_ter3;string;ISO 3 code of the territory feature.
+143;ecs;un_ter3;string;United Nations M49 Country Code of the territory feature.
+144;ecs;sovereign3;string;State that claims jurisdiction over the territory.
+145;ecs;mrgid_sov3;int;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+146;ecs;iso_sov3;string;ISO 3 code of the sovereign nation feature.
+147;ecs;un_sov3;string;United Nations M49 Country Code of the sovereign nation feature.
+148;ecs;territory4;string;Specific land area which directly relates to the feature.
+149;ecs;mrgid_ter4;string;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+150;ecs;iso_ter4;string;ISO 3 code of the territory feature.
+151;ecs;un_ter4;string;United Nations M49 Country Code of the territory feature.
+152;ecs;sovereign4;string;State that claims jurisdiction over the territory.
+153;ecs;mrgid_sov4;int;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+154;ecs;iso_sov4;string;ISO 3 code of the sovereign nation feature.
+155;ecs;un_sov4;string;United Nations M49 Country Code of the sovereign nation feature.
+156;ecs;territory5;string;Specific land area which directly relates to the feature.
+157;ecs;mrgid_ter5;string;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+158;ecs;iso_ter5;string;ISO 3 code of the territory feature.
+159;ecs;un_ter5;string;United Nations M49 Country Code of the territory feature.
+160;ecs;sovereign5;string;State that claims jurisdiction over the territory.
+161;ecs;mrgid_sov5;int;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+162;ecs;iso_sov5;string;ISO 3 code of the sovereign nation feature.
+163;ecs;un_sov5;string;United Nations M49 Country Code of the sovereign nation feature.
+164;ecs;territory6;string;Specific land area which directly relates to the feature.
+165;ecs;mrgid_ter6;string;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+166;ecs;iso_ter6;string;ISO 3 code of the territory feature.
+167;ecs;un_ter6;string;United Nations M49 Country Code of the territory feature.
+168;ecs;sovereign6;string;State that claims jurisdiction over the territory.
+169;ecs;mrgid_sov6;int;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+170;ecs;iso_sov6;string;ISO 3 code of the sovereign nation feature.
+171;ecs;un_sov6;string;United Nations M49 Country Code of the sovereign nation feature.
+172;ecs;territory7;string;Specific land area which directly relates to the feature.
+173;ecs;mrgid_ter7;string;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+174;ecs;iso_ter7;string;ISO 3 code of the territory feature.
+175;ecs;un_ter7;string;United Nations M49 Country Code of the territory feature.
+176;ecs;sovereign7;string;State that claims jurisdiction over the territory.
+177;ecs;mrgid_sov7;int;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+178;ecs;iso_sov7;string;ISO 3 code of the sovereign nation feature.
+179;ecs;un_sov7;string;United Nations M49 Country Code of the sovereign nation feature.
+180;ecs;x_1;string;Centroid longitude of feature in EPGS:4326
+181;ecs;y_1;string;Centroid latitude of feature in EPGS:4332
+182;ecs;area_km2;string;Area of feature in square kilometers.
+183;ecs;mrgid;int;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+184;ecs;mrgid_ecs;int;Marine Regions Geographic Identifier of the Extended Continental Shelf feature related to this feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+185;ecs_boundaries;line_id;double;Unique identifier of feature.
+186;ecs_boundaries;line_name;string;Name of the feature.
+187;ecs_boundaries;line_type;string;Basis of creation or legal status of feature. One of: ECS CLCS Joint Recommendation, ECS CLCS Joint Submission, ECS CLCS Recommendation, ECS CLCS Submission, ECS Connection Line, ECS DOALOS Deposit, ECS DOALOS Joint Deposit, ECS Treaty
+188;ecs_boundaries;territory1;string;Specific land area which directly relates to the feature.
+189;ecs_boundaries;sovereign1;string;State that claims jurisdiction over the territory.
+190;ecs_boundaries;territory2;string;Specific land area which directly relates to the feature.
+191;ecs_boundaries;sovereign2;string;State that claims jurisdiction over the territory.
+192;ecs_boundaries;territory3;string;Specific land area which directly relates to the feature.
+193;ecs_boundaries;sovereign3;string;State that claims jurisdiction over the territory.
+194;ecs_boundaries;territory4;string;Specific land area which directly relates to the feature.
+195;ecs_boundaries;sovereign4;string;State that claims jurisdiction over the territory.
+196;ecs_boundaries;territory5;string;Specific land area which directly relates to the feature.
+197;ecs_boundaries;sovereign5;string;State that claims jurisdiction over the territory.
+198;ecs_boundaries;territory6;string;Specific land area which directly relates to the feature.
+199;ecs_boundaries;sovereign6;string;State that claims jurisdiction over the territory.
+200;ecs_boundaries;origin;string;Type of source of feature. One of: Buffer, Database, External, Link, Median
+201;ecs_boundaries;url1;string;Uniform Resource Locator to the authoritative source that defines the feature.
+202;ecs_boundaries;source1;string;Name of the authoritative source that defines the feature.
+203;ecs_boundaries;doc_date;date;Date of publication of the authoritative source.
+204;ecs_boundaries;mrgid_ter1;double;Name of the authoritative source that defines the feature.
+205;ecs_boundaries;mrgid_ter2;double;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+206;ecs_boundaries;mrgid_ter3;double;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+207;ecs_boundaries;mrgid_ter4;double;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+208;ecs_boundaries;mrgid_ter5;double;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+209;ecs_boundaries;mrgid_ter6;double;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+210;ecs_boundaries;mrgid_sov1;double;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+211;ecs_boundaries;mrgid_sov2;double;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+212;ecs_boundaries;mrgid_sov3;double;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+213;ecs_boundaries;mrgid_sov4;double;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+214;ecs_boundaries;mrgid_sov5;double;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+215;ecs_boundaries;mrgid_sov6;double;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+216;ecs_boundaries;url2;string;Uniform Resource Locator to the authoritative source that defines the feature.
+217;ecs_boundaries;url3;string;Uniform Resource Locator to the authoritative source that defines the feature.
+218;ecs_boundaries;source2;string;Name of the authoritative source that defines the feature.
+219;ecs_boundaries;source3;string;Name of the authoritative source that defines the feature.
+220;ecs_boundaries;length_km;decimal;Length of feature in kilometers.
+221;iho;id;string;Unique identifier of feature.
+222;iho;longitude;decimal;Centroid longitude of feature in EPGS:4326
+223;iho;latitude;decimal;Centroid latitude of feature in EPGS:4326
+224;iho;min_x;decimal;Minimum longitude of feature in EPGS:4326
+225;iho;min_y;decimal;Minimum latitude of feature in EPGS:4326
+226;iho;max_x;decimal;Maximum longitude of feature in EPGS:4326
+227;iho;max_y;decimal;Maximum latitude of feature in EPGS:4326
+228;iho;area;long;Area of feature in square kilometers.
+229;iho;mrgid;int;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+230;goas;latitude;decimal;Centroid longitude of feature in EPGS:4326
+231;goas;longitude;decimal;Centroid latitude of feature in EPGS:4326
+232;goas;min_y;decimal;Minimum latitude of feature in EPGS:4326
+233;goas;min_x;decimal;Minimum longitude of feature in EPGS:4326
+234;goas;max_y;decimal;Maximum latitude of feature in EPGS:4326
+235;goas;max_x;decimal;Maximum longitude of feature in EPGS:4326
+236;goas;area_km2;double;Area of feature in square kilometers.
+237;eez_iho;mrgid;long;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+238;eez_iho;marregion;string;Name of the feature.
+239;eez_iho;mrgid_iho;long;Marine Regions Geographic Identifier of the International Hydrographic Office Sea Area feature related to this feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+240;eez_iho;iho_sea;string;Name of the International Hydrographic Office Sea Area polygon feature related to this feature.
+241;eez_iho;mrgid_eez;long;Marine Regions Geographic Identifier of the Exclusive Economic Zone feature related to this feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+242;eez_iho;eez;string;Name of the Exclusive Economic Zone feature related to this feature.
+243;eez_iho;mrgid_ter1;long;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+244;eez_iho;territory1;string;Specific land area which directly relates to the feature.
+245;eez_iho;iso_ter1;string;ISO 3 code of the territory feature.
+246;eez_iho;un_ter1;long;United Nations M49 Country Code of the territory feature.
+247;eez_iho;mrgid_sov1;long;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+248;eez_iho;sovereign1;string;State that claims jurisdiction over the territory.
+249;eez_iho;iso_sov1;string;ISO 3 code of the sovereign nation feature.
+250;eez_iho;un_sov1;long;United Nations M49 Country Code of the sovereign nation feature.
+251;eez_iho;mrgid_ter2;long;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+252;eez_iho;territory2;string;Specific land area which directly relates to the feature.
+253;eez_iho;iso_ter2;string;ISO 3 code of the territory feature.
+254;eez_iho;un_ter2;long;United Nations M49 Country Code of the territory feature.
+255;eez_iho;mrgid_sov2;long;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+256;eez_iho;sovereign2;string;State that claims jurisdiction over the territory.
+257;eez_iho;iso_sov2;string;ISO 3 code of the sovereign nation feature.
+258;eez_iho;un_sov2;long;United Nations M49 Country Code of the sovereign nation feature.
+259;eez_iho;mrgid_ter3;long;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+260;eez_iho;territory3;string;Specific land area which directly relates to the feature.
+261;eez_iho;iso_ter3;string;ISO 3 code of the territory feature.
+262;eez_iho;un_ter3;long;United Nations M49 Country Code of the territory feature.
+263;eez_iho;mrgid_sov3;long;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+264;eez_iho;sovereign3;string;State that claims jurisdiction over the territory.
+265;eez_iho;iso_sov3;string;ISO 3 code of the sovereign nation feature.
+266;eez_iho;un_sov3;long;United Nations M49 Country Code of the sovereign nation feature.
+267;eez_iho;area_km2;long;Area of feature in square kilometers.
+268;eez_iho;x_1;decimal;Centroid longitude of feature in EPGS:4326
+269;eez_iho;y_1;decimal;Centroid latitude of feature in EPGS:4326
+270;eez_land;union;string;Name of the feature.
+271;eez_land;mrgid_eez;long;Marine Regions Geographic Identifier of the Exclusive Economic Zone feature related to this feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+272;eez_land;territory1;string;Specific land area which directly relates to the feature.
+273;eez_land;mrgid_ter1;long;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+274;eez_land;iso_ter1;string;ISO 3 code of the territory feature.
+275;eez_land;un_ter1;long;United Nations M49 Country Code of the territory feature.
+276;eez_land;sovereign1;string;State that claims jurisdiction over the territory.
+277;eez_land;mrgid_sov1;long;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+278;eez_land;iso_sov1;string;ISO 3 code of the sovereign nation feature.
+279;eez_land;un_sov1;long;United Nations M49 Country Code of the sovereign nation feature.
+280;eez_land;territory2;string;Specific land area which directly relates to the feature.
+281;eez_land;mrgid_ter2;long;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+282;eez_land;iso_ter2;string;ISO 3 code of the territory feature.
+283;eez_land;un_ter2;long;United Nations M49 Country Code of the territory feature.
+284;eez_land;sovereign2;string;State that claims jurisdiction over the territory.
+285;eez_land;mrgid_sov2;long;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+286;eez_land;iso_sov2;string;ISO 3 code of the sovereign nation feature.
+287;eez_land;un_sov2;long;United Nations M49 Country Code of the sovereign nation feature.
+288;eez_land;territory3;string;Specific land area which directly relates to the feature.
+289;eez_land;mrgid_ter3;long;Marine Regions Geographic Identifier of the territory feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+290;eez_land;iso_ter3;string;ISO 3 code of the territory feature.
+291;eez_land;un_ter3;long;United Nations M49 Country Code of the territory feature.
+292;eez_land;sovereign3;string;State that claims jurisdiction over the territory.
+293;eez_land;mrgid_sov3;long;Marine Regions Geographic Identifier of the sovereign nation feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+294;eez_land;iso_sov3;string;ISO 3 code of the sovereign nation feature.
+295;eez_land;un_sov3;long;United Nations M49 Country Code of the sovereign nation feature.
+296;eez_land;pol_type;string;Basis of creation or legal status of feature.
+297;eez_land;y_1;decimal;Centroid latitude of feature in EPGS:4326
+298;eez_land;x_1;decimal;Centroid longitude of feature in EPGS:4326
+299;eez_land;area_km2;long;Area of feature in square kilometers.
+300;longhurst;provcode;string;Unique identifier of feature as 4 code.
+301;longhurst;provdescr;string;Name of feature.
+302;longhurst;x;decimal;Centroid longitude of feature in EPGS:4326
+303;longhurst;y;decimal;Centroid latitude of feature in EPGS:4326
+304;longhurst;area_m2;decimal;Area of feature in square meters.
+305;longhurst;orig_fid;int;Unique identifier of feature.
+306;longhurst;mrgid;int;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+307;cds;mrgid;int;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+308;cds;added_in;short;Year of designation of feature.
+309;cds;__xmin;double;Minimum longitude of feature in EPGS:4326
+310;cds;__xmax;double;Maximum longitude of feature in EPGS:4326
+311;cds;ymin;double;Minimum latitude of feature in EPGS:4326
+312;cds;ymax;double;Maximum latitude of feature in EPGS:4326
+313;cds;centroid;string;Centroid of feature in EPGS:4326
+314;eca_reg13_nox;area;string;Name of feature.
+315;eca_reg13_nox;regulation;string;Legal regulation of feature.
+316;eca_reg14_sox_pm;area;string;Name of feature.
+317;eca_reg14_sox_pm;regulation;string;Legal regulation of feature.
+318;worldheritagemarineprogramme;full_name;string;Name of feature.
+319;worldheritagemarineprogramme;country;string;State in which the feature lies.
+320;worldheritagemarineprogramme;year;string;Year of designation of feature.
+321;worldheritagemarineprogramme;beauty;string;Boolean. Indicates if the designation of feature is based on landscape criteria.
+322;worldheritagemarineprogramme;geology;string;Boolean. Indicates if the designation of feature is based on geological importance criteria.
+323;worldheritagemarineprogramme;ecology;string;Boolean. Indicates if the designation of feature is based on ecological importance criteria.
+324;worldheritagemarineprogramme;habitat;string;Boolean. Indicates if the designation of feature is based on ecological importance criteria.
+325;worldheritagemarineprogramme;long_whc;string;Centroid longitude of feature in EPGS:4326
+326;worldheritagemarineprogramme;lat_whc;string;Centroid latitude of feature in EPGS:4326
+327;worldheritagemarineprogramme;source;string;Name of the authoritative source that defines the feature.
+328;worldheritagemarineprogramme;buffer;string;Boolean. Indicates if the feature is a buffer around another feature.
+329;worldheritagemarineprogramme;url;string;Uniform Resource Locator to the authoritative source that defines the feature.
+330;worldheritagemarineprogramme;mrgid;string;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+331;worldheritagemarineprogramme;refid;string;Unique Identifier of the feature.
+332;worldheritagemarineprogramme;area_km2;decimal;Area of feature in square kilometers.
+333;lme;objectid;long;Unique identifier of feature.
+334;lme;lme_name;string;Name of feature.
+335;lme;grouping;string;Boolean: Indicates if the feature belongs to the category: Artic
+336;lme;arctic;string;Boolean: Indicates if the feature belongs to the category: Artic
+337;lme;uslmes;string;Boolean. Indicates if the feature is related to the nation: United States
+338;lme;shape_leng;decimal;Perimeter of feature in meters calculated in spheroid.
+339;lme;shape_area;decimal;Cartesian area of feature in square meters.
+340;lme;sum_gis_km;decimal;Geodetic area of feature in square kilometers.
+341;lme;mrgid;long;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+342;lme;minlat;double;Minimum latitude of feature in EPGS:4326
+343;lme;minlong;double;Minimum longitude of feature in EPGS:4326
+344;lme;maxlat;double;Maximum latitude of feature in EPGS:4326
+345;lme;maxlong;double;Maximum longitude of feature in EPGS:4326
+346;lme;lat;double;Centroid latitude of feature in EPGS:4326
+347;lme;lon;double;Centroid longitude of feature in EPGS:4326
+348;lme;lme_number;long;Unique identifier of feature.
+349;ecoregions;eco_code;long;Unique identifier of feature.
+350;ecoregions;ecoregion;string;Name of feature. Areas of relatively homogeneous species composition, clearly distinct from adjacent systems. The species composition is likely to be determined by the predominance of a small number of ecosystems and/or a distinct suite of oceanographic or topographic features. The dominant biogeographic forcing agents defining the ecoregions vary from location to location but may include isolation, upwelling, nutrient inputs, freshwater influx, temperature regimes, ice regimes, exposure, sediments, currents, and bathymetric or coastal complexity.
+351;ecoregions;lat;decimal;Centroid latitude of feature in EPGS:4326
+352;ecoregions;long;decimal;Centroid longitude of feature in EPGS:4326
+353;ecoregions;placetype;string;Type of feature.
+354;ecoregions;mrgid;int;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+355;seavox_v18;sub_region;string;Name of feature.
+356;seavox_v18;region;string;Name of the first hierarchical level of classification feature
+357;seavox_v18;level_1;string;Name of the second hierarchical level of classification feature.
+358;seavox_v18;level_2;string;Name of the third hierarchical level of classification feature.
+359;seavox_v18;level_3;string;Name of the fourth hierarchical level of classification feature
+360;seavox_v18;level_4;string;Name of the fifth hierarchical level of classification feature
+361;seavox_v18;skos_url;string;Uniform Resource Identifier of feature
+362;seavox_v18;lat;double;Centroid latitude of feature in EPGS:4326
+363;seavox_v18;long;double;Centroid longitude of feature in EPGS:4326
+364;seavox_v18;minlat;double;Minimum latitude of feature in EPGS:4326
+365;seavox_v18;minlong;double;Minimum longitude of feature in EPGS:4326
+366;seavox_v18;maxlat;double;Maximum latitude of feature in EPGS:4326
+367;seavox_v18;maxlong;double;Maximum longitude of feature in EPGS:4326
+368;seavox_v18;mrgid_sr;string;Marine Regions Geographic Identifier of the feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+369;seavox_v18;mrgid_r;string;Marine Regions Geographic Identifier of the first hierarchical level of classification feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+370;seavox_v18;mrgid_l1;string;Marine Regions Geographic Identifier of the second hierarchical level of classification feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+371;seavox_v18;mrgid_l2;string;Marine Regions Geographic Identifier of the third hierarchical level of classification feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+372;seavox_v18;mrgid_l3;string;Marine Regions Geographic Identifier of the fourth hierarchical level of classification feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+373;seavox_v18;mrgid_l4;string;Marine Regions Geographic Identifier of the fifth hierarchical level of classification feature. Unique, persistent and resolvable identifier used in the Marine Regions gazetteer.
+374;seavox_v18;area_km2;decimal;Geodetic area of feature in square kilometers.

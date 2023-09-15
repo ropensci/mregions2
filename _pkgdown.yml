@@ -27,6 +27,7 @@ reference:
     List, visualize and download the Marine Regions Data Products, such as the Maritime Boundaries
   contents:
   - mrp_list
+  - mrp_ontology
   - mrp_view
   - mrp_get
   - mrp_colnames

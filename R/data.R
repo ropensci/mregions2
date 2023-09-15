@@ -23,3 +23,22 @@
 #' @examples
 #' mrp_list
 "mrp_list"
+
+#' Marine Regions Data Products Ontology
+#'
+#' More information available at `vignette("mrp_ontology", package = "mregions2")`
+#'
+#' @format ## `mrp_ontology`
+#' A data frame with 374 rows and 4 columns:
+#' \describe{
+#'   \item{layer}{Identifier of the data product. Use in [mrp_get()]}
+#'   \item{colname}{Name of the columns of each data product.}
+#'   \item{type}{Data type of the column.}
+#'   \item{definition}{Definition of the column.}
+#' }
+#'
+#' @source <https://marineregions.org/sources.php> <https://marineregions.org/eezattribute.php>
+#'
+#' @examples
+#' mrp_ontology
+"mrp_ontology"

@@ -32,6 +32,8 @@ You can find detailed information in the articles online:
   mregions2](https://lifewatch.github.io/mregions2/articles/mregions2.html)
 - [Why mregions and
   mregions2?](https://lifewatch.github.io/mregions2/articles/why_mregions2.html)
+- [Marine Regions Data Products
+  Ontology](https://lifewatch.github.io/mregions2/articles/mrp_ontology.html)
 - [mregions2 as
   RDF](https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html)
 
@@ -189,10 +191,9 @@ gaz_search(3293) %>% gaz_geometry()
 #>   MRGID gazetteerSource    placeType latitude longitude minLatitude minLongitude
 #>   <int> <chr>              <chr>        <dbl>     <dbl>       <dbl>        <dbl>
 #> 1  3293 Flanders Marine I… EEZ           51.5      2.71        51.1         2.24
-#> # … with 8 more variables: maxLatitude <dbl>, maxLongitude <dbl>,
-#> #   precision <dbl>, preferredGazetteerName <chr>,
-#> #   preferredGazetteerNameLang <chr>, status <chr>, accepted <int>,
-#> #   the_geom <MULTIPOLYGON [°]>
+#> # ℹ 8 more variables: maxLatitude <dbl>, maxLongitude <dbl>, precision <dbl>,
+#> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
+#> #   status <chr>, accepted <int>, the_geom <MULTIPOLYGON [°]>
 
 # Or get only the geometry 
 gaz_geometry(3293, format = "sfc")
@@ -211,7 +212,7 @@ hierarchically. You can browse this hierarchy up and down with
 ``` r
 # Get all relations
 gaz_search(3293) %>% gaz_relations()
-#> # A tibble: 31 × 14
+#> # A tibble: 36 × 14
 #>    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude
 #>    <int> <chr>             <chr>        <dbl>     <dbl>       <dbl>        <dbl>
 #>  1  3293 Flanders Marine … EEZ           51.5      2.71        51.1         2.24
@@ -224,13 +225,14 @@ gaz_search(3293) %>% gaz_relations()
 #>  8  2550 ASFA thesaurus    Coast         51.2      2.91        51.1         2.54
 #>  9 17401 Aphia             Wreck         51.4      2.32        NA          NA   
 #> 10 17409 Aphia             Wreck         51.1      2.33        NA          NA   
-#> # … with 21 more rows, and 7 more variables: maxLatitude <dbl>,
-#> #   maxLongitude <dbl>, precision <dbl>, preferredGazetteerName <chr>,
-#> #   preferredGazetteerNameLang <chr>, status <chr>, accepted <int>
+#> # ℹ 26 more rows
+#> # ℹ 7 more variables: maxLatitude <dbl>, maxLongitude <dbl>, precision <dbl>,
+#> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
+#> #   status <chr>, accepted <int>
 
 # Or get the relations directly
 gaz_relations(3293)
-#> # A tibble: 31 × 14
+#> # A tibble: 36 × 14
 #>    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude
 #>    <int> <chr>             <chr>        <dbl>     <dbl>       <dbl>        <dbl>
 #>  1  3293 Flanders Marine … EEZ           51.5      2.71        51.1         2.24
@@ -243,9 +245,10 @@ gaz_relations(3293)
 #>  8  2550 ASFA thesaurus    Coast         51.2      2.91        51.1         2.54
 #>  9 17401 Aphia             Wreck         51.4      2.32        NA          NA   
 #> 10 17409 Aphia             Wreck         51.1      2.33        NA          NA   
-#> # … with 21 more rows, and 7 more variables: maxLatitude <dbl>,
-#> #   maxLongitude <dbl>, precision <dbl>, preferredGazetteerName <chr>,
-#> #   preferredGazetteerNameLang <chr>, status <chr>, accepted <int>
+#> # ℹ 26 more rows
+#> # ℹ 7 more variables: maxLatitude <dbl>, maxLongitude <dbl>, precision <dbl>,
+#> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
+#> #   status <chr>, accepted <int>
 ```
 
 ## Marine Regions Data Products
@@ -272,7 +275,30 @@ mrp_list
 #>  8 Extended Continental S… MarineRe… ecs   Creati… "Flande… http… http… "This d…
 #>  9 Extended Continental S… MarineRe… ecs_… Creati… "Flande… http… http… "This d…
 #> 10 IHO Sea Areas (v3)      MarineRe… iho   Creati… "Flande… http… http… "World …
-#> # … with 11 more rows
+#> # ℹ 11 more rows
+```
+
+Their attributes are explained in the [Marine Regions Data Products
+Ontology
+article](https://lifewatch.github.io/mregions2/articles/mrp_ontology.html),
+or simply run `mrp_ontology`
+
+``` r
+mrp_ontology
+#> # A tibble: 374 × 4
+#>    layer colname    type   definition                                           
+#>    <chr> <chr>      <chr>  <chr>                                                
+#>  1 eez   mrgid      int    Marine Regions Geographic Identifier of the feature.…
+#>  2 eez   geoname    string Name of the feature.                                 
+#>  3 eez   mrgid_ter1 int    Marine Regions Geographic Identifier of the territor…
+#>  4 eez   pol_type   string Basis of creation or legal status of feature. One of…
+#>  5 eez   mrgid_sov1 int    Marine Regions Geographic Identifier of the sovereig…
+#>  6 eez   territory1 string Specific land area which directly relates to the fea…
+#>  7 eez   iso_ter1   string ISO 3 code of the territory feature.                 
+#>  8 eez   sovereign1 string State that claims jurisdiction over the territory.   
+#>  9 eez   mrgid_ter2 int    Marine Regions Geographic Identifier of the territor…
+#> 10 eez   mrgid_sov2 int    Marine Regions Geographic Identifier of the sovereig…
+#> # ℹ 364 more rows
 ```
 
 You can visualize the Marine Regions Data Products with `mrp_view()`. It
