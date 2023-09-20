@@ -1,5 +1,5 @@
 
-# mregions2
+# mregions2 <a href="https://lifewatch.github.io/mregions2/"><img src="man/figures/logo.png" align="right" height="137" alt="mregions2 website" /></a>
 
 <!-- badges: start -->
 
