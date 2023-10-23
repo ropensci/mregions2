@@ -2,9 +2,9 @@
 % Please edit documentation in R/mregions2-package.R
 \name{MRGID}
 \alias{MRGID}
-\title{Marine Regions Global Identifier (MRGID)}
+\title{Marine Regions Global Identifier or MRGID (Documentation)}
 \value{
-Returns a help page
+Returns a help page: \code{MRGID} is not a function but documentation.
 }
 \description{
 Many functions of \link{mregions2} make use of the argument \code{mrgid} or return data with the numeric variable \code{MRGID}.

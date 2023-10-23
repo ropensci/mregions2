@@ -236,7 +236,7 @@ gaz_relations(3293, direction = "upper", type = "partof")
 
 ## RESTful services
 
-There is a set of functions in mregions2 named as `gaz_rest_*()` that read the Marine Regions Gazetteer [REST API](https://www.marineregions.org/gazetteer.php?p=webservices) via [HTTP](https://httr2.r-lib.org/) requests. These are closer to the definition of the web services. All the gazetteer functions shown above, such as `gaz_search()` or `gaz_relations()`, make use of this set of functions.
+There is a set of functions in mregions2 named as `gaz_rest` that read the Marine Regions Gazetteer [REST API](https://www.marineregions.org/gazetteer.php?p=webservices) via [HTTP](https://httr2.r-lib.org/) requests. These are closer to the definition of the web services. All the gazetteer functions shown above, such as `gaz_search()` or `gaz_relations()`, make use of this set of functions.
 
 | Main function            | REST function                    | REST web service               |
 |---------------------|---------------------------|-------------------------|

@@ -7,7 +7,7 @@ NULL
 
 
 #' @name MRGID
-#' @title Marine Regions Global Identifier (MRGID)
+#' @title Marine Regions Global Identifier or MRGID (Documentation)
 #'
 #' @description
 #' Many functions of [mregions2] make use of the argument `mrgid` or return data with the numeric variable `MRGID`.
@@ -50,24 +50,37 @@ NULL
 #' of the Flanders Marine Institute, issuing the identifier to maintain the http domain registration, and
 #' a strategy for managing the domain and the web servers.
 #'
-#' @return Returns a help page
+#' @return Returns a help page: `MRGID` is not a function but documentation.
 #'
 #' @examples \dontrun{?MRGID}
 NULL
 
 
 #' @name gaz_rest
-#' @title Marine Regions Gazetteer RESTful services
+#' @title Marine Regions Gazetteer RESTful services (Documentation)
 #'
 #' @description
 #'
 #' _RESTful service_
-#' REST (REpresentational State Transfer) is a simple stateless architecture that generally runs over HTTP.
+#' REST (REpresentational State Transfer) is a simple stateless architecture
+#' that generally runs over HTTP.
 #'
-#' [mregions2] makes use of the RESTful services created and maintained by Marine Regions. You can find more
-#' information at the overview of the [Marine Regions Gazetteer web services](https://marineregions.org/gazetteer.php?p=webservices)
 #'
-#' @return Returns a help page
+#' [mregions2] makes use of the [RESTful API](https://www.marineregions.org/gazetteer.php?p=webservices) created and maintained by
+#' Marine Regions. The functions with names starting as `gaz_rest_*` perform
+#' [HTTP requests](https://httr2.r-lib.org/) to read the Marine Regions REST API.
+#' They are closer to the definition of each function in the Marine Regions
+#' REST API. All the gazetteer functions such as `gaz_search()`or
+#' `gaz_relations()` make use of these `gaz_rest_*` functions.
+#'
+#' @seealso [gaz_rest_geometries()], [gaz_rest_names_by_mrgid()],
+#' [gaz_rest_record_by_mrgid()], [gaz_rest_records_by_lat_long()],
+#' [gaz_rest_records_by_name()], [gaz_rest_records_by_names()],
+#' [gaz_rest_records_by_source()], [gaz_rest_records_by_type()],
+#' [gaz_rest_relations_by_mrgid()], [gaz_rest_sources()],
+#' [gaz_rest_source_by_sourceid()], [gaz_rest_types()], [gaz_rest_wmses()]
+#'
+#' @return Returns a help page: `gaz_rest` is not a function but documentation.
 #'
 #' @examples \dontrun{?gaz_rest}
 NULL

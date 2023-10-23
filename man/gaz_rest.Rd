@@ -2,17 +2,30 @@
 % Please edit documentation in R/mregions2-package.R
 \name{gaz_rest}
 \alias{gaz_rest}
-\title{Marine Regions Gazetteer RESTful services}
+\title{Marine Regions Gazetteer RESTful services (Documentation)}
 \value{
-Returns a help page
+Returns a help page: \code{gaz_rest} is not a function but documentation.
 }
 \description{
 \emph{RESTful service}
-REST (REpresentational State Transfer) is a simple stateless architecture that generally runs over HTTP.
+REST (REpresentational State Transfer) is a simple stateless architecture
+that generally runs over HTTP.
 
-\link{mregions2} makes use of the RESTful services created and maintained by Marine Regions. You can find more
-information at the overview of the \href{https://marineregions.org/gazetteer.php?p=webservices}{Marine Regions Gazetteer web services}
+\link{mregions2} makes use of the \href{https://www.marineregions.org/gazetteer.php?p=webservices}{RESTful API} created and maintained by
+Marine Regions. The functions with names starting as \verb{gaz_rest_*} perform
+\href{https://httr2.r-lib.org/}{HTTP requests} to read the Marine Regions REST API.
+They are closer to the definition of each function in the Marine Regions
+REST API. All the gazetteer functions such as \code{gaz_search()}or
+\code{gaz_relations()} make use of these \verb{gaz_rest_*} functions.
 }
 \examples{
 \dontrun{?gaz_rest}
+}
+\seealso{
+\code{\link[=gaz_rest_geometries]{gaz_rest_geometries()}}, \code{\link[=gaz_rest_names_by_mrgid]{gaz_rest_names_by_mrgid()}},
+\code{\link[=gaz_rest_record_by_mrgid]{gaz_rest_record_by_mrgid()}}, \code{\link[=gaz_rest_records_by_lat_long]{gaz_rest_records_by_lat_long()}},
+\code{\link[=gaz_rest_records_by_name]{gaz_rest_records_by_name()}}, \code{\link[=gaz_rest_records_by_names]{gaz_rest_records_by_names()}},
+\code{\link[=gaz_rest_records_by_source]{gaz_rest_records_by_source()}}, \code{\link[=gaz_rest_records_by_type]{gaz_rest_records_by_type()}},
+\code{\link[=gaz_rest_relations_by_mrgid]{gaz_rest_relations_by_mrgid()}}, \code{\link[=gaz_rest_sources]{gaz_rest_sources()}},
+\code{\link[=gaz_rest_source_by_sourceid]{gaz_rest_source_by_sourceid()}}, \code{\link[=gaz_rest_types]{gaz_rest_types()}}, \code{\link[=gaz_rest_wmses]{gaz_rest_wmses()}}
 }
