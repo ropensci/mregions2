@@ -8,7 +8,7 @@ Authors@R: c(
          comment = c(ORCID = "0000-0003-0535-7677", github = "salvafern")),
   person(given = "Lotte",family = "Pohl", role = "aut",
          email = "lotte.pohl@imbrsea.eu",
-         comment = c(ORCID = "0000-0002-7607-7018", github = "whaleshark99")),
+         comment = c(ORCID = "0000-0002-7607-7018", github = "lottepohl")),
   person("LifeWatch Belgium", role = "fnd", comment = "https://lifewatch.be")
   )
 Maintainer: Salvador Fernandez-Bejarano <salvador.fernandez@vliz.be>
