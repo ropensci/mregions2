@@ -22,7 +22,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Lotte Pohl \email{lotte.pohl@imbrsea.eu} (\href{https://orcid.org/0000-0002-7607-7018}{ORCID}) (whaleshark99)
+  \item Lotte Pohl \email{lotte.pohl@imbrsea.eu} (\href{https://orcid.org/0000-0002-7607-7018}{ORCID}) (lottepohl)
 }
 
 Other contributors:

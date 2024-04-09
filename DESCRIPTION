@@ -34,7 +34,7 @@ Imports:
     methods,
     curl,
     digest
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 URL: https://github.com/lifewatch/mregions2,
     https://lifewatch.github.io/mregions2/
 BugReports: https://github.com/lifewatch/mregions2/issues
@@ -46,7 +46,6 @@ Suggests:
     leaflet,
     leaflet.extras2,
     mapview,
-    mregions,
     rmarkdown,
     testthat,
     wk,
