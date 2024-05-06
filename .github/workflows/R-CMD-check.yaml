@@ -26,10 +26,11 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      PKG_SYSREQS: false 
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -38,6 +39,11 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
+
+      - name: dependencies on Linux
+        if: runner.os == 'Linux'
+        run: sudo apt-get install -y make libgdal-dev gdal-bin libgeos-dev libproj-dev libsqlite3-dev libssl-dev make zlib1g-dev libsecret-1-dev pandoc libpng-dev librdf0-dev libsodium-dev libicu-dev libfontconfig1-dev libfreetype6-dev libudunits2-dev libxml2-dev libjpeg-dev libtiff-dev libfribidi-dev libharfbuzz-dev libcurl4-gnutls-dev
+
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:

@@ -22,7 +22,6 @@ Imports:
     glue,
     httr2,
     magrittr,
-    sf,
     utils,
     rdflib,
     ISOcodes,
@@ -30,14 +29,19 @@ Imports:
     cli,
     dplyr,
     xml2,
+    sf,
     wrapr,
     methods,
     curl,
+    jsonld,
     digest
 RoxygenNote: 7.3.1
 URL: https://github.com/lifewatch/mregions2,
     https://lifewatch.github.io/mregions2/
 BugReports: https://github.com/lifewatch/mregions2/issues
+Config/needs/coverage: XML
+SystemRequirements: GDAL (>= 2.0.1), GEOS (>= 3.4.0),
+    PROJ (>= 4.8.0), sqlite3
 Suggests: 
     ows4R (>= 0.3),
     httptest2,
