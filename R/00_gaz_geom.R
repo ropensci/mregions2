@@ -191,8 +191,11 @@ geom_perform <- function(url, format, multipart = TRUE, mrgid,
     ) %>% suppressMessages()
 
   geom$the_geom <- gsub("<","", geom$the_geom, fixed = TRUE)
-  geom$the_geom <- strsplit(geom$the_geom, ">")[[1]][2]
-  geom$the_geom <- trimws(geom$the_geom)
+
+  geom$the_geom <- strsplit(geom$the_geom, ">") %>%
+    lapply(`[`, n = 2) %>%
+    unlist() %>%
+    trimws()
 
   # Extract sourceid, transform to sf and group the geometry by sourceid
   geom <- geom %>%

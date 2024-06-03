@@ -37,7 +37,7 @@ test_that("Server status 500 handled", {
   }
 
   .f <- function(){
-    httr2::with_mock(
+    httr2::with_mocked_responses(
       mock_500,
       assert_service("")
     )}
@@ -52,7 +52,7 @@ test_that("assert_service returns NULL",{
   }
 
   .f <- function(){
-    httr2::with_mock(
+    httr2::with_mocked_responses(
       mock_200,
       assert_service("")
     )

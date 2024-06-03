@@ -51,7 +51,7 @@ httptest2::with_mock_dir("gaz", {
     gaz_search("Belgium", typeid = rocks_placetype) %>%
       expect_error("type", fixed = TRUE)
 
-    .f <- function() httr2::with_mock(mock_500, gaz_search("Belgium"))
+    .f <- function() httr2::with_mocked_responses(mock_500, gaz_search("Belgium"))
     expect_error(.f(), regexp = "500", fixed = TRUE)
 
 
@@ -81,10 +81,10 @@ httptest2::with_mock_dir("gaz", {
     gaz_search(x = lon, y = lat, typeid = 999999999) %>%
       expect_error("must be element of set", fixed = TRUE)
 
-    .f <- function() httr2::with_mock(mock_404, gaz_search(x = lon, y = lat))
+    .f <- function() httr2::with_mocked_responses(mock_404, gaz_search(x = lon, y = lat))
     expect_error(.f(), regexp = "no matches", fixed = TRUE)
 
-    .f <- function() httr2::with_mock(mock_500, gaz_search(x = lon, y = lat))
+    .f <- function() httr2::with_mocked_responses(mock_500, gaz_search(x = lon, y = lat))
     expect_error(.f(), regexp = "500", fixed = TRUE)
 
     gaz_search(x = lon, y = lat, typeid = rocks_placetype) %>%
@@ -102,7 +102,7 @@ httptest2::with_mock_dir("gaz", {
       expect_error(regexp = "No records", fixed = TRUE)
 
     .f <- function(){
-      httr2::with_mock(mock_500,
+      httr2::with_mocked_responses(mock_500,
                        gaz_rest_records_by_source("Belgian Sea Fisheries"))
     }
     expect_error(.f(), regexp = "500", fixed = TRUE)
@@ -160,7 +160,7 @@ httptest2::with_mock_dir("gaz", {
     .f <- function() gaz_relations(b24nm, type = "influencedby", direction = "lower")
     expect_error(.f(), regexp = "No relations found", fixed = TRUE)
 
-    .f <- function() httr2::with_mock(mock_404, gaz_relations(b24nm))
+    .f <- function() httr2::with_mocked_responses(mock_404, gaz_relations(b24nm))
     expect_error(.f(), regexp = "does not exist", fixed = TRUE)
 
   })

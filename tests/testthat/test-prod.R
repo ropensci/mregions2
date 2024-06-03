@@ -151,7 +151,7 @@ test_that("mrp_view() assertions work", {
     httr2::response(status_code = 500)
   }
   .f <- function(){
-    httr2::with_mock(
+    httr2::with_mocked_responses(
       mock_500,
       mrp_view("eez")
     )}
