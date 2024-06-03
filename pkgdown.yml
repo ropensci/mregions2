@@ -1,11 +1,12 @@
-pandoc: 2.19.2
-pkgdown: 2.0.7
+pandoc: 3.1.11
+pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
   mregions2-rdf: mregions2-rdf.html
-  why_mregions2: why_mregions2.html
   mregions2: mregions2.html
-last_built: 2023-06-28T13:22Z
+  mrp_ontology: mrp_ontology.html
+  why_mregions2: why_mregions2.html
+last_built: 2024-06-03T09:01Z
 urls:
   reference: https://lifewatch.github.io/mregions2/reference
   article: https://lifewatch.github.io/mregions2/articles

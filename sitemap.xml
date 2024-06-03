@@ -13,9 +13,6 @@
     <loc>https://lifewatch.github.io/mregions2/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://lifewatch.github.io/mregions2/LICENSE.html</loc>
-  </url>
-  <url>
     <loc>https://lifewatch.github.io/mregions2/articles/index.html</loc>
   </url>
   <url>
@@ -23,6 +20,9 @@
   </url>
   <url>
     <loc>https://lifewatch.github.io/mregions2/articles/mregions2.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/articles/mrp_ontology.html</loc>
   </url>
   <url>
     <loc>https://lifewatch.github.io/mregions2/articles/why_mregions2.html</loc>
@@ -116,6 +116,9 @@
   </url>
   <url>
     <loc>https://lifewatch.github.io/mregions2/reference/mrp_list.html</loc>
+  </url>
+  <url>
+    <loc>https://lifewatch.github.io/mregions2/reference/mrp_ontology.html</loc>
   </url>
   <url>
     <loc>https://lifewatch.github.io/mregions2/reference/mrp_view.html</loc>
