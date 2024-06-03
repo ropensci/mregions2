@@ -7,7 +7,6 @@
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/590_status.svg)](https://github.com/ropensci/software-review/issues/590)
 [![R-CMD-check](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml)
-[![pkgcheck](https://github.com/lifewatch/mregions2/workflows/pkgcheck/badge.svg)](https://github.com/lifewatch/mregions2/actions?query=workflow%3Apkgcheck)
 [![Codecov test
 coverage](https://codecov.io/gh/lifewatch/mregions2/branch/main/graph/badge.svg)](https://app.codecov.io/gh/lifewatch/mregions2?branch=main)
 
@@ -67,6 +66,7 @@ Some of the examples below use the pipe operator `%>%`. Install and load
 ``` r
 # install.packages("magrittr")
 library(magrittr)
+#> Warning: package 'magrittr' was built under R version 4.1.2
 ```
 
 ## Query the Marine Regions Gazetteer
@@ -99,7 +99,7 @@ gaz_search(3293)
 #> # A tibble: 1 × 14
 #>   MRGID gazetteerSource    placeType latitude longitude minLatitude minLongitude
 #>   <int> <chr>              <chr>        <dbl>     <dbl>       <dbl>        <dbl>
-#> 1  3293 Flanders Marine I… EEZ           51.5      2.71        51.1         2.24
+#> 1  3293 Flanders Marine I… EEZ           51.5      2.72        51.0         2.24
 #> # ℹ 7 more variables: maxLatitude <dbl>, maxLongitude <dbl>, precision <dbl>,
 #> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
 #> #   status <chr>, accepted <int>
@@ -109,43 +109,43 @@ Search by location:
 
 ``` r
 gaz_search(x = 2.927, y = 51.21551)
-#> # A tibble: 49 × 14
-#>    MRGID gazetteerSource          placeType minLatitude minLongitude maxLatitude
-#>    <int> <chr>                    <chr>           <dbl>        <dbl>       <dbl>
-#>  1    14 (2001). The Times compr… Nation           49.5         2.55        51.5
-#>  2    14 (2001). The Times compr… Nation           49.5         2.55        51.5
-#>  3    14 (2001). The Times compr… Nation           49.5         2.55        51.5
-#>  4    14 (2001). The Times compr… Nation           49.5         2.55        51.5
-#>  5    14 (2001). The Times compr… Nation           49.5         2.55        51.5
-#>  6    14 (2001). The Times compr… Nation           49.5         2.55        51.5
-#>  7    20 SAIL                     Province…        50.7         2.55        51.4
-#>  8    20 SAIL                     Province…        50.7         2.55        51.4
-#>  9    20 SAIL                     Province…        50.7         2.55        51.4
-#> 10    20 SAIL                     Province…        50.7         2.55        51.4
-#> # ℹ 39 more rows
-#> # ℹ 8 more variables: maxLongitude <dbl>, preferredGazetteerName <chr>,
-#> #   preferredGazetteerNameLang <chr>, status <chr>, accepted <int>,
-#> #   latitude <dbl>, longitude <dbl>, precision <dbl>
+#> # A tibble: 52 × 14
+#>    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude
+#>    <int> <chr>             <chr>        <dbl>     <dbl>       <dbl>        <dbl>
+#>  1    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55
+#>  2    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55
+#>  3    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55
+#>  4    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55
+#>  5    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55
+#>  6    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55
+#>  7    20 SAIL              Province…     51.0      3.03        50.7         2.55
+#>  8    20 SAIL              Province…     51.0      3.03        50.7         2.55
+#>  9    20 SAIL              Province…     51.0      3.03        50.7         2.55
+#> 10    20 SAIL              Province…     51.0      3.03        50.7         2.55
+#> # ℹ 42 more rows
+#> # ℹ 7 more variables: maxLatitude <dbl>, maxLongitude <dbl>,
+#> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
+#> #   status <chr>, accepted <int>, precision <dbl>
 ```
 
 Search by place type:
 
 ``` r
 gaz_search_by_type("EEZ")
-#> # A tibble: 254 × 14
+#> # A tibble: 246 × 14
 #>    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude
 #>    <int> <chr>             <chr>        <dbl>     <dbl>       <dbl>        <dbl>
-#>  1  3293 Flanders Marine … EEZ           51.5      2.71        51.1         2.24
-#>  2  5668 Flanders Marine … EEZ           53.6      4.19        51.0         2.54
-#>  3  5669 Flanders Marine … EEZ           54.6      8.39        52.9         3.35
+#>  1  3293 Flanders Marine … EEZ           51.5      2.72        51.0         2.24
+#>  2  5668 Flanders Marine … EEZ           53.6      4.19        51.3         2.54
+#>  3  5669 Flanders Marine … EEZ           54.6      8.40        52.9         3.35
 #>  4  5670 Flanders Marine … EEZ           40.9     19.1         39.6        18.3 
 #>  5  5672 Flanders Marine … EEZ           42.9     29.2         42.0        27.4 
-#>  6  5673 Flanders Marine … EEZ           43.4     15.7         41.6        13.0 
-#>  7  5674 Flanders Marine … EEZ           56.1      9.25        54.4         3.25
+#>  6  5673 Flanders Marine … EEZ           43.4     15.6         41.6        13.0 
+#>  7  5674 Flanders Marine … EEZ           56.2      9.21        54.4         3.25
 #>  8  5675 Flanders Marine … EEZ           58.8     23.0         57.6        20.4 
 #>  9  5676 Flanders Marine … EEZ           61.8     21.9         58.8        19.1 
-#> 10  5677 Flanders Marine … EEZ           46.0     -1.97        41.2        -9.88
-#> # ℹ 244 more rows
+#> 10  5677 Flanders Marine … EEZ           46.1     -1.96        41.2        -9.88
+#> # ℹ 236 more rows
 #> # ℹ 7 more variables: maxLatitude <dbl>, maxLongitude <dbl>, precision <dbl>,
 #> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
 #> #   status <chr>, accepted <int>
@@ -185,12 +185,12 @@ gaz_search(3293) %>% gaz_geometry()
 #> Simple feature collection with 1 feature and 14 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
-#> Bounding box:  xmin: 2.238333 ymin: 51.08931 xmax: 3.370403 ymax: 51.87611
+#> Bounding box:  xmin: 2.238333 ymin: 51.03976 xmax: 4.402039 ymax: 51.87611
 #> Geodetic CRS:  WGS 84
 #> # A tibble: 1 × 15
 #>   MRGID gazetteerSource    placeType latitude longitude minLatitude minLongitude
 #>   <int> <chr>              <chr>        <dbl>     <dbl>       <dbl>        <dbl>
-#> 1  3293 Flanders Marine I… EEZ           51.5      2.71        51.1         2.24
+#> 1  3293 Flanders Marine I… EEZ           51.5      2.72        51.0         2.24
 #> # ℹ 8 more variables: maxLatitude <dbl>, maxLongitude <dbl>, precision <dbl>,
 #> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
 #> #   status <chr>, accepted <int>, the_geom <MULTIPOLYGON [°]>
@@ -200,9 +200,9 @@ gaz_geometry(3293, format = "sfc")
 #> Geometry set for 1 feature 
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
-#> Bounding box:  xmin: 2.238333 ymin: 51.08931 xmax: 3.370403 ymax: 51.87611
+#> Bounding box:  xmin: 2.238333 ymin: 51.03976 xmax: 4.402039 ymax: 51.87611
 #> Geodetic CRS:  WGS 84
-#> MULTIPOLYGON (((3.370403 51.36696, 3.369459 51....
+#> MULTIPOLYGON (((4.242049 51.35397, 4.230735 51....
 ```
 
 The entries of the Marine Regions Gazetteer are organized
@@ -212,10 +212,10 @@ hierarchically. You can browse this hierarchy up and down with
 ``` r
 # Get all relations
 gaz_search(3293) %>% gaz_relations()
-#> # A tibble: 36 × 14
+#> # A tibble: 37 × 14
 #>    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude
 #>    <int> <chr>             <chr>        <dbl>     <dbl>       <dbl>        <dbl>
-#>  1  3293 Flanders Marine … EEZ           51.5      2.71        51.1         2.24
+#>  1  3293 Flanders Marine … EEZ           51.5      2.72        51.0         2.24
 #>  2  2419 ASFA thesaurus    Sandbank…     51.5      2.58        NA          NA   
 #>  3  2420 ASFA thesaurus    Sandbank…     51.5      2.88        NA          NA   
 #>  4  2421 ASFA thesaurus    Sandbank…     51.3      2.64        NA          NA   
@@ -225,17 +225,17 @@ gaz_search(3293) %>% gaz_relations()
 #>  8  2550 ASFA thesaurus    Coast         51.2      2.91        51.1         2.54
 #>  9 17401 Aphia             Wreck         51.4      2.32        NA          NA   
 #> 10 17409 Aphia             Wreck         51.1      2.33        NA          NA   
-#> # ℹ 26 more rows
+#> # ℹ 27 more rows
 #> # ℹ 7 more variables: maxLatitude <dbl>, maxLongitude <dbl>, precision <dbl>,
 #> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
 #> #   status <chr>, accepted <int>
 
 # Or get the relations directly
 gaz_relations(3293)
-#> # A tibble: 36 × 14
+#> # A tibble: 37 × 14
 #>    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude
 #>    <int> <chr>             <chr>        <dbl>     <dbl>       <dbl>        <dbl>
-#>  1  3293 Flanders Marine … EEZ           51.5      2.71        51.1         2.24
+#>  1  3293 Flanders Marine … EEZ           51.5      2.72        51.0         2.24
 #>  2  2419 ASFA thesaurus    Sandbank…     51.5      2.58        NA          NA   
 #>  3  2420 ASFA thesaurus    Sandbank…     51.5      2.88        NA          NA   
 #>  4  2421 ASFA thesaurus    Sandbank…     51.3      2.64        NA          NA   
@@ -245,7 +245,7 @@ gaz_relations(3293)
 #>  8  2550 ASFA thesaurus    Coast         51.2      2.91        51.1         2.54
 #>  9 17401 Aphia             Wreck         51.4      2.32        NA          NA   
 #> 10 17409 Aphia             Wreck         51.1      2.33        NA          NA   
-#> # ℹ 26 more rows
+#> # ℹ 27 more rows
 #> # ℹ 7 more variables: maxLatitude <dbl>, maxLongitude <dbl>, precision <dbl>,
 #> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
 #> #   status <chr>, accepted <int>
@@ -362,11 +362,10 @@ boundaries data. Here is a non-exhaustive list:
 
 ``` r
 citation("mregions2")
-#> To cite package 'mregions2' in publications use:
 #> 
-#>   Fernandez-Bejarano S, Pohl L (2023). _mregions2: Access Data from
-#>   Marineregions.org: The Marine Regions Gazetteer and the Marine
-#>   Regions Data Products_. <https://github.com/lifewatch/mregions2>.
+#> Fernandez-Bejarano S, Pohl L (2023). _mregions2: Access Data from
+#> Marineregions.org: The Marine Regions Gazetteer and the Marine Regions
+#> Data Products_. <URL: https://github.com/lifewatch/mregions2>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 

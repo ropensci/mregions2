@@ -33,7 +33,8 @@ Imports:
     wrapr,
     methods,
     curl,
-    digest
+    digest,
+    jsonld
 RoxygenNote: 7.3.1
 URL: https://github.com/lifewatch/mregions2,
     https://lifewatch.github.io/mregions2/
