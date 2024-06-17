@@ -56,7 +56,7 @@
 
       <ul class="navbar-nav">
 <li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/lifewatch/mregions2/" aria-label="github">
+  <a class="external-link nav-link" href="https://github.com/ropensci/mregions2/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -79,30 +79,32 @@
 <p>Marine Regions offers two key resources: the <a href="https://marineregions.org/gazetteer.php" class="external-link">Marine Regions Gazetteer</a>, a list of standardized marine place names with unique identifiers, and the <a href="https://marineregions.org/sources.php" class="external-link">Marine Regions Data Products</a>, including popular features like the world maritime boundaries.</p>
 <p>You can find detailed information in the articles online:</p>
 <ul>
-<li><a href="https://lifewatch.github.io/mregions2/articles/mregions2.html">Introduction to mregions2</a></li>
-<li><a href="https://lifewatch.github.io/mregions2/articles/why_mregions2.html">Why mregions and mregions2?</a></li>
-<li><a href="https://lifewatch.github.io/mregions2/articles/mrp_ontology.html">Marine Regions Data Products Ontology</a></li>
-<li><a href="https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html">mregions2 as RDF</a></li>
+<li><a href="https://docs.ropensci.org/mregions2/articles/mregions2.html">Introduction to mregions2</a></li>
+<li><a href="https://docs.ropensci.org/mregions2/articles/why_mregions2.html">Why mregions and mregions2?</a></li>
+<li><a href="https://docs.ropensci.org/mregions2/articles/mrp_ontology.html">Marine Regions Data Products Ontology</a></li>
+<li><a href="https://docs.ropensci.org/mregions2/articles/mregions2-rdf.html">mregions2 as RDF</a></li>
 </ul>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of mregions2 from GitHub with:</p>
+<p>You can install mregions2 with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"lifewatch/mregions2"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>Load the library with:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"mregions2"</span>, repos <span class="op">=</span> <span class="st">"https://ropensci.r-universe.dev"</span><span class="op">)</span></span></code></pre></div>
+<p>Or install the development version of mregions2 from GitHub with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lifewatch/mregions2" class="external-link">mregions2</a></span><span class="op">)</span></span></code></pre></div>
-<p>The function <code><a href="reference/mrp_view.html">mrp_view()</a></code> requires two extra packages that are not listed as Imports, hence they are not installed along with <code>mregions2</code> but you must install yourself:</p>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ropensci/mregions2"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>Load the library with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/mregions2">mregions2</a></span><span class="op">)</span></span></code></pre></div>
+<p>The function <code><a href="reference/mrp_view.html">mrp_view()</a></code> requires two extra packages that are not listed as Imports, hence they are not installed along with <code>mregions2</code> but you must install yourself:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"leaflet"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"leaflet.extras2"</span><span class="op">)</span></span></code></pre></div>
 <p>Some of the examples below use the pipe operator <code>%&gt;%</code>. Install and load <code>magrittr</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("magrittr")</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: package 'magrittr' was built under R version 4.1.2</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="query-the-marine-regions-gazetteer">Query the Marine Regions Gazetteer<a class="anchor" aria-label="anchor" href="#query-the-marine-regions-gazetteer"></a>
@@ -114,7 +116,7 @@
 <p><sup><a href="https://www.thefreedictionary.com/gazetteer" class="external-link uri">https://www.thefreedictionary.com/gazetteer</a></sup></p>
 <p>You can search the Gazetteer in many ways:</p>
 <p>Search by free text:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/gaz_search.html">gaz_search</a></span><span class="op">(</span><span class="st">"Belgian Part of the North Sea"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 9</span></span>
 <span><span class="co">#&gt;   MRGID gazetteerSource      placeType latitude longitude preferredGazetteerName</span></span>
@@ -123,7 +125,7 @@
 <span><span class="co">#&gt; # ℹ 3 more variables: preferredGazetteerNameLang &lt;chr&gt;, status &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   accepted &lt;int&gt;</span></span></code></pre></div>
 <p>Search by unique identifier. See <code><a href="reference/MRGID.html">?MRGID</a></code>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/gaz_search.html">gaz_search</a></span><span class="op">(</span><span class="fl">3293</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 14</span></span>
 <span><span class="co">#&gt;   MRGID gazetteerSource    placeType latitude longitude minLatitude minLongitude</span></span>
@@ -133,9 +135,9 @@
 <span><span class="co">#&gt; #   preferredGazetteerName &lt;chr&gt;, preferredGazetteerNameLang &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   status &lt;chr&gt;, accepted &lt;int&gt;</span></span></code></pre></div>
 <p>Search by location:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/gaz_search.html">gaz_search</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2.927</span>, y <span class="op">=</span> <span class="fl">51.21551</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 52 × 14</span></span>
+<span><span class="co">#&gt; # A tibble: 54 × 14</span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude</span></span>
 <span><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt;  1    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55</span></span>
@@ -148,12 +150,12 @@
 <span><span class="co">#&gt;  8    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
 <span><span class="co">#&gt;  9    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
 <span><span class="co">#&gt; 10    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
-<span><span class="co">#&gt; # ℹ 42 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 44 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 7 more variables: maxLatitude &lt;dbl&gt;, maxLongitude &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   preferredGazetteerName &lt;chr&gt;, preferredGazetteerNameLang &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   status &lt;chr&gt;, accepted &lt;int&gt;, precision &lt;dbl&gt;</span></span></code></pre></div>
 <p>Search by place type:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/gaz_search_by_type.html">gaz_search_by_type</a></span><span class="op">(</span><span class="st">"EEZ"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 246 × 14</span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude</span></span>
@@ -173,7 +175,7 @@
 <span><span class="co">#&gt; #   preferredGazetteerName &lt;chr&gt;, preferredGazetteerNameLang &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   status &lt;chr&gt;, accepted &lt;int&gt;</span></span></code></pre></div>
 <p>Search by authortative source:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/gaz_search_by_source.html">gaz_search_by_source</a></span><span class="op">(</span><span class="st">"Flanders Marine Institute (VLIZ)"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 23 × 13</span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource     placeType latitude longitude preferredGazetteerName</span></span>
@@ -194,7 +196,7 @@
 <span><span class="co">#&gt; #   maxLongitude &lt;dbl&gt;</span></span></code></pre></div>
 <p>The list of place types and sources are available with <code><a href="reference/gaz_types.html">gaz_types()</a></code> and <code><a href="reference/gaz_sources.html">gaz_sources()</a></code> respectively.</p>
 <p>You can add the geometry of the Gazetteer entries with <code><a href="reference/gaz_geometry.html">gaz_geometry()</a></code>:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get a record and turn into a sf object with geometry</span></span>
 <span><span class="fu"><a href="reference/gaz_search.html">gaz_search</a></span><span class="op">(</span><span class="fl">3293</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/gaz_geometry.html">gaz_geometry</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 1 feature and 14 fields</span></span>
@@ -219,7 +221,7 @@
 <span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
 <span><span class="co">#&gt; MULTIPOLYGON (((4.242049 51.35397, 4.230735 51....</span></span></code></pre></div>
 <p>The entries of the Marine Regions Gazetteer are organized hierarchically. You can browse this hierarchy up and down with <code><a href="reference/gaz_relations.html">gaz_relations()</a></code></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get all relations</span></span>
 <span><span class="fu"><a href="reference/gaz_search.html">gaz_search</a></span><span class="op">(</span><span class="fl">3293</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/gaz_relations.html">gaz_relations</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 37 × 14</span></span>
@@ -265,7 +267,7 @@
 </h2>
 <p>In addition to the Marine Regions Gazetteer, the Marine Regions Team creates and hosts geographical Data Products, being the most popular one the <a href="https://marineregions.org/eez.php" class="external-link">Marine Regions Maritime Boundaries</a>.</p>
 <p>An overview of all available products can be consulted with <code>mrp_list</code></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mrp_list</span></span>
 <span><span class="co">#&gt; # A tibble: 21 × 8</span></span>
 <span><span class="co">#&gt;    title                   namespace layer license citation doi   imis  abstract</span></span>
@@ -281,8 +283,8 @@
 <span><span class="co">#&gt;  9 Extended Continental S… MarineRe… ecs_… Creati… "Flande… http… http… "This d…</span></span>
 <span><span class="co">#&gt; 10 IHO Sea Areas (v3)      MarineRe… iho   Creati… "Flande… http… http… "World …</span></span>
 <span><span class="co">#&gt; # ℹ 11 more rows</span></span></code></pre></div>
-<p>Their attributes are explained in the <a href="https://lifewatch.github.io/mregions2/articles/mrp_ontology.html">Marine Regions Data Products Ontology article</a>, or simply run <code>mrp_ontology</code></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<p>Their attributes are explained in the <a href="https://docs.ropensci.org/mregions2/articles/mrp_ontology.html">Marine Regions Data Products Ontology article</a>, or simply run <code>mrp_ontology</code></p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mrp_ontology</span></span>
 <span><span class="co">#&gt; # A tibble: 374 × 4</span></span>
 <span><span class="co">#&gt;    layer colname    type   definition                                           </span></span>
@@ -299,16 +301,16 @@
 <span><span class="co">#&gt; 10 eez   mrgid_sov2 int    Marine Regions Geographic Identifier of the sovereig…</span></span>
 <span><span class="co">#&gt; # ℹ 364 more rows</span></span></code></pre></div>
 <p>You can visualize the Marine Regions Data Products with <code><a href="reference/mrp_view.html">mrp_view()</a></code>. It opens an interactive <code><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet::leaflet</a></code> viewer.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/mrp_view.html">mrp_view</a></span><span class="op">(</span><span class="st">"eez"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="https://raw.githubusercontent.com/lifewatch/mregions2/main/man/figures/README-prod1-1.png"></p>
-<p>Or you can download and read the data products into R with <code><a href="reference/mrp_get.html">mrp_get()</a></code></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/mrp_view.html">mrp_view</a></span><span class="op">(</span><span class="st">"eez"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="https://raw.githubusercontent.com/ropensci/mregions2/main/man/figures/README-prod1-1.png"></p>
+<p>Or you can download and read the data products into R with <code><a href="reference/mrp_get.html">mrp_get()</a></code></p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"eez"</span><span class="op">)</span></span></code></pre></div>
 <p>You can specify the download path in the <code>path</code> argument:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"eez"</span>, path <span class="op">=</span> <span class="st">"path/to/data"</span><span class="op">)</span></span></code></pre></div>
-<p>Get to know more in the <a href="https://lifewatch.github.io/mregions2/articles/mregions2.html">Get Started vignette</a>.</p>
+<p>Get to know more in the <a href="https://docs.ropensci.org/mregions2/articles/mregions2.html">Get Started vignette</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="related-packages">Related packages<a class="anchor" aria-label="anchor" href="#related-packages"></a>
@@ -347,12 +349,13 @@
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"mregions2"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; To cite package 'mregions2' in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Fernandez-Bejarano S, Pohl L (2023). _mregions2: Access Data from</span></span>
-<span><span class="co">#&gt; Marineregions.org: The Marine Regions Gazetteer and the Marine Regions</span></span>
-<span><span class="co">#&gt; Data Products_. &lt;URL: https://github.com/lifewatch/mregions2&gt;.</span></span>
+<span><span class="co">#&gt;   Fernandez-Bejarano S, Pohl L (2023). _mregions2: Access Data from</span></span>
+<span><span class="co">#&gt;   Marineregions.org: The Marine Regions Gazetteer and the Marine</span></span>
+<span><span class="co">#&gt;   Regions Data Products_. &lt;https://github.com/lifewatch/mregions2&gt;.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -372,14 +375,14 @@
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
 </h2>
-<p>Please note that the mregions2 project is released with a <a href="https://lifewatch.github.io/mregions2/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Please note that this package is released with a <a href="https://ropensci.org/code-of-conduct/" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/lifewatch/mregions2/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/lifewatch/mregions2/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/ropensci/mregions2/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/ropensci/mregions2/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -396,7 +399,6 @@
 <h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
-<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
 
@@ -423,8 +425,8 @@
 <ul class="list-unstyled">
 <li><a href="https://lifewatch.be" class="external-link"><img src="https://img.shields.io/static/v1?label=powered+by&amp;message=lifewatch.be&amp;labelColor=1a4e8a&amp;color=f15922" alt="Funding"></a></li>
 <li><a href="https://github.com/ropensci/software-review/issues/590" class="external-link"><img src="https://badges.ropensci.org/590_status.svg" alt="Status at rOpenSci Software Peer Review"></a></li>
-<li><a href="https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/lifewatch/mregions2?branch=main" class="external-link"><img src="https://codecov.io/gh/lifewatch/mregions2/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://github.com/ropensci/mregions2/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/ropensci/mregions2/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/ropensci/mregions2?branch=main" class="external-link"><img src="https://codecov.io/gh/ropensci/mregions2/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 
