@@ -8,6 +8,6 @@ articles:
   mregions2: mregions2.html
 last_built: 2023-09-15T09:07Z
 urls:
-  reference: https://lifewatch.github.io/mregions2/reference
-  article: https://lifewatch.github.io/mregions2/articles
+  reference: https://docs.ropensci.org/mregions2/reference
+  article: https://docs.ropensci.org/mregions2/articles
 

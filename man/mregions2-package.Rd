@@ -11,9 +11,9 @@ Explore and retrieve marine geo-spatial data from the Marine Regions Gazetteer a
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/lifewatch/mregions2}
-  \item \url{https://lifewatch.github.io/mregions2/}
-  \item Report bugs at \url{https://github.com/lifewatch/mregions2/issues}
+  \item \url{https://github.com/ropensci/mregions2}
+  \item \url{https://docs.ropensci.org/mregions2/}
+  \item Report bugs at \url{https://github.com/ropensci/mregions2/issues}
 }
 
 }

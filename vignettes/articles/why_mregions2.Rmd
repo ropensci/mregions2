@@ -28,4 +28,4 @@ More information in:
 
 > Lonneville B. et al. (2021) Publishing the Marine Regions Gazetteer as a Linked Data Event Stream. S4BioDiv 2021. http://ceur-ws.org/Vol-2969/paper8-s4biodiv.pdf
 
-The  package uses these two new functionalities to serve geometries in R as `sf::sf` objects, and allows to retrieve the Gazetteer database as `rdflib::rdf` objects. See the [Marine Regions Gazetteer as RDF article](https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html) for further information.
+The  package uses these two new functionalities to serve geometries in R as `sf::sf` objects, and allows to retrieve the Gazetteer database as `rdflib::rdf` objects. See the [Marine Regions Gazetteer as RDF article](https://docs.ropensci.org/mregions2/articles/mregions2-rdf.html) for further information.

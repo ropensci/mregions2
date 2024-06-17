@@ -6,9 +6,9 @@
 [![Funding](https://img.shields.io/static/v1?label=powered+by&message=lifewatch.be&labelColor=1a4e8a&color=f15922)](https://lifewatch.be)
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/590_status.svg)](https://github.com/ropensci/software-review/issues/590)
-[![R-CMD-check](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/ropensci/mregions2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/mregions2/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/lifewatch/mregions2/branch/main/graph/badge.svg)](https://app.codecov.io/gh/lifewatch/mregions2?branch=main)
+coverage](https://codecov.io/gh/ropensci/mregions2/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/mregions2?branch=main)
 
 <!-- badges: end -->
 
@@ -28,21 +28,27 @@ popular features like the world maritime boundaries.
 You can find detailed information in the articles online:
 
 - [Introduction to
-  mregions2](https://lifewatch.github.io/mregions2/articles/mregions2.html)
+  mregions2](https://docs.ropensci.org/mregions2/articles/mregions2.html)
 - [Why mregions and
-  mregions2?](https://lifewatch.github.io/mregions2/articles/why_mregions2.html)
+  mregions2?](https://docs.ropensci.org/mregions2/articles/why_mregions2.html)
 - [Marine Regions Data Products
-  Ontology](https://lifewatch.github.io/mregions2/articles/mrp_ontology.html)
+  Ontology](https://docs.ropensci.org/mregions2/articles/mrp_ontology.html)
 - [mregions2 as
-  RDF](https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html)
+  RDF](https://docs.ropensci.org/mregions2/articles/mregions2-rdf.html)
 
 ## Installation
 
-You can install the development version of mregions2 from GitHub with:
+You can install mregions2 with:
+
+``` r
+install.packages("mregions2", repos = "https://ropensci.r-universe.dev")
+```
+
+Or install the development version of mregions2 from GitHub with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("lifewatch/mregions2", build_vignettes = TRUE)
+devtools::install_github("ropensci/mregions2", build_vignettes = TRUE)
 ```
 
 Load the library with:
@@ -66,7 +72,6 @@ Some of the examples below use the pipe operator `%>%`. Install and load
 ``` r
 # install.packages("magrittr")
 library(magrittr)
-#> Warning: package 'magrittr' was built under R version 4.1.2
 ```
 
 ## Query the Marine Regions Gazetteer
@@ -109,7 +114,7 @@ Search by location:
 
 ``` r
 gaz_search(x = 2.927, y = 51.21551)
-#> # A tibble: 52 × 14
+#> # A tibble: 54 × 14
 #>    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude
 #>    <int> <chr>             <chr>        <dbl>     <dbl>       <dbl>        <dbl>
 #>  1    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55
@@ -122,7 +127,7 @@ gaz_search(x = 2.927, y = 51.21551)
 #>  8    20 SAIL              Province…     51.0      3.03        50.7         2.55
 #>  9    20 SAIL              Province…     51.0      3.03        50.7         2.55
 #> 10    20 SAIL              Province…     51.0      3.03        50.7         2.55
-#> # ℹ 42 more rows
+#> # ℹ 44 more rows
 #> # ℹ 7 more variables: maxLatitude <dbl>, maxLongitude <dbl>,
 #> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
 #> #   status <chr>, accepted <int>, precision <dbl>
@@ -280,7 +285,7 @@ mrp_list
 
 Their attributes are explained in the [Marine Regions Data Products
 Ontology
-article](https://lifewatch.github.io/mregions2/articles/mrp_ontology.html),
+article](https://docs.ropensci.org/mregions2/articles/mrp_ontology.html),
 or simply run `mrp_ontology`
 
 ``` r
@@ -308,7 +313,7 @@ opens an interactive `leaflet::leaflet` viewer.
 mrp_view("eez")
 ```
 
-![](https://raw.githubusercontent.com/lifewatch/mregions2/main/man/figures/README-prod1-1.png)
+![](https://raw.githubusercontent.com/ropensci/mregions2/main/man/figures/README-prod1-1.png)
 
 Or you can download and read the data products into R with `mrp_get()`
 
@@ -323,7 +328,7 @@ mrp_get("eez", path = "path/to/data")
 ```
 
 Get to know more in the [Get Started
-vignette](https://lifewatch.github.io/mregions2/articles/mregions2.html).
+vignette](https://docs.ropensci.org/mregions2/articles/mregions2.html).
 
 ## Related packages
 
@@ -362,10 +367,11 @@ boundaries data. Here is a non-exhaustive list:
 
 ``` r
 citation("mregions2")
+#> To cite package 'mregions2' in publications use:
 #> 
-#> Fernandez-Bejarano S, Pohl L (2023). _mregions2: Access Data from
-#> Marineregions.org: The Marine Regions Gazetteer and the Marine Regions
-#> Data Products_. <URL: https://github.com/lifewatch/mregions2>.
+#>   Fernandez-Bejarano S, Pohl L (2023). _mregions2: Access Data from
+#>   Marineregions.org: The Marine Regions Gazetteer and the Marine
+#>   Regions Data Products_. <https://github.com/lifewatch/mregions2>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -389,7 +395,6 @@ for more information.
 
 ## Code of Conduct
 
-Please note that the mregions2 project is released with a [Contributor
-Code of
-Conduct](https://lifewatch.github.io/mregions2/CODE_OF_CONDUCT.html). By
-contributing to this project, you agree to abide by its terms.
+Please note that this package is released with a [Contributor Code of
+Conduct](https://ropensci.org/code-of-conduct/). By contributing to this
+project, you agree to abide by its terms.

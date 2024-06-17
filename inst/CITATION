@@ -4,4 +4,4 @@ bibentry(bibtype = "Manual",
          title = "{mregions2}: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products",
          author = c(person("Salvador", "Fernandez-Bejarano"), person("Lotte", "Pohl")),
          year = year,
-         url = "https://github.com/lifewatch/mregions2")
+         url = "https://github.com/ropensci/mregions2")

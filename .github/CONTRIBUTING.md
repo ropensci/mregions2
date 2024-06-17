@@ -27,14 +27,14 @@ Think mregions2 is useful?
 Let others discover it, by telling them in person, via Twitter or a blog post.
 
 Using mregions2 for a paper you are writing?
-Consider [citing it](https://lifewatch.github.io/mregions2/authors.html).
+Consider [citing it](https://docs.ropensci.org/mregions2/authors.html).
 
 ### Ask a question ⁉️
 
 Using mregions2 and got stuck?
-Browse the [documentation](https://lifewatch.github.io/mregions2) to see if you can find a solution.
+Browse the [documentation](https://docs.ropensci.org/mregions2) to see if you can find a solution.
 Still stuck?
-Post your question as an [issue on GitHub](https://github.com/lifewatch/mregions2/issues/new).
+Post your question as an [issue on GitHub](https://github.com/ropensci/mregions2/issues/new).
 While we cannot offer user support, we'll try to do our best to address it, as questions often lead to better documentation or the discovery of bugs.
 
 Want to ask a question in private?
@@ -43,8 +43,8 @@ Contact Marine Regions by [email](mailto:info@marineregions.org).
 ### Propose an idea 💡
 
 Have an idea for a new mregions2 feature?
-Take a look at the [documentation](https://lifewatch.github.io/mregions2) and [issue list](https://github.com/lifewatch/mregions2/issues) to see if it isn't included or suggested yet.
-If not, suggest your idea as an [issue on GitHub](https://github.com/lifewatch/mregions2/issues/new).
+Take a look at the [documentation](https://docs.ropensci.org/mregions2) and [issue list](https://github.com/ropensci/mregions2/issues) to see if it isn't included or suggested yet.
+If not, suggest your idea as an [issue on GitHub](https://github.com/ropensci/mregions2/issues/new).
 While we can't promise to implement your idea, it helps to: \* Explain in detail how it would work.
 \* Keep the scope as narrow as possible.
 
@@ -54,7 +54,7 @@ See below if you want to contribute code for your idea as well.
 
 Using mregions2 and discovered a bug?
 That's annoying!
-Don't let others have the same experience and report it as an [issue on GitHub](https://github.com/lifewatch/mregions2/issues/new) so we can fix it.
+Don't let others have the same experience and report it as an [issue on GitHub](https://github.com/ropensci/mregions2/issues/new) so we can fix it.
 A good bug report makes it easier for us to do so.
 Please include:
 
@@ -72,16 +72,16 @@ Good documentation makes all the difference, so your help to improve it is very 
 
 #### The website
 
-[This website](https://lifewatch.github.io/mregions2) is generated with [`pkgdown`](http://pkgdown.r-lib.org/).
+[This website](https://docs.ropensci.org/mregions2) is generated with [`pkgdown`](http://pkgdown.r-lib.org/).
 That means we don't have to write any html: content is pulled together from documentation in the code, vignettes, [Markdown](https://guides.github.com/features/mastering-markdown/) files, the package `DESCRIPTION` and `_pkgdown.yml` settings.
 If you know your way around `pkgdown`, you can [propose a file change](https://help.github.com/articles/editing-files-in-another-user-s-repository/) to improve documentation.
-If not, [report an issue](https://github.com/lifewatch/mregions2/issues/new) and we can point you in the right direction.
+If not, [report an issue](https://github.com/ropensci/mregions2/issues/new) and we can point you in the right direction.
 
 #### Function documentation
 
 Functions are described as comments near their code and translated to documentation using [`roxygen2`](https://klutometis.github.io/roxygen/).
 If you want to improve a function description: 1.
-Go to `R/` directory in the [code repository](https://github.com/lifewatch/mregions2).
+Go to `R/` directory in the [code repository](https://github.com/ropensci/mregions2).
 2.
 Look for the function inside the files.
 3.
@@ -91,7 +91,7 @@ Look for the function inside the files.
 
 Care to fix bugs or implement new functionality for mregions2?
 Awesome!
-👏 Have a look at the [issue list](https://github.com/lifewatch/mregions2/issues) and leave a comment on the things you want to work on.
+👏 Have a look at the [issue list](https://github.com/ropensci/mregions2/issues) and leave a comment on the things you want to work on.
 See also the development guidelines below.
 
 ## Development guidelines

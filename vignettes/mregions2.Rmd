@@ -56,7 +56,7 @@ This package is developed for scientific, educational and research purposes. It 
 
 ### Wasn't there a package to read Marine Regions already? mregions?
 
-mregions2 supersedes [mregions](https://docs.ropensci.org/mregions/). The need of mregions2 is further explained in the article: [Why mregions and mregions2?](https://lifewatch.github.io/mregions2/articles/why_mregions2.html)
+mregions2 supersedes [mregions](https://docs.ropensci.org/mregions/). The need of mregions2 is further explained in the article: [Why mregions and mregions2?](https://docs.ropensci.org/mregions2/articles/why_mregions2.html)
 
 > **NOTE**
 >
@@ -212,7 +212,7 @@ As a `sf::sf` object:
 gaz_geometry(3293, format = "sf")
 ```
 
-Learn more about using the mregions2 to access the [Marine Regions Gazetteer as RDF article](https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html).
+Learn more about using the mregions2 to access the [Marine Regions Gazetteer as RDF article](https://docs.ropensci.org/mregions2/articles/mregions2-rdf.html).
 
 ## Search by relations
 
@@ -265,7 +265,7 @@ gaz_search(3293, rdf = TRUE)
 gaz_geometry(3293, format = "rdf")
 ```
 
-See the [Marine Regions Gazetteer as RDF article](https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html) for more information.
+See the [Marine Regions Gazetteer as RDF article](https://docs.ropensci.org/mregions2/articles/mregions2-rdf.html) for more information.
 
 # Marine Regions Data Products
 
@@ -354,7 +354,7 @@ mrp_col_unique("ecs", "pol_type")
 mrp_get("ecs", cql_filter = "pol_type = 'ECS Overlapping claim'")
 ```
 
-An exhaustive ontology defining the attributes of each data product is available in the data frame `mrp_ontology` included in this package, or read the [article online](https://lifewatch.github.io/mregions2/articles/mrp_ontology.html) for further reasoning.
+An exhaustive ontology defining the attributes of each data product is available in the data frame `mrp_ontology` included in this package, or read the [article online](https://docs.ropensci.org/mregions2/articles/mrp_ontology.html) for further reasoning.
 
 ```{r}
 mrp_ontology

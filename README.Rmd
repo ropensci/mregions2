@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
-[![Funding](https://img.shields.io/static/v1?label=powered+by&message=lifewatch.be&labelColor=1a4e8a&color=f15922)](https://lifewatch.be) [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/590_status.svg)](https://github.com/ropensci/software-review/issues/590) [![R-CMD-check](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lifewatch/mregions2/actions/workflows/R-CMD-check.yaml) [![Codecov test coverage](https://codecov.io/gh/lifewatch/mregions2/branch/main/graph/badge.svg)](https://app.codecov.io/gh/lifewatch/mregions2?branch=main)
+[![Funding](https://img.shields.io/static/v1?label=powered+by&message=lifewatch.be&labelColor=1a4e8a&color=f15922)](https://lifewatch.be) [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/590_status.svg)](https://github.com/ropensci/software-review/issues/590) [![R-CMD-check](https://github.com/ropensci/mregions2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/mregions2/actions/workflows/R-CMD-check.yaml) [![Codecov test coverage](https://codecov.io/gh/ropensci/mregions2/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/mregions2?branch=main)
 
 <!-- badges: end -->
 
@@ -29,18 +29,24 @@ Marine Regions offers two key resources: the [Marine Regions Gazetteer](https://
 
 You can find detailed information in the articles online:
 
--   [Introduction to mregions2](https://lifewatch.github.io/mregions2/articles/mregions2.html)
--   [Why mregions and mregions2?](https://lifewatch.github.io/mregions2/articles/why_mregions2.html)
-- [Marine Regions Data Products Ontology](https://lifewatch.github.io/mregions2/articles/mrp_ontology.html)
--   [mregions2 as RDF](https://lifewatch.github.io/mregions2/articles/mregions2-rdf.html)
+-   [Introduction to mregions2](https://docs.ropensci.org/mregions2/articles/mregions2.html)
+-   [Why mregions and mregions2?](https://docs.ropensci.org/mregions2/articles/why_mregions2.html)
+- [Marine Regions Data Products Ontology](https://docs.ropensci.org/mregions2/articles/mrp_ontology.html)
+-   [mregions2 as RDF](https://docs.ropensci.org/mregions2/articles/mregions2-rdf.html)
 
 ## Installation
 
-You can install the development version of mregions2 from GitHub with:
+You can install mregions2 with:
+
+``` r
+install.packages("mregions2", repos = "https://ropensci.r-universe.dev")
+```
+
+Or install the development version of mregions2 from GitHub with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("lifewatch/mregions2", build_vignettes = TRUE)
+devtools::install_github("ropensci/mregions2", build_vignettes = TRUE)
 ```
 
 Load the library with:
@@ -134,7 +140,7 @@ An overview of all available products can be consulted with `mrp_list`
 mrp_list
 ```
 
-Their attributes are explained in the [Marine Regions Data Products Ontology article](https://lifewatch.github.io/mregions2/articles/mrp_ontology.html), or simply run `mrp_ontology`
+Their attributes are explained in the [Marine Regions Data Products Ontology article](https://docs.ropensci.org/mregions2/articles/mrp_ontology.html), or simply run `mrp_ontology`
 
 ```{r prod_ontology}
 mrp_ontology
@@ -146,7 +152,7 @@ You can visualize the Marine Regions Data Products with `mrp_view()`. It opens a
 mrp_view("eez")
 ```
 
-![](https://raw.githubusercontent.com/lifewatch/mregions2/main/man/figures/README-prod1-1.png)
+![](https://raw.githubusercontent.com/ropensci/mregions2/main/man/figures/README-prod1-1.png)
 
 Or you can download and read the data products into R with `mrp_get()`
 
@@ -160,7 +166,7 @@ You can specify the download path in the `path` argument:
 mrp_get("eez", path = "path/to/data")
 ```
 
-Get to know more in the [Get Started vignette](https://lifewatch.github.io/mregions2/articles/mregions2.html).
+Get to know more in the [Get Started vignette](https://docs.ropensci.org/mregions2/articles/mregions2.html).
 
 ```{r, include=FALSE, echo=FALSE}
 # Copy and paste output - do not include to not add more deps
@@ -215,4 +221,4 @@ This software is developed for scientific, educational and research purposes. It
 
 ## Code of Conduct
 
-Please note that the mregions2 project is released with a [Contributor Code of Conduct](https://lifewatch.github.io/mregions2/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that this package is released with a [Contributor Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
