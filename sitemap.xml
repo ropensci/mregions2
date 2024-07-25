@@ -1,126 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/404.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/articles/mregions2-rdf.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/articles/mregions2.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/articles/mrp_ontology.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/articles/why_mregions2.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/index.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/MRGID.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_geometry.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_relations.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_rest.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_geometries.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_names_by_mrgid.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_record_by_mrgid.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_records_by_lat_long.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_records_by_name.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_records_by_names.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_records_by_source.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_records_by_type.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_relations_by_mrgid.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_source_by_sourceid.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_sources.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_types.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_wmses.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_search.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_search_by_source.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_search_by_type.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_sources.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/gaz_types.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/mregions2-package.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/mrp_col_unique.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/mrp_colnames.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/mrp_get.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/mrp_list.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/mrp_ontology.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/mrp_view.html</loc>
-  </url>
-  <url>
-    <loc>https://docs.ropensci.org/mregions2/reference/pipe.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://docs.ropensci.org/mregions2/404.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/CONTRIBUTING.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/LICENSE-text.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/articles/index.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/articles/mregions2-rdf.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/articles/mregions2.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/articles/mrp_ontology.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/articles/why_mregions2.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/authors.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/index.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/news/index.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/MRGID.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_geometry.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_relations.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_rest.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_geometries.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_names_by_mrgid.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_record_by_mrgid.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_records_by_lat_long.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_records_by_name.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_records_by_names.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_records_by_source.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_records_by_type.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_relations_by_mrgid.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_source_by_sourceid.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_sources.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_types.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_rest_wmses.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_search.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_search_by_source.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_search_by_type.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_sources.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/gaz_types.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/index.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/mregions2-package.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/mrp_col_unique.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/mrp_colnames.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/mrp_get.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/mrp_list.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/mrp_ontology.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/mrp_view.html</loc></url>
+<url><loc>https://docs.ropensci.org/mregions2/reference/pipe.html</loc></url>
 </urlset>
+
