@@ -27,7 +27,10 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item LifeWatch Belgium (https://lifewatch.be) [funder]
+  \item Julia Gustavsen [reviewer]
+  \item Muralidhar M.A. [reviewer]
+  \item Sheila  M. Saia [reviewer]
+  \item LifeWatch Belgium (lifewatch.be) [funder]
 }
 
 }

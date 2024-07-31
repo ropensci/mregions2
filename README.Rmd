@@ -187,10 +187,10 @@ The main purpose of Marine Regions is to serve as the geographical backbone for 
 get_md(c("worrms", "eurobis", "robis", "rgbif"))
 # Change links manually
 ```
-* [worrms](https://docs.ropensci.org/worrms): _World Register of Marine Species (WoRMS) Client_. 
+* [worrms](https://docs.ropensci.org/worrms/): _World Register of Marine Species (WoRMS) Client_. 
 * [eurobis](https://lifewatch.github.io/eurobis/): _Download data from EurOBIS using the LifeWatch/EMODnet-Biology Web Feature Services_. 
 * [robis](https://cran.r-project.org/package=robis): _Ocean Biodiversity Information System (OBIS) Client_. 
-* [rgbif](https://docs.ropensci.org/rgbif): _Interface to the Global Biodiversity Information Facility API_. 
+* [rgbif](https://docs.ropensci.org/rgbif/): _Interface to the Global Biodiversity Information Facility API_. 
 
 ### More geographical data
 
@@ -200,11 +200,11 @@ There are other R packages that allow to access other gazetteers and boundaries 
 get_md(c("geonames", "osmdata", "osmextract", "rnaturalearth"))
 ```
 
-* [geonames](https://docs.ropensci.org/geonames): _Interface to the "Geonames" Spatial Query Web Service_. 
-* [osmdata](https://docs.ropensci.org/osmdata): _Import 'OpenStreetMap' Data as Simple Features or Spatial
+* [geonames](https://docs.ropensci.org/geonames/): _Interface to the "Geonames" Spatial Query Web Service_. 
+* [osmdata](https://docs.ropensci.org/osmdata/): _Import 'OpenStreetMap' Data as Simple Features or Spatial
 Objects_. 
-* [osmextract](https://docs.ropensci.org/osmextract): _Download and Import Open Street Map Data Extracts_. 
-* [rnaturalearth](https://docs.ropensci.org/rnaturalearth): _World Map Data from Natural Earth_.
+* [osmextract](https://docs.ropensci.org/osmextract/): _Download and Import Open Street Map Data Extracts_. 
+* [rnaturalearth](https://docs.ropensci.org/rnaturalearth/): _World Map Data from Natural Earth_.
 
 
 ## Citation

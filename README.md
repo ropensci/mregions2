@@ -340,13 +340,13 @@ authoritative classification and catalogue of marine names. Here is a
 list of R packages to access Marine taxonomical and biogeographic data
 that can be combined with data from `mregions2`:
 
-- [worrms](https://docs.ropensci.org/worrms): *World Register of Marine
+- [worrms](https://docs.ropensci.org/worrms/): *World Register of Marine
   Species (WoRMS) Client*.
 - [eurobis](https://lifewatch.github.io/eurobis/): *Download data from
   EurOBIS using the LifeWatch/EMODnet-Biology Web Feature Services*.
 - [robis](https://cran.r-project.org/package=robis): *Ocean Biodiversity
   Information System (OBIS) Client*.
-- [rgbif](https://docs.ropensci.org/rgbif): *Interface to the Global
+- [rgbif](https://docs.ropensci.org/rgbif/): *Interface to the Global
   Biodiversity Information Facility API*.
 
 ### More geographical data
@@ -354,13 +354,13 @@ that can be combined with data from `mregions2`:
 There are other R packages that allow to access other gazetteers and
 boundaries data. Here is a non-exhaustive list:
 
-- [geonames](https://docs.ropensci.org/geonames): *Interface to the
+- [geonames](https://docs.ropensci.org/geonames/): *Interface to the
   “Geonames” Spatial Query Web Service*.
-- [osmdata](https://docs.ropensci.org/osmdata): *Import ‘OpenStreetMap’
+- [osmdata](https://docs.ropensci.org/osmdata/): *Import ‘OpenStreetMap’
   Data as Simple Features or Spatial Objects*.
-- [osmextract](https://docs.ropensci.org/osmextract): *Download and
+- [osmextract](https://docs.ropensci.org/osmextract/): *Download and
   Import Open Street Map Data Extracts*.
-- [rnaturalearth](https://docs.ropensci.org/rnaturalearth): *World Map
+- [rnaturalearth](https://docs.ropensci.org/rnaturalearth/): *World Map
   Data from Natural Earth*.
 
 ## Citation
@@ -371,7 +371,7 @@ citation("mregions2")
 #> 
 #>   Fernandez-Bejarano S, Pohl L (2023). _mregions2: Access Data from
 #>   Marineregions.org: The Marine Regions Gazetteer and the Marine
-#>   Regions Data Products_. <https://github.com/lifewatch/mregions2>.
+#>   Regions Data Products_. <https://github.com/ropensci/mregions2>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -379,7 +379,7 @@ citation("mregions2")
 #>     title = {{mregions2}: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products},
 #>     author = {Salvador Fernandez-Bejarano and Lotte Pohl},
 #>     year = {2023},
-#>     url = {https://github.com/lifewatch/mregions2},
+#>     url = {https://github.com/ropensci/mregions2},
 #>   }
 ```
 

@@ -34,7 +34,7 @@
 #' @export
 #'
 #' @seealso [mrp_list] to describe the list of products, [mrp_colnames()] and [mrp_col_unique()] to get the name, data type and unique values of a the columns of a data product, useful to query
-#' with the arguments `cql_filter` or `filter`, [mrp_get()] to get the data products as a [simple feature][sf] object.
+#' with the arguments `cql_filter` or `filter`, [mrp_get()] to get the data products as a [simple feature](https://r-spatial.github.io/sf/) object.
 #'
 #' @return A leaflet map with a data product visualized via WMS
 #'

@@ -143,5 +143,5 @@ mrp_view_eez_boundaries(
 }
 \seealso{
 \link{mrp_list} to describe the list of products, \code{\link[=mrp_colnames]{mrp_colnames()}} and \code{\link[=mrp_col_unique]{mrp_col_unique()}} to get the name, data type and unique values of a the columns of a data product, useful to query
-with the arguments \code{cql_filter} or \code{filter}, \code{\link[=mrp_get]{mrp_get()}} to get the data products as a \link[=sf]{simple feature} object.
+with the arguments \code{cql_filter} or \code{filter}, \code{\link[=mrp_get]{mrp_get()}} to get the data products as a \href{https://r-spatial.github.io/sf/}{simple feature} object.
 }

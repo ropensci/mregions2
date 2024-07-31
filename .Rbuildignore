@@ -15,3 +15,4 @@
 ^vignettes/mregions2_cache$
 ^real-tests$
 ^data-raw$
+^cran-comments\.md$

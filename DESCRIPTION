@@ -3,7 +3,7 @@ Type: Package
 Title: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products
 Version: 1.1.0
 Authors@R: c(
-  person(given = "Salvador", family = "Fernandez-Bejarano", role = c("aut", "cre"),
+  person(given = "Salvador Jesús", family = "Fernández Bejarano", role = c("aut", "cre"),
          email = "salvador.fernandez@vliz.be",
          comment = c(ORCID = "0000-0003-0535-7677", github = "salvafern")),
   person(given = "Lotte",family = "Pohl", role = "aut",
@@ -14,8 +14,8 @@ Authors@R: c(
   person(given = "Sheila", family = " M. Saia", role = "rev"),
   person("LifeWatch Belgium", role = "fnd", comment = "lifewatch.be")
   )
-Maintainer: Salvador Fernandez-Bejarano <salvador.fernandez@vliz.be>
-Description: Explore and retrieve marine geo-spatial data from the Marine Regions Gazetteer and the Marine Regions Data Products, including the Maritime Boundaries.
+Maintainer: Salvador Jesús Fernández Bejarano <salvador.fernandez@vliz.be>
+Description: Explore and retrieve marine geospatial data from the Marine Regions Gazetteer and the Marine Regions Data Products, including the Maritime Boundaries.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -36,8 +36,7 @@ Imports:
     wrapr,
     methods,
     curl,
-    digest,
-    jsonld
+    digest
 RoxygenNote: 7.3.1
 URL: https://github.com/ropensci/mregions2,
     https://docs.ropensci.org/mregions2/

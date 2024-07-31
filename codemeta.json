@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/ropensci/mregions2",
   "issueTracker": "https://github.com/ropensci/mregions2/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -374,29 +374,17 @@
     },
     "17": {
       "@type": "SoftwareApplication",
-      "identifier": "jsonld",
-      "name": "jsonld",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=jsonld"
-    },
-    "18": {
-      "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
       "version": ">= 2.10"
     },
     "SystemRequirements": null
   },
-  "fileSize": "929.86KB",
+  "fileSize": "1882.23KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
-      "datePublished": "2023",
+      "datePublished": "2024",
       "author": [
         {
           "@type": "Person",
@@ -413,6 +401,7 @@
       "url": "https://github.com/ropensci/mregions2"
     }
   ],
+  "releaseNotes": "https://github.com/ropensci/mregions2/blob/main/NEWS.md",
   "readme": "https://github.com/ropensci/mregions2/blob/main/README.md",
   "contIntegration": ["https://github.com/ropensci/mregions2/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/ropensci/mregions2?branch=main"],
   "review": {

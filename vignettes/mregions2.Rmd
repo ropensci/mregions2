@@ -293,7 +293,7 @@ Instead of downloading the full product directly, it is a better approach to fir
 mrp_view("ecs")
 ```
 
-It returns a `leaflet::leaflet` interactive map with the data product requested added via [Web Map Services (WMS)](https://wikipedia.org/wiki/Web_Map_Service).
+It returns a `leaflet::leaflet` interactive map with the data product requested added via [Web Map Services (WMS)](https://en.wikipedia.org/wiki/Web_Map_Service).
 
 Note `leaflet::leaflet` and `leaflet.extras2::leaflet.extras2` are required by `mrp_view()` but listed only as "Suggests". Install these packages to use `mrp_view()`.
 

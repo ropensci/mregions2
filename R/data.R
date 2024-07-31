@@ -14,7 +14,7 @@
 #'   \item{license}{terms of use of the data products}
 #'   \item{citation}{preferred citation of the data products}
 #'   \item{doi}{ISO 26324 [Digital Object Identifier](https://www.doi.org/))}
-#'   \item{imis}{Url of the data products in the [Integrated Marine Information System (IMIS)](https://vliz.be/imis?)}
+#'   \item{imis}{Url of the data products in the [Integrated Marine Information System (IMIS)](https://vliz.be/en/imis)}
 #'   \item{abstract}{Description of the data product}
 #' }
 #'
