@@ -283,7 +283,7 @@ or Exclusive Economic Zone.</p>
 database with <code><a href="../reference/gaz_types.html">gaz_types()</a></code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gaz_types.html">gaz_types</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 331 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 332 × 3</span></span></span>
 <span><span class="co">#&gt;    typeID type                      description                                 </span></span>
 <span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>      1 Town                      The lowest administrative unit in Belgium a…</span></span>
@@ -296,7 +296,7 @@ database with <code><a href="../reference/gaz_types.html">gaz_types()</a></code>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>      8 Ward                      The lowest administrative unit in the Unite…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>      9 Commune                   The lowest administrative unit in a lot of …</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     10 District                  A medium-level administrative unit that is …</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 321 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 322 more rows</span></span></span></code></pre></div>
 <p>You can restrict your search to a certain type ID in the argument
 <code>typeid</code></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -314,7 +314,7 @@ database with <code><a href="../reference/gaz_types.html">gaz_types()</a></code>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># With text</span></span>
 <span><span class="fu"><a href="../reference/gaz_search_by_type.html">gaz_search_by_type</a></span><span class="op">(</span><span class="st">"Town"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 935 × 14</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 936 × 14</span></span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource placeType latitude longitude preferredGazetteerName</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    29 SAIL            Town          51.1      3.23 Oostkamp              </span></span>
@@ -327,14 +327,14 @@ database with <code><a href="../reference/gaz_types.html">gaz_types()</a></code>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    36 SAIL            Town          51.3      3.13 Zuienkerke            </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    37 SAIL            Town          51.3      3.31 Knokke-Heist          </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    38 SAIL            Town          51.3      3.22 Brugge                </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 925 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 926 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: preferredGazetteerNameLang &lt;chr&gt;, status &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   accepted &lt;int&gt;, minLatitude &lt;dbl&gt;, minLongitude &lt;dbl&gt;, maxLatitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   maxLongitude &lt;dbl&gt;, precision &lt;dbl&gt;</span></span></span>
 <span></span>
 <span><span class="co"># With the place type ID</span></span>
 <span><span class="fu"><a href="../reference/gaz_search_by_type.html">gaz_search_by_type</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 935 × 14</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 936 × 14</span></span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource placeType latitude longitude preferredGazetteerName</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    29 SAIL            Town          51.1      3.23 Oostkamp              </span></span>
@@ -347,7 +347,7 @@ database with <code><a href="../reference/gaz_types.html">gaz_types()</a></code>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    36 SAIL            Town          51.3      3.13 Zuienkerke            </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    37 SAIL            Town          51.3      3.31 Knokke-Heist          </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    38 SAIL            Town          51.3      3.22 Brugge                </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 925 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 926 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: preferredGazetteerNameLang &lt;chr&gt;, status &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   accepted &lt;int&gt;, minLatitude &lt;dbl&gt;, minLongitude &lt;dbl&gt;, maxLatitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   maxLongitude &lt;dbl&gt;, precision &lt;dbl&gt;</span></span></span></code></pre></div>
@@ -362,7 +362,7 @@ sort of authority.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List sources</span></span>
 <span><span class="fu"><a href="../reference/gaz_sources.html">gaz_sources</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 527 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 546 × 3</span></span></span>
 <span><span class="co">#&gt;    sourceID source                                                     sourceURL</span></span>
 <span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>        1 SAIL                                                       http://w…</span></span>
@@ -375,7 +375,7 @@ sort of authority.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>        9 BIOMARE                                                    http://w…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       10 (1953). Limits of oceans and seas. 3rd edition. IHO Speci… <span style="color: #BB0000;">NA</span>       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       11 Nomenclature des espaces maritimes/List of maritime areas  <span style="color: #BB0000;">NA</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 517 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 536 more rows</span></span></span></code></pre></div>
 <p>Search by source is possible with the function
 <code><a href="../reference/gaz_search_by_source.html">gaz_search_by_source()</a></code>, either with the source as text or
 passing a sourceID</p>
@@ -773,7 +773,7 @@ approach to first have a quick look. <code><a href="../reference/mrp_view.html">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/mrp_view.html">mrp_view</a></span><span class="op">(</span><span class="st">"ecs"</span><span class="op">)</span></span></code></pre></div>
 <p>It returns a <code><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet::leaflet</a></code> interactive map with the
-data product requested added via <a href="https://wikipedia.org/wiki/Web_Map_Service" class="external-link">Web Map Services
+data product requested added via <a href="https://en.wikipedia.org/wiki/Web_Map_Service" class="external-link">Web Map Services
 (WMS)</a>.</p>
 <p>Note <code><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet::leaflet</a></code> and
 <code><a href="https://trafficonese.github.io/leaflet.extras2/reference/leaflet.extras2.html" class="external-link">leaflet.extras2::leaflet.extras2</a></code> are required by
@@ -789,8 +789,8 @@ a message:</p>
 <code class="sourceCode R"><span><span class="co"># One more time! Get the Extended Continental Shelves</span></span>
 <span><span class="va">ecs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"ecs"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Cache is fresh. Reading:</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">/var/folders/hn/5bx1f4_d4ds5vhwhkxc7vdcr0000gn/T//Rtmp1YrFa0/ecs-127feb7d/ecs.shp</span></span></span>
-<span><span class="co">#&gt; (Last Modified: <span style="font-style: italic;">2024-07-25 09:41:01.352954</span>)</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #0000BB;">/var/folders/zn/hj183dg15s713b47j2wlhwzw0000gn/T//RtmprryfwT/ecs-127feb7d/ecs.shp</span></span></span>
+<span><span class="co">#&gt; (Last Modified: <span style="font-style: italic;">2024-07-31 12:00:04.507434</span>)</span></span></code></pre></div>
 <p><code><a href="../reference/mrp_get.html">mrp_get()</a></code> performs a WFS request to get the layer as a
 zipped Shapefile and writes the response to disk. This saves both
 bandwith and memory. After downloading, the file is unzipped and read
@@ -983,7 +983,7 @@ for mregions2.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Salvador Fernandez-Bejarano, Lotte Pohl, <a href="https://lifewatch.be" class="external-link"><img src="https://www.lifewatch.be/sites/lifewatch.be/themes/lifewatchportal/images/header_lw_logo.png" width="72"></a>.</p>
+  <p>Developed by Salvador Jesús Fernández Bejarano, Lotte Pohl, <a href="https://lifewatch.be" class="external-link"><img src="https://www.lifewatch.be/sites/lifewatch.be/themes/lifewatchportal/images/header_lw_logo.png" width="72"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
