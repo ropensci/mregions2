@@ -28,7 +28,7 @@ A data frame with Gazetteer entries
 Retrieve Gazetteer Records by Source
 }
 \examples{
-\dontrun{
+\donttest{
 # Check out all sources
 gaz_sources()
 

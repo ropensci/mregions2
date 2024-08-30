@@ -16,10 +16,8 @@ a vector with all the names of a Marine Regions Gazetteer entry
 Get the names for a given MRGID
 }
 \examples{
-\dontrun{
 gaz_rest_names_by_mrgid(3293)
 gaz_rest_names_by_mrgid(14)
-}
 }
 \seealso{
 \link{gaz_rest}, \link{MRGID}

@@ -18,10 +18,9 @@
 #'
 #' @return A data frame with Gazetteer entries
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # Get the relations of the Belgian Exclusive Economic Zone
-#' require(magrittr)
-#' gaz_search("Belgian Exclusive Economic Zone") %>% gaz_relations()
+#' gaz_search("Belgian Exclusive Economic Zone") |> gaz_relations()
 #'
 #' # Or using its mrgid
 #' gaz_relations(3293)
@@ -63,7 +62,7 @@ gaz_relations.mr_df <- function(x, ...){
 #'
 #' @seealso [List of types (Object Properties)](https://marineregions.org/ontology/documentation.html), [gaz_rest], [MRGID]
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' gaz_rest_relations_by_mrgid(7378)
 #' }
 gaz_rest_relations_by_mrgid <- function(mrgid, with_geometry = FALSE, direction = "both", type = "all"){

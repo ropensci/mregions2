@@ -19,7 +19,7 @@ REST API. All the gazetteer functions such as \code{gaz_search()}or
 \code{gaz_relations()} make use of these \verb{gaz_rest_*} functions.
 }
 \examples{
-\dontrun{?gaz_rest}
+\donttest{?gaz_rest}
 }
 \seealso{
 \code{\link[=gaz_rest_geometries]{gaz_rest_geometries()}}, \code{\link[=gaz_rest_names_by_mrgid]{gaz_rest_names_by_mrgid()}},

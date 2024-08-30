@@ -160,7 +160,7 @@ rocks_placetype <- 193
     .f <- function() gaz_relations(b24nm, type = "influencedby", direction = "lower")
     expect_error(.f(), regexp = "No relations found", fixed = TRUE)
 
-    .f <- function() httr2::with_mock(mock_404, gaz_relations(b24nm))
+    .f <- function() httr2::with_mocked_responses(mock_404, gaz_relations(b24nm))
     expect_error(.f(), regexp = "does not exist", fixed = TRUE)
 
   })

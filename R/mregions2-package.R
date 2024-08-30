@@ -52,7 +52,7 @@ NULL
 #'
 #' @return Returns a help page: `MRGID` is not a function but documentation.
 #'
-#' @examples \dontrun{?MRGID}
+#' @examples \donttest{?MRGID}
 NULL
 
 
@@ -82,5 +82,5 @@ NULL
 #'
 #' @return Returns a help page: `gaz_rest` is not a function but documentation.
 #'
-#' @examples \dontrun{?gaz_rest}
+#' @examples \donttest{?gaz_rest}
 NULL

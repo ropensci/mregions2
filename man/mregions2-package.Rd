@@ -4,9 +4,9 @@
 \name{mregions2-package}
 \alias{mregions2}
 \alias{mregions2-package}
-\title{mregions2: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products}
+\title{mregions2: Access Data from Marineregions.org: Gazetteer & Data Products}
 \description{
-Explore and retrieve marine geo-spatial data from the Marine Regions Gazetteer and the Marine Regions Data Products, including the Maritime Boundaries.
+Explore and retrieve marine geospatial data from the Marine Regions Gazetteer \url{https://marineregions.org/gazetteer.php?p=webservices} and the Marine Regions Data Products \url{https://marineregions.org/webservices.php}.
 }
 \seealso{
 Useful links:
@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Salvador Fernandez-Bejarano \email{salvador.fernandez@vliz.be} (\href{https://orcid.org/0000-0003-0535-7677}{ORCID}) (salvafern)
+\strong{Maintainer}: Salvador Jesús Fernández Bejarano \email{salvador.fernandez@vliz.be} (\href{https://orcid.org/0000-0003-0535-7677}{ORCID}) (salvafern)
 
 Authors:
 \itemize{
@@ -29,7 +29,7 @@ Other contributors:
 \itemize{
   \item Julia Gustavsen [reviewer]
   \item Muralidhar M.A. [reviewer]
-  \item Sheila  M. Saia [reviewer]
+  \item Sheila M. Saia [reviewer]
   \item LifeWatch Belgium (lifewatch.be) [funder]
 }
 

@@ -18,7 +18,7 @@ A data frame with Gazetteer entries
 Retrieve Gazetteer Records by Source
 }
 \examples{
-\dontrun{
+\donttest{
 gaz_rest_records_by_source("ICES Ecoregions")
 }
 }

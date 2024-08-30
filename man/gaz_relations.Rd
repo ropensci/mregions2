@@ -49,10 +49,9 @@ this package to ensure the data frame passed to gaz_relations has a variable wit
 }
 }
 \examples{
-\dontrun{
+\donttest{
 # Get the relations of the Belgian Exclusive Economic Zone
-require(magrittr)
-gaz_search("Belgian Exclusive Economic Zone") \%>\% gaz_relations()
+gaz_search("Belgian Exclusive Economic Zone") |> gaz_relations()
 
 # Or using its mrgid
 gaz_relations(3293)

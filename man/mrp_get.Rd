@@ -55,12 +55,15 @@ A tutorial on CQL filters is available in the \href{https://docs.geoserver.org/s
 }
 }
 \examples{
-\dontrun{
-# Set cache path
-options("mregions2.download_path" = "my/path/")
+\donttest{
+# Set cache path. Default is a temporal directory
+options(mregions2.download_path = tempdir())
+
+getOption("mregions2.download_path")
+#> [1] "/tmp/RtmpARLgoE"
 
 # See the list of all data products
-View(mrp_list)
+mrp_list
 
 # We want the Exclusive Economic Zones of Portugal. Let's first visualize the product:
 mrp_view("eez")
@@ -90,7 +93,7 @@ portugal_eez <- mrp_get("eez", cql_filter = "sovereign1 = 'Portugal'")
 
 # If you perform this request again, it will be read from the cache instead
 portugal_eez <- mrp_get("eez", cql_filter = "sovereign1 = 'Portugal'")
-#> Cache is fresh. Reading: my/path/eez-1951c8b7/eez.shp
+#> Cache is fresh. Reading: /tmp/RtmpARLgoE/eez-1951c8b7/eez.shp
 #> (Last Modified: 2023-04-24 17:45:16)
 
 # You can also limit the number of features to be requested

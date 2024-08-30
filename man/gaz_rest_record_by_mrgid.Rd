@@ -20,7 +20,7 @@ A data frame with the Gazetteer entry
 Get one record for the given MRGID
 }
 \examples{
-\dontrun{
+\donttest{
 gaz_rest_record_by_mrgid(3293)
 gaz_rest_record_by_mrgid(3293, with_geometry = TRUE)
 gaz_rest_record_by_mrgid(3293, rdf = TRUE)

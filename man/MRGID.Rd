@@ -50,5 +50,5 @@ a strategy for managing the domain and the web servers.
 }
 }
 \examples{
-\dontrun{?MRGID}
+\donttest{?MRGID}
 }

@@ -27,7 +27,7 @@ A data frame with Gazetteer entries
 Get Gazetteer Records for all given names
 }
 \examples{
-\dontrun{
+\donttest{
 gaz_rest_records_by_names(
   c("Belgian Exclusive Economic Zone", "Dutch Exclusive Economic Zone")
 )

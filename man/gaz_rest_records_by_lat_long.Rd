@@ -27,9 +27,11 @@ A data frame with Gazetteer entries
 Get all gazetteer records where the geometry intersects with the given latitude and longitude
 }
 \examples{
-\dontrun{
+\donttest{
 gaz_rest_records_by_lat_long(51.21551, 2.927)
-gaz_rest_records_by_lat_long(51.21551, 2.927, with_geometry = TRUE, typeid = c(255, 259))
+gaz_rest_records_by_lat_long(51.21551, 2.927,
+                             with_geometry = TRUE,
+                             typeid = c(255, 259))
 }
 }
 \seealso{

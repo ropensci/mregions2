@@ -24,7 +24,7 @@ The actual description of each column is available only to the Maritime Boundari
 See \url{https://marineregions.org/eezattribute.php}
 }
 \examples{
-\dontrun{
+\donttest{
 mrp_colnames("eez")
 mrp_colnames("ecoregions")
 }

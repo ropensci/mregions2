@@ -53,7 +53,8 @@ Search in the Marine Regions Gazetteer by names, MRGID or reverse geocode with a
 WGS84 coordinates x and y
 }
 \examples{
-\dontrun{
+\donttest{
+
 # Look-up a name in the Gazetteer
 gaz_search("North Sea")
 

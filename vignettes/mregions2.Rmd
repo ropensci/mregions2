@@ -401,4 +401,4 @@ Note that all the data products of Marine Regions are served via the [VLIZ geose
 
 Whenever the documentation refers to CQL, ECQL syntax can be used as well.
 
-I recommend the `vignette("ecql_filtering", package = "EMODnetWFS")` of the [EMODnetWFS](https://emodnet.github.io/EMODnetWFS/articles/ecql_filtering.html) R package to know more. The principles explained there are useful also for mregions2.
+I recommend the `vignette("ecql_filtering", package = "emodnet.wfs")` of the [emodnet.wfs](https://emodnet.github.io/emodnet.wfs/articles/ecql_filtering.html) R package to know more. The principles explained there are useful also for mregions2.
