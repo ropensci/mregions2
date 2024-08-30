@@ -18,7 +18,7 @@ a data frame with three columns:
 Get all the place types of the Marine Regions Gazetteer
 }
 \examples{
-\dontrun{
+\donttest{
 # This
 gaz_rest_types()
 

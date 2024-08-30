@@ -8,7 +8,7 @@
 #'
 #' @seealso [gaz_rest]
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # This
 #' gaz_rest_types()
 #'
@@ -44,7 +44,7 @@ gaz_types <- memoise::memoise(gaz_rest_types)
 #' @return A data frame with Gazetteer entries
 #' @export
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # This
 #' gaz_search_by_type("EEZ")
 #'
@@ -89,7 +89,7 @@ gaz_search_by_type.numeric <- function(x, ...){
 #' @seealso [gaz_rest], [gaz_rest_types()]
 #' @export
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' gaz_rest_records_by_type("FAO Subdivisions")
 #' gaz_rest_records_by_type("EEZ")
 #' }

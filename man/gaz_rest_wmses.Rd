@@ -24,7 +24,7 @@ a data frame with information from the WMS services including:
 Get WMS information for a given MRGID
 }
 \examples{
-\dontrun{
+\donttest{
 gaz_rest_wmses(3293)
 }
 }

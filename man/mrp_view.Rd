@@ -108,7 +108,7 @@ A tutorial on CQL filters is available in the \href{https://docs.geoserver.org/s
 }
 }
 \examples{
-\dontrun{
+\donttest{
 # You can pass a product name from mrp_list
 mrp_view('eez')
 

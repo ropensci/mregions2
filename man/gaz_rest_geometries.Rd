@@ -34,7 +34,7 @@ or an RDF object
 Get the geometries associated with a gazetteer record
 }
 \examples{
-\dontrun{
+\donttest{
 gaz_rest_geometries(3293)
 gaz_rest_geometries(3293, format = "wkt")
 gaz_rest_geometries(3293, format = "rdf")

@@ -1,3 +1,10 @@
+# 1.1.1
+
+Minor changes on preparation for CRAN release.
+* Examples wrapped in tag \donttest{} instead of \dontrun{}
+* Examples and tests do always write now to a `tempdir()`
+* Title reduced to less than 65 characters
+
 # 1.1.0
 
 First mregions2 publication on rOpenSci.

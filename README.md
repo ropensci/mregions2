@@ -114,7 +114,7 @@ Search by location:
 
 ``` r
 gaz_search(x = 2.927, y = 51.21551)
-#> # A tibble: 54 × 14
+#> # A tibble: 55 × 14
 #>    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude
 #>    <int> <chr>             <chr>        <dbl>     <dbl>       <dbl>        <dbl>
 #>  1    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55
@@ -127,7 +127,7 @@ gaz_search(x = 2.927, y = 51.21551)
 #>  8    20 SAIL              Province…     51.0      3.03        50.7         2.55
 #>  9    20 SAIL              Province…     51.0      3.03        50.7         2.55
 #> 10    20 SAIL              Province…     51.0      3.03        50.7         2.55
-#> # ℹ 44 more rows
+#> # ℹ 45 more rows
 #> # ℹ 7 more variables: maxLatitude <dbl>, maxLongitude <dbl>,
 #> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
 #> #   status <chr>, accepted <int>, precision <dbl>
@@ -226,7 +226,7 @@ gaz_search(3293) %>% gaz_relations()
 #>  4  2421 ASFA thesaurus    Sandbank…     51.3      2.64        NA          NA   
 #>  5    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55
 #>  6  2350 (1953). Limits o… IHO Sea …     56.4      2.74        51.0        -4.45
-#>  7  4675 <NA>              Sandbank…     NA       NA           NA          NA   
+#>  7  4675 <NA>              Sandbank…     51.3      2.98        NA          NA   
 #>  8  2550 ASFA thesaurus    Coast         51.2      2.91        51.1         2.54
 #>  9 17401 Aphia             Wreck         51.4      2.32        NA          NA   
 #> 10 17409 Aphia             Wreck         51.1      2.33        NA          NA   
@@ -246,7 +246,7 @@ gaz_relations(3293)
 #>  4  2421 ASFA thesaurus    Sandbank…     51.3      2.64        NA          NA   
 #>  5    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55
 #>  6  2350 (1953). Limits o… IHO Sea …     56.4      2.74        51.0        -4.45
-#>  7  4675 <NA>              Sandbank…     NA       NA           NA          NA   
+#>  7  4675 <NA>              Sandbank…     51.3      2.98        NA          NA   
 #>  8  2550 ASFA thesaurus    Coast         51.2      2.91        51.1         2.54
 #>  9 17401 Aphia             Wreck         51.4      2.32        NA          NA   
 #> 10 17409 Aphia             Wreck         51.1      2.33        NA          NA   
@@ -369,7 +369,7 @@ boundaries data. Here is a non-exhaustive list:
 citation("mregions2")
 #> To cite package 'mregions2' in publications use:
 #> 
-#>   Fernandez-Bejarano S, Pohl L (2023). _mregions2: Access Data from
+#>   Fernandez-Bejarano S, Pohl L (2024). _mregions2: Access Data from
 #>   Marineregions.org: The Marine Regions Gazetteer and the Marine
 #>   Regions Data Products_. <https://github.com/ropensci/mregions2>.
 #> 
@@ -378,7 +378,7 @@ citation("mregions2")
 #>   @Manual{,
 #>     title = {{mregions2}: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products},
 #>     author = {Salvador Fernandez-Bejarano and Lotte Pohl},
-#>     year = {2023},
+#>     year = {2024},
 #>     url = {https://github.com/ropensci/mregions2},
 #>   }
 ```

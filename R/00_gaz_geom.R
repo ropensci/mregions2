@@ -17,14 +17,12 @@
 #'
 #' @return A sfc object (default), a sf data frame, a WKT string or an RDF object
 #'
-#' @examples \dontrun{
-#' require(magrittr)
-#'
+#' @examples \donttest{
 #' gaz_geometry(3293)
 #' gaz_geometry(3293, format = "wkt")
 #' gaz_geometry(3293, format = "rdf")
 #'
-#' gaz_search(3293) %>% gaz_geometry()
+#' gaz_search(3293) |> gaz_geometry()
 #' }
 gaz_geometry <- function(x, ...){
   UseMethod("gaz_geometry")
@@ -91,7 +89,7 @@ gaz_geometry.mr_df <- function(x, ...){
 #' @return A sfc object (default), a sf data frame, a WKT string
 #' or an RDF object
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' gaz_rest_geometries(3293)
 #' gaz_rest_geometries(3293, format = "wkt")
 #' gaz_rest_geometries(3293, format = "rdf")

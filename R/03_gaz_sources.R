@@ -8,7 +8,7 @@
 #' @return A data frame with Gazetteer entries
 #' @export
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # Check out all sources
 #' gaz_sources()
 #'
@@ -53,7 +53,7 @@ gaz_search_by_source.numeric <- function(x, ...){
 #'
 #' @seealso [gaz_rest]
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' gaz_rest_records_by_source("ICES Ecoregions")
 #' }
 gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
@@ -127,15 +127,12 @@ gaz_rest_records_by_source <- function(source, with_geometry = FALSE){
 #'
 #' @seealso [gaz_rest], [gaz_search_by_source()], [gaz_rest_records_by_source()], [gaz_rest_source_by_sourceid()]
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' # This
 #' gaz_rest_sources()
 #'
 #' # is the same as
 #' gaz_sources()
-#'
-#' memoise::is.memoised(gaz_sources)
-#' #> [1] TRUE
 #' }
 gaz_rest_sources <- function(){
   sourceID <- NULL
@@ -207,7 +204,7 @@ gaz_sources <- memoise::memoise(gaz_rest_sources)
 #'
 #' @seealso [gaz_rest], [gaz_sources()]
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' gaz_rest_source_by_sourceid(390)
 #' gaz_rest_source_by_sourceid(657)
 #' }

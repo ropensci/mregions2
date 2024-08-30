@@ -31,7 +31,7 @@ crash your R session.
 }
 }
 \examples{
-\dontrun{
+\donttest{
 mrp_col_unique("ecs", "pol_type")
 mrp_col_unique("ecs_boundaries", "line_type")
 }

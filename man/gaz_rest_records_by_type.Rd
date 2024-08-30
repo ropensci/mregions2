@@ -18,7 +18,7 @@ A data frame with Gazetteer entries
 Retrieve Gazetteer Records by Placetype
 }
 \examples{
-\dontrun{
+\donttest{
 gaz_rest_records_by_type("FAO Subdivisions")
 gaz_rest_records_by_type("EEZ")
 }

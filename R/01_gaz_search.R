@@ -16,7 +16,8 @@
 #' @return A data frame with Gazetteer entries
 #' @export
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
+#'
 #' # Look-up a name in the Gazetteer
 #' gaz_search("North Sea")
 #'
@@ -133,7 +134,7 @@ gaz_search.sfc <- function(x, ...){
 #'
 #' @return A data frame with the Gazetteer entry
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' gaz_rest_record_by_mrgid(3293)
 #' gaz_rest_record_by_mrgid(3293, with_geometry = TRUE)
 #' gaz_rest_record_by_mrgid(3293, rdf = TRUE)
@@ -210,7 +211,7 @@ gaz_rest_record_by_mrgid <- function(mrgid, with_geometry = FALSE, rdf = FALSE){
 #' @seealso [gaz_rest], [gaz_rest_records_by_name]
 #' @return A data frame with Gazetteer entries
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' gaz_rest_records_by_name("Belgian Exclusive Economic Zone", with_geometry = TRUE)
 #' gaz_rest_records_by_name("Bélgica", language = "es")
 #' gaz_rest_records_by_name("Belgium", typeid = c(350, 351))
@@ -371,7 +372,7 @@ gaz_rest_records_by_name <- function(name, with_geometry = FALSE, typeid = NULL,
 #'
 #' @export
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' gaz_rest_records_by_names(
 #'   c("Belgian Exclusive Economic Zone", "Dutch Exclusive Economic Zone")
 #' )
@@ -427,9 +428,11 @@ gaz_rest_records_by_names <- function(names, with_geometry = FALSE, like = TRUE,
 #'
 #' @return A data frame with Gazetteer entries
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' gaz_rest_records_by_lat_long(51.21551, 2.927)
-#' gaz_rest_records_by_lat_long(51.21551, 2.927, with_geometry = TRUE, typeid = c(255, 259))
+#' gaz_rest_records_by_lat_long(51.21551, 2.927,
+#'                              with_geometry = TRUE,
+#'                              typeid = c(255, 259))
 #' }
 gaz_rest_records_by_lat_long <- function(latitude, longitude, with_geometry = FALSE, typeid = NULL){
   MRGID <- NULL

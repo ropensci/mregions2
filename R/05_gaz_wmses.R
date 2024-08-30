@@ -13,7 +13,7 @@
 #' @export
 #' @seealso [gaz_rest], [MRGID], [mrp_view()]
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' gaz_rest_wmses(3293)
 #' }
 gaz_rest_wmses <- function(mrgid){

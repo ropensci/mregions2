@@ -1,7 +1,7 @@
 Package: mregions2
 Type: Package
-Title: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products
-Version: 1.1.0
+Title: Access Data from Marineregions.org: Gazetteer & Data Products
+Version: 1.1.1
 Authors@R: c(
   person(given = "Salvador Jesús", family = "Fernández Bejarano", role = c("aut", "cre"),
          email = "salvador.fernandez@vliz.be",
@@ -15,7 +15,7 @@ Authors@R: c(
   person("LifeWatch Belgium", role = "fnd", comment = "lifewatch.be")
   )
 Maintainer: Salvador Jesús Fernández Bejarano <salvador.fernandez@vliz.be>
-Description: Explore and retrieve marine geospatial data from the Marine Regions Gazetteer and the Marine Regions Data Products, including the Maritime Boundaries.
+Description: Explore and retrieve marine geospatial data from the Marine Regions Gazetteer <https://marineregions.org/gazetteer.php?p=webservices> and the Marine Regions Data Products <https://marineregions.org/webservices.php>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -37,7 +37,7 @@ Imports:
     methods,
     curl,
     digest
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 URL: https://github.com/ropensci/mregions2,
     https://docs.ropensci.org/mregions2/
 BugReports: https://github.com/ropensci/mregions2/issues

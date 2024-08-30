@@ -33,7 +33,7 @@ A data frame with Gazetteer entries
 Retrieve Gazetteer Records by Placetype
 }
 \examples{
-\dontrun{
+\donttest{
 # This
 gaz_search_by_type("EEZ")
 

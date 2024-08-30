@@ -16,7 +16,7 @@ a named vector with the source name and, if available, the url to the source.
 Get the name of a source by providing a sourceID
 }
 \examples{
-\dontrun{
+\donttest{
 gaz_rest_source_by_sourceid(390)
 gaz_rest_source_by_sourceid(657)
 }

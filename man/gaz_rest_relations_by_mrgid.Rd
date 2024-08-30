@@ -32,7 +32,7 @@ A data frame with Gazetteer entries
 Retrieve Gazetter Relations by MRGID
 }
 \examples{
-\dontrun{
+\donttest{
 gaz_rest_relations_by_mrgid(7378)
 }
 }

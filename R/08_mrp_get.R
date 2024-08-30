@@ -36,12 +36,15 @@
 #' @seealso [mrp_list] to describe the list of products, [mrp_view()] to visualize the data product in advance, [mrp_colnames()] and [mrp_col_unique()] to get the name, data type and unique values of a the columns of a data product, useful to query
 #' with the arguments `cql_filter` or `filter`
 #'
-#' @examples \dontrun{
-#' # Set cache path
-#' options("mregions2.download_path" = "my/path/")
+#' @examples \donttest{
+#' # Set cache path. Default is a temporal directory
+#' options(mregions2.download_path = tempdir())
+#'
+#' getOption("mregions2.download_path")
+#' #> [1] "/tmp/RtmpARLgoE"
 #'
 #' # See the list of all data products
-#' View(mrp_list)
+#' mrp_list
 #'
 #' # We want the Exclusive Economic Zones of Portugal. Let's first visualize the product:
 #' mrp_view("eez")
@@ -71,7 +74,7 @@
 #'
 #' # If you perform this request again, it will be read from the cache instead
 #' portugal_eez <- mrp_get("eez", cql_filter = "sovereign1 = 'Portugal'")
-#' #> Cache is fresh. Reading: my/path/eez-1951c8b7/eez.shp
+#' #> Cache is fresh. Reading: /tmp/RtmpARLgoE/eez-1951c8b7/eez.shp
 #' #> (Last Modified: 2023-04-24 17:45:16)
 #'
 #' # You can also limit the number of features to be requested
@@ -262,7 +265,7 @@ check_server_warning <- function(cached_unzip_path){
 #' columns of a data product, useful to write queries that can be passed to [mrp_get()] or [mrp_view()] via the
 #' arguments `cql_filter` or `filter`.
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' mrp_colnames("eez")
 #' mrp_colnames("ecoregions")
 #' }
@@ -333,7 +336,7 @@ mrp_colnames <- memoise::memoise(.mrp_colnames)
 #' the columns of a data product, useful to write queries that can be passed to [mrp_get()] or [mrp_view()] via
 #' the arguments `cql_filter` or `filter`.
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' mrp_col_unique("ecs", "pol_type")
 #' mrp_col_unique("ecs_boundaries", "line_type")
 #' }
