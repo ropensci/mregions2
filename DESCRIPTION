@@ -54,6 +54,7 @@ Suggests:
     wk,
     purrr,
     withr
+Config/Needs/website: jsonld
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 Depends: 
