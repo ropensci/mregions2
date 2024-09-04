@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products • mregions2</title>
+<title>Access Data from Marineregions.org: Gazetteer &amp; Data Products • mregions2</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products">
-<meta name="description" content="Explore and retrieve marine geospatial data from the Marine Regions Gazetteer and the Marine Regions Data Products, including the Maritime Boundaries.">
-<meta property="og:description" content="Explore and retrieve marine geospatial data from the Marine Regions Gazetteer and the Marine Regions Data Products, including the Maritime Boundaries.">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Access Data from Marineregions.org: Gazetteer &amp; Data Products">
+<meta name="description" content="Explore and retrieve marine geospatial data from the Marine Regions Gazetteer &lt;https://marineregions.org/gazetteer.php?p=webservices&gt; and the Marine Regions Data Products &lt;https://marineregions.org/webservices.php&gt;.">
+<meta property="og:description" content="Explore and retrieve marine geospatial data from the Marine Regions Gazetteer &lt;https://marineregions.org/gazetteer.php?p=webservices&gt; and the Marine Regions Data Products &lt;https://marineregions.org/webservices.php&gt;.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">mregions2</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -124,7 +124,7 @@
 <p>Search by location:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/gaz_search.html">gaz_search</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2.927</span>, y <span class="op">=</span> <span class="fl">51.21551</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 54 × 14</span></span>
+<span><span class="co">#&gt; # A tibble: 55 × 14</span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude</span></span>
 <span><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt;  1    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55</span></span>
@@ -137,7 +137,7 @@
 <span><span class="co">#&gt;  8    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
 <span><span class="co">#&gt;  9    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
 <span><span class="co">#&gt; 10    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
-<span><span class="co">#&gt; # ℹ 44 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 45 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 7 more variables: maxLatitude &lt;dbl&gt;, maxLongitude &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   preferredGazetteerName &lt;chr&gt;, preferredGazetteerNameLang &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   status &lt;chr&gt;, accepted &lt;int&gt;, precision &lt;dbl&gt;</span></span></code></pre></div>
@@ -220,7 +220,7 @@
 <span><span class="co">#&gt;  4  2421 ASFA thesaurus    Sandbank…     51.3      2.64        NA          NA   </span></span>
 <span><span class="co">#&gt;  5    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55</span></span>
 <span><span class="co">#&gt;  6  2350 (1953). Limits o… IHO Sea …     56.4      2.74        51.0        -4.45</span></span>
-<span><span class="co">#&gt;  7  4675 &lt;NA&gt;              Sandbank…     NA       NA           NA          NA   </span></span>
+<span><span class="co">#&gt;  7  4675 &lt;NA&gt;              Sandbank…     51.3      2.98        NA          NA   </span></span>
 <span><span class="co">#&gt;  8  2550 ASFA thesaurus    Coast         51.2      2.91        51.1         2.54</span></span>
 <span><span class="co">#&gt;  9 17401 Aphia             Wreck         51.4      2.32        NA          NA   </span></span>
 <span><span class="co">#&gt; 10 17409 Aphia             Wreck         51.1      2.33        NA          NA   </span></span>
@@ -240,7 +240,7 @@
 <span><span class="co">#&gt;  4  2421 ASFA thesaurus    Sandbank…     51.3      2.64        NA          NA   </span></span>
 <span><span class="co">#&gt;  5    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55</span></span>
 <span><span class="co">#&gt;  6  2350 (1953). Limits o… IHO Sea …     56.4      2.74        51.0        -4.45</span></span>
-<span><span class="co">#&gt;  7  4675 &lt;NA&gt;              Sandbank…     NA       NA           NA          NA   </span></span>
+<span><span class="co">#&gt;  7  4675 &lt;NA&gt;              Sandbank…     51.3      2.98        NA          NA   </span></span>
 <span><span class="co">#&gt;  8  2550 ASFA thesaurus    Coast         51.2      2.91        51.1         2.54</span></span>
 <span><span class="co">#&gt;  9 17401 Aphia             Wreck         51.4      2.32        NA          NA   </span></span>
 <span><span class="co">#&gt; 10 17409 Aphia             Wreck         51.1      2.33        NA          NA   </span></span>
@@ -340,7 +340,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"mregions2"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; To cite package 'mregions2' in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Fernandez-Bejarano S, Pohl L (2023). _mregions2: Access Data from</span></span>
+<span><span class="co">#&gt;   Fernandez-Bejarano S, Pohl L (2024). _mregions2: Access Data from</span></span>
 <span><span class="co">#&gt;   Marineregions.org: The Marine Regions Gazetteer and the Marine</span></span>
 <span><span class="co">#&gt;   Regions Data Products_. &lt;https://github.com/ropensci/mregions2&gt;.</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -349,7 +349,7 @@
 <span><span class="co">#&gt;   @Manual{,</span></span>
 <span><span class="co">#&gt;     title = {{mregions2}: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products},</span></span>
 <span><span class="co">#&gt;     author = {Salvador Fernandez-Bejarano and Lotte Pohl},</span></span>
-<span><span class="co">#&gt;     year = {2023},</span></span>
+<span><span class="co">#&gt;     year = {2024},</span></span>
 <span><span class="co">#&gt;     url = {https://github.com/ropensci/mregions2},</span></span>
 <span><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
@@ -368,6 +368,7 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=mregions2" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/ropensci/mregions2/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/ropensci/mregions2/issues" class="external-link">Report a bug</a></li>
 </ul>

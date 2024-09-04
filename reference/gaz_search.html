@@ -9,7 +9,7 @@ WGS84 coordinates x and y"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mregions2</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,20 +114,71 @@ of class <code>POINT</code></p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Look-up a name in the Gazetteer</span></span></span>
 <span class="r-in"><span><span class="fu">gaz_search</span><span class="op">(</span><span class="st">"North Sea"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 25 × 14</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    MRGID gazetteerSource     placeType latitude longitude preferredGazetteerName</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>350 <span style="color: #949494;">"</span>(1953). Limits of… IHO Sea …     56.4      2.74 North Sea             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>399 <span style="color: #949494;">"</span>ASFA thesaurus<span style="color: #949494;">"</span>    Bight         51.6      3.02 Southern Bight of the…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">8</span>542 <span style="color: #949494;">"</span>Large Marine Ecos… Large Ma…     57.4      2.73 North Sea             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> <span style="text-decoration: underline;">17</span>441 <span style="color: #949494;">"</span>Aphia<span style="color: #949494;">"</span>             General …     53.1      2.81 Central North Sea     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="text-decoration: underline;">17</span>977 <span style="color: #949494;">"</span>Aphia<span style="color: #949494;">"</span>             General …     59        1.8  Northern North Sea    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="text-decoration: underline;">17</span>977 <span style="color: #949494;">"</span>Aphia<span style="color: #949494;">"</span>             General …     59        1.8  Northern Part of the …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="text-decoration: underline;">21</span>912 <span style="color: #949494;">"</span>Spalding, M. D. F… Marine E…     55.5      4.59 North Sea             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="text-decoration: underline;">22</span>165  <span style="color: #BB0000;">NA</span>                 ICES Eco…     <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>    North Sea             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">22</span>253 <span style="color: #949494;">"</span>Aphia<span style="color: #949494;">"</span>             General …     51.4      1.99 Southern North Sea    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">22</span>762 <span style="color: #949494;">"</span>VLIZ (2020). Inte… Marine R…     54.6      6.78 German part of the No…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 15 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: preferredGazetteerNameLang &lt;chr&gt;, status &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   accepted &lt;int&gt;, minLatitude &lt;dbl&gt;, minLongitude &lt;dbl&gt;, maxLatitude &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   maxLongitude &lt;dbl&gt;, precision &lt;dbl&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get the entries of two known MRGID including their geometry</span></span></span>
 <span class="r-in"><span><span class="fu">gaz_search</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="fl">17</span><span class="op">)</span>, with_geometry <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 2 features and 14 fields</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: -5.143675 ymin: 41.33376 xmax: 9.560596 ymax: 51.50408</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Geodetic CRS:  WGS 84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 15</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   MRGID gazetteerSource    placeType latitude longitude minLatitude minLongitude</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>    14 (2001). The Times… Nation        50.5      4.48        49.5         2.55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>    17 (2001). The Times… Nation        46.2      2.19        41.3        -<span style="color: #BB0000;">5.18</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: maxLatitude &lt;dbl&gt;, maxLongitude &lt;dbl&gt;, precision &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   preferredGazetteerName &lt;chr&gt;, preferredGazetteerNameLang &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   status &lt;chr&gt;, accepted &lt;int&gt;, the_geom &lt;MULTIPOLYGON [°]&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Maybe the name is in another language...</span></span></span>
 <span class="r-in"><span><span class="fu">gaz_search</span><span class="op">(</span><span class="st">"Noordzee"</span>, language <span class="op">=</span> <span class="st">"nl"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 14</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   MRGID gazetteerSource    placeType latitude longitude minLatitude minLongitude</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>350 (1953). Limits of… IHO Sea …     56.4      2.74        51.0        -<span style="color: #BB0000;">4.45</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>399 ASFA thesaurus     Bight         51.6      3.02        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> <span style="text-decoration: underline;">27</span>417 Natura 2000 Sites… Natura 2…     53.3      5.25        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> <span style="text-decoration: underline;">50</span>168 Wikipedia          Channel       52.5      4.56        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: maxLatitude &lt;dbl&gt;, maxLongitude &lt;dbl&gt;, precision &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   preferredGazetteerName &lt;chr&gt;, preferredGazetteerNameLang &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   status &lt;chr&gt;, accepted &lt;int&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get all the records intersecting with the longitude 51.21551 and latitude 2.927</span></span></span>
 <span class="r-in"><span><span class="co"># restricting to some placetypes</span></span></span>
 <span class="r-in"><span><span class="fu">gaz_search</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2.927</span>, y <span class="op">=</span> <span class="fl">51.21551</span>, typeid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">255</span>, <span class="fl">259</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   MRGID gazetteerSource    placeType latitude longitude minLatitude minLongitude</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">23</span>734 The SeaVoX Salt a… SeaVoX S…     54.9      29.7        36.0        -<span style="color: #BB0000;">9.50</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> <span style="text-decoration: underline;">23</span>734 The SeaVoX Salt a… SeaVoX S…     54.9      29.7        36.0        -<span style="color: #BB0000;">9.50</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> <span style="text-decoration: underline;">24</span>174 The SeaVoX Salt a… SeaVoX S…     54.5      26.6        36.0        -<span style="color: #BB0000;">9.50</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> <span style="text-decoration: underline;">24</span>174 The SeaVoX Salt a… SeaVoX S…     54.5      26.6        36.0        -<span style="color: #BB0000;">9.50</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 more variables: maxLatitude &lt;dbl&gt;, maxLongitude &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   preferredGazetteerName &lt;chr&gt;, preferredGazetteerNameLang &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   status &lt;chr&gt;, accepted &lt;int&gt;</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
