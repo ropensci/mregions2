@@ -6,6 +6,7 @@
 [![Funding](https://img.shields.io/static/v1?label=powered+by&message=lifewatch.be&labelColor=1a4e8a&color=f15922)](https://lifewatch.be)
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/590_status.svg)](https://github.com/ropensci/software-review/issues/590)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/mregions2)](https://cran.r-project.org/package=mregions2)
 [![R-CMD-check](https://github.com/ropensci/mregions2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/mregions2/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/ropensci/mregions2/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/mregions2?branch=main)
@@ -38,10 +39,10 @@ You can find detailed information in the articles online:
 
 ## Installation
 
-You can install mregions2 with:
+You can install the latest CRAN version with:
 
 ``` r
-install.packages("mregions2", repos = "https://ropensci.r-universe.dev")
+install.packages("mregions2")
 ```
 
 Or install the development version of mregions2 from GitHub with:
@@ -367,21 +368,21 @@ boundaries data. Here is a non-exhaustive list:
 
 ``` r
 citation("mregions2")
-#> To cite package 'mregions2' in publications use:
-#> 
-#>   Fernandez-Bejarano S, Pohl L (2024). _mregions2: Access Data from
-#>   Marineregions.org: The Marine Regions Gazetteer and the Marine
-#>   Regions Data Products_. <https://github.com/ropensci/mregions2>.
-#> 
-#> A BibTeX entry for LaTeX users is
-#> 
-#>   @Manual{,
-#>     title = {{mregions2}: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products},
-#>     author = {Salvador Fernandez-Bejarano and Lotte Pohl},
-#>     year = {2024},
-#>     url = {https://github.com/ropensci/mregions2},
-#>   }
 ```
+
+To cite package ‘mregions2’ in publications use:
+
+Fernández Bejarano S, Pohl L (2024). *mregions2: Access Data from
+Marineregions.org: Gazetteer & Data Products*.
+<doi:10.32614/CRAN.package.mregions2>
+<https://doi.org/10.32614/CRAN.package.mregions2>.
+
+A BibTeX entry for LaTeX users is
+
+@Manual{, title = {mregions2: Access Data from Marineregions.org:
+Gazetteer & Data Products}, author = {Salvador Jesús {Fernández
+Bejarano} and Lotte Pohl}, year = {2024}, doi =
+{10.32614/CRAN.package.mregions2}, }
 
 ## License
 

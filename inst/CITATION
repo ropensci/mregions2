@@ -1,7 +1,7 @@
 year <- 2024
 
 bibentry(bibtype = "Manual",
-         title = "{mregions2}: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products",
-         author = c(person("Salvador", "Fernandez-Bejarano"), person("Lotte", "Pohl")),
+         title = "mregions2: Access Data from Marineregions.org: Gazetteer & Data Products",
+         author = c(person("Salvador Jesús", "Fernández Bejarano"), person("Lotte", "Pohl")),
          year = year,
-         url = "https://github.com/ropensci/mregions2")
+         doi = "10.32614/CRAN.package.mregions2")
