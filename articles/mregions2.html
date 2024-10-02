@@ -62,7 +62,7 @@
       <h1>Introduction to mregions2</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ropensci/mregions2/blob/v1.1.1/vignettes/mregions2.Rmd" class="external-link"><code>vignettes/mregions2.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ropensci/mregions2/blob/main/vignettes/mregions2.Rmd" class="external-link"><code>vignettes/mregions2.Rmd</code></a></small>
       <div class="d-none name"><code>mregions2.Rmd</code></div>
     </div>
 
@@ -160,7 +160,7 @@ free text search. Some examples:</p>
 <p>Find any term with the words ‘North Sea’</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gaz_search.html">gaz_search</a></span><span class="op">(</span><span class="st">"North Sea"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 25 × 14</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 26 × 14</span></span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource     placeType latitude longitude preferredGazetteerName</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>350 <span style="color: #949494;">"</span>(1953). Limits of… IHO Sea …     56.4      2.74 North Sea             </span></span>
@@ -173,7 +173,7 @@ free text search. Some examples:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="text-decoration: underline;">22</span>165  <span style="color: #BB0000;">NA</span>                 ICES Eco…     <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>    North Sea             </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">22</span>253 <span style="color: #949494;">"</span>Aphia<span style="color: #949494;">"</span>             General …     51.4      1.99 Southern North Sea    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">22</span>762 <span style="color: #949494;">"</span>VLIZ (2020). Inte… Marine R…     54.6      6.78 German part of the No…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 15 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 16 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: preferredGazetteerNameLang &lt;chr&gt;, status &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   accepted &lt;int&gt;, minLatitude &lt;dbl&gt;, minLongitude &lt;dbl&gt;, maxLatitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   maxLongitude &lt;dbl&gt;, precision &lt;dbl&gt;</span></span></span></code></pre></div>
@@ -283,7 +283,7 @@ or Exclusive Economic Zone.</p>
 database with <code><a href="../reference/gaz_types.html">gaz_types()</a></code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gaz_types.html">gaz_types</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 332 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 333 × 3</span></span></span>
 <span><span class="co">#&gt;    typeID type                      description                                 </span></span>
 <span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>      1 Town                      The lowest administrative unit in Belgium a…</span></span>
@@ -296,7 +296,7 @@ database with <code><a href="../reference/gaz_types.html">gaz_types()</a></code>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>      8 Ward                      The lowest administrative unit in the Unite…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>      9 Commune                   The lowest administrative unit in a lot of …</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     10 District                  A medium-level administrative unit that is …</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 322 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 323 more rows</span></span></span></code></pre></div>
 <p>You can restrict your search to a certain type ID in the argument
 <code>typeid</code></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -362,7 +362,7 @@ sort of authority.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List sources</span></span>
 <span><span class="fu"><a href="../reference/gaz_sources.html">gaz_sources</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 689 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 695 × 3</span></span></span>
 <span><span class="co">#&gt;    sourceID source                                                     sourceURL</span></span>
 <span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>        1 SAIL                                                       http://w…</span></span>
@@ -375,7 +375,7 @@ sort of authority.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>        9 BIOMARE                                                    http://w…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       10 (1953). Limits of oceans and seas. 3rd edition. IHO Speci… <span style="color: #BB0000;">NA</span>       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       11 Nomenclature des espaces maritimes/List of maritime areas  <span style="color: #BB0000;">NA</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 679 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 685 more rows</span></span></span></code></pre></div>
 <p>Search by source is possible with the function
 <code><a href="../reference/gaz_search_by_source.html">gaz_search_by_source()</a></code>, either with the source as text or
 passing a sourceID</p>
@@ -525,7 +525,7 @@ other. You can either pass the result of <code><a href="../reference/gaz_search.
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>421 ASFA thesaurus    Sandbank…     51.3      2.64        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>350 (1953). Limits o… IHO Sea …     56.4      2.74        51.0        -<span style="color: #BB0000;">4.45</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">4</span>675 <span style="color: #BB0000;">NA</span>                Sandbank…     51.3      2.98        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">4</span>675 Cattrijsse, A.; … Sandbank…     51.3      2.98        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>550 ASFA thesaurus    Coast         51.2      2.91        51.1         2.54</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">17</span>401 Aphia             Wreck         51.4      2.32        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">17</span>409 Aphia             Wreck         51.1      2.33        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   </span></span>
@@ -545,7 +545,7 @@ other. You can either pass the result of <code><a href="../reference/gaz_search.
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>421 ASFA thesaurus    Sandbank…     51.3      2.64        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>350 (1953). Limits o… IHO Sea …     56.4      2.74        51.0        -<span style="color: #BB0000;">4.45</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">4</span>675 <span style="color: #BB0000;">NA</span>                Sandbank…     51.3      2.98        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">4</span>675 Cattrijsse, A.; … Sandbank…     51.3      2.98        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>550 ASFA thesaurus    Coast         51.2      2.91        51.1         2.54</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">17</span>401 Aphia             Wreck         51.4      2.32        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">17</span>409 Aphia             Wreck         51.1      2.33        <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span>   </span></span>
@@ -789,8 +789,8 @@ a message:</p>
 <code class="sourceCode R"><span><span class="co"># One more time! Get the Extended Continental Shelves</span></span>
 <span><span class="va">ecs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"ecs"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Cache is fresh. Reading:</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">/var/folders/m4/5dz5h26x329cqq4fx333f8gm0000gn/T//Rtmp7u6czC/ecs-127feb7d/ecs.shp</span></span></span>
-<span><span class="co">#&gt; (Last Modified: <span style="font-style: italic;">2024-09-04 10:27:46.510216</span>)</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #0000BB;">/var/folders/0g/hj_q_pzx65bbjnslxz9n0src0000gn/T//RtmpMVMEVU/ecs-127feb7d/ecs.shp</span></span></span>
+<span><span class="co">#&gt; (Last Modified: <span style="font-style: italic;">2024-10-02 13:10:40.101139</span>)</span></span></code></pre></div>
 <p><code><a href="../reference/mrp_get.html">mrp_get()</a></code> performs a WFS request to get the layer as a
 zipped Shapefile and writes the response to disk. This saves both
 bandwith and memory. After downloading, the file is unzipped and read
@@ -987,7 +987,7 @@ for mregions2.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

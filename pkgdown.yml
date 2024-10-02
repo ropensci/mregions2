@@ -1,12 +1,12 @@
 pandoc: 3.1.11
-pkgdown: 2.1.0
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   articles/mregions2-rdf: mregions2-rdf.html
   mregions2: mregions2.html
   articles/mrp_ontology: mrp_ontology.html
   articles/why_mregions2: why_mregions2.html
-last_built: 2024-09-04T10:21Z
+last_built: 2024-10-02T13:01Z
 urls:
   reference: https://docs.ropensci.org/mregions2/reference
   article: https://docs.ropensci.org/mregions2/articles
