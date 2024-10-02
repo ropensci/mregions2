@@ -47,3 +47,4 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: ropensci/mregions2
+          path: ${{ runner.temp }}/package
