@@ -8,8 +8,8 @@
 <title>Introduction to mregions2 • mregions2</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to mregions2">
 </head>
 <body>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">mregions2</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -131,8 +131,8 @@ disclaimer</a>.</p>
 <h4 id="wasnt-there-a-package-to-read-marine-regions-already-mregions">Wasn’t there a package to read Marine Regions already?
 mregions?<a class="anchor" aria-label="anchor" href="#wasnt-there-a-package-to-read-marine-regions-already-mregions"></a>
 </h4>
-<p>mregions2 supersedes <a href="https://docs.ropensci.org/mregions/" class="external-link">mregions</a>. The need of
-mregions2 is further explained in the article: <a href="https://docs.ropensci.org/mregions2/articles/why_mregions2.html">Why
+<p>mregions2 supersedes <a href="https://github.com/ropensci-archive/mregions" class="external-link">mregions</a>. The
+need of mregions2 is further explained in the article: <a href="https://docs.ropensci.org/mregions2/articles/why_mregions2.html">Why
 mregions and mregions2?</a></p>
 <blockquote>
 <p><strong>NOTE</strong></p>
@@ -163,16 +163,16 @@ free text search. Some examples:</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 26 × 14</span></span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource     placeType latitude longitude preferredGazetteerName</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>350 <span style="color: #949494;">"</span>(1953). Limits of… IHO Sea …     56.4      2.74 North Sea             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>399 <span style="color: #949494;">"</span>ASFA thesaurus<span style="color: #949494;">"</span>    Bight         51.6      3.02 Southern Bight of the…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">8</span>542 <span style="color: #949494;">"</span>Large Marine Ecos… Large Ma…     57.4      2.73 North Sea             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="text-decoration: underline;">17</span>441 <span style="color: #949494;">"</span>Aphia<span style="color: #949494;">"</span>             General …     53.1      2.81 Central North Sea     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="text-decoration: underline;">17</span>977 <span style="color: #949494;">"</span>Aphia<span style="color: #949494;">"</span>             General …     59        1.8  Northern North Sea    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="text-decoration: underline;">17</span>977 <span style="color: #949494;">"</span>Aphia<span style="color: #949494;">"</span>             General …     59        1.8  Northern Part of the …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="text-decoration: underline;">21</span>912 <span style="color: #949494;">"</span>Spalding, M. D. F… Marine E…     55.5      4.59 North Sea             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="text-decoration: underline;">22</span>165  <span style="color: #BB0000;">NA</span>                 ICES Eco…     <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>    North Sea             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">22</span>253 <span style="color: #949494;">"</span>Aphia<span style="color: #949494;">"</span>             General …     51.4      1.99 Southern North Sea    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">22</span>762 <span style="color: #949494;">"</span>VLIZ (2020). Inte… Marine R…     54.6      6.78 German part of the No…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>350 (1953). Limits of … IHO Sea …     56.4      2.74 North Sea             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>399 ASFA thesaurus      Bight         51.6      3.02 Southern Bight of the…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">8</span>542 Large Marine Ecosy… Large Ma…     57.4      2.73 North Sea             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="text-decoration: underline;">17</span>441 Aphia               General …     53.1      2.81 Central North Sea     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="text-decoration: underline;">17</span>977 Aphia               General …     59        1.8  Northern North Sea    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="text-decoration: underline;">17</span>977 Aphia               General …     59        1.8  Northern Part of the …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="text-decoration: underline;">21</span>912 Spalding, M. D. Fo… Marine E…     55.5      4.59 North Sea             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="text-decoration: underline;">22</span>165 <span style="color: #BB0000;">NA</span>                  ICES Eco…     <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>    North Sea             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">22</span>253 Aphia               General …     51.4      1.99 Southern North Sea    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">22</span>762 Flanders Marine In… Marine R…     54.6      6.78 German part of the No…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 16 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: preferredGazetteerNameLang &lt;chr&gt;, status &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   accepted &lt;int&gt;, minLatitude &lt;dbl&gt;, minLongitude &lt;dbl&gt;, maxLatitude &lt;dbl&gt;,</span></span></span>
@@ -229,7 +229,7 @@ intersect with the point.</p>
 coast</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gaz_search.html">gaz_search</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2.927</span>, y <span class="op">=</span> <span class="fl">51.21551</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 55 × 14</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 58 × 14</span></span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55</span></span>
@@ -242,7 +242,7 @@ coast</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 45 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 48 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: maxLatitude &lt;dbl&gt;, maxLongitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   preferredGazetteerName &lt;chr&gt;, preferredGazetteerNameLang &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   status &lt;chr&gt;, accepted &lt;int&gt;, precision &lt;dbl&gt;</span></span></span></code></pre></div>
@@ -254,7 +254,7 @@ coast</p>
 <span><span class="co">#&gt; POINT (2.927 51.21551)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/gaz_search.html">gaz_search</a></span><span class="op">(</span><span class="va">pt</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 55 × 14</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 58 × 14</span></span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55</span></span>
@@ -267,7 +267,7 @@ coast</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 45 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 48 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: maxLatitude &lt;dbl&gt;, maxLongitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   preferredGazetteerName &lt;chr&gt;, preferredGazetteerNameLang &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   status &lt;chr&gt;, accepted &lt;int&gt;, precision &lt;dbl&gt;</span></span></span></code></pre></div>
@@ -362,7 +362,7 @@ sort of authority.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List sources</span></span>
 <span><span class="fu"><a href="../reference/gaz_sources.html">gaz_sources</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 695 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 698 × 3</span></span></span>
 <span><span class="co">#&gt;    sourceID source                                                     sourceURL</span></span>
 <span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>        1 SAIL                                                       http://w…</span></span>
@@ -375,7 +375,7 @@ sort of authority.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>        9 BIOMARE                                                    http://w…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       10 (1953). Limits of oceans and seas. 3rd edition. IHO Speci… <span style="color: #BB0000;">NA</span>       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       11 Nomenclature des espaces maritimes/List of maritime areas  <span style="color: #BB0000;">NA</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 685 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 688 more rows</span></span></span></code></pre></div>
 <p>Search by source is possible with the function
 <code><a href="../reference/gaz_search_by_source.html">gaz_search_by_source()</a></code>, either with the source as text or
 passing a sourceID</p>
@@ -731,31 +731,31 @@ Regions Gazetteer as RDF article</a> for more information.</p>
 <span></span>
 <span><span class="co"># Get the Extended Continental Shelves</span></span>
 <span><span class="fu"><a href="../reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"ecs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Simple feature collection with 134 features and 63 fields</span></span>
+<span><span class="co">#&gt; Simple feature collection with 147 features and 71 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
 <span><span class="co">#&gt; Bounding box:  xmin: -180 ymin: -64.03206 xmax: 180 ymax: 90</span></span>
 <span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 134 × 64</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 147 × 72</span></span></span>
 <span><span class="co">#&gt;    geoname pol_type territory1 mrgid_ter1 iso_ter1 un_ter1 sovereign1 mrgid_sov1</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Overla… ECS Ove… New Zeala… 2227       NZL      554     New Zeala…       <span style="text-decoration: underline;">2</span>227</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Overla… ECS Ove… Ireland    2114       IRL      372     Ireland          <span style="text-decoration: underline;">2</span>114</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Guyane… ECS CLC… Guyana     2124       GUY      328     Guyana           <span style="text-decoration: underline;">2</span>124</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Maurit… ECS CLC… Republic … 8614       MUS      480     Republic …       <span style="text-decoration: underline;">8</span>614</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Danish… ECS CLC… Faeroe     3297       FRO      234     Denmark          <span style="text-decoration: underline;">2</span>157</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Overla… ECS Ove… Barbados   8649       BRB      52      Barbados         <span style="text-decoration: underline;">8</span>649</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Brazil… ECS CLC… Brazil     2143       BRA      76      Brazil           <span style="text-decoration: underline;">2</span>143</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Overla… ECS Ove… New Zeala… 2227       NZL      554     New Zeala…       <span style="text-decoration: underline;">2</span>227</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Japane… ECS CLC… Japan      2121       JPN      392     Japan            <span style="text-decoration: underline;">2</span>121</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Overla… ECS Ove… Japan      2121       JPN      392     Japan            <span style="text-decoration: underline;">2</span>121</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 124 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 56 more variables: iso_sov1 &lt;chr&gt;, un_sov1 &lt;chr&gt;, territory2 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter2 &lt;chr&gt;, iso_ter2 &lt;chr&gt;, un_ter2 &lt;chr&gt;, sovereign2 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_sov2 &lt;int&gt;, iso_sov2 &lt;chr&gt;, un_sov2 &lt;chr&gt;, territory3 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter3 &lt;chr&gt;, iso_ter3 &lt;chr&gt;, un_ter3 &lt;chr&gt;, sovereign3 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_sov3 &lt;int&gt;, iso_sov3 &lt;chr&gt;, un_sov3 &lt;chr&gt;, territory4 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter4 &lt;chr&gt;, iso_ter4 &lt;chr&gt;, un_ter4 &lt;chr&gt;, sovereign4 &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> French… ECS CLC… French Gu…       <span style="text-decoration: underline;">8</span>683 GUF          254 France             17</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Overla… ECS Ove… Barbados         <span style="text-decoration: underline;">8</span>649 BRB           52 Barbados         <span style="text-decoration: underline;">8</span>649</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> New Ze… ECS DOA… New Zeala…       <span style="text-decoration: underline;">2</span>227 NZL          554 New Zeala…       <span style="text-decoration: underline;">2</span>227</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> New Ze… ECS CLC… Cook Isla…       <span style="text-decoration: underline;">8</span>672 COK          184 New Zeala…       <span style="text-decoration: underline;">2</span>227</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Overla… ECS Ove… Fiji             <span style="text-decoration: underline;">2</span>108 FJI          242 Fiji             <span style="text-decoration: underline;">2</span>108</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Indian… ECS CLC… India            <span style="text-decoration: underline;">2</span>128 IND          356 India            <span style="text-decoration: underline;">2</span>128</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Joint … ECS Joi… Crozet Is…       <span style="text-decoration: underline;">8</span>627 ATF          260 France             17</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Overla… ECS Ove… Canada           <span style="text-decoration: underline;">2</span>169 CAN          124 Canada           <span style="text-decoration: underline;">2</span>169</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Overla… ECS Ove… Guyana           <span style="text-decoration: underline;">2</span>124 GUY          328 Guyana           <span style="text-decoration: underline;">2</span>124</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Micron… ECS CLC… Micronesia       <span style="text-decoration: underline;">8</span>595 FSM          583 Micronesia       <span style="text-decoration: underline;">8</span>595</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 137 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 64 more variables: iso_sov1 &lt;chr&gt;, un_sov1 &lt;int&gt;, territory2 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter2 &lt;int&gt;, iso_ter2 &lt;chr&gt;, un_ter2 &lt;int&gt;, sovereign2 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_sov2 &lt;int&gt;, iso_sov2 &lt;chr&gt;, un_sov2 &lt;int&gt;, territory3 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter3 &lt;int&gt;, iso_ter3 &lt;chr&gt;, un_ter3 &lt;int&gt;, sovereign3 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_sov3 &lt;int&gt;, iso_sov3 &lt;chr&gt;, un_sov3 &lt;int&gt;, territory4 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter4 &lt;int&gt;, iso_ter4 &lt;chr&gt;, un_ter4 &lt;int&gt;, sovereign4 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p>However, this is an expensive request that <strong>may take some
 time</strong> to complete. mregions2 aims to tackle this with three
 different strategies:</p>
@@ -776,7 +776,7 @@ approach to first have a quick look. <code><a href="../reference/mrp_view.html">
 data product requested added via <a href="https://en.wikipedia.org/wiki/Web_Map_Service" class="external-link">Web Map Services
 (WMS)</a>.</p>
 <p>Note <code><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet::leaflet</a></code> and
-<code><a href="https://trafficonese.github.io/leaflet.extras2/reference/leaflet.extras2.html" class="external-link">leaflet.extras2::leaflet.extras2</a></code> are required by
+<code><a href="https://trafficonese.github.io/leaflet.extras2/reference/leaflet.extras2-package.html" class="external-link">leaflet.extras2::leaflet.extras2</a></code> are required by
 <code><a href="../reference/mrp_view.html">mrp_view()</a></code> but listed only as “Suggests”. Install these
 packages to use <code><a href="../reference/mrp_view.html">mrp_view()</a></code>.</p>
 </div>
@@ -789,8 +789,8 @@ a message:</p>
 <code class="sourceCode R"><span><span class="co"># One more time! Get the Extended Continental Shelves</span></span>
 <span><span class="va">ecs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"ecs"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Cache is fresh. Reading:</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">/var/folders/0g/hj_q_pzx65bbjnslxz9n0src0000gn/T//RtmppIAhuG/ecs-127feb7d/ecs.shp</span></span></span>
-<span><span class="co">#&gt; (Last Modified: <span style="font-style: italic;">2024-10-02 13:24:29.745509</span>)</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #0000BB;">/var/folders/ml/x_tvfgn50_s7p67dm1ypcqqm0000gn/T//RtmpSAwn8d/ecs-127feb7d/ecs.shp</span></span></span>
+<span><span class="co">#&gt; (Last Modified: <span style="font-style: italic;">2025-01-15 13:00:03.978723</span>)</span></span></code></pre></div>
 <p><code><a href="../reference/mrp_get.html">mrp_get()</a></code> performs a WFS request to get the layer as a
 zipped Shapefile and writes the response to disk. This saves both
 bandwith and memory. After downloading, the file is unzipped and read
@@ -841,55 +841,55 @@ and data type</strong> of a data product. <code><a href="../reference/mrp_col_un
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Columns of the Extended Continental Shelves data product</span></span>
 <span><span class="fu"><a href="../reference/mrp_colnames.html">mrp_colnames</a></span><span class="op">(</span><span class="st">"ecs"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 63 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 71 × 3</span></span></span>
 <span><span class="co">#&gt;    layer colname    type  </span></span>
 <span><span class="co">#&gt;  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> ecs   geoname    string</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> ecs   pol_type   string</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> ecs   territory1 string</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> ecs   mrgid_ter1 string</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> ecs   mrgid_ter1 int   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> ecs   iso_ter1   string</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> ecs   un_ter1    string</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> ecs   un_ter1    int   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> ecs   sovereign1 string</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> ecs   mrgid_sov1 int   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> ecs   iso_sov1   string</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> ecs   un_sov1    string</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 53 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> ecs   un_sov1    int   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 61 more rows</span></span></span>
 <span></span>
 <span><span class="co"># Unique values of the column pol_type</span></span>
 <span><span class="fu"><a href="../reference/mrp_col_unique.html">mrp_col_unique</a></span><span class="op">(</span><span class="st">"ecs"</span>, <span class="st">"pol_type"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "ECS CLCS Recommendation"       "ECS CLCS Submission"          </span></span>
 <span><span class="co">#&gt; [3] "ECS DOALOS Deposit"            "ECS Joint CLCS Recommendation"</span></span>
 <span><span class="co">#&gt; [5] "ECS Joint CLCS Submission"     "ECS Joint DOALOS Deposit"     </span></span>
-<span><span class="co">#&gt; [7] "ECS Overlapping claim"</span></span>
+<span><span class="co">#&gt; [7] "ECS Non-UNCLOS Claim"          "ECS Overlapping claim"</span></span>
 <span></span>
 <span><span class="co"># Get all the Overlapping claims</span></span>
 <span><span class="fu"><a href="../reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"ecs"</span>, cql_filter <span class="op">=</span> <span class="st">"pol_type = 'ECS Overlapping claim'"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Simple feature collection with 55 features and 63 fields</span></span>
+<span><span class="co">#&gt; Simple feature collection with 63 features and 71 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
 <span><span class="co">#&gt; Bounding box:  xmin: -180 ymin: -57.0112 xmax: 180 ymax: 90</span></span>
 <span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 55 × 64</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 63 × 72</span></span></span>
 <span><span class="co">#&gt;    geoname pol_type territory1 mrgid_ter1 iso_ter1 un_ter1 sovereign1 mrgid_sov1</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Overla… ECS Ove… New Zeala… 2227       NZL      554     New Zeala…       <span style="text-decoration: underline;">2</span>227</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Overla… ECS Ove… Ireland    2114       IRL      372     Ireland          <span style="text-decoration: underline;">2</span>114</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Overla… ECS Ove… Barbados   8649       BRB      52      Barbados         <span style="text-decoration: underline;">8</span>649</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Overla… ECS Ove… New Zeala… 2227       NZL      554     New Zeala…       <span style="text-decoration: underline;">2</span>227</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Overla… ECS Ove… Japan      2121       JPN      392     Japan            <span style="text-decoration: underline;">2</span>121</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Overla… ECS Ove… Fiji       2108       FJI      242     Fiji             <span style="text-decoration: underline;">2</span>108</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Overla… ECS Ove… Barbados   8649       BRB      52      Barbados         <span style="text-decoration: underline;">8</span>649</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Overla… ECS Ove… Mozambique 2220       MOZ      508     Mozambique       <span style="text-decoration: underline;">2</span>220</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Overla… ECS Ove… Fiji       2108       FJI      242     Fiji             <span style="text-decoration: underline;">2</span>108</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Overla… ECS Ove… Madagascar 7963       MDG      450     Madagascar       <span style="text-decoration: underline;">7</span>963</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 45 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 56 more variables: iso_sov1 &lt;chr&gt;, un_sov1 &lt;chr&gt;, territory2 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter2 &lt;chr&gt;, iso_ter2 &lt;chr&gt;, un_ter2 &lt;chr&gt;, sovereign2 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_sov2 &lt;int&gt;, iso_sov2 &lt;chr&gt;, un_sov2 &lt;chr&gt;, territory3 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter3 &lt;chr&gt;, iso_ter3 &lt;chr&gt;, un_ter3 &lt;chr&gt;, sovereign3 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_sov3 &lt;int&gt;, iso_sov3 &lt;chr&gt;, un_sov3 &lt;chr&gt;, territory4 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter4 &lt;chr&gt;, iso_ter4 &lt;chr&gt;, un_ter4 &lt;chr&gt;, sovereign4 &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Overla… ECS Ove… Barbados         <span style="text-decoration: underline;">8</span>649 BRB           52 Barbados         <span style="text-decoration: underline;">8</span>649</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Overla… ECS Ove… Fiji             <span style="text-decoration: underline;">2</span>108 FJI          242 Fiji             <span style="text-decoration: underline;">2</span>108</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Overla… ECS Ove… Canada           <span style="text-decoration: underline;">2</span>169 CAN          124 Canada           <span style="text-decoration: underline;">2</span>169</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Overla… ECS Ove… Guyana           <span style="text-decoration: underline;">2</span>124 GUY          328 Guyana           <span style="text-decoration: underline;">2</span>124</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Overla… ECS Ove… New Zeala…       <span style="text-decoration: underline;">2</span>227 NZL          554 New Zeala…       <span style="text-decoration: underline;">2</span>227</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Overla… ECS Ove… New Zeala…       <span style="text-decoration: underline;">2</span>227 NZL          554 New Zeala…       <span style="text-decoration: underline;">2</span>227</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Overla… ECS Ove… Angola           <span style="text-decoration: underline;">2</span>150 AGO           24 Angola           <span style="text-decoration: underline;">2</span>150</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Overla… ECS Ove… Madagascar       <span style="text-decoration: underline;">7</span>963 MDG          450 Madagascar       <span style="text-decoration: underline;">7</span>963</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Overla… ECS Ove… Federal R…       <span style="text-decoration: underline;">2</span>187 SOM          706 Federal R…       <span style="text-decoration: underline;">2</span>187</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Overla… ECS Ove… Bangladesh       <span style="text-decoration: underline;">2</span>142 BGD           50 Bangladesh       <span style="text-decoration: underline;">2</span>142</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 53 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 64 more variables: iso_sov1 &lt;chr&gt;, un_sov1 &lt;int&gt;, territory2 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter2 &lt;int&gt;, iso_ter2 &lt;chr&gt;, un_ter2 &lt;int&gt;, sovereign2 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_sov2 &lt;int&gt;, iso_sov2 &lt;chr&gt;, un_sov2 &lt;int&gt;, territory3 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter3 &lt;int&gt;, iso_ter3 &lt;chr&gt;, un_ter3 &lt;int&gt;, sovereign3 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_sov3 &lt;int&gt;, iso_sov3 &lt;chr&gt;, un_sov3 &lt;int&gt;, territory4 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter4 &lt;int&gt;, iso_ter4 &lt;chr&gt;, un_ter4 &lt;int&gt;, sovereign4 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p>An exhaustive ontology defining the attributes of each data product
 is available in the data frame <code>mrp_ontology</code> included in
 this package, or read the <a href="https://docs.ropensci.org/mregions2/articles/mrp_ontology.html">article
@@ -918,22 +918,22 @@ You can also limit the number of features requested with the
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get only one feature</span></span>
 <span><span class="fu"><a href="../reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"ecs"</span>, count <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Simple feature collection with 1 feature and 63 fields</span></span>
+<span><span class="co">#&gt; Simple feature collection with 1 feature and 71 fields</span></span>
 <span><span class="co">#&gt; Geometry type: POLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: 177.0364 ymin: -28.0213 xmax: 177.5697 ymax: -26.12738</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -52.18109 ymin: 7.020631 xmax: -48.7873 ymax: 10.31361</span></span>
 <span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 64</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 72</span></span></span>
 <span><span class="co">#&gt;   geoname  pol_type territory1 mrgid_ter1 iso_ter1 un_ter1 sovereign1 mrgid_sov1</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Overlap… ECS Ove… New Zeala… 2227       NZL      554     New Zeala…       <span style="text-decoration: underline;">2</span>227</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 56 more variables: iso_sov1 &lt;chr&gt;, un_sov1 &lt;chr&gt;, territory2 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter2 &lt;chr&gt;, iso_ter2 &lt;chr&gt;, un_ter2 &lt;chr&gt;, sovereign2 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_sov2 &lt;int&gt;, iso_sov2 &lt;chr&gt;, un_sov2 &lt;chr&gt;, territory3 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter3 &lt;chr&gt;, iso_ter3 &lt;chr&gt;, un_ter3 &lt;chr&gt;, sovereign3 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_sov3 &lt;int&gt;, iso_sov3 &lt;chr&gt;, un_sov3 &lt;chr&gt;, territory4 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter4 &lt;chr&gt;, iso_ter4 &lt;chr&gt;, un_ter4 &lt;chr&gt;, sovereign4 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_sov4 &lt;int&gt;, iso_sov4 &lt;chr&gt;, un_sov4 &lt;chr&gt;, territory5 &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> French … ECS CLC… French Gu…       <span style="text-decoration: underline;">8</span>683 GUF          254 France             17</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 64 more variables: iso_sov1 &lt;chr&gt;, un_sov1 &lt;int&gt;, territory2 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter2 &lt;int&gt;, iso_ter2 &lt;chr&gt;, un_ter2 &lt;int&gt;, sovereign2 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_sov2 &lt;int&gt;, iso_sov2 &lt;chr&gt;, un_sov2 &lt;int&gt;, territory3 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter3 &lt;int&gt;, iso_ter3 &lt;chr&gt;, un_ter3 &lt;int&gt;, sovereign3 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_sov3 &lt;int&gt;, iso_sov3 &lt;chr&gt;, un_sov3 &lt;int&gt;, territory4 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_ter4 &lt;int&gt;, iso_ter4 &lt;chr&gt;, un_ter4 &lt;int&gt;, sovereign4 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mrgid_sov4 &lt;int&gt;, iso_sov4 &lt;chr&gt;, un_sov4 &lt;int&gt;, territory5 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><code><a href="../reference/mrp_view.html">mrp_view()</a></code> uses <code><a href="https://trafficonese.github.io/leaflet.extras2/reference/addWMS.html" class="external-link">leaflet.extras2::addWMS()</a></code>,
 which <a href="https://github.com/trafficonese/leaflet.extras2/issues/42" class="external-link">enables
 passing the filters together with the base URL</a> in the argument
@@ -949,8 +949,8 @@ passing the filters together with the base URL</a> in the argument
 <span><span class="st">  AND area_km2 &gt; 1000000</span></span>
 <span><span class="st">"</span></span>
 <span><span class="fu"><a href="../reference/mrp_view.html">mrp_view</a></span><span class="op">(</span><span class="st">"ecs"</span>, cql_filter <span class="op">=</span> <span class="va">verbose</span><span class="op">)</span></span></code></pre></div>
-<p>You can also apply a <a href="https://www.ogc.org/standard/filter/" class="external-link">standard OGC filter
-specification</a>. These are however more verbose:</p>
+<p>You can also apply a <a href="https://www.ogc.org/publications/standard/filter/" class="external-link">standard OGC
+filter specification</a>. These are however more verbose:</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># View the Extended Continental Shelf of Portugal</span></span>
 <span><span class="va">verbose</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
