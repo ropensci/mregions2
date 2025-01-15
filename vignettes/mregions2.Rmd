@@ -56,7 +56,7 @@ This package is developed for scientific, educational and research purposes. It 
 
 ### Wasn't there a package to read Marine Regions already? mregions?
 
-mregions2 supersedes [mregions](https://docs.ropensci.org/mregions/). The need of mregions2 is further explained in the article: [Why mregions and mregions2?](https://docs.ropensci.org/mregions2/articles/why_mregions2.html)
+mregions2 supersedes [mregions](https://github.com/ropensci-archive/mregions). The need of mregions2 is further explained in the article: [Why mregions and mregions2?](https://docs.ropensci.org/mregions2/articles/why_mregions2.html)
 
 > **NOTE**
 >
@@ -382,7 +382,7 @@ verbose <- "
 mrp_view("ecs", cql_filter = verbose)
 ```
 
-You can also apply a [standard OGC filter specification](https://www.ogc.org/standard/filter/). These are however more verbose:
+You can also apply a [standard OGC filter specification](https://www.ogc.org/publications/standard/filter/). These are however more verbose:
 
 ```{r, eval=FALSE}
 # View the Extended Continental Shelf of Portugal

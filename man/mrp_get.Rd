@@ -46,7 +46,7 @@ delete the layers in the cache path.
 
 \subsection{Filters}{
 
-Both the \href{https://portal.ogc.org/files/96288}{Contextual Query Language (CQL) filter} and the \href{https://www.ogc.org/standard/filter/}{standard OGC filter specification} allow to
+Both the \href{https://portal.ogc.org/files/96288}{Contextual Query Language (CQL) filter} and the \href{https://www.ogc.org/publications/standard/filter/}{standard OGC filter specification} allow to
 query the server before performing a request. This will boost performance as you will only retrieve the area of your interest. It is possible to query on attributes, but also perform
 geospatial queries. For instance, you can query a bounding box of interest.
 

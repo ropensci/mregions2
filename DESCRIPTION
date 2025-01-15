@@ -1,20 +1,19 @@
 Package: mregions2
 Type: Package
 Title: Access Data from Marineregions.org: Gazetteer & Data Products
-Version: 1.1.1
+Version: 1.1.2
 Authors@R: c(
   person(given = "Salvador Jesús", family = "Fernández Bejarano", role = c("aut", "cre"),
          email = "salvador.fernandez@vliz.be",
          comment = c(ORCID = "0000-0003-0535-7677", github = "salvafern")),
   person(given = "Lotte",family = "Pohl", role = "aut",
-         email = "lotte.pohl@imbrsea.eu",
+         email = "lotte.pohl@vliz.be",
          comment = c(ORCID = "0000-0002-7607-7018", github = "lottepohl")),
   person(given = "Julia", family = "Gustavsen", role = "rev"),
   person(given = "Muralidhar", family = "M.A.", role = "rev"),
   person(given = "Sheila", family = " M. Saia", role = "rev"),
   person("LifeWatch Belgium", role = "fnd", comment = "lifewatch.be")
   )
-Maintainer: Salvador Jesús Fernández Bejarano <salvador.fernandez@vliz.be>
 Description: Explore and retrieve marine geospatial data from the Marine Regions Gazetteer <https://marineregions.org/gazetteer.php?p=webservices> and the Marine Regions Data Products <https://marineregions.org/webservices.php>.
 License: MIT + file LICENSE
 Encoding: UTF-8

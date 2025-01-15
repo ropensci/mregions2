@@ -27,6 +27,7 @@ rocks_placetype <- 193
 # Perform
 httptest2::with_mock_dir("gaz", {
   test_that("gaz_search.numeric", {
+    skip_on_cran()
     gaz_search(17) %>% expect_mr()
     gaz_search(c(14, 17), rdf = TRUE) %>% expect_s3_class("rdf")
 
@@ -168,6 +169,7 @@ httptest2::with_mock_dir("gaz", {
   # Replace geometries with dummy polygons manually
   # Dummy polygon: POLYGON ((1 0, 1 1, 0 1, 0 0, 1 0))
   test_that("gaz_geometry.numeric", {
+    skip_on_cran()
 
     gaz_geometry(b24nm) %>% expect_s3_class("sfc")
     gaz_geometry(b24nm, format = "wkt") %>% wk::as_wkt() %>% expect_s3_class("wk_wkt")
@@ -195,6 +197,7 @@ httptest2::with_mock_dir("gaz", {
   })
 
   test_that("gaz_rest_geometry (not exported) is tested", {
+    skip_on_cran()
     gaz_rest_geometry(b24nm, sourceid = 1.5) %>% expect_error("Assertion")
     gaz_rest_geometry(b24nm, sourceid = -1) %>% expect_error("Assertion")
     gaz_rest_geometry(kuurne, sourceid = 182,
@@ -203,6 +206,7 @@ httptest2::with_mock_dir("gaz", {
   })
 
   test_that("gaz_geometry.mr_df", {
+    skip_on_cran()
     gaz_search(b24nm) %>% gaz_geometry() %>% expect_mr_sf()
     gaz_search(b24nm, with_geometry = TRUE) %>% expect_mr_sf()
 

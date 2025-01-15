@@ -79,6 +79,7 @@ test_that("Only one filter assertion works",{
 })
 
 test_that("Imported method rdflib:::c.rdf as c_rdf works", {
+  skip_on_cran()
   pepe <- rdflib::rdf() %>%
     rdflib::rdf_add("person", "hasName", "pepe")
   juan <- rdflib::rdf() %>%

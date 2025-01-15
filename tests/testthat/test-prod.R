@@ -86,6 +86,8 @@ test_that("mrp_view() leaflet output works", {
 })
 
 test_that("mrp_view() filters can be passed", {
+  skip_on_cran()
+
   # OGC filter
   filter <- "<Filter>
               <PropertyIsEqualTo>
