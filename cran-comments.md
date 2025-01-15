@@ -2,41 +2,8 @@ mregions2 is a package to explore and retrieve data from MarineRegions.org. It
 superseeds mregions. The package has been peer-reviewed via rOpenSci. See 
 https://github.com/ropensci/software-review/issues/590
 
-This is resubmission after correcting a number of issues:
-
-> Please reduce the length of the title to less than 65 characters.
-
-Done
-
->Please provide a link to the used webservices (Marineregions.org) to the
-description field of your DESCRIPTION file in the form
-<http:...> or <[https:...]https:...>
-with angle brackets for auto-linking and no space after 'http:' and
-'https:'.
-
-Done
-
-
->\dontrun{} should only be used if the example really cannot be executed
-(e.g. because of missing additional software, missing API keys, ...) by
-the user. That's why wrapping examples in \dontrun{} adds the comment
-("# Not run:") as a warning for the user. Does not seem necessary.
-Please replace \dontrun with \donttest.
-Please unwrap the examples if they are executable in < 5 sec, or replace
-dontrun{} with \donttest{}.
-Please put functions which download data in \donttest{}.
-
-Done. I wrapped most functions under \donttest{} as they retrieve data from an 
-API. Cannot be sure the examples won't take longer than 5 seconds always.
-
-
->Please ensure that your functions do not write by default or in your
-examples/vignettes/tests in the user's home filespace (including the
-package directory and getwd()). This is not allowed by CRAN policies.
-Please omit any default path in writing functions. In your
-examples/vignettes/tests you can write to tempdir(). -> man/mrp_get.Rd
-
-Changed the examples on man/mrp_get.Rd to write to `tempdir()`
+This is resubmission after the package was archived on CRAN for not fixing
+issues on time. Bad timing that this happened during the Christmas period.
 
 ## R CMD check results (local)
 
@@ -49,16 +16,22 @@ Locally on Ubuntu:
   
 ## R CMD check results (Win-devel)
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 2 notes
 
   * checking CRAN incoming feasibility ... [11s] NOTE
   Maintainer: 'Salvador Jesús Fernández Bejarano <salvador.fernandez@vliz.be>'
   
   New submission
   
+  Package was archived on CRAN
+  
   Possibly misspelled words in DESCRIPTION:
     Marineregions (3:25)
-    geospatial (19:42)
+    geospatial (17:42)
+  
+  CRAN repository db overrides:
+    X-CRAN-Comment: Archived on 2025-01-13 as issues were not corrected
+      in time.
     
 In this case, these two words are not misspelled in my opinion:
 
@@ -68,6 +41,15 @@ refer to the project.
 
 "Geospatial" is an term in the English language defined e.g. in the Cambridge 
 Business English Dictionary.
+
+  * checking DESCRIPTION meta-information ... NOTE
+  Author field differs from that derived from Authors@R
+    Author:    'Salvador Jesús Fernández Bejarano [aut, cre] (<https://orcid.org/0000-0003-0535-7677>, salvafern), Lotte Pohl [aut] (<https://orcid.org/0000-0002-7607-7018>, lottepohl), Julia Gustavsen [rev], Muralidhar M.A. [rev], Sheila M. Saia [rev], LifeWatch Belgium [fnd] (lifewatch.be)'
+    Authors@R: 'Salvador Jesús Fernández Bejarano [aut, cre] (ORCID: <https://orcid.org/0000-0003-0535-7677>, github: salvafern), Lotte Pohl [aut] (ORCID: <https://orcid.org/0000-0002-7607-7018>, github: lottepohl), Julia Gustavsen [rev], Muralidhar M.A. [rev], Sheila M. Saia [rev], LifeWatch Belgium [fnd] (lifewatch.be)'
+
+I have searched extensively how could this be fixed. In the DESCRIPTION file, 
+there is only the field Authors@R. There is no fiels Author nor Maintainer.
+This issue is not triggered in the R CMD check of Win-release.
 
 Thank you for considering mregions2 to be hosted in CRAN,
 Salva Fernández

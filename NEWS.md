@@ -1,3 +1,7 @@
+# 1.1.2
+
+Small fixes to avoid CRAN triggering downstream librdf errors.
+
 # 1.1.1
 
 Minor changes on preparation for CRAN release.
