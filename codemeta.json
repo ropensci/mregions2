@@ -8,13 +8,13 @@
   "codeRepository": "https://github.com/ropensci/mregions2",
   "issueTracker": "https://github.com/ropensci/mregions2/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.1 (2024-06-14)",
+  "runtimePlatform": "R version 4.4.2 (2024-10-31)",
   "author": [
     {
       "@type": "Person",
@@ -27,7 +27,7 @@
       "@type": "Person",
       "givenName": "Lotte",
       "familyName": "Pohl",
-      "email": "lotte.pohl@imbrsea.eu",
+      "email": "lotte.pohl@vliz.be",
       "@id": "https://orcid.org/0000-0002-7607-7018"
     }
   ],
@@ -380,7 +380,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "930.299KB",
+  "fileSize": "930.495KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -388,8 +388,8 @@
       "author": [
         {
           "@type": "Person",
-          "givenName": "Salvador",
-          "familyName": "Fernandez-Bejarano"
+          "givenName": "Salvador Jesús",
+          "familyName": "Fernández Bejarano"
         },
         {
           "@type": "Person",
@@ -397,8 +397,10 @@
           "familyName": "Pohl"
         }
       ],
-      "name": "{mregions2}: Access Data from Marineregions.org: The Marine Regions Gazetteer and the Marine Regions Data Products",
-      "url": "https://github.com/ropensci/mregions2"
+      "name": "mregions2: Access Data from Marineregions.org: Gazetteer & Data Products",
+      "identifier": "10.32614/CRAN.package.mregions2",
+      "@id": "https://doi.org/10.32614/CRAN.package.mregions2",
+      "sameAs": "https://doi.org/10.32614/CRAN.package.mregions2"
     }
   ],
   "releaseNotes": "https://github.com/ropensci/mregions2/blob/master/NEWS.md",
