@@ -58,13 +58,13 @@ jobs:
           job-config: ${{ matrix.config.job-config }}
       - name: Install `wget` and download `libraptor2-dev`
         run: |
-          sudo apt-get update
-          sudo apt-get install -y wget
+          apt-get update
+          apt-get install -y wget
           wget http://archive.ubuntu.com/ubuntu/pool/universe/r/raptor2/libraptor2-0_2.0.15-0ubuntu1_amd64.deb
           wget http://archive.ubuntu.com/ubuntu/pool/universe/r/raptor2/libraptor2-dev_2.0.15-0ubuntu1_amd64.deb
-          sudo dpkg -i libraptor2-0_2.0.15-0ubuntu1_amd64.deb
-          sudo dpkg -i libraptor2-dev_2.0.15-0ubuntu1_amd64.deb
-          sudo apt-get install -f -y
+          dpkg -i libraptor2-0_2.0.15-0ubuntu1_amd64.deb
+          dpkg -i libraptor2-dev_2.0.15-0ubuntu1_amd64.deb
+          apt-get install -f -y
       - uses: r-hub/actions/setup-deps@v1
         with:
           token: ${{ secrets.RHUB_TOKEN }}
