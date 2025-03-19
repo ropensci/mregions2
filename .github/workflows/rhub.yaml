@@ -59,7 +59,7 @@ jobs:
       - name: Install `wget` and required dependencies
         run: |
           apt update
-          apt install -y wget libxslt1.1 libyajl2 libxslt1-dev libyajl-dev libcurl4-openssl-dev
+          apt install -y wget libxslt1.1 libyajl2 libxslt1-dev libyajl-dev libcurl4-gnutls-dev
           wget http://security.ubuntu.com/ubuntu/pool/main/r/raptor2/libraptor2-0_2.0.15-0ubuntu4.1_amd64.deb
           wget http://security.ubuntu.com/ubuntu/pool/main/r/raptor2/libraptor2-dev_2.0.15-0ubuntu4.1_amd64.deb
           dpkg -i libraptor2-0_2.0.15-0ubuntu4.1_amd64.deb
