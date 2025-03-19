@@ -56,15 +56,14 @@ jobs:
         with:
           token: ${{ secrets.RHUB_TOKEN }}
           job-config: ${{ matrix.config.job-config }}
-      - name: Install `wget` and download `libraptor2-dev`
+      - name: Install `wget` and required dependencies
         run: |
-          apt-get update
-          apt-get install -y wget libxslt1.1 libyajl2
+          apt update
+          apt install -y wget libxslt1.1 libyajl2 libxslt1-dev libyajl-dev libcurl4-openssl-dev
           wget http://security.ubuntu.com/ubuntu/pool/main/r/raptor2/libraptor2-0_2.0.15-0ubuntu4.1_amd64.deb
           wget http://security.ubuntu.com/ubuntu/pool/main/r/raptor2/libraptor2-dev_2.0.15-0ubuntu4.1_amd64.deb
           dpkg -i libraptor2-0_2.0.15-0ubuntu4.1_amd64.deb
-          dpkg -i libraptor2-dev_2.0.15-0ubuntu4.1_amd64.deb
-          apt-get install -f -y
+          dpkg -i libraptor2-dev_2.0.15-0ubuntu4.1_amd64.deb || apt install -f -y
       - uses: r-hub/actions/setup-deps@v1
         with:
           token: ${{ secrets.RHUB_TOKEN }}
