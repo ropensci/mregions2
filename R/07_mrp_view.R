@@ -24,7 +24,7 @@
 #'
 #'   ## Filters
 #'
-#'   Both the [Contextual Query Language (CQL) filter](https://portal.ogc.org/files/96288) and the [standard OGC filter specification](https://www.ogc.org/standard/filter/) allow to
+#'   Both the [Contextual Query Language (CQL) filter](https://portal.ogc.org/files/96288) and the [standard OGC filter specification](https://www.ogc.org/publications/standard/filter/) allow to
 #'   query the server before performing a request. This will boost performance as you will only retrieve the area of your interest. It is possible to query on attributes, but also perform
 #'   geospatial queries. For instance, you can query a bounding box of interest.
 #'

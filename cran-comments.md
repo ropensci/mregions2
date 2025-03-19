@@ -48,7 +48,7 @@ Business English Dictionary.
     Authors@R: 'Salvador Jesús Fernández Bejarano [aut, cre] (ORCID: <https://orcid.org/0000-0003-0535-7677>, github: salvafern), Lotte Pohl [aut] (ORCID: <https://orcid.org/0000-0002-7607-7018>, github: lottepohl), Julia Gustavsen [rev], Muralidhar M.A. [rev], Sheila M. Saia [rev], LifeWatch Belgium [fnd] (lifewatch.be)'
 
 I have searched extensively how could this be fixed. In the DESCRIPTION file, 
-there is only the field Authors@R. There is no fiels Author nor Maintainer.
+there is only the field Authors@R. There is no fiedls Author nor Maintainer.
 This issue is not triggered in the R CMD check of Win-release.
 
 Thank you for considering mregions2 to be hosted in CRAN,
