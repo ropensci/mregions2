@@ -1,4 +1,8 @@
-library(testthat)
-library(mregions2)
+if (identical(Sys.getenv("NOT_CRAN"), "true") ||
+    identical(Sys.getenv("GITHUB_ACTIONS"), "true")) {
 
-test_check("mregions2")
+  library(testthat)
+  library(mregions2)
+
+  test_check("mregions2")
+}
