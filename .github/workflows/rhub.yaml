@@ -60,10 +60,10 @@ jobs:
         run: |
           apt-get update
           apt-get install -y wget
-          wget http://archive.ubuntu.com/ubuntu/pool/universe/r/raptor2/libraptor2-0_2.0.15-0ubuntu1_amd64.deb
-          wget http://archive.ubuntu.com/ubuntu/pool/universe/r/raptor2/libraptor2-dev_2.0.15-0ubuntu1_amd64.deb
-          dpkg -i libraptor2-0_2.0.15-0ubuntu1_amd64.deb
-          dpkg -i libraptor2-dev_2.0.15-0ubuntu1_amd64.deb
+          wget http://security.ubuntu.com/ubuntu/pool/main/r/raptor2/libraptor2-0_2.0.16-4ubuntu0.1_amd64.deb
+          wget http://security.ubuntu.com/ubuntu/pool/main/r/raptor2/libraptor2-dev_2.0.16-3ubuntu0.1_amd64.deb
+          dpkg -i libraptor2-0_2.0.16-4ubuntu0.1_amd64.deb
+          dpkg -i libraptor2-dev_2.0.16-3ubuntu0.1_amd64.deb
           apt-get install -f -y
       - uses: r-hub/actions/setup-deps@v1
         with:
