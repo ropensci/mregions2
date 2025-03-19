@@ -20,7 +20,7 @@
 #'
 #' @examples \donttest{
 #' # Get the relations of the Belgian Exclusive Economic Zone
-#' gaz_search("Belgian Exclusive Economic Zone") |> gaz_relations()
+#' gaz_search("Belgian Exclusive Economic Zone") %>% gaz_relations()
 #'
 #' # Or using its mrgid
 #' gaz_relations(3293)

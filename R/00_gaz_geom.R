@@ -22,7 +22,7 @@
 #' gaz_geometry(3293, format = "wkt")
 #' gaz_geometry(3293, format = "rdf")
 #'
-#' gaz_search(3293) |> gaz_geometry()
+#' gaz_search(3293) %>% gaz_geometry()
 #' }
 gaz_geometry <- function(x, ...){
   UseMethod("gaz_geometry")
