@@ -2,7 +2,11 @@
 
 ## Authors
 
-- **Salvador Jesús Fernández Bejarano**. Author, maintainer.
+- **[Michelle Guevara](https://marineinfo.org/en/doc/person/45954)**.
+  Author, maintainer. [](https://orcid.org/0009-0004-2932-2131)  
+  MichelleKGV
+
+- **Salvador Jesús Fernández Bejarano**. Author.
   [](https://orcid.org/0000-0003-0535-7677)  
   salvafern
 

@@ -100,7 +100,7 @@ product, useful to query with the arguments `cql_filter` or `filter`
 options(mregions2.download_path = tempdir())
 
 getOption("mregions2.download_path")
-#> [1] "/var/folders/mn/js5hmsy13552y330w_94s79h0000gn/T//Rtmp3dsBqp"
+#> [1] "/var/folders/8j/sfr9qqcj73j4p6nhwcfpr0th0000gn/T//Rtmpfwqidy"
 #> [1] "/tmp/RtmpARLgoE"
 
 # See the list of all data products
@@ -166,9 +166,6 @@ portugal_eez <- mrp_get("eez", cql_filter = "sovereign1 = 'Portugal'")
 
 # If you perform this request again, it will be read from the cache instead
 portugal_eez <- mrp_get("eez", cql_filter = "sovereign1 = 'Portugal'")
-#> Cache is fresh. Reading:
-#> /var/folders/mn/js5hmsy13552y330w_94s79h0000gn/T//Rtmp3dsBqp/eez-958cf9d6/eez.shp
-#> (Last Modified: 2026-07-02 11:47:47.126283)
 #> Cache is fresh. Reading: /tmp/RtmpARLgoE/eez-1951c8b7/eez.shp
 #> (Last Modified: 2023-04-24 17:45:16)
 
