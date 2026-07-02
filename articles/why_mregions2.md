@@ -1,0 +1,49 @@
+# Why mregions and mregions2?
+
+Since 2021, the geometries of the [Marine Regions
+gazetteer](https://marineregions.org/gazetteer.php?p=webservices) are
+available as Well-Known Text ([Loneville et al.,
+(2021)](http://ceur-ws.org/Vol-2969/paper8-s4biodiv.pdf)), coming
+directly from the data base and offered as Open Linked Data and [Linked
+Data Event Streams](https://w3id.org/ldes/specification). Previously,
+they were just WMS links, in many cases coming from the Marine Regions
+OGC Web Services hosted at the [Flanders Marine Institute (VLIZ)
+geoserver](https://geo.vliz.be). Therefore, the functions of `mregions`
+did not use the
+[`?MRGID`](https://docs.ropensci.org/mregions2/reference/MRGID.md) in an
+effort to unify the geometries that were in geoserver with the gazetteer
+entries. However all those geometries hosted by third parties were left
+out.
+
+This method is not needed anymore since we harvest the geometries from
+the WMS links and stored in the Gazetteer. mregions2 makes a very clear
+distinction between the Gazetteer database and the Data Products created
+by Marine Regions.
+
+We decided to create a new package **to not break compatibility**. We
+will continue to maintain `mregions::mregions` but we won’t add new
+developments.
+
+## What’s new in mregions2?
+
+During 2021, new web services were developed to access the Marine
+Regions Gazetteer. In essence, two major changes happened:
+
+- The database can be accessed now through **Open Linked Data**
+  standards: JSON-LD and Turtle.
+- The geometry associated to each gazetteer record is now available
+  through RESTful services.
+
+More information in:
+
+> Lonneville B. et al. (2021) Publishing the Marine Regions Gazetteer as
+> a Linked Data Event Stream. S4BioDiv 2021.
+> <http://ceur-ws.org/Vol-2969/paper8-s4biodiv.pdf>
+
+The package uses these two new functionalities to serve geometries in R
+as [`sf::sf`](https://r-spatial.github.io/sf/reference/sf.html) objects,
+and allows to retrieve the Gazetteer database as
+[`rdflib::rdf`](https://docs.ropensci.org/rdflib/reference/rdf.html)
+objects. See the [Marine Regions Gazetteer as RDF
+article](https://docs.ropensci.org/mregions2/articles/mregions2-rdf.html)
+for further information.

@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Introduction to mregions2 • mregions2</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to mregions2">
 </head>
@@ -229,7 +229,7 @@ intersect with the point.</p>
 coast</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gaz_search.html">gaz_search</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">2.927</span>, y <span class="op">=</span> <span class="fl">51.21551</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 58 × 14</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 61 × 14</span></span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55</span></span>
@@ -242,7 +242,7 @@ coast</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 48 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 51 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: maxLatitude &lt;dbl&gt;, maxLongitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   preferredGazetteerName &lt;chr&gt;, preferredGazetteerNameLang &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   status &lt;chr&gt;, accepted &lt;int&gt;, precision &lt;dbl&gt;</span></span></span></code></pre></div>
@@ -254,7 +254,7 @@ coast</p>
 <span><span class="co">#&gt; POINT (2.927 51.21551)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/gaz_search.html">gaz_search</a></span><span class="op">(</span><span class="va">pt</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 58 × 14</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 61 × 14</span></span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource   placeType latitude longitude minLatitude minLongitude</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    14 (2001). The Time… Nation        50.5      4.48        49.5         2.55</span></span>
@@ -267,7 +267,7 @@ coast</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    20 SAIL              Province…     51.0      3.03        50.7         2.55</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 48 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 51 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: maxLatitude &lt;dbl&gt;, maxLongitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   preferredGazetteerName &lt;chr&gt;, preferredGazetteerNameLang &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   status &lt;chr&gt;, accepted &lt;int&gt;, precision &lt;dbl&gt;</span></span></span></code></pre></div>
@@ -283,7 +283,7 @@ or Exclusive Economic Zone.</p>
 database with <code><a href="../reference/gaz_types.html">gaz_types()</a></code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gaz_types.html">gaz_types</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 333 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 341 × 3</span></span></span>
 <span><span class="co">#&gt;    typeID type                      description                                 </span></span>
 <span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>      1 Town                      The lowest administrative unit in Belgium a…</span></span>
@@ -296,7 +296,7 @@ database with <code><a href="../reference/gaz_types.html">gaz_types()</a></code>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>      8 Ward                      The lowest administrative unit in the Unite…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>      9 Commune                   The lowest administrative unit in a lot of …</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     10 District                  A medium-level administrative unit that is …</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 323 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 331 more rows</span></span></span></code></pre></div>
 <p>You can restrict your search to a certain type ID in the argument
 <code>typeid</code></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -314,7 +314,7 @@ database with <code><a href="../reference/gaz_types.html">gaz_types()</a></code>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># With text</span></span>
 <span><span class="fu"><a href="../reference/gaz_search_by_type.html">gaz_search_by_type</a></span><span class="op">(</span><span class="st">"Town"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 934 × 14</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 936 × 14</span></span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource placeType latitude longitude preferredGazetteerName</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    29 SAIL            Town          51.1      3.23 Oostkamp              </span></span>
@@ -327,14 +327,14 @@ database with <code><a href="../reference/gaz_types.html">gaz_types()</a></code>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    36 SAIL            Town          51.3      3.13 Zuienkerke            </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    37 SAIL            Town          51.3      3.31 Knokke-Heist          </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    38 SAIL            Town          51.3      3.22 Brugge                </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 924 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 926 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: preferredGazetteerNameLang &lt;chr&gt;, status &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   accepted &lt;int&gt;, minLatitude &lt;dbl&gt;, minLongitude &lt;dbl&gt;, maxLatitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   maxLongitude &lt;dbl&gt;, precision &lt;dbl&gt;</span></span></span>
 <span></span>
 <span><span class="co"># With the place type ID</span></span>
 <span><span class="fu"><a href="../reference/gaz_search_by_type.html">gaz_search_by_type</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 934 × 14</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 936 × 14</span></span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource placeType latitude longitude preferredGazetteerName</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>    29 SAIL            Town          51.1      3.23 Oostkamp              </span></span>
@@ -347,7 +347,7 @@ database with <code><a href="../reference/gaz_types.html">gaz_types()</a></code>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>    36 SAIL            Town          51.3      3.13 Zuienkerke            </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>    37 SAIL            Town          51.3      3.31 Knokke-Heist          </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    38 SAIL            Town          51.3      3.22 Brugge                </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 924 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 926 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: preferredGazetteerNameLang &lt;chr&gt;, status &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   accepted &lt;int&gt;, minLatitude &lt;dbl&gt;, minLongitude &lt;dbl&gt;, maxLatitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   maxLongitude &lt;dbl&gt;, precision &lt;dbl&gt;</span></span></span></code></pre></div>
@@ -362,7 +362,7 @@ sort of authority.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List sources</span></span>
 <span><span class="fu"><a href="../reference/gaz_sources.html">gaz_sources</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 704 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 724 × 3</span></span></span>
 <span><span class="co">#&gt;    sourceID source                                                     sourceURL</span></span>
 <span><span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>        1 SAIL                                                       http://w…</span></span>
@@ -375,14 +375,14 @@ sort of authority.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>        9 BIOMARE                                                    http://w…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>       10 (1953). Limits of oceans and seas. 3rd edition. IHO Speci… <span style="color: #BB0000;">NA</span>       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       11 Nomenclature des espaces maritimes/List of maritime areas  <span style="color: #BB0000;">NA</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 694 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 714 more rows</span></span></span></code></pre></div>
 <p>Search by source is possible with the function
 <code><a href="../reference/gaz_search_by_source.html">gaz_search_by_source()</a></code>, either with the source as text or
 passing a sourceID</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># With text</span></span>
 <span><span class="fu"><a href="../reference/gaz_search_by_source.html">gaz_search_by_source</a></span><span class="op">(</span><span class="st">"Flanders Marine Institute (VLIZ)"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 23 × 13</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 24 × 13</span></span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource     placeType latitude longitude preferredGazetteerName</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="text-decoration: underline;">62</span>642 Seys, J.; Pint, S.… Sampling…     51.3      3.16 SW-Blankenberge-01    </span></span>
@@ -395,14 +395,14 @@ passing a sourceID</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="text-decoration: underline;">62</span>649 Seys, J.; Pint, S.… Sampling…     51.2      2.71 SW-Nieuwpoort-01      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">62</span>650 Seys, J.; Pint, S.… Sampling…     51.1      2.69 SW-Oostduinkerke-01   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">62</span>651 Seys, J.; Pint, S.… Sampling…     51.2      2.94 SW-Oostende_Oosteroev…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: preferredGazetteerNameLang &lt;chr&gt;, status &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   accepted &lt;int&gt;, minLatitude &lt;dbl&gt;, minLongitude &lt;dbl&gt;, maxLatitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   maxLongitude &lt;dbl&gt;</span></span></span>
 <span></span>
 <span><span class="co"># With source ID</span></span>
 <span><span class="fu"><a href="../reference/gaz_search_by_source.html">gaz_search_by_source</a></span><span class="op">(</span><span class="fl">695</span><span class="op">)</span> </span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 23 × 13</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 24 × 13</span></span></span>
 <span><span class="co">#&gt;    MRGID gazetteerSource     placeType latitude longitude preferredGazetteerName</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="text-decoration: underline;">62</span>642 Seys, J.; Pint, S.… Sampling…     51.3      3.16 SW-Blankenberge-01    </span></span>
@@ -415,7 +415,7 @@ passing a sourceID</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="text-decoration: underline;">62</span>649 Seys, J.; Pint, S.… Sampling…     51.2      2.71 SW-Nieuwpoort-01      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">62</span>650 Seys, J.; Pint, S.… Sampling…     51.1      2.69 SW-Oostduinkerke-01   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">62</span>651 Seys, J.; Pint, S.… Sampling…     51.2      2.94 SW-Oostende_Oosteroev…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: preferredGazetteerNameLang &lt;chr&gt;, status &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   accepted &lt;int&gt;, minLatitude &lt;dbl&gt;, minLongitude &lt;dbl&gt;, maxLatitude &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   maxLongitude &lt;dbl&gt;</span></span></span></code></pre></div>
@@ -789,8 +789,8 @@ a message:</p>
 <code class="sourceCode R"><span><span class="co"># One more time! Get the Extended Continental Shelves</span></span>
 <span><span class="va">ecs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mrp_get.html">mrp_get</a></span><span class="op">(</span><span class="st">"ecs"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Cache is fresh. Reading:</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">/var/folders/bz/h4njq8yd7td8qk42rt_9f0p00000gn/T//RtmpbGXXBj/ecs-127feb7d/ecs.shp</span></span></span>
-<span><span class="co">#&gt; (Last Modified: <span style="font-style: italic;">2025-03-24 14:56:31.213365</span>)</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #0000BB;">/var/folders/mn/js5hmsy13552y330w_94s79h0000gn/T//RtmpNPMXAf/ecs-127feb7d/ecs.shp</span></span></span>
+<span><span class="co">#&gt; (Last Modified: <span style="font-style: italic;">2026-07-02 11:50:11.2907</span>)</span></span></code></pre></div>
 <p><code><a href="../reference/mrp_get.html">mrp_get()</a></code> performs a WFS request to get the layer as a
 zipped Shapefile and writes the response to disk. This saves both
 bandwith and memory. After downloading, the file is unzipped and read
@@ -987,7 +987,7 @@ for mregions2.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

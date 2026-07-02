@@ -1,0 +1,4 @@
+# License
+
+    YEAR: 2024
+    COPYRIGHT HOLDER: Salvador Jesús Fernández Bejarano and Lotte Pohl
