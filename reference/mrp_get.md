@@ -100,7 +100,7 @@ product, useful to query with the arguments `cql_filter` or `filter`
 options(mregions2.download_path = tempdir())
 
 getOption("mregions2.download_path")
-#> [1] "/var/folders/mn/js5hmsy13552y330w_94s79h0000gn/T//RtmpF9Lazu"
+#> [1] "/var/folders/8j/sfr9qqcj73j4p6nhwcfpr0th0000gn/T//RtmpURCZsZ"
 #> [1] "/tmp/RtmpARLgoE"
 
 # See the list of all data products
