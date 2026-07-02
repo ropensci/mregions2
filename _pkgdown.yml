@@ -4,8 +4,8 @@ template:
 deploy:
   install_metadata: true
 authors:
-  Salvador Fernández:
-    href: https://twitter.com/salvafern
+  Michelle Guevara:
+    href: https://marineinfo.org/en/doc/person/45954
   LifeWatch Belgium:
     href: https://lifewatch.be
     html: "<img src='https://www.lifewatch.be/sites/lifewatch.be/themes/lifewatchportal/images/header_lw_logo.png' width=72>"
