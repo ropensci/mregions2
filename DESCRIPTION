@@ -1,7 +1,7 @@
 Package: mregions2
 Type: Package
 Title: Access Data from Marineregions.org: Gazetteer & Data Products
-Version: 1.1.2
+Version: 1.1.3
 Authors@R: c(
   person(given = "Michelle", family = "Guevara", role = c("aut", "cre"),
          email = "michelle.guevara@vliz.be",
