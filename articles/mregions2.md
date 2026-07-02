@@ -766,9 +766,6 @@ message:
 
 # One more time! Get the Extended Continental Shelves
 ecs <- mrp_get("ecs")
-#> Cache is fresh. Reading:
-#> /var/folders/8j/sfr9qqcj73j4p6nhwcfpr0th0000gn/T//RtmpNPOA7m/ecs-127feb7d/ecs.shp
-#> (Last Modified: 2026-07-02 12:12:04.131823)
 ```
 
 [`mrp_get()`](https://docs.ropensci.org/mregions2/reference/mrp_get.md)
