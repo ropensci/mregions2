@@ -26,7 +26,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/ropensci/mregions2/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/ropensci/mregions2/blob/v1.1.3/inst/CITATION)
 
 Fernández Bejarano S, Pohl L (2024). *mregions2: Access Data from
 Marineregions.org: Gazetteer & Data Products*.
