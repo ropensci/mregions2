@@ -61,7 +61,7 @@ class(bpns)
 #> [1] "rdf"
 
 bpns
-#> Total of 99 triples, stored in hashes
+#> Total of 100 triples, stored in hashes
 #> -------------------------------
 #> @base <localhost://> .
 #> @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -74,7 +74,7 @@ bpns
 #>     a <http://marineregions.org/ns/ontology#MRGeoObject>, <http://marineregions.org/ns/placetypes#Wreck> ;
 #>     <http://www.w3.org/2004/02/skos/core#prefLabel> "Birkenfels"@en .
 #> 
-#> ... with 89 more triples
+#> ... with 90 more triples
 ```
 
 There are many stores returned. This is because the returned object
@@ -438,6 +438,10 @@ Show Output
     #>                 "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
     #>                 "@value": "2023-10-28T08:26:23Z"
     #>             },
+    #>             "http://www.w3.org/2000/01/rdf-schema#label": {
+    #>                 "@language": "en",
+    #>                 "@value": "Belgian Exclusive Economic Zone (EEZ)"
+    #>             },
     #>             "http://www.w3.org/2004/02/skos/core#altLabel": {
     #>                 "@language": "en",
     #>                 "@value": "Belgian Continental Shelf"
@@ -498,7 +502,7 @@ sparql <- "
   }"
 
 rdf_query(bpns, query = sparql)
-#> # A tibble: 32 × 2
+#> # A tibble: 33 × 2
 #>    p                                             o                              
 #>    <chr>                                         <chr>                          
 #>  1 http://marineregions.org/ns/ontology#contains http://marineregions.org/mrgid…
@@ -511,7 +515,7 @@ rdf_query(bpns, query = sparql)
 #>  8 http://marineregions.org/ns/ontology#contains http://marineregions.org/mrgid…
 #>  9 http://marineregions.org/ns/ontology#contains http://marineregions.org/mrgid…
 #> 10 http://marineregions.org/ns/ontology#contains http://marineregions.org/mrgid…
-#> # ℹ 22 more rows
+#> # ℹ 23 more rows
 ```
 
 #### Extract all relationship

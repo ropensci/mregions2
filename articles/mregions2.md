@@ -249,7 +249,7 @@ database with
 ``` r
 
 gaz_types()
-#> # A tibble: 341 × 3
+#> # A tibble: 348 × 3
 #>    typeID type                      description                                 
 #>     <int> <chr>                     <chr>                                       
 #>  1      1 Town                      The lowest administrative unit in Belgium a…
@@ -262,7 +262,7 @@ gaz_types()
 #>  8      8 Ward                      The lowest administrative unit in the Unite…
 #>  9      9 Commune                   The lowest administrative unit in a lot of …
 #> 10     10 District                  A medium-level administrative unit that is …
-#> # ℹ 331 more rows
+#> # ℹ 338 more rows
 ```
 
 You can restrict your search to a certain type ID in the argument
@@ -288,7 +288,7 @@ Or you can look up all the records with a certain place type with
 
 # With text
 gaz_search_by_type("Town")
-#> # A tibble: 936 × 14
+#> # A tibble: 937 × 14
 #>    MRGID gazetteerSource placeType latitude longitude preferredGazetteerName
 #>    <int> <chr>           <chr>        <dbl>     <dbl> <chr>                 
 #>  1    29 SAIL            Town          51.1      3.23 Oostkamp              
@@ -301,14 +301,14 @@ gaz_search_by_type("Town")
 #>  8    36 SAIL            Town          51.3      3.13 Zuienkerke            
 #>  9    37 SAIL            Town          51.3      3.31 Knokke-Heist          
 #> 10    38 SAIL            Town          51.3      3.22 Brugge                
-#> # ℹ 926 more rows
+#> # ℹ 927 more rows
 #> # ℹ 8 more variables: preferredGazetteerNameLang <chr>, status <chr>,
 #> #   accepted <int>, minLatitude <dbl>, minLongitude <dbl>, maxLatitude <dbl>,
 #> #   maxLongitude <dbl>, precision <dbl>
 
 # With the place type ID
 gaz_search_by_type(1)
-#> # A tibble: 936 × 14
+#> # A tibble: 937 × 14
 #>    MRGID gazetteerSource placeType latitude longitude preferredGazetteerName
 #>    <int> <chr>           <chr>        <dbl>     <dbl> <chr>                 
 #>  1    29 SAIL            Town          51.1      3.23 Oostkamp              
@@ -321,7 +321,7 @@ gaz_search_by_type(1)
 #>  8    36 SAIL            Town          51.3      3.13 Zuienkerke            
 #>  9    37 SAIL            Town          51.3      3.31 Knokke-Heist          
 #> 10    38 SAIL            Town          51.3      3.22 Brugge                
-#> # ℹ 926 more rows
+#> # ℹ 927 more rows
 #> # ℹ 8 more variables: preferredGazetteerNameLang <chr>, status <chr>,
 #> #   accepted <int>, minLatitude <dbl>, minLongitude <dbl>, maxLatitude <dbl>,
 #> #   maxLongitude <dbl>, precision <dbl>
@@ -340,7 +340,7 @@ The list of sources is available with
 
 # List sources
 gaz_sources()
-#> # A tibble: 724 × 3
+#> # A tibble: 726 × 3
 #>    sourceID source                                                     sourceURL
 #>       <int> <chr>                                                      <chr>    
 #>  1        1 SAIL                                                       http://w…
@@ -353,7 +353,7 @@ gaz_sources()
 #>  8        9 BIOMARE                                                    http://w…
 #>  9       10 (1953). Limits of oceans and seas. 3rd edition. IHO Speci… NA       
 #> 10       11 Nomenclature des espaces maritimes/List of maritime areas  NA       
-#> # ℹ 714 more rows
+#> # ℹ 716 more rows
 ```
 
 Search by source is possible with the function
@@ -637,7 +637,7 @@ object of class
 ``` r
 
 gaz_search(3293, rdf = TRUE)
-#> Total of 99 triples, stored in hashes
+#> Total of 100 triples, stored in hashes
 #> -------------------------------
 #> @base <localhost://> .
 #> @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -650,7 +650,7 @@ gaz_search(3293, rdf = TRUE)
 #>     a <http://marineregions.org/ns/ontology#MRGeoObject>, <http://marineregions.org/ns/placetypes#Wreck> ;
 #>     <http://www.w3.org/2004/02/skos/core#prefLabel> "Birkenfels"@en .
 #> 
-#> ... with 89 more triples
+#> ... with 90 more triples
 
 gaz_geometry(3293, format = "rdf")
 #> Total of 4 triples, stored in hashes
@@ -767,8 +767,8 @@ message:
 # One more time! Get the Extended Continental Shelves
 ecs <- mrp_get("ecs")
 #> Cache is fresh. Reading:
-#> /var/folders/8j/sfr9qqcj73j4p6nhwcfpr0th0000gn/T//RtmpFh3Wo6/ecs-127feb7d/ecs.shp
-#> (Last Modified: 2026-07-02 16:36:09.996589)
+#> /var/folders/q2/p1t6rgxj5fj32g1dc7dmd49r0000gn/T//RtmpfRvauc/ecs-127feb7d/ecs.shp
+#> (Last Modified: 2026-11-23 11:44:08.092094)
 ```
 
 [`mrp_get()`](https://docs.ropensci.org/mregions2/reference/mrp_get.md)

@@ -2,9 +2,9 @@
 
 ## Authors
 
-- **[Michelle Guevara](https://marineinfo.org/en/doc/person/45954)**.
-  Author, maintainer. [](https://orcid.org/0009-0004-2932-2131)  
-  MichelleKGV
+- **Arno Pauwels**. Author, maintainer.
+  [](https://orcid.org/0000-0001-7519-8080)  
+  arnopauwels
 
 - **Salvador Jesús Fernández Bejarano**. Author.
   [](https://orcid.org/0000-0003-0535-7677)  
@@ -26,7 +26,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/ropensci/mregions2/blob/v1.1.3/inst/CITATION)
+[`inst/CITATION`](https://github.com/ropensci/mregions2/blob/main/inst/CITATION)
 
 Fernández Bejarano S, Pohl L (2024). *mregions2: Access Data from
 Marineregions.org: Gazetteer & Data Products*.

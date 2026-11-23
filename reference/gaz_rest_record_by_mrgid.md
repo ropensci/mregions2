@@ -59,7 +59,7 @@ gaz_rest_record_by_mrgid(3293, with_geometry = TRUE)
 #> #   preferredGazetteerName <chr>, preferredGazetteerNameLang <chr>,
 #> #   status <chr>, accepted <int>, the_geom <MULTIPOLYGON [°]>
 gaz_rest_record_by_mrgid(3293, rdf = TRUE)
-#> Total of 99 triples, stored in hashes
+#> Total of 100 triples, stored in hashes
 #> -------------------------------
 #> <http://marineregions.org/mrgid/3293> <http://marineregions.org/ns/ontology#contains> <http://marineregions.org/mrgid/28318> .
 #> <http://marineregions.org/mrgid/3293> <http://marineregions.org/ns/ontology#contains> <http://marineregions.org/mrgid/27790> .
@@ -72,6 +72,6 @@ gaz_rest_record_by_mrgid(3293, rdf = TRUE)
 #> <http://marineregions.org/mrgid/3293> <http://marineregions.org/ns/ontology#contains> <http://marineregions.org/mrgid/2421> .
 #> <http://marineregions.org/mrgid/3293> <http://marineregions.org/ns/ontology#contains> <http://marineregions.org/mrgid/2420> .
 #> 
-#> ... with 89 more triples
+#> ... with 90 more triples
 # }
 ```

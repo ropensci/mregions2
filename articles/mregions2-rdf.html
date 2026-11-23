@@ -70,7 +70,7 @@
 Fernández</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ropensci/mregions2/blob/v1.1.3/vignettes/articles/mregions2-rdf.Rmd" class="external-link"><code>vignettes/articles/mregions2-rdf.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ropensci/mregions2/blob/main/vignettes/articles/mregions2-rdf.Rmd" class="external-link"><code>vignettes/articles/mregions2-rdf.Rmd</code></a></small>
       <div class="d-none name"><code>mregions2-rdf.Rmd</code></div>
     </div>
 
@@ -122,7 +122,7 @@ format.</li>
 <span><span class="co">#&gt; [1] "rdf"</span></span>
 <span></span>
 <span><span class="va">bpns</span></span>
-<span><span class="co">#&gt; Total of 99 triples, stored in hashes</span></span>
+<span><span class="co">#&gt; Total of 100 triples, stored in hashes</span></span>
 <span><span class="co">#&gt; -------------------------------</span></span>
 <span><span class="co">#&gt; @base &lt;localhost://&gt; .</span></span>
 <span><span class="co">#&gt; @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .</span></span>
@@ -135,7 +135,7 @@ format.</li>
 <span><span class="co">#&gt;     a &lt;http://marineregions.org/ns/ontology#MRGeoObject&gt;, &lt;http://marineregions.org/ns/placetypes#Wreck&gt; ;</span></span>
 <span><span class="co">#&gt;     &lt;http://www.w3.org/2004/02/skos/core#prefLabel&gt; "Birkenfels"@en .</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ... with 89 more triples</span></span></code></pre></div>
+<span><span class="co">#&gt; ... with 90 more triples</span></span></code></pre></div>
 <p>There are many stores returned. This is because the returned object
 includes not only info about the Gazetteer record, but also about its
 hierarchy. The Marine Regions Gazetteer is hierarchical and there are
@@ -168,7 +168,7 @@ applications.</p>
 <span>  format <span class="op">=</span> <span class="st">"jsonld"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">bpns_as_jsonld</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">jsonlite</span><span class="fu">::</span><span class="fu"><a href="https://jeroen.r-universe.dev/jsonlite/reference/prettify.html" class="external-link">prettify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">bpns_as_jsonld</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">jsonlite</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/prettify.html" class="external-link">prettify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <!-- Low tech solution to hide long output with HTML -->
 <details><summary>
 Show Output
@@ -492,6 +492,10 @@ Show Output
 <span><span class="co">#&gt;                 "@type": "http://www.w3.org/2001/XMLSchema#dateTime",</span></span>
 <span><span class="co">#&gt;                 "@value": "2023-10-28T08:26:23Z"</span></span>
 <span><span class="co">#&gt;             },</span></span>
+<span><span class="co">#&gt;             "http://www.w3.org/2000/01/rdf-schema#label": {</span></span>
+<span><span class="co">#&gt;                 "@language": "en",</span></span>
+<span><span class="co">#&gt;                 "@value": "Belgian Exclusive Economic Zone (EEZ)"</span></span>
+<span><span class="co">#&gt;             },</span></span>
 <span><span class="co">#&gt;             "http://www.w3.org/2004/02/skos/core#altLabel": {</span></span>
 <span><span class="co">#&gt;                 "@language": "en",</span></span>
 <span><span class="co">#&gt;                 "@value": "Belgian Continental Shelf"</span></span>
@@ -552,7 +556,7 @@ Belgian Part of the North Sea is
 <span><span class="st">  }"</span></span>
 <span></span>
 <span><span class="fu"><a href="https://docs.ropensci.org/rdflib/reference/rdf_query.html" class="external-link">rdf_query</a></span><span class="op">(</span><span class="va">bpns</span>, query <span class="op">=</span> <span class="va">sparql</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 32 × 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 33 × 2</span></span></span>
 <span><span class="co">#&gt;    p                                             o                              </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> http://marineregions.org/ns/ontology#contains http://marineregions.org/mrgid…</span></span>
@@ -565,7 +569,7 @@ Belgian Part of the North Sea is
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> http://marineregions.org/ns/ontology#contains http://marineregions.org/mrgid…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> http://marineregions.org/ns/ontology#contains http://marineregions.org/mrgid…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> http://marineregions.org/ns/ontology#contains http://marineregions.org/mrgid…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 23 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="extract-all-relationship">Extract all relationship<a class="anchor" aria-label="anchor" href="#extract-all-relationship"></a>
@@ -745,11 +749,11 @@ requested date.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://marineinfo.org/en/doc/person/45954" class="external-link">Michelle Guevara</a>, Salvador Jesús Fernández Bejarano, Lotte Pohl, <a href="https://lifewatch.be" class="external-link"><img src="https://www.lifewatch.be/sites/lifewatch.be/themes/lifewatchportal/images/header_lw_logo.png" width="72"></a>.</p>
+  <p>Developed by Arno Pauwels, Salvador Jesús Fernández Bejarano, Lotte Pohl, <a href="https://lifewatch.be" class="external-link"><img src="https://www.lifewatch.be/sites/lifewatch.be/themes/lifewatchportal/images/header_lw_logo.png" width="72"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

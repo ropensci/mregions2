@@ -37,7 +37,7 @@ gaz_search() is a memoised function from gaz_rest_search(). See
 # \donttest{
 # This
 gaz_rest_sources()
-#> # A tibble: 724 × 3
+#> # A tibble: 726 × 3
 #>    sourceID source                                                     sourceURL
 #>       <int> <chr>                                                      <chr>    
 #>  1        1 SAIL                                                       http://w…
@@ -50,11 +50,11 @@ gaz_rest_sources()
 #>  8        9 BIOMARE                                                    http://w…
 #>  9       10 (1953). Limits of oceans and seas. 3rd edition. IHO Speci… NA       
 #> 10       11 Nomenclature des espaces maritimes/List of maritime areas  NA       
-#> # ℹ 714 more rows
+#> # ℹ 716 more rows
 
 # is the same as
 gaz_sources()
-#> # A tibble: 724 × 3
+#> # A tibble: 726 × 3
 #>    sourceID source                                                     sourceURL
 #>       <int> <chr>                                                      <chr>    
 #>  1        1 SAIL                                                       http://w…
@@ -67,6 +67,6 @@ gaz_sources()
 #>  8        9 BIOMARE                                                    http://w…
 #>  9       10 (1953). Limits of oceans and seas. 3rd edition. IHO Speci… NA       
 #> 10       11 Nomenclature des espaces maritimes/List of maritime areas  NA       
-#> # ℹ 714 more rows
+#> # ℹ 716 more rows
 # }
 ```

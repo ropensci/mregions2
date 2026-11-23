@@ -29,7 +29,7 @@ a data frame with three columns:
 # \donttest{
 # This
 gaz_rest_types()
-#> # A tibble: 341 × 3
+#> # A tibble: 348 × 3
 #>    typeID type                      description                                 
 #>     <int> <chr>                     <chr>                                       
 #>  1      1 Town                      The lowest administrative unit in Belgium a…
@@ -42,11 +42,11 @@ gaz_rest_types()
 #>  8      8 Ward                      The lowest administrative unit in the Unite…
 #>  9      9 Commune                   The lowest administrative unit in a lot of …
 #> 10     10 District                  A medium-level administrative unit that is …
-#> # ℹ 331 more rows
+#> # ℹ 338 more rows
 
 # is the same as
 gaz_types()
-#> # A tibble: 341 × 3
+#> # A tibble: 348 × 3
 #>    typeID type                      description                                 
 #>     <int> <chr>                     <chr>                                       
 #>  1      1 Town                      The lowest administrative unit in Belgium a…
@@ -59,6 +59,6 @@ gaz_types()
 #>  8      8 Ward                      The lowest administrative unit in the Unite…
 #>  9      9 Commune                   The lowest administrative unit in a lot of …
 #> 10     10 District                  A medium-level administrative unit that is …
-#> # ℹ 331 more rows
+#> # ℹ 338 more rows
 # }
 ```
